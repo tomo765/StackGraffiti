@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Draw: MonoBehaviour
+public class Draw : MonoBehaviour
 {
     [SerializeField] private float width;
     private GameObject targetObject;
@@ -67,12 +67,10 @@ public class Draw: MonoBehaviour
                 Destroy(this.newObject);
             }
             vlist.Clear();  // リストの中身をクリアする
-
         }
 
         if (Input.GetMouseButton(0) && targetObject != null && canDraw)
         {
-
             var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             vlist.Add(pos);
@@ -82,8 +80,6 @@ public class Draw: MonoBehaviour
         // 左クリックを離して、書いたやつが存在してる時
         if (Input.GetMouseButtonUp(0) && targetObject != null)
         {
-
-            // private void Finish()をお呼び出しする。
             Finish();
             newObject = GameObject.Find("MeshObject");
             newObject.name = "new Object";
