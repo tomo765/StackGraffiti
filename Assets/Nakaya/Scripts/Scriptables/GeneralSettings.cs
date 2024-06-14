@@ -61,11 +61,11 @@ public class GeneralSettings : ScriptableObject  //ToDo : ステージセレクトのプレ
         [SerializeField] private GameObject m_Eye;
         //[SerializeField] private GameObject m_Head;
         [SerializeField] private TMP m_NameText;
-        //[SerializeField] private StageSelectButton m_StageSelectBtn;
+        [SerializeField] private StageSelectButton m_StageSelectBtn;
 
         public GameObject Eye => m_Eye;
         public TMP NameText => m_NameText;
-        //public StageSelectButton StageSelectBtn => m_StageSelectBtn;
+        public StageSelectButton StageSelectBtn => m_StageSelectBtn;
     }
 
     [System.Serializable]
@@ -108,7 +108,7 @@ public class GeneralSettings : ScriptableObject  //ToDo : ステージセレクトのプレ
         }
 
         [System.Serializable]
-        public struct StageEvaluation
+        public class StageEvaluation
         {
             [SerializeField] private int m_ThreeStar;
             [SerializeField] private int m_TwoStar;
@@ -142,11 +142,50 @@ public class GeneralSettings : ScriptableObject  //ToDo : ステージセレクトのプレ
         [SerializeField] private Sprite m_ClearStar;
         [SerializeField] private Sprite m_UnclearStar;
 
-
         public Sprite AliveEye => m_AliveEye;
         public Sprite DeathEye => m_DeathEye;
         public Sprite ClearStar => m_ClearStar;
         public Sprite UnclearStar => m_UnclearStar;
+
+
+        [SerializeField] private Sprite m_Stage1;
+        [SerializeField] private Sprite m_Stage2;
+        [SerializeField] private Sprite m_Stage3;
+        [SerializeField] private Sprite m_Stage4;
+        [SerializeField] private Sprite m_Stage5;
+        [SerializeField] private Sprite m_Stage6;
+        [SerializeField] private Sprite m_Stage7;
+        [SerializeField] private Sprite m_Stage8;
+        [SerializeField] private Sprite m_Stage9;
+        [SerializeField] private Sprite m_Stage10;
+        [SerializeField] private Sprite m_Stage11;
+        [SerializeField] private Sprite m_Stage12;
+        [SerializeField] private Sprite m_Stage13;
+
+        private Dictionary<int, Sprite> m_StageCuts;
+        public Dictionary<int, Sprite> StageCuts
+        {
+            get
+            {
+                m_StageCuts ??= new Dictionary<int, Sprite>()  //nullチェックをして、nullなら代入
+                {
+                    {1, m_Stage1 },
+                    {2, m_Stage2 },
+                    {3, m_Stage3 },
+                    {4, m_Stage4 },
+                    {5, m_Stage5 },
+                    {6, m_Stage6 },
+                    {7, m_Stage7 },
+                    {8, m_Stage8 },
+                    {9, m_Stage9 },
+                    {10, m_Stage10 },
+                    {11, m_Stage11 },
+                    {12, m_Stage12 },
+                    {13, m_Stage13 },
+                };
+                return m_StageCuts;
+            }
+        }
     }
 
     [System.Serializable]

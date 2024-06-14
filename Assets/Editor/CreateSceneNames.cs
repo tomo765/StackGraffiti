@@ -15,10 +15,7 @@ public class CreateSceneNames : EditorWindow
     private static void GenerateSceneNamesClass()
     {
         Debug.Log("GenerateSceneNamesClass is executing...");
-        List<string> sceneNames = EditorBuildSettings.scenes
-            .Where(scene => scene.enabled)
-            .Select(scene => Path.GetFileNameWithoutExtension(scene.path))
-            .ToList();
+        List<string> sceneNames = GetStageNames();
         StringBuilder log = new StringBuilder();
         foreach (var scene in sceneNames)
         {
@@ -64,4 +61,9 @@ public class CreateSceneNames : EditorWindow
         content.Append("\n}");
         return content.ToString();
     }
+
+    public static List<string> GetStageNames() => EditorBuildSettings.scenes
+                                                  .Where(scene => scene.enabled)
+                                                  .Select(scene => Path.GetFileNameWithoutExtension(scene.path))
+                                                  .ToList();
 }
