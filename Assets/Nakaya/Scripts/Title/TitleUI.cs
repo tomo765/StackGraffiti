@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class TitleUI : MonoBehaviour
 {
     [SerializeField] private Button m_StartButton;
     [SerializeField] private Button m_FinishButton;
-    [SerializeField] private Button m_OptionButton;
-
-    [SerializeField] private GameObject m_OptionUI;
 
     void Start()
     {
@@ -23,7 +21,7 @@ public class TitleUI : MonoBehaviour
         m_StartButton.onClick.RemoveAllListeners();
         m_StartButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("1_StageSelect");
+            SceneManager.LoadScene(Config.SceneNames.StageSelect);
             SoundManager.Instance.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
     }

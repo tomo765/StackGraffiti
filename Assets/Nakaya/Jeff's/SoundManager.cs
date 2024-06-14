@@ -11,6 +11,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource m_BGM;
     [SerializeField] private AudioSource m_SE;
 
+    public float BGMVol => m_BGM.volume;
+    public float SEVol => m_SE.volume;
 
     public void Awake()
     {
@@ -22,6 +24,7 @@ public class SoundManager : MonoBehaviour
         if (instance != null)
         {
             Destroy(gameObject);
+            return;
         }
         instance = this;
         DontDestroyOnLoad(gameObject);

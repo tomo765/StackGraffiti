@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class OptionUI : MonoBehaviour
@@ -23,12 +24,13 @@ public class OptionUI : MonoBehaviour
         m_ReturnButton.onClick.RemoveAllListeners();
         m_ReturnButton.onClick.AddListener(() =>
         {
-            gameObject.SetActive(false);
+            SceneManager.UnloadSceneAsync(gameObject.scene);
         });
     }
 
     private void SetBGMSlider()
     {
+        m_BGMSlider.value = SoundManager.Instance.BGMVol;
         m_BGMSlider.onValueChanged.AddListener((i) =>
         {
             SoundManager.Instance.SetBGMVol(i);
@@ -37,6 +39,7 @@ public class OptionUI : MonoBehaviour
 
     private void SetSESlider()
     {
+        m_SESlider.value = SoundManager.Instance.SEVol;
         m_SESlider.onValueChanged.AddListener((i) =>
         {
             SoundManager.Instance.SetSEVol(i);

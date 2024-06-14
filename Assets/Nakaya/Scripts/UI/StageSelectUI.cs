@@ -5,13 +5,13 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StageSelectUI : MonoBehaviour
 {
-    [SerializeField] private GameObject m_ViewContant;
-    [SerializeField] private Button m_NextPageBtn;
-    [SerializeField] private Button m_BeforePageBtn;
+    [SerializeField] private GameObject m_ViewContent;
+    [SerializeField] private Button m_ReturnTitleBtn;
 
     private StageSelectButton[] m_SelectButtons;
     private int cullentPage = 1;
@@ -19,7 +19,7 @@ public class StageSelectUI : MonoBehaviour
     void Start()
     {
         SetSelectButtons();
-        SetPageButtons();
+        SetReturnTitleBtn();
     }
 
     private void SetSelectButtons()
@@ -36,7 +36,7 @@ public class StageSelectUI : MonoBehaviour
         {
             if (!sceneNames[i].Contains("Main_Stage")) { continue; }
 
-            var btn = Instantiate(GeneralSettings.Instance.Prehab.StageSelectBtn, Vector3.zero, Quaternion.identity, m_ViewContant.transform);
+            var btn = Instantiate(GeneralSettings.Instance.Prehab.StageSelectBtn, Vector3.zero, Quaternion.identity, m_ViewContent.transform);
             btn.Init(sceneNames[i], j);
             selectButtons.Add(btn);
             j++;
@@ -49,48 +49,13 @@ public class StageSelectUI : MonoBehaviour
         }
     }
 
-    private void SetPageButtons()
+    private void SetReturnTitleBtn()
     {
-        m_NextPageBtn.interactable = (m_SelectButtons.Length / 5f > 1);
-        m_NextPageBtn.onClick.AddListener(() => 
+        m_ReturnTitleBtn.onClick.RemoveAllListeners();
+        m_ReturnTitleBtn.onClick.AddListener(() =>
         {
-            if(cullentPage == 1)
-            {
-                m_BeforePageBtn.interactable = true;
-            }
-            cullentPage++;
-
-            if (cullentPage == m_SelectButtons.Length / 5)
-            {
-                m_NextPageBtn.interactable = false;
-            }
-            ChangeVisibleStaeg();
+            SceneManager.LoadScene(Config.SceneNames.Title);
+            SoundManager.Instance.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
-
-        m_BeforePageBtn.interactable = false;
-        m_BeforePageBtn.onClick.AddListener(() =>
-        {
-            if (cullentPage == m_SelectButtons.Length / 5)
-            {
-                m_NextPageBtn.interactable = true;
-            }
-            cullentPage--;
-
-            if (cullentPage == 1)
-            {
-                m_BeforePageBtn.interactable = false;
-            }
-            ChangeVisibleStaeg();
-        });
-    }
-
-    private void ChangeVisibleStaeg()
-    {
-        for (int i = 1; i <= m_SelectButtons.Length; i++)
-        {
-            Debug.Log(m_SelectButtons[i-1]);
-            bool isActive = i >= (5 * cullentPage - 4) && i <= (5 * cullentPage);  //1`5, 6`10...‚Å•\Ž¦A”ñ•\Ž¦‚ð•ª‚¯‚é
-            m_SelectButtons[i-1].gameObject.SetActive(isActive);
-        }
     }
 }
