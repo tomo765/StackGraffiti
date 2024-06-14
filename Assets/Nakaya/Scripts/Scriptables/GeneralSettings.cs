@@ -4,6 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMP = TMPro.TextMeshProUGUI;
 
+public enum Stages
+{
+    Stage1,
+    Stage2,
+    Stage3,
+    Stage4,
+    Stage5,
+    Stage6,
+    Stage7,
+    Stage8,
+    Stage9,
+    Stage10
+}
+
+
 [CreateAssetMenu(fileName = "GeneralSettings", menuName = "Scriptables/GeneralSettings")]
 public class GeneralSettings : ScriptableObject
 {
@@ -62,17 +77,30 @@ public class GeneralSettings : ScriptableObject
         [SerializeField] private StageEvaluation m_Stage9;
         [SerializeField] private StageEvaluation m_Stage10;
 
-
-        public StageEvaluation Stage1 => m_Stage1;
-        public StageEvaluation Stage2 => m_Stage2;
-        public StageEvaluation Stage3 => m_Stage3;
-        public StageEvaluation Stage4 => m_Stage4;
-        public StageEvaluation Stage5 => m_Stage5;
-        public StageEvaluation Stage6 => m_Stage6;
-        public StageEvaluation Stage7 => m_Stage7;
-        public StageEvaluation Stage8 => m_Stage8;
-        public StageEvaluation Stage9 => m_Stage9;
-        public StageEvaluation Stage10 => m_Stage10;
+        Dictionary<Stages, StageEvaluation> m_StageScores;
+        public Dictionary<Stages, StageEvaluation> StageScores
+        {
+            get
+            {
+                if(m_StageScores == null)
+                {
+                    m_StageScores = new Dictionary<Stages, StageEvaluation>()
+                    {
+                        {Stages.Stage1, m_Stage1 },
+                        {Stages.Stage2, m_Stage2 },
+                        {Stages.Stage3, m_Stage3 },
+                        {Stages.Stage4, m_Stage4 },
+                        {Stages.Stage5, m_Stage5 },
+                        {Stages.Stage6, m_Stage6 },
+                        {Stages.Stage7, m_Stage7 },
+                        {Stages.Stage8, m_Stage8 },
+                        {Stages.Stage9, m_Stage9 },
+                        {Stages.Stage10, m_Stage10 }
+                    };
+                }
+                return m_StageScores;
+            }
+        }
 
         [System.Serializable]
         public struct StageEvaluation
@@ -81,10 +109,23 @@ public class GeneralSettings : ScriptableObject
             [SerializeField] private int m_TwoStar;
             [SerializeField] private int m_OneStar;
 
-            public int ThreeStar => m_ThreeStar;
-            public int TwoStar => m_TwoStar;
-            public int OneStar => m_OneStar;
-            
+            private Dictionary<int, int> m_ClearLevel;
+            public Dictionary<int, int> ClearLevel
+            {
+                get
+                {
+                    if(m_ClearLevel == null)
+                    {
+                        m_ClearLevel = new Dictionary<int, int>()
+                        {
+                            {m_ThreeStar, 3 },
+                            {m_TwoStar, 2},
+                            {m_OneStar, 1}
+                        };
+                    }
+                    return m_ClearLevel;
+                }
+            }
         }
     }
 
