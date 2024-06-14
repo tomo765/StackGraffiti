@@ -25,7 +25,7 @@ public class ButtonManager : MonoBehaviour
     public void OnpointExit(int i) 
     {
         // F–ß‚·
-        comandButton[i].image.color = new Color(1, 1, 1, 1);
+        comandButton[i].image.color = Color.white;
         // Œ³‚Ì‰æ‘œ‚É–ß‚·
         comandButton[i].image.sprite = buttonImageDefault[i];
 

@@ -13,12 +13,6 @@ public class SceneManagings : MonoBehaviour
 
     void Start()
     {
-        //returnButton.onClick.AddListener(() =>
-        //{       
-        //    loadedOption = false;
-        //    SceneManager.UnloadSceneAsync("OptionScene");
-        //});
-
         loadOption.onClick.AddListener(() =>
         {
             if(loadedOption) { return; }

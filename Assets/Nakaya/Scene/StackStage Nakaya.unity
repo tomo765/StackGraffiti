@@ -2229,37 +2229,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!1 &1190411668
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1190411670}
-  m_Layer: 0
-  m_Name: EyesPrefab
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1190411670
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190411668}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1222546, y: 0.1851413, z: 67.634674}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1256825504
 GameObject:
   m_ObjectHideFlags: 0
@@ -2272,7 +2241,6 @@ GameObject:
   - component: {fileID: 1256825509}
   - component: {fileID: 1256825508}
   - component: {fileID: 1256825507}
-  - component: {fileID: 1256825506}
   - component: {fileID: 1256825510}
   m_Layer: 0
   m_Name: StageButton
@@ -2301,18 +2269,6 @@ RectTransform:
   m_AnchoredPosition: {x: -233, y: -150}
   m_SizeDelta: {x: 350, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1256825506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1256825504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 118af81673017014caa5d41182588129, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1256825507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2357,18 +2313,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1256825506}
-        m_TargetAssemblyTypeName: SelectSceneButtonManager, Assembly-CSharp
-        m_MethodName: Load
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 967589247}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
         m_MethodName: OnClick
@@ -3307,7 +3251,6 @@ GameObject:
   - component: {fileID: 1737828482}
   - component: {fileID: 1737828481}
   - component: {fileID: 1737828480}
-  - component: {fileID: 1737828479}
   - component: {fileID: 1737828483}
   m_Layer: 0
   m_Name: TitleButton
@@ -3336,18 +3279,6 @@ RectTransform:
   m_AnchoredPosition: {x: 260, y: -150}
   m_SizeDelta: {x: 350, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1737828479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737828477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 118af81673017014caa5d41182588129, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1737828480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3392,18 +3323,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1737828479}
-        m_TargetAssemblyTypeName: SelectSceneButtonManager, Assembly-CSharp
-        m_MethodName: Load
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 967589245}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: PlayOneShot
@@ -5605,6 +5524,5 @@ SceneRoots:
   - {fileID: 762039370}
   - {fileID: 616109615}
   - {fileID: 1609832184}
-  - {fileID: 1190411670}
   - {fileID: 2119273756}
   - {fileID: 1318967383}

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMP = TMPro.TextMeshProUGUI;
 
-public enum Stages
+public enum StageState
 {
     Stage1,
     Stage2,
@@ -20,7 +20,7 @@ public enum Stages
 
 
 [CreateAssetMenu(fileName = "GeneralSettings", menuName = "Scriptables/GeneralSettings")]
-public class GeneralSettings : ScriptableObject
+public class GeneralSettings : ScriptableObject  //ToDo : ステージセレクトのプレハブを作る
 {
     private const string path = "GeneralSettings";
 
@@ -46,10 +46,13 @@ public class GeneralSettings : ScriptableObject
     [SerializeField] private Prehabs m_Prehabs;
     [SerializeField] private StageEvaluations m_StageEvaluation;
     [SerializeField] private Sprites m_Sprites;
+    [SerializeField] private Sounds m_Sounds;
+
+
     public Prehabs Prehab => m_Prehabs;
     public StageEvaluations StageEval => m_StageEvaluation;
     public Sprites Sprite => m_Sprites;
-
+    public Sounds Sound => m_Sounds;
 
 
     [System.Serializable]
@@ -58,9 +61,11 @@ public class GeneralSettings : ScriptableObject
         [SerializeField] private GameObject m_Eye;
         //[SerializeField] private GameObject m_Head;
         [SerializeField] private TMP m_NameText;
+        //[SerializeField] private StageSelectButton m_StageSelectBtn;
 
         public GameObject Eye => m_Eye;
         public TMP NameText => m_NameText;
+        //public StageSelectButton StageSelectBtn => m_StageSelectBtn;
     }
 
     [System.Serializable]
@@ -77,25 +82,25 @@ public class GeneralSettings : ScriptableObject
         [SerializeField] private StageEvaluation m_Stage9;
         [SerializeField] private StageEvaluation m_Stage10;
 
-        Dictionary<Stages, StageEvaluation> m_StageScores;
-        public Dictionary<Stages, StageEvaluation> StageScores
+        Dictionary<StageState, StageEvaluation> m_StageScores;
+        public Dictionary<StageState, StageEvaluation> StageScores
         {
             get
             {
                 if(m_StageScores == null)
                 {
-                    m_StageScores = new Dictionary<Stages, StageEvaluation>()
+                    m_StageScores = new Dictionary<StageState, StageEvaluation>()
                     {
-                        {Stages.Stage1, m_Stage1 },
-                        {Stages.Stage2, m_Stage2 },
-                        {Stages.Stage3, m_Stage3 },
-                        {Stages.Stage4, m_Stage4 },
-                        {Stages.Stage5, m_Stage5 },
-                        {Stages.Stage6, m_Stage6 },
-                        {Stages.Stage7, m_Stage7 },
-                        {Stages.Stage8, m_Stage8 },
-                        {Stages.Stage9, m_Stage9 },
-                        {Stages.Stage10, m_Stage10 }
+                        {StageState.Stage1, m_Stage1 },
+                        {StageState.Stage2, m_Stage2 },
+                        {StageState.Stage3, m_Stage3 },
+                        {StageState.Stage4, m_Stage4 },
+                        {StageState.Stage5, m_Stage5 },
+                        {StageState.Stage6, m_Stage6 },
+                        {StageState.Stage7, m_Stage7 },
+                        {StageState.Stage8, m_Stage8 },
+                        {StageState.Stage9, m_Stage9 },
+                        {StageState.Stage10, m_Stage10 }
                     };
                 }
                 return m_StageScores;
@@ -142,5 +147,13 @@ public class GeneralSettings : ScriptableObject
         public Sprite DeathEye => m_DeathEye;
         public Sprite ClearStar => m_ClearStar;
         public Sprite UnclearStar => m_UnclearStar;
+    }
+
+    [System.Serializable]
+    public class Sounds
+    {
+        [SerializeField] private AudioClip m_SelectSE;
+
+        public AudioClip SelectSE => m_SelectSE;
     }
 }

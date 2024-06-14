@@ -1,13 +1,5 @@
 using UnityEngine;
 
-// ゲームの状態
-public enum GameState
-{
-    Playing, 
-    Drawing,
-    Goal
-}
-
 public class PlayerControll : MonoBehaviour
 {
     Rigidbody2D rigid2D;            
@@ -40,10 +32,10 @@ public class PlayerControll : MonoBehaviour
         {
             // ジャンプ中
             isJumping = true;
-            float originalMass = rigid2D.mass;
-            this.rigid2D.mass = 0f;         // 質量を0にする
+            //float originalMass = rigid2D.mass;
+            //this.rigid2D.mass = 0f;         // 質量を0にする
             this.rigid2D.velocity = new Vector3(rigid2D.velocity.x, jumpForce);
-            rigid2D.mass = originalMass;    //　飛んだら質量を戻す
+            //rigid2D.mass = originalMass;    //　飛んだら質量を戻す
 
         }
 
