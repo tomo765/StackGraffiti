@@ -25,7 +25,7 @@ public class StageSelectButton : MonoBehaviour
         {
             SceneManager.LoadScene(m_StageName);
             GameManager.SetCullentStage(StageState.Stage1);
-            SoundManager.Instance.PlayNewBGM(GeneralSettings.Instance.Sound.SelectSE);
+            SoundManager.Instance?.PlayNewBGM(GeneralSettings.Instance.Sound.SelectSE);
         });
 
 
