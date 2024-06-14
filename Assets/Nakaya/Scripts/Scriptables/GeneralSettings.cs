@@ -115,7 +115,7 @@ public class GeneralSettings : ScriptableObject  //ToDo : ステージセレクトのプレ
             [SerializeField] private int m_TwoStar;
             [SerializeField] private int m_OneStar;
 
-            private int m_CullentEval = 0;
+            [SerializeField]private int m_CullentEval = 0;  //ToDo : JSONなどに置き換え
             public int CullentEval => m_CullentEval;
 
             private Dictionary<int, int> m_ClearLevel;
