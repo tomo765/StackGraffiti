@@ -31,6 +31,7 @@ public class GameCanvasUI : MonoBehaviour
             m_DrawUI.gameObject.SetActive(m_isVisible);
             m_LookButtonText.text = m_isVisible ? CreateCharacter : ViewStage;
         });
+        m_DrawUI.gameObject.SetActive(true);
     }
     private void ChangeVisible()
     {

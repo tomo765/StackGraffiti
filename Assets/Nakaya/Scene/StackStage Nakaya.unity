@@ -503,7 +503,6 @@ GameObject:
   - component: {fileID: 350984068}
   - component: {fileID: 350984067}
   - component: {fileID: 350984070}
-  - component: {fileID: 350984069}
   - component: {fileID: 350984066}
   m_Layer: 0
   m_Name: LookButton
@@ -599,21 +598,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350984064}
   m_CullTransparentMesh: 1
---- !u!114 &350984069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 350984064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c98deb4c4c8114d4ab879da47a8f329a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drawWindow: {fileID: 457456829}
-  lookButton: {fileID: 350984070}
-  buttonText: {fileID: 2039104683}
 --- !u!114 &350984070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -908,7 +892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DrawArea: {fileID: 0}
-  m_CreateCharaButton: {fileID: 0}
+  m_VisibleButton: {fileID: 0}
   m_NameInput: {fileID: 0}
 --- !u!1 &473324331
 GameObject:
@@ -2329,7 +2313,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 118af81673017014caa5d41182588129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 
 --- !u!114 &1256825507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3365,7 +3348,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 118af81673017014caa5d41182588129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 
 --- !u!114 &1737828480
 MonoBehaviour:
   m_ObjectHideFlags: 0

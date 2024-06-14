@@ -7,6 +7,27 @@ using TMP = TMPro.TextMeshProUGUI;
 [CreateAssetMenu(fileName = "GeneralSettings", menuName = "Scriptables/GeneralSettings")]
 public class GeneralSettings : ScriptableObject
 {
+    private const string path = "GeneralSettings";
+
+    private static GeneralSettings instance;
+    public static GeneralSettings Instance
+    {
+        get
+        {
+            if(instance == null)
+            {
+                instance = Resources.Load<GeneralSettings>(path);
+                if(instance == null )
+                {
+                    Debug.LogError("no");
+                }
+            }
+            return instance;
+        }
+    }
+
+
+
     [SerializeField] private Prehabs m_Prehabs;
     [SerializeField] private StageEvaluations m_StageEvaluation;
     [SerializeField] private Sprites m_Sprites;
@@ -72,8 +93,13 @@ public class GeneralSettings : ScriptableObject
     {
         [SerializeField] private Sprite m_AliveEye;
         [SerializeField] private Sprite m_DeathEye;
+        [SerializeField] private Sprite m_ClearStar;
+        [SerializeField] private Sprite m_UnclearStar;
+
 
         public Sprite AliveEye => m_AliveEye;
         public Sprite DeathEye => m_DeathEye;
+        public Sprite ClearStar => m_ClearStar;
+        public Sprite UnclearStar => m_UnclearStar;
     }
 }

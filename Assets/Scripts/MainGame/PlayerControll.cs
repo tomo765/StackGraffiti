@@ -123,15 +123,12 @@ public class PlayerControll : MonoBehaviour
 
             // 目のスプライトを変更する
             transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("deatheye_2");
-
         }
         else if (collision.gameObject.tag == "Sleep")
         {
-            
             Sleep();
             gameState = "Drawing";
         }
-        
     }
 
     private void OnTriggerStay2D(Collider2D collision)

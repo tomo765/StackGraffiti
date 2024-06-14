@@ -9,7 +9,7 @@ using TInputField = TMPro.TMP_InputField;
 public class DrawUI : MonoBehaviour
 {
     [SerializeField] private RectTransform DrawArea;
-    [SerializeField] private Button m_CreateCharaButton;
+    [SerializeField] private Button m_VisibleButton;
     [SerializeField] private TInputField m_NameInput;
 
     void Start()
@@ -19,8 +19,8 @@ public class DrawUI : MonoBehaviour
 
     private void Init()
     {
-        m_CreateCharaButton.onClick.RemoveAllListeners();
-        m_CreateCharaButton.onClick.AddListener(() =>
+        m_VisibleButton.onClick.RemoveAllListeners();
+        m_VisibleButton.onClick.AddListener(() =>
         {
             
         });

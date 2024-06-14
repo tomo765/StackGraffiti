@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 350984069}
   - component: {fileID: 350984066}
   m_Layer: 0
-  m_Name: LookButton
+  m_Name: VisibleButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -614,6 +614,7 @@ MonoBehaviour:
   drawWindow: {fileID: 457456829}
   lookButton: {fileID: 350984070}
   buttonText: {fileID: 2039104683}
+  m_IsActive: 0
 --- !u!114 &350984070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1544,6 +1545,7 @@ GameObject:
   - component: {fileID: 762039369}
   - component: {fileID: 762039368}
   - component: {fileID: 762039367}
+  - component: {fileID: 762039371}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1638,6 +1640,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &762039371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762039366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed748745d604985438029c007aa97ffa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DrawArea: {fileID: 457456830}
+  m_VisibleButton: {fileID: 0}
+  m_NameInput: {fileID: 2065347200}
 --- !u!1 &785117545
 GameObject:
   m_ObjectHideFlags: 0
