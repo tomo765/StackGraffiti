@@ -6,6 +6,7 @@ using TMP = TMPro.TextMeshProUGUI;
 
 public enum StageState
 {
+    None,
     Stage1,
     Stage2,
     Stage3,
@@ -114,6 +115,9 @@ public class GeneralSettings : ScriptableObject  //ToDo : ステージセレクトのプレ
             [SerializeField] private int m_TwoStar;
             [SerializeField] private int m_OneStar;
 
+            private int m_CullentEval = 0;
+            public int CullentEval => m_CullentEval;
+
             private Dictionary<int, int> m_ClearLevel;
             public Dictionary<int, int> ClearLevel
             {
@@ -130,6 +134,12 @@ public class GeneralSettings : ScriptableObject  //ToDo : ステージセレクトのプレ
                     }
                     return m_ClearLevel;
                 }
+            }
+
+            public void SetClearEval(int i)
+            {
+                if(m_CullentEval >= i) { return; }
+                m_CullentEval = i;
             }
         }
     }
