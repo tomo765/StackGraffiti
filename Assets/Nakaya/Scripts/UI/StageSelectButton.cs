@@ -23,9 +23,9 @@ public class StageSelectButton : MonoBehaviour
         m_StageLevelText.text = stageLevel.ToString();
         m_TransitionButton.onClick.AddListener(() =>
         {
-            SoundManager.Instance.PlayNewBGM(GeneralSettings.Instance.Sound.SelectSE);
             SceneManager.LoadScene(m_StageName);
             GameManager.SetCullentStage(StageState.Stage1);
+            SoundManager.Instance.PlayNewBGM(GeneralSettings.Instance.Sound.SelectSE);
         });
 
 
