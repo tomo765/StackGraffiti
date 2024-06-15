@@ -20,8 +20,6 @@ public class StageScore
     [SerializeField] private StageType m_StageType;
     [SerializeField] private int m_StarLevel;
 
-    private int m_CullentEval;
-
     public StageType StageType => m_StageType;
     public int StarLevel => m_StarLevel;
 

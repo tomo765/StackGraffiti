@@ -78,7 +78,8 @@ public class GeneralSettings : ScriptableObject  //ToDo : ステージセレクトのプレ
 
         public StageEvaluation[] Stages => m_Stages;
 
-        public StageEvaluation GetStageEval(StageType stg) => Array.Find(Stages, stage => stage.StageType == stg);
+        public int GetCullentLevel(StageType type, int sleepCnt) => GetStageEval(type).GetStarLevel(sleepCnt);
+        private StageEvaluation GetStageEval(StageType stg) => Array.Find(Stages, stage => stage.StageType == stg);
 
         [System.Serializable]
         public class StageEvaluation

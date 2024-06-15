@@ -214,9 +214,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a2dddd42f7c604fa65fe41a12ff4b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Star1: {fileID: 680687185}
-  m_Star2: {fileID: 1698590986}
-  m_Star3: {fileID: 689649992}
+  m_Stars:
+  - {fileID: 680687185}
+  - {fileID: 1698590986}
+  - {fileID: 689649992}
   m_StageSelectBtn: {fileID: 578397855}
   m_ReturnTitleBtn: {fileID: 2036137628}
 --- !u!1 &368666222

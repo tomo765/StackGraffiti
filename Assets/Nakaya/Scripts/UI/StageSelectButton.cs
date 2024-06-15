@@ -25,11 +25,11 @@ public class StageSelectButton : MonoBehaviour
         m_TransitionButton.onClick.AddListener(() =>
         {
             SceneManager.LoadScene(m_StageName);
-            GameManager.SetCullentStage((StageType)stageNum);
+            GameManager.StartStage((StageType)stageNum);
             SoundManager.Instance?.PlayNewBGM(GeneralSettings.Instance.Sound.SelectSE);  //ToDo : サウンド変更
         });
 
-        for (int i = 0; i < StageDataUtility.StageDatas.StageScores[i].StarLevel; i++)
+        for (int i = 0; i < StageDataUtility.StageDatas.StageScores[stageNum - 1].StarLevel; i++)
         {
             m_Stars[i].sprite = GeneralSettings.Instance.Sprite.ClearStar;
         }

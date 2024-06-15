@@ -61,7 +61,7 @@ public static class StageDataUtility
 
     public static void SetStageScore(StageType stage, int sleepCnt)
     {
-        int starLevel = GeneralSettings.Instance.StageEvals.GetStageEval(stage).GetStarLevel(sleepCnt);
+        int starLevel = GeneralSettings.Instance.StageEvals.GetCullentLevel(stage, sleepCnt);
         GetScore(stage).SetStarLevel(starLevel);
     }
 

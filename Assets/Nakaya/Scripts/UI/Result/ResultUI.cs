@@ -6,10 +6,7 @@ using UnityEngine.UI;
 
 public class ResultUI : MonoBehaviour
 {
-    [SerializeField] private Image m_Star1;
-    [SerializeField] private Image m_Star2;
-    [SerializeField] private Image m_Star3;
-    private Image[] m_Stars;
+    [SerializeField] private Image[] m_Stars;
 
 
     [SerializeField] private Button m_StageSelectBtn;
@@ -18,30 +15,24 @@ public class ResultUI : MonoBehaviour
     void Start()
     {
         Init();
-        SetStar(0);
+        SetStar();
     }
 
     private void Init()
     {
         m_StageSelectBtn.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("1_StageSelect");
+            SceneManager.LoadScene(Config.SceneNames.StageSelect);
         });
         m_ReturnTitleBtn.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("0_Title");
+            SceneManager.LoadScene(Config.SceneNames.Title);
         });
-
-        m_Stars = new Image[]
-        {
-            m_Star1,
-            m_Star2,
-            m_Star3
-        };
     }
 
-    public void SetStar(int level)
+    public void SetStar()
     {
+        int level = GeneralSettings.Instance.StageEvals.GetCullentLevel(GameManager.CullentStage, GameManager.SleepCount);
         for (int i = 0; i < level; i++)
         {
             m_Stars[i].sprite = GeneralSettings.Instance.Sprite.ClearStar;

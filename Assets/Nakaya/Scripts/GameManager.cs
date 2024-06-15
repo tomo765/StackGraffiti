@@ -27,10 +27,12 @@ public static class GameManager
         m_SleepCount = 0;
     }
 
-    public static void SetCullentStage(StageType stg) => m_CullentStage = stg;
+    public static void SleepCharacter() => m_SleepCount++;
 
     public static void Clear()
     {
-        SceneManager.LoadScene("Result", LoadSceneMode.Additive);
+        StageDataUtility.SetStageScore(m_CullentStage, m_SleepCount);
+
+        SceneManager.LoadScene(Config.SceneNames.Result, LoadSceneMode.Additive);
     }
 }

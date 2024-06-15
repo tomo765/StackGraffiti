@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControll : MonoBehaviour
 {
@@ -81,9 +82,11 @@ public class PlayerControll : MonoBehaviour
     {
         if(collision.gameObject.tag == "Goal")
         {
+            if(gameState == "Goal") { return; }
             // ƒS[ƒ‹‚µ‚½
             Goal();
-            FindObjectOfType<MainManager>().SetClearText();
+            GameManager.Clear();
+            SceneManager.LoadScene(Config.SceneNames.Result, LoadSceneMode.Additive);
         }
         else if(collision.gameObject.tag == "Dead")
         {
@@ -95,6 +98,8 @@ public class PlayerControll : MonoBehaviour
         }
         else if(collision.gameObject.tag == "Needle")
         {
+            GameManager.SleepCharacter();
+
             rigid2D.isKinematic = true;
             rigid2D.velocity = new Vector2(0, 0);
             rigid2D.freezeRotation = true; // ‰ñ“]‚à’â~
@@ -154,6 +159,8 @@ public class PlayerControll : MonoBehaviour
     // ƒLƒƒƒ‰€
     public void Dead()
     {
+        GameManager.SleepCharacter();
+
         // €‚ñ‚¾‚â‚Â‚ğÁ‚·
         Destroy(this.gameObject);
 
@@ -170,6 +177,8 @@ public class PlayerControll : MonoBehaviour
 
     public void Sleep()
     {
+        GameManager.SleepCharacter();
+
         GameObject sleep = GameObject.Find("MainManager");
         // Q‚½‰ñ”ƒJƒEƒ“ƒg“ü‚ê‚é
         sleep.GetComponent<MainManager>().SleepCount();
