@@ -17,19 +17,19 @@ public class StageSelectButton : MonoBehaviour
     private int m_StageLevel;
     public string StageName => m_StageName;
 
-    public void Init(string name, int stageLevel)
+    public void Init(string name, int stageNum)
     {
         m_StageName = name;
-        m_StageLevel = stageLevel;
-        m_StageLevelText.text = "ステージ" + stageLevel.ToString();
+        m_StageLevel = stageNum;
+        m_StageLevelText.text = "ステージ" + stageNum.ToString();
         m_TransitionButton.onClick.AddListener(() =>
         {
             SceneManager.LoadScene(m_StageName);
-            GameManager.SetCullentStage((StageState)stageLevel);
+            GameManager.SetCullentStage((StageType)stageNum);
             SoundManager.Instance?.PlayNewBGM(GeneralSettings.Instance.Sound.SelectSE);  //ToDo : サウンド変更
         });
 
-        for (int i = 0; i < GeneralSettings.Instance.StageEval.StageScores[(StageState)stageLevel].CullentEval; i++)
+        for (int i = 0; i < StageDataUtility.StageDatas.StageScores[i].StarLevel; i++)
         {
             m_Stars[i].sprite = GeneralSettings.Instance.Sprite.ClearStar;
         }

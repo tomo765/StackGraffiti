@@ -18,6 +18,8 @@ public class StageSelectUI : MonoBehaviour
 
     void Start()
     {
+        StageDataUtility.FindData();
+
         SetSelectButtons();
         SetReturnTitleBtn();
     }

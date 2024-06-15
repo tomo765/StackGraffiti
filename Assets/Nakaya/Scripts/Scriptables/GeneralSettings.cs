@@ -1,10 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using TMP = TMPro.TextMeshProUGUI;
 
-public enum StageState
+public enum StageType
 {
     None,
     Stage1,
@@ -51,7 +53,7 @@ public class GeneralSettings : ScriptableObject  //ToDo : ステージセレクトのプレ
 
 
     public Prehabs Prehab => m_Prehabs;
-    public StageEvaluations StageEval => m_StageEvaluation;
+    public StageEvaluations StageEvals => m_StageEvaluation;
     public Sprites Sprite => m_Sprites;
     public Sounds Sound => m_Sounds;
 
@@ -72,74 +74,34 @@ public class GeneralSettings : ScriptableObject  //ToDo : ステージセレクトのプレ
     [System.Serializable]
     public class StageEvaluations
     {
-        [SerializeField] private StageEvaluation m_Stage1;
-        [SerializeField] private StageEvaluation m_Stage2;
-        [SerializeField] private StageEvaluation m_Stage3;
-        [SerializeField] private StageEvaluation m_Stage4;
-        [SerializeField] private StageEvaluation m_Stage5;
-        [SerializeField] private StageEvaluation m_Stage6;
-        [SerializeField] private StageEvaluation m_Stage7;
-        [SerializeField] private StageEvaluation m_Stage8;
-        [SerializeField] private StageEvaluation m_Stage9;
-        [SerializeField] private StageEvaluation m_Stage10;
+        [SerializeField] private StageEvaluation[] m_Stages = null;
 
-        Dictionary<StageState, StageEvaluation> m_StageScores;
-        public Dictionary<StageState, StageEvaluation> StageScores
-        {
-            get
-            {
-                if(m_StageScores == null)
-                {
-                    m_StageScores = new Dictionary<StageState, StageEvaluation>()
-                    {
-                        {StageState.Stage1, m_Stage1 },
-                        {StageState.Stage2, m_Stage2 },
-                        {StageState.Stage3, m_Stage3 },
-                        {StageState.Stage4, m_Stage4 },
-                        {StageState.Stage5, m_Stage5 },
-                        {StageState.Stage6, m_Stage6 },
-                        {StageState.Stage7, m_Stage7 },
-                        {StageState.Stage8, m_Stage8 },
-                        {StageState.Stage9, m_Stage9 },
-                        {StageState.Stage10, m_Stage10 }
-                    };
-                }
-                return m_StageScores;
-            }
-        }
+        public StageEvaluation[] Stages => m_Stages;
+
+        public StageEvaluation GetStageEval(StageType stg) => Array.Find(Stages, stage => stage.StageType == stg);
 
         [System.Serializable]
         public class StageEvaluation
         {
+            [SerializeField] private StageType m_StageType;
             [SerializeField] private int m_ThreeStar;
             [SerializeField] private int m_TwoStar;
             [SerializeField] private int m_OneStar;
 
-            [SerializeField]private int m_CullentEval = 0;  //ToDo : JSONなどに置き換え
-            public int CullentEval => m_CullentEval;
+            public StageType StageType => m_StageType;
 
-            private Dictionary<int, int> m_ClearLevel;
-            public Dictionary<int, int> ClearLevel
+            public int GetStarLevel(int sleepCnt)
             {
-                get
+                if (sleepCnt <= m_ThreeStar)
                 {
-                    if(m_ClearLevel == null)
-                    {
-                        m_ClearLevel = new Dictionary<int, int>()
-                        {
-                            {m_ThreeStar, 3 },
-                            {m_TwoStar, 2},
-                            {m_OneStar, 1}
-                        };
-                    }
-                    return m_ClearLevel;
+                    return 3;
                 }
-            }
+                else if (sleepCnt <= m_TwoStar)
+                {
+                    return 2;
+                }
 
-            public void SetClearEval(int i)
-            {
-                if(m_CullentEval >= i) { return; }
-                m_CullentEval = i;
+                return 1;
             }
         }
     }
@@ -156,46 +118,6 @@ public class GeneralSettings : ScriptableObject  //ToDo : ステージセレクトのプレ
         public Sprite DeathEye => m_DeathEye;
         public Sprite ClearStar => m_ClearStar;
         public Sprite UnclearStar => m_UnclearStar;
-
-
-        [SerializeField] private Sprite m_Stage1;
-        [SerializeField] private Sprite m_Stage2;
-        [SerializeField] private Sprite m_Stage3;
-        [SerializeField] private Sprite m_Stage4;
-        [SerializeField] private Sprite m_Stage5;
-        [SerializeField] private Sprite m_Stage6;
-        [SerializeField] private Sprite m_Stage7;
-        [SerializeField] private Sprite m_Stage8;
-        [SerializeField] private Sprite m_Stage9;
-        [SerializeField] private Sprite m_Stage10;
-        [SerializeField] private Sprite m_Stage11;
-        [SerializeField] private Sprite m_Stage12;
-        [SerializeField] private Sprite m_Stage13;
-
-        private Dictionary<int, Sprite> m_StageCuts;
-        public Dictionary<int, Sprite> StageCuts
-        {
-            get
-            {
-                m_StageCuts ??= new Dictionary<int, Sprite>()  //nullチェックをして、nullなら代入
-                {
-                    {1, m_Stage1 },
-                    {2, m_Stage2 },
-                    {3, m_Stage3 },
-                    {4, m_Stage4 },
-                    {5, m_Stage5 },
-                    {6, m_Stage6 },
-                    {7, m_Stage7 },
-                    {8, m_Stage8 },
-                    {9, m_Stage9 },
-                    {10, m_Stage10 },
-                    {11, m_Stage11 },
-                    {12, m_Stage12 },
-                    {13, m_Stage13 },
-                };
-                return m_StageCuts;
-            }
-        }
     }
 
     [System.Serializable]

@@ -888,37 +888,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StartButton: {fileID: 895731599}
   m_FinishButton: {fileID: 368605336}
---- !u!1 &1362995998
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1362995999}
-  m_Layer: 0
-  m_Name: TitleManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1362995999
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362995998}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 64.33728, y: 268.29776, z: -1.9399927}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1376183989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1309,6 +1278,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 161274091}
-  - {fileID: 1362995999}
   - {fileID: 2087307667}
   - {fileID: 1808021124}

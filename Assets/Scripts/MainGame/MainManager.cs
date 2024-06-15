@@ -56,7 +56,7 @@ public class MainManager : MonoBehaviour
         // Escを押したらセレクトシーンに戻る
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("1_StageSelect");
+            SceneManager.LoadScene(Config.SceneNames.StageSelect);
         }
 
 
