@@ -26,7 +26,7 @@ public class StageSelectButton : MonoBehaviour
         {
             SceneManager.LoadScene(m_StageName);
             GameManager.StartStage((StageType)stageNum);
-            SoundManager.Instance?.PlayNewBGM(GeneralSettings.Instance.Sound.SelectSE);
+            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
 
         for (int i = 0; i < StageDataUtility.StageDatas.StageScores[stageNum - 1].StarLevel; i++)

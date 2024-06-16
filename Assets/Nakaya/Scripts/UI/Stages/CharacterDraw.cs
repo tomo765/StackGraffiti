@@ -28,7 +28,6 @@ public class CharacterDraw : MonoBehaviour, IPointerDownHandler, IPointerEnterHa
     {
         if (Input.GetMouseButtonUp(0))
         {
-            Debug.Log("asfadfasdasd");
             FinishWrite();
             m_OnDrawing = false;
         }
