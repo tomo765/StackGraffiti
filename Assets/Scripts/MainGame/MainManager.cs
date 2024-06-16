@@ -29,14 +29,13 @@ public class MainManager : MonoBehaviour
         sleepCount = 0;
         // スコアの最初の表示
         sleepText.SetText(string.Format("眠った回数:{0}", sleepCount));
-        PlayerControll.gameState = "Drawing";
         GameManager.SetGameState(GameState.Drawing);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(PlayerControll.gameState == "Playing")
+        if(GameManager.IsPlaying)
         {
             // Space押したら音鳴る
             if (Input.GetKeyDown(KeyCode.Space))

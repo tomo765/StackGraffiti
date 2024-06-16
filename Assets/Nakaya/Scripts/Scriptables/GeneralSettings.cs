@@ -44,7 +44,8 @@ public class GeneralSettings : ScriptableObject  //ToDo : ステージセレクトのプレ
         }
     }
 
-
+    [SerializeField] private Material m_CharaMaterial;
+    public Material CharaMaterial => m_CharaMaterial;
 
     [SerializeField] private Prehabs m_Prehabs;
     [SerializeField] private StageEvaluations m_StageEvaluation;

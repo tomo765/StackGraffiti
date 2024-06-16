@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2357467605919803950
 RectTransform:
   m_ObjectHideFlags: 0
@@ -283,7 +283,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4866592702005211097}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
@@ -314,12 +314,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539da35411bdf3a438463178255d620e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Rb2d: {fileID: 0}
   m_EyeRender: {fileID: 9221424753856994692}
   m_NameText: {fileID: 2407245920271010096}
-  m_Controller: {fileID: 7189406536801247105}
   m_Weight: 2
   m_ScaleOnStage: 0.3
+  m_MeshFilter: {fileID: 7762994307881871891}
 --- !u!114 &7189406536801247105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +342,10 @@ PrefabInstance:
     - target: {fileID: 1888823407801551705, guid: 3cc3421e8cbdafc4392a2acc9b1bdea3, type: 3}
       propertyPath: m_Name
       value: Eye
+      objectReference: {fileID: 0}
+    - target: {fileID: 1888823407801551705, guid: 3cc3421e8cbdafc4392a2acc9b1bdea3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9215803154840300531, guid: 3cc3421e8cbdafc4392a2acc9b1bdea3, type: 3}
       propertyPath: m_LocalPosition.x

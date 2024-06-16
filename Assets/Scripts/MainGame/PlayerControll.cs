@@ -14,7 +14,7 @@ public class PlayerControll : MonoBehaviour
     public int stageScore = 0;  // ステージのスコア
 
     // ゲームの状態
-    public static string gameState = "Drawing";
+    //public static string gameState = "Drawing";
 
     
 
@@ -79,22 +79,22 @@ public class PlayerControll : MonoBehaviour
     // トリガーに触れたら
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Goal")
+        if(collision.gameObject.CompareTag("Goal"))
         {
-            if(gameState == "Goal") { return; }
+            if(GameManager.IsClear) { return; }
             // ゴールした時
             Goal();
             GameManager.StageClear();
         }
-        else if(collision.gameObject.tag == "Dead")
+        else if(collision.gameObject.CompareTag("Dead"))
         {
             // キャラ死亡
             Dead();
-            gameState = "Drawing";
+            GameManager.SetGameState(GameState.Drawing);
             // PayerタグのついたオブジェクトのOrder in Layerを変更
             HideThePlayer();
         }
-        else if(collision.gameObject.tag == "Needle")
+        else if(collision.gameObject.CompareTag("Needle"))
         {
             GameManager.AddSleepCount();
 
@@ -111,7 +111,7 @@ public class PlayerControll : MonoBehaviour
             }
 
             playerSleep = true;
-            gameState = "Drawing";
+            GameManager.SetGameState(GameState.Drawing);
 
             // PayerタグのついたオブジェクトのOrder in Layerを変更
             HideThePlayer();
@@ -119,16 +119,16 @@ public class PlayerControll : MonoBehaviour
             // 目のスプライトを変更する
             transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("deatheye_2");
         }
-        else if (collision.gameObject.tag == "Sleep")
+        else if (collision.gameObject.CompareTag("Sleep"))
         {
             Sleep();
-            gameState = "Drawing";
+            GameManager.SetGameState(GameState.Drawing);
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag =="DrawWindow")
+        if (collision.gameObject.CompareTag("DrawWindow"))
         {
             //this.gameObject.SetActive(false);
         }
@@ -138,11 +138,11 @@ public class PlayerControll : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // ジャンプ判定
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.CompareTag("Ground"))
         {
             isJumping = false;
         }
-        else if (collision.gameObject.tag == "Player")
+        else if (collision.gameObject.CompareTag("Player"))
         {
             isJumping = false;
         }
@@ -150,7 +150,7 @@ public class PlayerControll : MonoBehaviour
 
     public void Goal()
     {
-        gameState = "Goal";
+        GameManager.SetGameState(GameState.Goal);
         playerSleep = true;
     }
 

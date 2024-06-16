@@ -1,47 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer m_EyeRender;
     [SerializeField] private TextMeshProUGUI m_NameText;
+    [SerializeField] private MeshFilter m_MeshFilter;
 
     [SerializeField] private float m_Weight = 2;
     [SerializeField] private float m_ScaleOnStage = 0.3f;
 
     private Rigidbody2D m_Rb2d;
-    private MeshFilter m_MeshFilter;
     private PolygonCollider2D m_PolygonCollider2D;
 
     private CharacterController m_Controller;
-    
+
+    public SpriteRenderer EyeRenderer => m_EyeRender;
+    public Rigidbody2D Rb2D => m_Rb2d;
+    public MeshFilter MeshFilter => m_MeshFilter;
+    public PolygonCollider2D Poly2D => m_PolygonCollider2D;
+
     private void Start()
     {
         m_Rb2d = GetComponent<Rigidbody2D>();
-        m_MeshFilter = GetComponent<MeshFilter>();
         m_PolygonCollider2D = GetComponent<PolygonCollider2D>();
         m_Controller = GetComponent<CharacterController>();
 
         m_Controller.SetManagerMember(m_Rb2d, OnSleep, OnUnmovable, OnClear);
-
-        m_Controller.enabled = false;
-        m_PolygonCollider2D.enabled = false;
     }
 
-    public void CreateOnStage(string name, Vector2[] colliders, MeshFilter filter)
+    public void CreateOnStage(string playerName)
     {
-        filter.name = "CharacterFilter";
+        m_EyeRender.gameObject.SetActive(true);
+        m_NameText.gameObject.SetActive(true);
 
-        m_NameText.text = name;
-        m_PolygonCollider2D.points = colliders;
-        m_MeshFilter = filter;
+        transform.position = GameManager.SpawnPos;
+        transform.localScale = Vector3.one * 0.3f;
+        Rb2D.bodyType = RigidbodyType2D.Dynamic;
+
+        m_NameText.text = playerName;
 
         transform.localScale = Vector3.one * m_ScaleOnStage;
-
-        m_Controller.enabled = true;
-        m_PolygonCollider2D.enabled = true;
     }
 
     private void OnSleep()
@@ -56,6 +58,7 @@ public class CharacterManager : MonoBehaviour
         GameManager.SetGameState(GameState.Drawing);
 
         Destroy(m_Controller);
+        Destroy(this);
     }
 
     private void OnUnmovable()

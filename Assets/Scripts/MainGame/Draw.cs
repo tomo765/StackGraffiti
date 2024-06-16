@@ -12,7 +12,7 @@ public class Draw : MonoBehaviour
     bool canDraw = false;
     public Material drawMaterial;   // マテリアルの種類
 
-    // メッシュを作るためのスクリプト
+    // メッシュを作るためのスクリプト  https://qiita.com/divideby_zero/items/491d18cbc91d7fabd700
     private void CreateMesh(Mesh mesh, List<Vector2> vlist)
     {
         mesh.Clear();
@@ -48,7 +48,6 @@ public class Draw : MonoBehaviour
     public void Update()
     {
         if (Input.GetMouseButtonDown(0) && canDraw)    // マウスの左クリックをしたら
-        //if (Input.GetMouseButtonDown(0))    // マウスの左クリックをしたら
         {
             targetObject = new GameObject("MeshObject");    // ゲーム上にMeshObject(ヒエラルキー上の名前)という名前のオブジェクトを新しく出現させる
 

@@ -23,7 +23,7 @@ public class CreateCharacter : MonoBehaviour
 
     public void OncreateButton()
     {
-        PlayerControll.gameState = "Playing";
+        GameManager.SetGameState(GameState.Playing);
 
         character = GameObject.Find("new Object");  // キャラクター探してくる
         if (character == null )
