@@ -13,7 +13,6 @@ public class StageSelectUI : MonoBehaviour
     [SerializeField] private Button m_ReturnTitleBtn;
 
     private StageSelectButton[] m_SelectButtons;
-    private int cullentPage = 1;
 
     void Start()
     {

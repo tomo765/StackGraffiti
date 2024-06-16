@@ -30,24 +30,27 @@ public class GameCanvasUI : MonoBehaviour
             ChangeVisible();
             m_DrawUI.gameObject.SetActive(m_isVisible);
             m_LookButtonText.text = m_isVisible ? CreateCharacter : ViewStage;
+            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
         m_DrawUI.gameObject.SetActive(true);
-        //GameManager.Clear();
+
+        GameManager.AddCharaSleepAction(UpdateSleepCount);
+        GameManager.AddCharaSleepAction(RestartDrawing);
     }
+
     private void ChangeVisible()
     {
         m_isVisible = !m_isVisible;
     }
 
-
-
-    void Update()
-    {
-        
-    }
-
     private void UpdateSleepCount()
     {
-        m_SleepCount.text = "1";  //ToDo : ˆø”‚Å‚Á‚Ä‚­‚é‚© static ‚ÅŠÇ—‚µ‚Ä‚¢‚é•¨‚ğˆø‚Á’£‚Á‚Ä‚­‚é
+        m_SleepCount.text = "–°‚Á‚½‰ñ” : " + GameManager.SleepCount.ToString();  //ToDo : —Ç‚¢Š´‚¶‚ÌŠ‚ÅŒÄ‚Ño‚·
+    }
+
+    private void RestartDrawing()
+    {
+        m_DrawUI.gameObject.SetActive(true);
+        m_LookButton.gameObject.SetActive(true);
     }
 }

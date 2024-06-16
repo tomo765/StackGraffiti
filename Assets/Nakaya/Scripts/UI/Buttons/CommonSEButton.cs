@@ -47,14 +47,14 @@ public class CommonSEButton : Button
     {
         if(m_Img == null) { SetImage(); }
 
-        SoundManager.Instance.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
+        SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.HoverSE);
         GetComponent<Image>().color = m_EnterColor;
     }
     public override void OnPointerExit(PointerEventData eventData)
     {
         if (m_Img == null) { SetImage(); }
 
-        SoundManager.Instance.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
+        //SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.HoverSE);
         GetComponent<Image>().color = m_ExitColor;
     }
 

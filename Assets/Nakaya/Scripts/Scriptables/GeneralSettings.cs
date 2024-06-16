@@ -62,11 +62,12 @@ public class GeneralSettings : ScriptableObject  //ToDo : ステージセレクトのプレ
     public class Prehabs
     {
         [SerializeField] private GameObject m_Eye;
-        //[SerializeField] private GameObject m_Head;
+        [SerializeField] private CharacterManager m_Character;
         [SerializeField] private TMP m_NameText;
         [SerializeField] private StageSelectButton m_StageSelectBtn;
 
         public GameObject Eye => m_Eye;
+        public CharacterManager Character => m_Character;
         public TMP NameText => m_NameText;
         public StageSelectButton StageSelectBtn => m_StageSelectBtn;
     }
@@ -124,8 +125,12 @@ public class GeneralSettings : ScriptableObject  //ToDo : ステージセレクトのプレ
     [System.Serializable]
     public class Sounds
     {
+        [SerializeField] private AudioClip m_HoverSE;
         [SerializeField] private AudioClip m_SelectSE;
+        [SerializeField] private AudioClip m_JumpSE;
 
+        public AudioClip HoverSE => m_HoverSE;
         public AudioClip SelectSE => m_SelectSE;
+        public AudioClip JumpSE => m_JumpSE;
     }
 }

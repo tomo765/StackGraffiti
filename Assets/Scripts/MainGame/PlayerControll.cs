@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerControll : MonoBehaviour
 {
@@ -85,8 +84,7 @@ public class PlayerControll : MonoBehaviour
             if(gameState == "Goal") { return; }
             // ゴールした時
             Goal();
-            GameManager.Clear();
-            SceneManager.LoadScene(Config.SceneNames.Result, LoadSceneMode.Additive);
+            GameManager.StageClear();
         }
         else if(collision.gameObject.tag == "Dead")
         {
@@ -98,7 +96,7 @@ public class PlayerControll : MonoBehaviour
         }
         else if(collision.gameObject.tag == "Needle")
         {
-            GameManager.SleepCharacter();
+            GameManager.AddSleepCount();
 
             rigid2D.isKinematic = true;
             rigid2D.velocity = new Vector2(0, 0);
@@ -159,7 +157,7 @@ public class PlayerControll : MonoBehaviour
     // キャラ死
     public void Dead()
     {
-        GameManager.SleepCharacter();
+        GameManager.AddSleepCount();
 
         // 死んだやつを消す
         Destroy(this.gameObject);
@@ -177,7 +175,7 @@ public class PlayerControll : MonoBehaviour
 
     public void Sleep()
     {
-        GameManager.SleepCharacter();
+        GameManager.AddSleepCount();
 
         GameObject sleep = GameObject.Find("MainManager");
         // 寝た回数カウント入れる

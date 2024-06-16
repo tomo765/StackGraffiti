@@ -30,16 +30,12 @@ public class MainManager : MonoBehaviour
         // スコアの最初の表示
         sleepText.SetText(string.Format("眠った回数:{0}", sleepCount));
         PlayerControll.gameState = "Drawing";
-
+        GameManager.SetGameState(GameState.Drawing);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(PlayerControll.gameState == "Goal")
-        {
-            cleare.SetActive(true);
-        }
         if(PlayerControll.gameState == "Playing")
         {
             // Space押したら音鳴る
@@ -64,14 +60,8 @@ public class MainManager : MonoBehaviour
 
     public void SetActiveTrue()
     {
-        //// 3秒後にウィンドウ出す
-        //StartCoroutine(DelayCoroutine(3.0f, () => {
-        //    True();
-        //}));
-
-            drawWindow.SetActive(true);    // 描く場所出す
-            lookButton.SetActive(true);    // 描く場所のボタンも出す
-       
+        drawWindow.SetActive(true);    // 描く場所出す
+        lookButton.SetActive(true);    // 描く場所のボタンも出す
     }
 
     private void True()
