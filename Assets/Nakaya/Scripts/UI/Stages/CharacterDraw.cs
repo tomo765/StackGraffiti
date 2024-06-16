@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CharacterDraw : MonoBehaviour, IPointerDownHandler, IPointerExitHandler
+public class CharacterDraw : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private DrawUI m_DrawUI;
     [SerializeField] private RectTransform m_RectT;
@@ -12,6 +12,7 @@ public class CharacterDraw : MonoBehaviour, IPointerDownHandler, IPointerExitHan
     private List<Vector2> m_MeshPoints;
 
     private bool m_OnDrawing = false;
+    private bool m_IsInArea = false;
 
 
     void Start()
@@ -23,15 +24,21 @@ public class CharacterDraw : MonoBehaviour, IPointerDownHandler, IPointerExitHan
         m_RectT.GetWorldCorners(worldCorners);
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        if (m_OnDrawing && Input.GetMouseButton(0))
+        if (Input.GetMouseButtonUp(0))
+        {
+            Debug.Log("asfadfasdasd");
+            FinishWrite();
+            m_OnDrawing = false;
+        }
+    }
+
+    void FixedUpdate()  // ToDo : 書ける範囲からはみ出したあとにクリックした状態で戻ってきたら書き続けれるようにする
+    {
+        if (m_OnDrawing && m_IsInArea && Input.GetMouseButton(0))
         {
             CharacterCreator.OnHold(transform.position);
-        }
-        if(m_OnDrawing && Input.GetMouseButtonUp(0))
-        {
-            FinishWrite();
         }
     }
 
@@ -43,11 +50,14 @@ public class CharacterDraw : MonoBehaviour, IPointerDownHandler, IPointerExitHan
         m_MeshPoints = new List<Vector2>();
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        m_IsInArea = true;
+    }
+
     public void OnPointerExit(PointerEventData eventData)
     {
-        if(!m_OnDrawing) { return; }
-
-        FinishWrite();
+        m_IsInArea = false;
     }
 
     private void FinishWrite()
@@ -55,9 +65,4 @@ public class CharacterDraw : MonoBehaviour, IPointerDownHandler, IPointerExitHan
         CharacterCreator.OnRelease();
         m_OnDrawing = false;
     }
-
-    //public void OnPointerUp(PointerEventData eventData)
-    //{
-    //    m_OnDrawing = false;
-    //}
 }
