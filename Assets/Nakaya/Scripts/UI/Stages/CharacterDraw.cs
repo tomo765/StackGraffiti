@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CharacterDraw : MonoBehaviour, IPointerDownHandler
+public class CharacterDraw : MonoBehaviour, IPointerDownHandler, IPointerExitHandler
 {
     [SerializeField] private DrawUI m_DrawUI;
     [SerializeField] private RectTransform m_RectT;
@@ -31,8 +31,7 @@ public class CharacterDraw : MonoBehaviour, IPointerDownHandler
         }
         if(m_OnDrawing && Input.GetMouseButtonUp(0))
         {
-            CharacterCreator.OnRelease();
-            m_OnDrawing = false;
+            FinishWrite();
         }
     }
 
@@ -40,22 +39,25 @@ public class CharacterDraw : MonoBehaviour, IPointerDownHandler
     {
         CharacterCreator.OnClick(transform.position);
 
-        //m_CharaMesh.Clear();
-
         m_OnDrawing = true;
         m_MeshPoints = new List<Vector2>();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if(!m_OnDrawing) { return; }
+
+        FinishWrite();
+    }
+
+    private void FinishWrite()
+    {
+        CharacterCreator.OnRelease();
+        m_OnDrawing = false;
     }
 
     //public void OnPointerUp(PointerEventData eventData)
     //{
     //    m_OnDrawing = false;
-    //}
-
-
-    //private Vector2 GetDrawAreaPosInWor()
-    //{
-    //    var rect = GetComponent<RectTransform>();
-    //    RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, (Vector2)rect.position, Camera.main, out var localPoint);
-    //    return rect.TransformPoint(localPoint);
     //}
 }

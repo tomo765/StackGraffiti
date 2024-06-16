@@ -10,7 +10,7 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
 
     private static CharacterManager m_CreateChara;
 
-    public static bool CanCreateChara => m_Mesh.vertexCount < 4;
+    public static bool CanCreateChara => m_CreateChara != null && m_Mesh.vertexCount >= 4;
 
     public static void OnClick(Vector2 position)  //Input.GetMouseButtonDown(0)
     {
@@ -47,6 +47,8 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
 
     public static void CreateOnStage()
     {
+        if(!CanCreateChara) { return; }
+
         GameManager.SetGameState(GameState.Playing);
         m_CreateChara.CreateOnStage("‚È‚Ü‚¦");
         
@@ -88,7 +90,7 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
 
     private static void Finish()
     {
-        if (CanCreateChara) { return; }
+        if (!CanCreateChara) { return; }
 
         m_CreateChara.Rb2D.useAutoMass = true;
         var polyColliderPos = CreateMeshToPolyCollider(m_Mesh);

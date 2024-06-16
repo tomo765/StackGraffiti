@@ -11,6 +11,7 @@ using UnityEngine.EventSystems;
 public class DrawUI : MonoBehaviour
 {
     [SerializeField] private Button m_CreateButton;
+    [SerializeField] private Button m_LookButton;
     [SerializeField] private TInputField m_NameInput;
     [SerializeField] private CharacterDraw m_DrawArea;
     
@@ -24,13 +25,11 @@ public class DrawUI : MonoBehaviour
         m_CreateButton.onClick.RemoveAllListeners();
         m_CreateButton.onClick.AddListener(() =>
         {
-            Debug.Log(1);
-            if (CharacterCreator.CanCreateChara) { return; }
-            Debug.Log(2);
+            if (!CharacterCreator.CanCreateChara) { return; }
             CharacterCreator.CreateOnStage();
 
             gameObject.SetActive(false);
-            m_CreateButton.gameObject.SetActive(false);
+            m_LookButton.gameObject.SetActive(false);
         });
     }
 }
