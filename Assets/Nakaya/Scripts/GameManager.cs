@@ -14,7 +14,7 @@ public static class GameManager
     private static GameState m_GameState = GameState.Drawing;
     private static StageType m_CullentStage = StageType.Stage1;
     private static int m_SleepCount = 0;
-    private static Vector2 m_CharacterSpawnPos;
+    private static GameObject m_SpawnArea;
 
     private static Action m_UpdSleepText;
     private static Action m_RestartDraw;
@@ -27,11 +27,11 @@ public static class GameManager
     public static StageType CullentStage => m_CullentStage;
 
     public static int SleepCount => m_SleepCount;
-    public static Vector2 SpawnPos => m_CharacterSpawnPos;
+    public static GameObject SpawnArea => m_SpawnArea;
 
 
     public static void SetGameState(GameState state) => m_GameState = state;
-    public static void SetSpawnPos(Vector2 pos) => m_CharacterSpawnPos = pos;
+    public static void SetSpawnPos(GameObject pos) => m_SpawnArea = pos;
     public static void SetUpdateSleepText(Action onSleep) => m_UpdSleepText = onSleep;
     public static void SetRestartDrawing(Action reDraw) => m_RestartDraw = reDraw;
 

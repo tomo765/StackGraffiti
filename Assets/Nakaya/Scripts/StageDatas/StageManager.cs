@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour
 {
-    [SerializeField] Transform m_CharacterSpawnPos;
+    [SerializeField] GameObject m_SpawnArea;
     //[SerializeField] private GameObject m_GoalFlag;
 
     void Start()
     {
-        GameManager.SetSpawnPos(m_CharacterSpawnPos.position);
+        GameManager.SetSpawnPos(m_SpawnArea);
         StageDataUtility.FindData();
     }
 

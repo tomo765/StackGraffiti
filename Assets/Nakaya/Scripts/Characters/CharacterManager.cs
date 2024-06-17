@@ -43,7 +43,7 @@ public class CharacterManager : MonoBehaviour
         m_NameText.gameObject.SetActive(true);
         m_Controller.enabled = true;
 
-        transform.position = GameManager.SpawnPos;
+        transform.position = GameManager.SpawnArea.transform.position;
         transform.localScale = Vector3.one * 0.3f;
         Rb2D.bodyType = RigidbodyType2D.Dynamic;
 

@@ -18,7 +18,10 @@ public enum StageType
     Stage7,
     Stage8,
     Stage9,
-    Stage10
+    Stage10,
+    Stage11,
+    Stage12,
+    Stage13,
 }
 
 
