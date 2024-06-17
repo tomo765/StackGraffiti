@@ -129,9 +129,13 @@ public class GeneralSettings : ScriptableObject  //ToDo : ステージセレクトのプレ
         [SerializeField] private AudioClip m_HoverSE;
         [SerializeField] private AudioClip m_SelectSE;
         [SerializeField] private AudioClip m_JumpSE;
+        [SerializeField] private AudioClip m_TouchNeedleSE;
+        [SerializeField] private AudioClip m_ClearSE;
 
         public AudioClip HoverSE => m_HoverSE;
         public AudioClip SelectSE => m_SelectSE;
         public AudioClip JumpSE => m_JumpSE;
+        public AudioClip TouchNeedleSE => m_TouchNeedleSE;
+        public AudioClip ClearSE => m_ClearSE;
     }
 }

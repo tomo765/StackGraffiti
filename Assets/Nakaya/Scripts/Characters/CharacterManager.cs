@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterManager : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class CharacterManager : MonoBehaviour
         m_Controller = GetComponent<CharacterController>();
 
         Poly2D.enabled = false;
-        m_Controller.SetManagerMember(m_Rb2d, OnSleep, OnUnmovable, OnClear);
+        m_Controller.SetManagerMember(m_Rb2d, OnSleep, OnUnmovable, OnDead, OnClear);
     }
 
     public void CreateOnStage(string playerName)
@@ -62,7 +63,7 @@ public class CharacterManager : MonoBehaviour
         GetComponent<MeshRenderer>().sortingOrder = -1;
         m_EyeRender.sortingOrder = -1;
 
-        GameManager.SetGameState(GameState.Drawing);
+        GameManager.SleepCharacter();
 
         Destroy(this);
         Destroy(m_Controller);
@@ -74,8 +75,17 @@ public class CharacterManager : MonoBehaviour
         OnSleep();
     }
 
+    private void OnDead()
+    {
+        GameManager.SleepCharacter();
+        Destroy(gameObject);
+    }
+
     private void OnClear()
     {
-        GameManager.SetGameState(GameState.Goal);
+        if(GameManager.IsClear) { return; }
+
+        m_Rb2d.bodyType = RigidbodyType2D.Static;
+        GameManager.StageClear();
     }
 }

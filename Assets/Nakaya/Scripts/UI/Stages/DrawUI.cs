@@ -27,6 +27,7 @@ public class DrawUI : MonoBehaviour
         {
             if (!CharacterCreator.CanCreateChara) { return; }
             CharacterCreator.CreateOnStage();
+            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
 
             gameObject.SetActive(false);
             m_LookButton.gameObject.SetActive(false);

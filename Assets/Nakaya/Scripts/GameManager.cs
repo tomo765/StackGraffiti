@@ -12,7 +12,7 @@ public enum GameState
 public static class GameManager
 {
     private static GameState m_GameState = GameState.Drawing;
-    private static StageType m_CullentStage;
+    private static StageType m_CullentStage = StageType.Stage1;
     private static int m_SleepCount = 0;
     private static Vector2 m_CharacterSpawnPos;
 
@@ -54,8 +54,9 @@ public static class GameManager
 
     public static void StageClear()
     {
+        SetGameState(GameState.Goal);
+        SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.ClearSE);
         StageDataUtility.SetStageScore(m_CullentStage, m_SleepCount);
-
         SceneManager.LoadScene(Config.SceneNames.Result, LoadSceneMode.Additive);
     }
 }

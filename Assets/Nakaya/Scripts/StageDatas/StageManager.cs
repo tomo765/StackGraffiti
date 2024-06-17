@@ -10,5 +10,14 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         GameManager.SetSpawnPos(m_CharacterSpawnPos.position);
+        StageDataUtility.FindData();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(Config.SceneNames.StageSelect);
+        }
     }
 }

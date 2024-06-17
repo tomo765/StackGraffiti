@@ -11,9 +11,14 @@ public static partial class InputExtension
 
 public static partial class InputExtension
 {
-    public static bool OnMove => Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A);
-    public static bool OnStopMove => Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A);
+    public static bool OnMove => MoveKey && !GameManager.IsClear;
+    public static bool OnStopMove => StopMoveKey && !GameManager.IsClear;
 
-    public static bool StartJump => Input.GetKeyDown(KeyCode.Space);
-    public static bool OnSleep => Input.GetKeyDown(KeyCode.E);
+    public static bool StartJump => JumpKey && !GameManager.IsClear;
+    public static bool OnSleep => SleepKey && !GameManager.IsClear;
+
+    private static bool MoveKey => Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A);
+    private static bool StopMoveKey => Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A);
+    private static bool JumpKey => Input.GetKeyDown(KeyCode.Space);
+    private static bool SleepKey => Input.GetKeyDown(KeyCode.E);
 }

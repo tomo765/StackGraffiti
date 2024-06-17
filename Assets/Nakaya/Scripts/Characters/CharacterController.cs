@@ -13,15 +13,17 @@ public class CharacterController : MonoBehaviour
 
     private Action m_OnSleep;
     private Action m_OnUnmovable;
+    private Action m_OnDead;
     private Action m_OnClear;
 
     private bool m_CanJump = false;
 
-    public void SetManagerMember(Rigidbody2D rb2d, Action onSleep, Action onUnmovable, Action onClear)
+    public void SetManagerMember(Rigidbody2D rb2d, Action onSleep, Action onUnmovable, Action onDesd, Action onClear)
     {
         m_Rb2d = rb2d;
         m_OnSleep = onSleep;
         m_OnUnmovable = onUnmovable;
+        m_OnDead = onDesd;
         m_OnClear = onClear;
     }
 
@@ -30,12 +32,12 @@ public class CharacterController : MonoBehaviour
         if(InputExtension.OnSleep)
         {
             m_OnSleep();
-            GameManager.SleepCharacter();
         }
 
         if(InputExtension.StartJump && m_CanJump)
         {
-            m_Rb2d.AddForce(new Vector2(0, 1.5f), ForceMode2D.Impulse);
+            m_Rb2d.velocity = new Vector2(m_Rb2d.velocity.x, 10);
+            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.JumpSE);
         }
     }
 
@@ -49,30 +51,37 @@ public class CharacterController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        switch (collision.transform.tag)
-        {
-            case "Ground":
-                m_CanJump = true;
-                break;
-            case "Dead":
-                break;
-            case "Needle":
-                break;
-            case "Goal":
-                break;
-        }
+        ByTag(collision.transform.tag, true);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Ground"))
-        {
-            m_CanJump = false;
-        }
+        ByTag(collision.transform.tag, false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        ByTag(collision.transform.tag, true);
+    }
+
+    private void ByTag(string tag, bool isEnter)
+    {
+        switch (tag)
+        {
+            case "Ground":
+            case "Player":
+                m_CanJump = isEnter;
+                break;
+            case "Dead":
+                m_OnDead();
+                break;
+            case "Needle":
+                SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.TouchNeedleSE);  //ToDo : ニードルのサウンドに直す
+                m_OnUnmovable();
+                break;
+            case "Goal":
+                m_OnClear();
+                break;
+        }
     }
 }
