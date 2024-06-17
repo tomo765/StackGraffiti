@@ -45,12 +45,13 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
                                       Quaternion.identity);
     }
 
-    public static void CreateOnStage()
+    public static void CreateOnStage(string charaName)
     {
         if(!CanCreateChara) { return; }
+        if(string.IsNullOrEmpty(charaName)) { charaName = "‚«‚Þ‚¿"; }
 
         GameManager.SetGameState(GameState.Playing);
-        m_CreateChara.CreateOnStage("‚È‚Ü‚¦");
+        m_CreateChara.CreateOnStage(charaName);
         
         m_CreateChara = null;
     }

@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine.EventSystems;
 
 
-public class DrawUI : MonoBehaviour
+public class DrawUI : MonoBehaviour  //Ques : キャラを生成したら名前インプットを消す?
 {
     [SerializeField] private Button m_CreateButton;
     [SerializeField] private Button m_LookButton;
@@ -26,7 +26,8 @@ public class DrawUI : MonoBehaviour
         m_CreateButton.onClick.AddListener(() =>
         {
             if (!CharacterCreator.CanCreateChara) { return; }
-            CharacterCreator.CreateOnStage();
+            CharacterCreator.CreateOnStage(m_NameInput.text);
+
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
 
             gameObject.SetActive(false);
