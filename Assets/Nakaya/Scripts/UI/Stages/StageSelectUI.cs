@@ -55,7 +55,7 @@ public class StageSelectUI : MonoBehaviour
         m_ReturnTitleBtn.onClick.AddListener(() =>
         {
             SceneManager.LoadScene(Config.SceneNames.Title);
-            SoundManager.Instance.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
+            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
     }
 }
