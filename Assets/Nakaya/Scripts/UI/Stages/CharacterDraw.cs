@@ -33,7 +33,7 @@ public class CharacterDraw : MonoBehaviour, IPointerDownHandler, IPointerEnterHa
         }
     }
 
-    void FixedUpdate()  // ToDo : 書ける範囲からはみ出したあとにクリックした状態で戻ってきたら書き続けれるようにする
+    void FixedUpdate()
     {
         if (m_OnDrawing && m_IsInArea && Input.GetMouseButton(0))
         {

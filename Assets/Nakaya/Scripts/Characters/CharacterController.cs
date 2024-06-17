@@ -76,7 +76,7 @@ public class CharacterController : MonoBehaviour
                 m_OnDead();
                 break;
             case "Needle":
-                SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.TouchNeedleSE);  //ToDo : ニードルのサウンドに直す
+                SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.TouchNeedleSE);
                 m_OnUnmovable();
                 break;
             case "Goal":

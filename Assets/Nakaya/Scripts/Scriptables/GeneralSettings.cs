@@ -23,7 +23,7 @@ public enum StageType
 
 
 [CreateAssetMenu(fileName = "GeneralSettings", menuName = "Scriptables/GeneralSettings")]
-public class GeneralSettings : ScriptableObject  //ToDo : ステージセレクトのプレハブを作る
+public class GeneralSettings : ScriptableObject
 {
     private const string path = "GeneralSettings";
 
