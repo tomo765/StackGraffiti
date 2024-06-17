@@ -15,6 +15,7 @@ public class CharacterController : MonoBehaviour
     private Action m_OnUnmovable;
     private Action m_OnClear;
 
+    private bool m_CanJump = false;
 
     public void SetManagerMember(Rigidbody2D rb2d, Action onSleep, Action onUnmovable, Action onClear)
     {
@@ -32,7 +33,7 @@ public class CharacterController : MonoBehaviour
             GameManager.SleepCharacter();
         }
 
-        if(InputExtension.StartJump)
+        if(InputExtension.StartJump && m_CanJump)
         {
             m_Rb2d.AddForce(new Vector2(0, 1.5f), ForceMode2D.Impulse);
         }
@@ -48,7 +49,26 @@ public class CharacterController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        switch (collision.transform.tag)
+        {
+            case "Ground":
+                m_CanJump = true;
+                break;
+            case "Dead":
+                break;
+            case "Needle":
+                break;
+            case "Goal":
+                break;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Ground"))
+        {
+            m_CanJump = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
