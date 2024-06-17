@@ -26,19 +26,33 @@ public class CharacterController : MonoBehaviour
 
     private void Update()
     {
-        
+        if(InputExtension.OnSleep)
+        {
+            m_OnSleep();
+            GameManager.SleepCharacter();
+        }
+
+        if(InputExtension.StartJump)
+        {
+            m_Rb2d.AddForce(new Vector2(0, 1.5f), ForceMode2D.Impulse);
+        }
     }
 
     private void FixedUpdate()
     {
+        if(InputExtension.OnMove)
+        {
+            m_Rb2d.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * 3, m_Rb2d.velocity.y);
+        }
+    }
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            m_Rb2d.AddForce(Vector2.right, ForceMode2D.Impulse);
-        }
-        if(Input.GetKey(KeyCode.A))
-        {
-            m_Rb2d.AddForce(-Vector2.right, ForceMode2D.Impulse);
-        }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
     }
 }

@@ -25,17 +25,22 @@ public class CharacterManager : MonoBehaviour
 
     private void Start()
     {
+
         m_Rb2d = GetComponent<Rigidbody2D>();
         m_PolygonCollider2D = GetComponent<PolygonCollider2D>();
         m_Controller = GetComponent<CharacterController>();
 
+        Poly2D.enabled = false;
         m_Controller.SetManagerMember(m_Rb2d, OnSleep, OnUnmovable, OnClear);
     }
 
     public void CreateOnStage(string playerName)
     {
+        Poly2D.enabled = true;
+
         m_EyeRender.gameObject.SetActive(true);
         m_NameText.gameObject.SetActive(true);
+        m_Controller.enabled = true;
 
         transform.position = GameManager.SpawnPos;
         transform.localScale = Vector3.one * 0.3f;
@@ -49,16 +54,18 @@ public class CharacterManager : MonoBehaviour
     private void OnSleep()
     {
         m_EyeRender.sprite = GeneralSettings.Instance.Sprite.DeathEye;
-        m_Rb2d.mass *= m_Weight;
+
+        float mass = m_Rb2d.mass;
+        m_Rb2d.useAutoMass = false;
+        m_Rb2d.mass = mass * 4;
 
         GetComponent<MeshRenderer>().sortingOrder = -1;
         m_EyeRender.sortingOrder = -1;
 
-        GameManager.AddSleepCount();
         GameManager.SetGameState(GameState.Drawing);
 
-        Destroy(m_Controller);
         Destroy(this);
+        Destroy(m_Controller);
     }
 
     private void OnUnmovable()

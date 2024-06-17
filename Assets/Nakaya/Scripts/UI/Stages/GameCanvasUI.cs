@@ -20,6 +20,7 @@ public class GameCanvasUI : MonoBehaviour
     void Start()
     {
         Init();
+        UpdateSleepText();
     }
 
     private void Init()
@@ -34,8 +35,8 @@ public class GameCanvasUI : MonoBehaviour
         });
         m_DrawUI.gameObject.SetActive(true);
 
-        GameManager.AddCharaSleepAction(UpdateSleepCount);
-        GameManager.AddCharaSleepAction(RestartDrawing);
+        GameManager.SetUpdateSleepText(UpdateSleepText);
+        GameManager.SetRestartDrawing(RestartDrawing);
     }
 
     private void ChangeVisible()
@@ -43,7 +44,7 @@ public class GameCanvasUI : MonoBehaviour
         m_isVisible = !m_isVisible;
     }
 
-    private void UpdateSleepCount()
+    private void UpdateSleepText()
     {
         m_SleepCount.text = "ñ∞Ç¡ÇΩâÒêî : " + GameManager.SleepCount.ToString();  //ToDo : ó«Ç¢ä¥Ç∂ÇÃèäÇ≈åƒÇ—èoÇ∑
     }

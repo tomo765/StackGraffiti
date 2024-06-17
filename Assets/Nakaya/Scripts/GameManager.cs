@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,7 +16,8 @@ public static class GameManager
     private static int m_SleepCount = 0;
     private static Vector2 m_CharacterSpawnPos;
 
-    private static Action m_OnCharacterSleep;
+    private static Action m_UpdSleepText;
+    private static Action m_RestartDraw;
 
     public static GameState GameState => m_GameState;
     public static bool IsDrawing => m_GameState == GameState.Drawing;
@@ -33,12 +32,13 @@ public static class GameManager
 
     public static void SetGameState(GameState state) => m_GameState = state;
     public static void SetSpawnPos(Vector2 pos) => m_CharacterSpawnPos = pos;
-    public static void AddCharaSleepAction(Action onSleep) => m_OnCharacterSleep += onSleep;
+    public static void SetUpdateSleepText(Action onSleep) => m_UpdSleepText = onSleep;
+    public static void SetRestartDrawing(Action reDraw) => m_RestartDraw = reDraw;
 
     public static void StartStage(StageType stg)
     {
         m_CullentStage = stg;
-        m_OnCharacterSleep = null;
+        m_UpdSleepText = null;
         m_SleepCount = 0;
     }
 
@@ -46,7 +46,8 @@ public static class GameManager
     {
         AddSleepCount();
         SetGameState(GameState.Drawing);
-        m_OnCharacterSleep();
+        m_UpdSleepText();
+        m_RestartDraw();
     }
 
     public static void AddSleepCount() => m_SleepCount++;

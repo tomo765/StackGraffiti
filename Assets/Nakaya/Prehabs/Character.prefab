@@ -316,9 +316,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EyeRender: {fileID: 9221424753856994692}
   m_NameText: {fileID: 2407245920271010096}
+  m_MeshFilter: {fileID: 7762994307881871891}
   m_Weight: 2
   m_ScaleOnStage: 0.3
-  m_MeshFilter: {fileID: 7762994307881871891}
 --- !u!114 &7189406536801247105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4866592702005211097}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b38525cff3250c14182966276052f7a7, type: 3}
   m_Name: 
