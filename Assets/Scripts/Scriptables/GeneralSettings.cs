@@ -65,14 +65,10 @@ public class GeneralSettings : ScriptableObject
     [System.Serializable]
     public class Prehabs
     {
-        [SerializeField] private GameObject m_Eye;
         [SerializeField] private CharacterManager m_Character;
-        [SerializeField] private TMP m_NameText;
         [SerializeField] private StageSelectButton m_StageSelectBtn;
 
-        public GameObject Eye => m_Eye;
         public CharacterManager Character => m_Character;
-        public TMP NameText => m_NameText;
         public StageSelectButton StageSelectBtn => m_StageSelectBtn;
     }
 
