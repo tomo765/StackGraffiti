@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6463324775649399354}
   - component: {fileID: 255468169298098547}
   m_Layer: 8
-  m_Name: arch3_blue
+  m_Name: Arch_Blue
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
