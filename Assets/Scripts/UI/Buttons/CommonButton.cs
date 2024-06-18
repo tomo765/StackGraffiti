@@ -10,8 +10,8 @@ using System;
 [RequireComponent(typeof(Image))]
 public class CommonButton : Button
 {
-    [SerializeField] private Color m_EnterColor;
-    [SerializeField] private Color m_ExitColor;
+    [SerializeField] private Color m_EnterColor = Color.white * 0.8f;  //ToDo : マジックナンバー消す 
+    [SerializeField] private Color m_ExitColor = Color.white;
 
 #if UNITY_EDITOR
 
