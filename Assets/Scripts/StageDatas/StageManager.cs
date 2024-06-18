@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
@@ -15,9 +16,15 @@ public class StageManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (InputExtension.EscapeStage)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(Config.SceneNames.StageSelect);
+            SceneManager.LoadScene(Config.SceneNames.StageSelect);
+        }
+
+        if (InputExtension.ResetStage)
+        {
+            GameManager.StartStage(GameManager.CullentStage);
+            SceneManager.LoadScene(gameObject.scene.name);
         }
     }
 }

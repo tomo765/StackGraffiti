@@ -13,17 +13,6 @@ public static class StageDataUtility
 
     public static StageDatas StageDatas => m_StageDatas;
 
-
-    private static void CreateData()
-    {
-        StageScore[] scores = new StageScore[Enum.GetValues(typeof(StageType)).Length - 1];
-        for (int i = 1; i <= scores.Length; i++)
-        {
-            scores[i - 1] = new StageScore((StageType)i, 0);
-        }
-        m_StageDatas = new StageDatas(scores);
-    }
-
     public static void FindData()
     {
         // ディレクトリが存在しない場合は作成
@@ -34,13 +23,28 @@ public static class StageDataUtility
 
         if(!File.Exists(FilePath))
         {
-            CreateData();
-            SaveData();
+            SetNewData();
         }
         else
         {
             LoadData();
         }
+    }
+
+    public static void SetNewData()
+    {
+        CreateData();
+        SaveData();
+    }
+
+    private static void CreateData()
+    {
+        StageScore[] scores = new StageScore[Enum.GetValues(typeof(StageType)).Length - 1];
+        for (int i = 1; i <= scores.Length; i++)
+        {
+            scores[i - 1] = new StageScore((StageType)i, 0);
+        }
+        m_StageDatas = new StageDatas(scores);
     }
 
     public static void SaveData()

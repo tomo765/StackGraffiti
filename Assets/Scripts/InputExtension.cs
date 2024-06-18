@@ -21,4 +21,7 @@ public static partial class InputExtension
     private static bool StopMoveKey => Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A);
     private static bool JumpKey => Input.GetKeyDown(KeyCode.Space);
     private static bool SleepKey => Input.GetKeyDown(KeyCode.E);
+
+    public static bool EscapeStage => Input.GetKeyDown(KeyCode.Escape);
+    public static bool ResetStage => Input.GetKeyDown(KeyCode.G);
 }

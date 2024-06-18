@@ -19,7 +19,7 @@ public class OptionButton : MonoBehaviour
         m_OptionButton.onClick.AddListener(() =>
         {
             SceneManager.LoadScene(Config.SceneNames.Option, LoadSceneMode.Additive);
-            SoundManager.Instance.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
+            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
     }
 }

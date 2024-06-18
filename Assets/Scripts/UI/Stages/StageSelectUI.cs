@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -27,25 +28,16 @@ public class StageSelectUI : MonoBehaviour
         string[] sceneNames = EditorBuildSettings.scenes
                                                  .Where(scene => scene.enabled)
                                                  .Select(scene => Path.GetFileNameWithoutExtension(scene.path))
+                                                 .Where(name => name.Contains("Main_Stage"))
                                                  .ToArray();
 
-        List<StageSelectButton> selectButtons = new List<StageSelectButton>(sceneNames.Length);
+        m_SelectButtons = new StageSelectButton[sceneNames.Length];
 
-        int j = 1;
         for (int i = 0; i < sceneNames.Length; i++)
         {
-            if (!sceneNames[i].Contains("Main_Stage")) { continue; }
-
             var btn = Instantiate(GeneralSettings.Instance.Prehab.StageSelectBtn, Vector3.zero, Quaternion.identity, m_ViewContent.transform);
-            btn.Init(sceneNames[i], j);
-            selectButtons.Add(btn);
-            j++;
-        }
-
-        m_SelectButtons = new StageSelectButton[j-1];
-        for(int i = 0; i < j-1; i++)
-        {
-            m_SelectButtons[i] = selectButtons[i];
+            btn.Init(sceneNames[i], i+1);
+            m_SelectButtons[i] = btn;
         }
     }
 

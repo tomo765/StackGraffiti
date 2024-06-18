@@ -65,5 +65,6 @@ public class CreateSceneNames : EditorWindow
     public static List<string> GetStageNames() => EditorBuildSettings.scenes
                                                   .Where(scene => scene.enabled)
                                                   .Select(scene => Path.GetFileNameWithoutExtension(scene.path))
+                                                  .Where(sceneName => !sceneName.Contains("Main_Stage"))
                                                   .ToList();
 }

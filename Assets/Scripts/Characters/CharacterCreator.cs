@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class CharacterCreator  //https://qiita.com/divideby_zero/items/491d18cbc91d7fabd700
@@ -36,7 +37,18 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
         Finish();
     }
 
-    public static void CreateCharacter(Vector2 position)
+    public static void CreateOnStage(string charaName)
+    {
+        if (!CanCreateChara) { return; }
+        if (string.IsNullOrEmpty(charaName)) { charaName = "‚«‚Þ‚¿"; }
+
+        GameManager.SetGameState(GameState.Playing);
+        m_CreateChara.CreateOnStage(charaName);
+
+        m_CreateChara = null;
+    }
+
+    private static void CreateCharacter(Vector2 position)
     {
         if (m_CreateChara != null) { return; }
 
@@ -44,18 +56,6 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
                                       position,
                                       Quaternion.identity);
     }
-
-    public static void CreateOnStage(string charaName)
-    {
-        if(!CanCreateChara) { return; }
-        if(string.IsNullOrEmpty(charaName)) { charaName = "‚«‚Þ‚¿"; }
-
-        GameManager.SetGameState(GameState.Playing);
-        m_CreateChara.CreateOnStage(charaName);
-        
-        m_CreateChara = null;
-    }
-
 
     private static void CreateMesh()
     {

@@ -11,7 +11,6 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_NameText;
     [SerializeField] private MeshFilter m_MeshFilter;
 
-    [SerializeField] private float m_Weight = 2;
     [SerializeField] private float m_ScaleOnStage = 0.3f;
 
     private Rigidbody2D m_Rb2d;
