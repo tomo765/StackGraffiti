@@ -12,6 +12,7 @@ public class StageSelectUI : MonoBehaviour
 {
     [SerializeField] private GameObject m_ViewContent;
     [SerializeField] private Button m_ReturnTitleBtn;
+    [SerializeField] private Scrollbar m_VerticalBar;
 
     private StageSelectButton[] m_SelectButtons;
 
@@ -21,6 +22,8 @@ public class StageSelectUI : MonoBehaviour
 
         SetSelectButtons();
         SetReturnTitleBtn();
+
+        m_VerticalBar.value = 1;
     }
 
     private void SetSelectButtons()

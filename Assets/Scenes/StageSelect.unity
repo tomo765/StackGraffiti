@@ -986,6 +986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ViewContent: {fileID: 1823560836}
   m_ReturnTitleBtn: {fileID: 84988932}
+  m_VerticalBar: {fileID: 434531027}
 --- !u!1 &1185619554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1609,8 +1610,8 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 400, y: 200}
-  m_Spacing: {x: 20, y: -13}
+  m_CellSize: {x: 387, y: 100}
+  m_Spacing: {x: 20, y: 100}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &1823560839
