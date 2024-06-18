@@ -40,7 +40,7 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
     public static void CreateOnStage(string charaName)
     {
         if (!CanCreateChara) { return; }
-        if (string.IsNullOrEmpty(charaName)) { charaName = "‚«‚Þ‚¿"; }
+        if (string.IsNullOrEmpty(charaName)) { charaName = GeneralSettings.Instance.PlayerSetting.GetRandomName(); }
 
         GameManager.SetGameState(GameState.Playing);
         m_CreateChara.CreateOnStage(charaName);

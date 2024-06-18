@@ -47,16 +47,15 @@ public class GeneralSettings : ScriptableObject
         }
     }
 
-    [SerializeField] private Material m_CharaMaterial;
-    public Material CharaMaterial => m_CharaMaterial;
-
     [SerializeField] private Prehabs m_Prehabs;
+    [SerializeField] private PlayerSettings m_PlayerSettings;
     [SerializeField] private StageEvaluations m_StageEvaluation;
     [SerializeField] private Sprites m_Sprites;
     [SerializeField] private Sounds m_Sounds;
 
 
     public Prehabs Prehab => m_Prehabs;
+    public PlayerSettings PlayerSetting => m_PlayerSettings;
     public StageEvaluations StageEvals => m_StageEvaluation;
     public Sprites Sprite => m_Sprites;
     public Sounds Sound => m_Sounds;
@@ -70,6 +69,15 @@ public class GeneralSettings : ScriptableObject
 
         public CharacterManager Character => m_Character;
         public StageSelectButton StageSelectBtn => m_StageSelectBtn;
+    }
+
+    [System.Serializable]
+    public class PlayerSettings
+    {
+        [SerializeField] private string[] m_RandomNames;
+
+        public string GetRandomName() => m_RandomNames[UnityEngine.Random.Range(0, m_RandomNames.Length)];
+
     }
 
     [System.Serializable]
