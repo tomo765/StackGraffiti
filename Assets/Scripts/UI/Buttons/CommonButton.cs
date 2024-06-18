@@ -8,7 +8,7 @@ using UnityEditor.UI;
 using System;
 
 [RequireComponent(typeof(Image))]
-public class CommonSEButton : Button
+public class CommonButton : Button
 {
     [SerializeField] private Color m_EnterColor;
     [SerializeField] private Color m_ExitColor;
@@ -48,14 +48,13 @@ public class CommonSEButton : Button
         if(m_Img == null) { SetImage(); }
 
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.HoverSE);
-        GetComponent<Image>().color = m_EnterColor;
+        m_Img.color = m_EnterColor;
     }
     public override void OnPointerExit(PointerEventData eventData)
     {
         if (m_Img == null) { SetImage(); }
 
-        //SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.HoverSE);
-        GetComponent<Image>().color = m_ExitColor;
+        m_Img.color = m_ExitColor;
     }
 
     private void SetImage() => m_Img = GetComponent<Image>();
@@ -64,7 +63,7 @@ public class CommonSEButton : Button
 
 
 
-[CustomEditor(typeof(CommonSEButton))]
+[CustomEditor(typeof(CommonButton))]
 public class CommonSEButtonEditor : ButtonEditor
 {
     SerializedProperty myCustomColorProperty;
@@ -77,7 +76,7 @@ public class CommonSEButtonEditor : ButtonEditor
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-        CommonSEButton customButton = (CommonSEButton)target;
+        CommonButton customButton = (CommonButton)target;
 
 #pragma warning disable CS0618 // å^Ç‹ÇΩÇÕÉÅÉìÉoÅ[Ç™ãåå^éÆÇ≈Ç∑
         customButton.EnterColor = EditorGUILayout.ColorField("EnterColor", customButton.EnterColor);
