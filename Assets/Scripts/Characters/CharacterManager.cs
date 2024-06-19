@@ -54,17 +54,14 @@ public class CharacterManager : MonoBehaviour
     private void OnSleep()
     {
         m_EyeRender.sprite = GeneralSettings.Instance.Sprite.DeathEye;
-
-        float mass = m_Rb2d.mass;
-        m_Rb2d.useAutoMass = false;
-        m_Rb2d.mass = mass * 4;
+        m_Rb2d.sharedMaterial = GeneralSettings.Instance.PlayerSetting.PhysicsOnDead;
 
         GetComponent<MeshRenderer>().sortingOrder = -1;
         m_EyeRender.sortingOrder = -1;
 
+        m_Rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;  //ŠÛ‚¢ƒLƒƒƒ‰‚ª“]‚ª‚ç‚È‚¢‚æ‚¤‚É‚·‚é
         GameManager.SleepCharacter();
 
-        Destroy(this);
         Destroy(m_Controller);
     }
 

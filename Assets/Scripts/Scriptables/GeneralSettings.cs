@@ -75,8 +75,9 @@ public class GeneralSettings : ScriptableObject
     public class PlayerSettings
     {
         [SerializeField] private string[] m_RandomNames;
-
+        [SerializeField] private PhysicsMaterial2D m_PhysicsOnDead;
         public string GetRandomName() => m_RandomNames[UnityEngine.Random.Range(0, m_RandomNames.Length)];
+        public PhysicsMaterial2D PhysicsOnDead => m_PhysicsOnDead;
 
     }
 
