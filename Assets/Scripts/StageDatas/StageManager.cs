@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class StageManager : MonoBehaviour
 {
     [SerializeField] GameObject m_SpawnArea;
-    //[SerializeField] private GameObject m_GoalFlag;
 
     void Start()
     {
@@ -23,6 +22,8 @@ public class StageManager : MonoBehaviour
 
         if (InputExtension.ResetStage)
         {
+            if(GameManager.IsDrawing || GameManager.IsClear) { return; }
+
             GameManager.StartStage(GameManager.CullentStage);
             SceneManager.LoadScene(gameObject.scene.name);
         }
