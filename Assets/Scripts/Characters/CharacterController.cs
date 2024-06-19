@@ -11,30 +11,27 @@ public class CharacterController : MonoBehaviour
 {
     private Rigidbody2D m_Rb2d;
 
+    public delegate void OnTouchHandler(string tag);
+    private OnTouchHandler m_OnTouch;
     private Action m_OnSleep;
-    private Action m_OnUnmovable;
-    private Action m_OnDead;
-    private Action m_OnClear;
 
     private bool m_CanJump = false;
 
-    public void SetManagerMember(Rigidbody2D rb2d, Action onSleep, Action onUnmovable, Action onDesd, Action onClear)
+    public void SetManagerMember(Rigidbody2D rb2d, OnTouchHandler onTouch, Action onSleep)
     {
         m_Rb2d = rb2d;
+        m_OnTouch = onTouch;
         m_OnSleep = onSleep;
-        m_OnUnmovable = onUnmovable;
-        m_OnDead = onDesd;
-        m_OnClear = onClear;
     }
 
     private void Update()
     {
-        if(InputExtension.OnSleep)
+        if (InputExtension.OnSleep)
         {
             m_OnSleep();
         }
 
-        if(InputExtension.StartJump && m_CanJump)
+        if (InputExtension.StartJump && m_CanJump)
         {
             m_Rb2d.velocity = new Vector2(m_Rb2d.velocity.x, 10);
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.JumpSE);
@@ -43,7 +40,7 @@ public class CharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(InputExtension.OnMove)
+        if (InputExtension.OnMove)
         {
             m_Rb2d.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * 3, m_Rb2d.velocity.y);
         }
@@ -51,20 +48,20 @@ public class CharacterController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        ByTag(collision.transform.tag, true);
+        OnCharacterTouch(collision.transform.tag, true);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        ByTag(collision.transform.tag, false);
+        OnCharacterTouch(collision.transform.tag, false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        ByTag(collision.transform.tag, true);
+        OnCharacterTouch(collision.transform.tag, true);
     }
 
-    private void ByTag(string tag, bool isEnter)
+    private void OnCharacterTouch(string tag, bool isEnter)
     {
         switch (tag)
         {
@@ -72,15 +69,8 @@ public class CharacterController : MonoBehaviour
             case "Player":
                 m_CanJump = isEnter;
                 break;
-            case "Dead":
-                m_OnDead();
-                break;
-            case "Needle":
-                SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.TouchNeedleSE);
-                m_OnUnmovable();
-                break;
-            case "Goal":
-                m_OnClear();
+            default:
+                m_OnTouch(tag);
                 break;
         }
     }

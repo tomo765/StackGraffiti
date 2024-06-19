@@ -31,7 +31,7 @@ public class CharacterManager : MonoBehaviour
         m_Controller = GetComponent<CharacterController>();
 
         Poly2D.enabled = false;
-        m_Controller.SetManagerMember(m_Rb2d, OnSleep, OnUnmovable, OnDead, OnClear);
+        m_Controller.SetManagerMember(m_Rb2d, OnCharacterTouch, OnSleep);
     }
 
     public void CreateOnStage(string playerName)
@@ -51,14 +51,36 @@ public class CharacterManager : MonoBehaviour
         transform.localScale = Vector3.one * m_ScaleOnStage;
     }
 
+    private void OnCharacterTouch(string tag)
+    {
+        switch (tag)
+        {
+            case "Dead":
+                OnDead();
+                break;
+            case "Needle":
+                SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.TouchNeedleSE);
+                OnUnmovable();
+                break;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Goal"))
+        {
+            OnClear();
+        }
+    }
+
     private void OnSleep()
     {
-        if(!GetComponent<Renderer>().isVisible) //画面外で操作不能になったら削除
+        GameManager.SleepCharacter();
+        if (!GetComponent<Renderer>().isVisible) //画面外で操作不能になったら削除
         { 
             Destroy(gameObject);
             return;
         }  
-        
         
         m_EyeRender.sprite = GeneralSettings.Instance.Sprite.DeathEye;
         m_Rb2d.sharedMaterial = GeneralSettings.Instance.PlayerSetting.PhysicsOnDead;
@@ -67,7 +89,6 @@ public class CharacterManager : MonoBehaviour
         m_EyeRender.sortingOrder = -1;
 
         m_Rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;  //丸いキャラが転がらないようにする
-        GameManager.SleepCharacter();
 
         Destroy(m_Controller);
     }
