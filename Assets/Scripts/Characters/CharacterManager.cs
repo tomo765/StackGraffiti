@@ -53,6 +53,13 @@ public class CharacterManager : MonoBehaviour
 
     private void OnSleep()
     {
+        if(!GetComponent<Renderer>().isVisible) //‰æ–ÊŠO‚Å‘€ì•s”\‚É‚È‚Á‚½‚çíœ
+        { 
+            Destroy(gameObject);
+            return;
+        }  
+        
+        
         m_EyeRender.sprite = GeneralSettings.Instance.Sprite.DeathEye;
         m_Rb2d.sharedMaterial = GeneralSettings.Instance.PlayerSetting.PhysicsOnDead;
 
