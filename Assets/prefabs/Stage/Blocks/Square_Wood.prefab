@@ -12,11 +12,7 @@ GameObject:
   - component: {fileID: 7797179906007580909}
   - component: {fileID: 7982693292037248234}
   m_Layer: 8
-<<<<<<< HEAD:Assets/prefabs/Stage/Blocks/Square_Wood.prefab
   m_Name: Square_Wood
-=======
-  m_Name: square_wood
->>>>>>> develop-kiguchi:Assets/prefabs/Stage/wood/square_wood.prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
