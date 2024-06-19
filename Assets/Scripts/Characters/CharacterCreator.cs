@@ -13,6 +13,12 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
 
     public static bool CanCreateChara => m_CreateChara != null && m_Mesh.vertexCount >= 4;
 
+
+    public static void SetCreatingCharaVisible(bool b)
+    {
+        if(m_CreateChara == null) { return; }
+        m_CreateChara.gameObject.SetActive(b);
+    }
     public static void OnClick(Vector2 position)  //Input.GetMouseButtonDown(0)
     {
         CreateCharacter(position);
