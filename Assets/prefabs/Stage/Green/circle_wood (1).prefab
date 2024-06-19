@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4449163274079012828
+--- !u!1 &880941755893991977
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3372764902510933732}
-  - component: {fileID: 7797179906007580909}
-  - component: {fileID: 7982693292037248234}
+  - component: {fileID: 4612822157185634922}
+  - component: {fileID: 3044278930460474210}
+  - component: {fileID: 3991137828725342385}
   m_Layer: 8
-<<<<<<< HEAD:Assets/prefabs/Stage/Blocks/Square_Wood.prefab
-  m_Name: Square_Wood
-=======
-  m_Name: square_wood
->>>>>>> develop-kiguchi:Assets/prefabs/Stage/wood/square_wood.prefab
+  m_Name: circle_wood (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3372764902510933732
+--- !u!4 &4612822157185634922
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4449163274079012828}
+  m_GameObject: {fileID: 880941755893991977}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -3.84, y: 1.57, z: 0}
+  m_LocalScale: {x: 0.2660775, y: 0.2660775, z: 0.2660775}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7797179906007580909
+--- !u!212 &3044278930460474210
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4449163274079012828}
+  m_GameObject: {fileID: 880941755893991977}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -80,24 +76,24 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 415bf1fdc3dc87b48a0aa0db17aafff4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aae5e2aaf5b503c4db59b60296d140ca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 1
-  m_Size: {x: 2.78, y: 2.79}
+  m_DrawMode: 0
+  m_Size: {x: 2.81, y: 2.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7982693292037248234
-BoxCollider2D:
+--- !u!58 &3991137828725342385
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4449163274079012828}
+  m_GameObject: {fileID: 880941755893991977}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -126,14 +122,4 @@ BoxCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0.29999998, y: 0.29999998, z: 0.29999998, w: 0.29999998}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.78, y: 2.79}
-    newSize: {x: 2.78, y: 2.79}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 1
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 2.78, y: 2.79}
-  m_EdgeRadius: 0
+  m_Radius: 1.405
