@@ -124,11 +124,15 @@ public class GeneralSettings : ScriptableObject
         [SerializeField] private Sprite m_DeathEye;
         [SerializeField] private Sprite m_ClearStar;
         [SerializeField] private Sprite m_UnclearStar;
+        [SerializeField] private Sprite m_SwitchIdle;
+        [SerializeField] private Sprite m_SwitchPush;
 
         public Sprite AliveEye => m_AliveEye;
         public Sprite DeathEye => m_DeathEye;
         public Sprite ClearStar => m_ClearStar;
         public Sprite UnclearStar => m_UnclearStar;
+        public Sprite SwitchIdle => m_SwitchIdle;
+        public Sprite SwitchPush => m_SwitchPush;
     }
 
     [System.Serializable]

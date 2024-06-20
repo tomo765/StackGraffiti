@@ -42,7 +42,7 @@ public class CharacterController : MonoBehaviour
     {
         if (InputExtension.OnMove)
         {
-            m_Rb2d.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * 3, m_Rb2d.velocity.y);
+            m_Rb2d.velocity = m_Rb2d.MoveVec(3);  //ToDO : マジックナンバー, ストレイフ修正
         }
     }
 
