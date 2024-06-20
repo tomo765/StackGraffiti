@@ -25,5 +25,5 @@ public static partial class InputExtension
     public static bool EscapeStage => Input.GetKeyDown(KeyCode.Escape);
     public static bool ResetStage => Input.GetKeyDown(KeyCode.G);
 
-    public static Vector2 MoveVec(this Rigidbody2D rb2d, int i) => new Vector2(Input.GetAxisRaw("Horizontal") * i, rb2d.velocity.y);
+    public static Vector2 MoveVec(float i) => new Vector2(Input.GetAxisRaw("Horizontal") * i, 0);
 }

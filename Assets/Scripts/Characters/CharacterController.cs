@@ -15,7 +15,7 @@ public class CharacterController : MonoBehaviour
     private OnTouchHandler m_OnTouch;
     private Action m_OnSleep;
 
-    private bool m_CanJump = false;
+    private bool m_OnGround = false;
 
     public void SetManagerMember(Rigidbody2D rb2d, OnTouchHandler onTouch, Action onSleep)
     {
@@ -31,7 +31,7 @@ public class CharacterController : MonoBehaviour
             m_OnSleep();
         }
 
-        if (InputExtension.StartJump && m_CanJump)
+        if (InputExtension.StartJump && m_OnGround)
         {
             m_Rb2d.velocity = new Vector2(m_Rb2d.velocity.x, 10);
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.JumpSE);
@@ -42,7 +42,16 @@ public class CharacterController : MonoBehaviour
     {
         if (InputExtension.OnMove)
         {
-            m_Rb2d.velocity = m_Rb2d.MoveVec(3);  //ToDO : マジックナンバー, ストレイフ修正
+            if (m_OnGround)
+            {
+                m_Rb2d.velocity = InputExtension.MoveVec(2.5f) + new Vector2(0, m_Rb2d.velocity.y);  //ToDO : マジックナンバー, ストレイフ修正
+            }
+            else
+            {
+                var newVec = m_Rb2d.velocity + InputExtension.MoveVec(0.5f);
+                newVec.x = Mathf.Clamp(newVec.x, -2.5f, 2.5f);
+                m_Rb2d.velocity = newVec;
+            }
         }
     }
 
@@ -67,7 +76,7 @@ public class CharacterController : MonoBehaviour
         {
             case "Ground":
             case "Player":
-                m_CanJump = isEnter;
+                m_OnGround = isEnter;
                 break;
             default:
                 m_OnTouch(tag);
