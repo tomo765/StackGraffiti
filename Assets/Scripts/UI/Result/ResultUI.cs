@@ -22,11 +22,15 @@ public class ResultUI : MonoBehaviour
     {
         m_StageSelectBtn.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene(Config.SceneNames.StageSelect);
+            FadeExtension.LoadScene(GeneralSettings.Instance.Sound.SelectSE, Config.SceneNames.StageSelect);
+            //SceneManager.LoadScene(Config.SceneNames.StageSelect);
+            //SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
         m_ReturnTitleBtn.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene(Config.SceneNames.Title);
+            FadeExtension.LoadScene(GeneralSettings.Instance.Sound.SelectSE, Config.SceneNames.Title);
+            //SceneManager.LoadScene(Config.SceneNames.Title);
+            //SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
     }
 

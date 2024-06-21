@@ -17,7 +17,8 @@ public class StageManager : MonoBehaviour
     {
         if (InputExtension.EscapeStage)
         {
-            SceneManager.LoadScene(Config.SceneNames.StageSelect);
+            FadeExtension.LoadScene(null, Config.SceneNames.StageSelect);
+            //SceneManager.LoadScene(Config.SceneNames.StageSelect);
         }
 
         if (InputExtension.ResetStage)
@@ -25,11 +26,13 @@ public class StageManager : MonoBehaviour
             if(!GameManager.IsPlaying) { return; }
 
             GameManager.StartStage(GameManager.CullentStage);
-            SceneManager.LoadScene(gameObject.scene.name);
+            FadeExtension.LoadScene(null, gameObject.scene.name);
         }
 
-        if(InputExtension.ShowHowToPlay && (GameManager.IsPlaying || GameManager.IsHowToPlay))
+        if(InputExtension.ShowHowToPlay)
         {
+            if(!GameManager.IsPlaying && !GameManager.IsHowToPlay) { return; }
+
             if(GameManager.IsHowToPlay) 
             {
                 GameManager.SetGameState(GameState.Playing);

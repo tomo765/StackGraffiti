@@ -32,6 +32,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlayNewBGM(AudioClip newClip)
     {
+        if (m_SE == null) { return; }
         m_BGM.clip = newClip;
         m_BGM.PlayOneShot(newClip);
     }
@@ -43,6 +44,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlayNewSE(AudioClip newClip)
     {
+        if(m_SE == null) { return; }
         m_SE.clip = newClip;
         m_SE.PlayOneShot(newClip);
     }

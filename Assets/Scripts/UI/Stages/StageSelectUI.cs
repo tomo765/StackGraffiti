@@ -45,8 +45,9 @@ public class StageSelectUI : MonoBehaviour
         m_ReturnTitleBtn.onClick.RemoveAllListeners();
         m_ReturnTitleBtn.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene(Config.SceneNames.Title);
-            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
+            FadeExtension.LoadScene(GeneralSettings.Instance.Sound.SelectSE, Config.SceneNames.Title);
+            //SceneManager.LoadScene(Config.SceneNames.Title);
+            //SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
     }
 }

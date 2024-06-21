@@ -66,9 +66,11 @@ public class GeneralSettings : ScriptableObject
     {
         [SerializeField] private CharacterManager m_Character;
         [SerializeField] private StageSelectButton m_StageSelectBtn;
+        [SerializeField] private FadeCanvasUI m_FadeCanvasUI;
 
         public CharacterManager Character => m_Character;
         public StageSelectButton StageSelectBtn => m_StageSelectBtn;
+        public FadeCanvasUI FadeCanvasUI => m_FadeCanvasUI;
     }
 
     [System.Serializable]

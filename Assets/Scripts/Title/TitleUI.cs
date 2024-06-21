@@ -21,8 +21,9 @@ public class TitleUI : MonoBehaviour
         m_StartButton.onClick.RemoveAllListeners();
         m_StartButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene(Config.SceneNames.StageSelect);
-            SoundManager.Instance.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
+            FadeExtension.LoadScene(GeneralSettings.Instance.Sound.SelectSE, Config.SceneNames.StageSelect);
+            //SceneManager.LoadScene(Config.SceneNames.StageSelect);
+            //SoundManager.Instance.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
     }
     private void SetFinishButton()
