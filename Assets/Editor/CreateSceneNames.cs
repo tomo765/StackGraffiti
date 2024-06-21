@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,18 +16,18 @@ public class CreateSceneNames : EditorWindow
     private static void GenerateSceneNamesClass()
     {
         Debug.Log("GenerateSceneNamesClass is executing...");
-        List<string> sceneNames = GetStageNames();
+        List<string> sceneNames = GetSceneNames();
+        List<string> stageNames = GetStageNames();
         StringBuilder log = new StringBuilder();
         foreach (var scene in sceneNames)
         {
             log.Append($"{scene}\n");
         }
         Debug.Log($"Available scene names are\n{log}");
-
-        CreateSceneNamesClass(sceneNames);
+        CreateSceneNamesClass(sceneNames, stageNames);
     }
 
-    private static void CreateSceneNamesClass(List<string> sceneNames)
+    private static void CreateSceneNamesClass(List<string> sceneNames, List<string> stageNames)
     {
         if (Directory.Exists(ScriptsFolderPath + "/Config") == false)
         {
@@ -43,12 +44,12 @@ public class CreateSceneNames : EditorWindow
         }
         using (var sr = new StreamWriter(ScriptsFolderPath + "/Config/SceneNames.cs"))
         {
-            sr.Write(GenerateClassContent(sceneNames));
+            sr.Write(GenerateClassContent(sceneNames, stageNames));
         }
         AssetDatabase.Refresh();
     }
 
-    private static string GenerateClassContent(List<string> sceneNames)
+    private static string GenerateClassContent(List<string> sceneNames, List<string> stageNames)
     {
         StringBuilder content = new();
         content.Append("namespace Config {\n");
@@ -57,14 +58,30 @@ public class CreateSceneNames : EditorWindow
         {
             content.Append($"\n        public static readonly string {sceneName} = \"{sceneName}\";");
         }
+
+        content.Append("\n\n        public static readonly string[] m_StageNames = {");
+        foreach (var stageName in stageNames)
+        {
+            content.Append($"\n         \"{stageName}\"");
+            if (stageName != stageNames[stageNames.Count - 1]) { content.Append(','); }
+        }
+        content.Append("\n        };");
         content.Append("\n    }");
+
         content.Append("\n}");
         return content.ToString();
     }
 
-    public static List<string> GetStageNames() => EditorBuildSettings.scenes
+    public static List<string> GetSceneNames() => EditorBuildSettings.scenes
                                                   .Where(scene => scene.enabled)
                                                   .Select(scene => Path.GetFileNameWithoutExtension(scene.path))
                                                   .Where(sceneName => !sceneName.Contains("Main_Stage"))
                                                   .ToList();
+
+    public static List<string> GetStageNames() => EditorBuildSettings.scenes
+                                                  .Where(scene => scene.enabled)
+                                                  .Select(scene => Path.GetFileNameWithoutExtension(scene.path))
+                                                  .Where(sceneName => sceneName.Contains("Main_Stage"))
+                                                  .ToList();
+
 }

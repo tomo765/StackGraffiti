@@ -5,7 +5,7 @@ using UnityEngine;
 public class Switch : GimmickSender
 {
     [SerializeField] private GimmickReceiver m_TargetGimmick;
-    [SerializeField] private bool m_IsActivate = false;
+    //[SerializeField] private bool m_IsActivate = false;
 
     private SpriteRenderer m_Renderer;
     private readonly List<Collider2D> m_Touches = new List<Collider2D>(10);

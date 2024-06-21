@@ -28,11 +28,7 @@ public class StageSelectUI : MonoBehaviour
 
     private void SetSelectButtons()
     {
-        string[] sceneNames = EditorBuildSettings.scenes
-                                                 .Where(scene => scene.enabled)
-                                                 .Select(scene => Path.GetFileNameWithoutExtension(scene.path))
-                                                 .Where(name => name.Contains("Main_Stage"))
-                                                 .ToArray();
+        string[] sceneNames = Config.SceneNames.m_StageNames;
 
         m_SelectButtons = new StageSelectButton[sceneNames.Length];
 

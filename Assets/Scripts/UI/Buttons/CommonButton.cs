@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEditor;
-using UnityEditor.UI;
 using System;
+
+#if UNITY_EDITOR
+using UnityEditor.UI;
+#endif
 
 [RequireComponent(typeof(Image))]
 public class CommonButton : Button
@@ -62,7 +65,7 @@ public class CommonButton : Button
 
 
 
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(CommonButton))]
 public class CommonSEButtonEditor : ButtonEditor
 {
@@ -90,3 +93,4 @@ public class CommonSEButtonEditor : ButtonEditor
         }
     }
 }
+#endif
