@@ -44,11 +44,11 @@ public class CharacterController : MonoBehaviour
         {
             if (m_OnGround)
             {
-                m_Rb2d.velocity = InputExtension.MoveVec(2.5f) + new Vector2(0, m_Rb2d.velocity.y);  //ToDO : マジックナンバー, ストレイフ修正
+                m_Rb2d.velocity = InputExtension.MoveByKey(2.5f) + new Vector2(0, m_Rb2d.velocity.y);  //ToDO : マジックナンバー, ストレイフ修正
             }
             else
             {
-                var newVec = m_Rb2d.velocity + InputExtension.MoveVec(0.5f);
+                var newVec = m_Rb2d.velocity + InputExtension.MoveByKey(0.5f);
                 newVec.x = Mathf.Clamp(newVec.x, -2.5f, 2.5f);
                 m_Rb2d.velocity = newVec;
             }
