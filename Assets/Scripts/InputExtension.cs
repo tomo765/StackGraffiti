@@ -24,6 +24,7 @@ public static partial class InputExtension
 
     public static bool EscapeStage => Input.GetKeyDown(KeyCode.Escape);
     public static bool ResetStage => Input.GetKeyDown(KeyCode.G);
+    public static bool ShowHowToPlay => Input.GetKeyDown(KeyCode.Y);
 
     public static Vector2 MoveVec(float i) => new Vector2(Input.GetAxisRaw("Horizontal") * i, 0);
 }

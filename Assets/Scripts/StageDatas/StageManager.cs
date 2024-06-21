@@ -22,10 +22,24 @@ public class StageManager : MonoBehaviour
 
         if (InputExtension.ResetStage)
         {
-            if(GameManager.IsDrawing || GameManager.IsClear) { return; }
+            if(!GameManager.IsPlaying) { return; }
 
             GameManager.StartStage(GameManager.CullentStage);
             SceneManager.LoadScene(gameObject.scene.name);
+        }
+
+        if(InputExtension.ShowHowToPlay && (GameManager.IsPlaying || GameManager.IsHowToPlay))
+        {
+            if(GameManager.IsHowToPlay) 
+            {
+                GameManager.SetGameState(GameState.Playing);
+                SceneManager.UnloadSceneAsync(Config.SceneNames.HowToPlay);
+            }
+            else
+            {
+                GameManager.SetGameState(GameState.HowToPlay);
+                SceneManager.LoadScene(Config.SceneNames.HowToPlay, LoadSceneMode.Additive);
+            }
         }
     }
 }

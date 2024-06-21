@@ -6,7 +6,8 @@ public enum GameState
 {
     Drawing,
     Playing,
-    Goal
+    Goal,
+    HowToPlay
 }
 
 public static class GameManager
@@ -23,6 +24,7 @@ public static class GameManager
     public static bool IsDrawing => m_GameState == GameState.Drawing;
     public static bool IsPlaying => m_GameState == GameState.Playing;
     public static bool IsClear => m_GameState == GameState.Goal;
+    public static bool IsHowToPlay => m_GameState == GameState.HowToPlay;
 
     public static StageType CullentStage => m_CullentStage;
 
