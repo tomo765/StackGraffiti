@@ -47,9 +47,9 @@ public class GeneralSettings : ScriptableObject
         }
     }
 
-    [SerializeField] private Prehabs m_Prehabs;
     [SerializeField] private PlayerSettings m_PlayerSettings;
     [SerializeField] private StageEvaluations m_StageEvaluation;
+    [SerializeField] private Prehabs m_Prehabs;
     [SerializeField] private Sprites m_Sprites;
     [SerializeField] private Sounds m_Sounds;
 
