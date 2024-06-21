@@ -44,7 +44,7 @@ public class CharacterController : MonoBehaviour
         {
             if (m_OnGround)
             {
-                m_Rb2d.velocity = InputExtension.MoveByKey(2.5f) + new Vector2(0, m_Rb2d.velocity.y);  //ToDO : マジックナンバー, ストレイフ修正
+                m_Rb2d.velocity = InputExtension.MoveByKey(2.5f) + new Vector2(0, m_Rb2d.velocity.y);
             }
             else
             {
