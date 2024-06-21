@@ -844,6 +844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CreateButton: {fileID: 2365871667345684612}
   m_LookButton: {fileID: 232105666061344660}
+  m_RenameButton: {fileID: 974396838205200766}
   m_NameInput: {fileID: 6449122217989721536}
   m_DrawArea: {fileID: 5369459150733640662}
 --- !u!1 &3645064571023528781
