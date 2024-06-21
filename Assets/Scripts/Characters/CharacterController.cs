@@ -31,11 +31,11 @@ public class CharacterController : MonoBehaviour
             m_OnSleep();
         }
 
-        if (InputExtension.StartJump && m_OnGround)
-        {
-            m_Rb2d.velocity = new Vector2(m_Rb2d.velocity.x, 10);
-            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.JumpSE);
-        }
+        //if (InputExtension.StartJump && m_OnGround)
+        //{
+        //    m_Rb2d.velocity = new Vector2(m_Rb2d.velocity.x, 10);
+        //    SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.JumpSE);
+        //}
     }
 
     private void FixedUpdate()
