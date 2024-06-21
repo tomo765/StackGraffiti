@@ -7,16 +7,16 @@ public partial class ElevatorController : GimmickReceiver
     [SerializeField] private Vector2 m_MoveVec;
     [SerializeField] private float m_MoveSpeed;
     [SerializeField] private bool m_OnActivate = false;
-    [SerializeField] private bool m_CanReverse = true;
+    [SerializeField] private bool m_Reversible = true;
 
     private Vector2 m_StartPos;
     private Vector2 m_EndPos;
     private float m_ArrivalTime;      // 0`1‚Å•Ï“® ‰ŠúˆÊ’u = 0, ˆÚ“®Œã = 1@‚Æ‚µ‚ÄˆÚ“®‚³‚¹‚é
-    private bool m_IsReturn = false;  //true : •œ˜H, false : ‰˜H
+    private bool m_OnReverse = false;  //true : •œ˜H, false : ‰˜H
 
     public bool OnActivate => m_OnActivate;
 
-    private float GetAddTime() => Time.fixedDeltaTime * (m_IsReturn && m_CanReverse ? -1 : 1) * m_MoveSpeed;
+    private float GetAddTime() => Time.fixedDeltaTime * (m_OnReverse && m_Reversible ? -1 : 1) * m_MoveSpeed;
 
     private void Start()
     {
@@ -38,7 +38,7 @@ public partial class ElevatorController : GimmickReceiver
 
         if (m_ArrivalTime >= 1f || m_ArrivalTime <= 0f)
         {
-            m_IsReturn = !m_IsReturn;
+            m_OnReverse = !m_OnReverse;
             m_ArrivalTime = Mathf.Clamp(m_ArrivalTime, 0, 1);
         }
     }
