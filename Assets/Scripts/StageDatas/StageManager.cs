@@ -25,7 +25,7 @@ public class StageManager : MonoBehaviour
             if(!GameManager.IsPlaying) { return; }
 
             GameManager.StartStage(GameManager.CullentStage);
-            FadeExtension.LoadScene(gameObject.scene.name, null);
+            FadeExtension.LoadScene(gameObject.scene.name, GeneralSettings.Instance.Sound.SelectSE);
         }
 
         if(InputExtension.ShowHowToPlay)

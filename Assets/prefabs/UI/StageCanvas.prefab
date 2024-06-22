@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DrawUI: {fileID: 8220117502162674078}
-  m_RectT: {fileID: 2267695557171758374}
+  m_Rect: {fileID: 0}
 --- !u!1 &1318833172722305346
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,7 +580,7 @@ GameObject:
   - component: {fileID: 6936212777940888721}
   - component: {fileID: 1553987094732226338}
   - component: {fileID: 916830307510803692}
-  - component: {fileID: 974396838205200766}
+  - component: {fileID: 5176960487812515140}
   m_Layer: 0
   m_Name: RenameButton
   m_TagString: Untagged
@@ -645,7 +645,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &974396838205200766
+--- !u!114 &5176960487812515140
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -654,7 +654,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2238913191293755009}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 4904cd1049f4c2a43a6eceefdb164f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -689,6 +689,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  m_EnterColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.8}
+  m_ExitColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2669819055569725463
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,7 +846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CreateButton: {fileID: 2365871667345684612}
   m_LookButton: {fileID: 232105666061344660}
-  m_RenameButton: {fileID: 974396838205200766}
+  m_RenameButton: {fileID: 5176960487812515140}
   m_NameInput: {fileID: 6449122217989721536}
   m_DrawArea: {fileID: 5369459150733640662}
 --- !u!1 &3645064571023528781

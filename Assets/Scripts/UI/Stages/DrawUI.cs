@@ -39,6 +39,7 @@ public class DrawUI : MonoBehaviour  //Ques : キャラを生成したら名前インプットを
         m_RenameButton.onClick.AddListener(() =>
         {
             m_NameInput.text = GeneralSettings.Instance.PlayerSetting.GetRandomName();
+            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
     }
 }
