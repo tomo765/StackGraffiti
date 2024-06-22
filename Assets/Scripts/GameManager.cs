@@ -41,6 +41,7 @@ public static class GameManager
     {
         m_CullentStage = stg;
         m_UpdSleepText = null;
+        SetGameState(GameState.Drawing);
         m_SleepCount = 0;
     }
 
