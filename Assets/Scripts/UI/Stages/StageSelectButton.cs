@@ -24,7 +24,7 @@ public class StageSelectButton : MonoBehaviour
         m_StageLevelText.text = "ステージ" + stageNum.ToString();
         m_TransitionButton.onClick.AddListener(() =>
         {
-            FadeExtension.LoadScene(GeneralSettings.Instance.Sound.SelectSE, m_StageName);
+            FadeExtension.LoadScene(m_StageName, GeneralSettings.Instance.Sound.SelectSE);
             GameManager.StartStage((StageType)stageNum);
         });
 

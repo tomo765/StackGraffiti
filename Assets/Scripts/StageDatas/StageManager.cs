@@ -17,8 +17,7 @@ public class StageManager : MonoBehaviour
     {
         if (InputExtension.EscapeStage)
         {
-            FadeExtension.LoadScene(null, Config.SceneNames.StageSelect);
-            //SceneManager.LoadScene(Config.SceneNames.StageSelect);
+            FadeExtension.LoadScene(Config.SceneNames.StageSelect, GeneralSettings.Instance.Sound.SelectSE);
         }
 
         if (InputExtension.ResetStage)
@@ -26,7 +25,7 @@ public class StageManager : MonoBehaviour
             if(!GameManager.IsPlaying) { return; }
 
             GameManager.StartStage(GameManager.CullentStage);
-            FadeExtension.LoadScene(null, gameObject.scene.name);
+            FadeExtension.LoadScene(gameObject.scene.name, null);
         }
 
         if(InputExtension.ShowHowToPlay)

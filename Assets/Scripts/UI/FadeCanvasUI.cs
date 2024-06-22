@@ -41,16 +41,10 @@ public class FadeCanvasUI : MonoBehaviour
     }
 
 
-    public async Task IsCompleteFadeIn()
-    {
-        await WaitUntiil(() => m_Info.IsName("Fout"));
-    }
+    public async Task IsCompleteFadeIn() => await WaitUntiil(() => m_Info.IsName("Fout"));
 
-    public async Task IsCompleteFadeOut()
-    {
-        await WaitUntiil(() =>
-        m_Info.IsName("Fout") && m_Info.normalizedTime >= 1f);
-    }
+    public async Task IsCompleteFadeOut() => await WaitUntiil(() => m_Info.IsName("Fout") &&
+                                                                    m_Info.normalizedTime >= 1f);
 
     public static async Task WaitUntiil(Func<bool> isCompleted)
     {
@@ -63,7 +57,7 @@ public class FadeCanvasUI : MonoBehaviour
 
 public static class FadeExtension
 {
-    public static async void LoadScene(AudioClip playClp, string load)
+    public static async void LoadScene(string load, AudioClip playClp)
     {
 
         if(FadeCanvasUI.Instance == null) 
@@ -74,7 +68,6 @@ public static class FadeExtension
 
         if (FadeCanvasUI.Instance.OnFade) { return; }
         SoundManager.Instance?.PlayNewSE(playClp);
-        
         FadeCanvasUI.Instance.StartFade();
 
         await FadeCanvasUI.Instance.IsCompleteFadeIn();
