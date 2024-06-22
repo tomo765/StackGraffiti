@@ -34,7 +34,7 @@ public class SoundManager : MonoBehaviour
     {
         if (m_SE == null) { return; }
         m_BGM.clip = newClip;
-        m_BGM.PlayOneShot(newClip);
+        m_BGM.Play();
     }
     public void SetBGMVol(float vol)
     {
