@@ -42,6 +42,8 @@ public class CharacterController : MonoBehaviour
     {
         if (InputExtension.OnMove)
         {
+            if(!GameManager.IsPlaying) { return; }
+
             if (m_OnGround)
             {
                 m_Rb2d.velocity = InputExtension.MoveByKey(2.5f) + new Vector2(0, m_Rb2d.velocity.y);
