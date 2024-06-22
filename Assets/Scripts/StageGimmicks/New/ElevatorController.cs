@@ -9,6 +9,9 @@ public partial class ElevatorController : GimmickReceiver
     [SerializeField] private bool m_OnActivate = false;
     [SerializeField] private bool m_Reversible = true;
 
+    private const int MinTime = 0;
+    private const int MaxTime = 1;
+
     private Vector2 m_StartPos;
     private Vector2 m_EndPos;
     private float m_ArrivalTime;      // 0`1‚Å•Ï“® ‰ŠúˆÊ’u = 0, ˆÚ“®Œã = 1@‚Æ‚µ‚ÄˆÚ“®‚³‚¹‚é
@@ -36,15 +39,14 @@ public partial class ElevatorController : GimmickReceiver
         m_ArrivalTime += GetAddTime();
         transform.position = Vector2.Lerp(m_StartPos, m_EndPos, m_ArrivalTime);
 
-        if (m_ArrivalTime >= 1f || m_ArrivalTime <= 0f)
+        if (m_ArrivalTime >= MaxTime || m_ArrivalTime <= MinTime)
         {
             m_OnReverse = !m_OnReverse;
-            m_ArrivalTime = Mathf.Clamp(m_ArrivalTime, 0, 1);
+            m_ArrivalTime = Mathf.Clamp(m_ArrivalTime, MinTime, MaxTime);
         }
     }
 
     public override void ChangeActivate() => m_OnActivate = !m_OnActivate;
-    public override void SetActivate(bool b) => m_OnActivate = b;
 }
 
 #if UNITY_EDITOR

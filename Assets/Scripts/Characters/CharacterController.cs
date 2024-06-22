@@ -9,9 +9,13 @@ using System;
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterController : MonoBehaviour
 {
+    public delegate void OnTouchHandler(string tag);
+    
     private Rigidbody2D m_Rb2d;
 
-    public delegate void OnTouchHandler(string tag);
+    private const float MaxMoveSpeed = 2.5f;
+    private const float AirMoveSpeed = 0.5f;
+
     private OnTouchHandler m_OnTouch;
     private Action m_OnSleep;
 
@@ -46,12 +50,12 @@ public class CharacterController : MonoBehaviour
 
             if (m_OnGround)
             {
-                m_Rb2d.velocity = InputExtension.MoveByKey(2.5f) + new Vector2(0, m_Rb2d.velocity.y);
+                m_Rb2d.velocity = InputExtension.MoveByKey(MaxMoveSpeed) + Vector2.up * m_Rb2d.velocity.y;
             }
             else
             {
-                var newVec = m_Rb2d.velocity + InputExtension.MoveByKey(0.5f);
-                newVec.x = Mathf.Clamp(newVec.x, -2.5f, 2.5f);
+                var newVec = m_Rb2d.velocity + InputExtension.MoveByKey(AirMoveSpeed);  //ToDo
+                newVec.x = Mathf.Clamp(newVec.x, -MaxMoveSpeed, MaxMoveSpeed);
                 m_Rb2d.velocity = newVec;
             }
         }

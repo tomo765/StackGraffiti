@@ -43,7 +43,6 @@ public class CharacterManager : MonoBehaviour
         m_Controller.enabled = true;
 
         transform.position = GameManager.SpawnArea.transform.position;
-        transform.localScale = Vector3.one * 0.3f;
         Rb2D.bodyType = RigidbodyType2D.Dynamic;
 
         m_NameText.text = playerName;
@@ -85,7 +84,7 @@ public class CharacterManager : MonoBehaviour
         m_EyeRender.sprite = GeneralSettings.Instance.Sprite.DeathEye;
         m_Rb2d.sharedMaterial = GeneralSettings.Instance.PlayerSetting.PhysicsOnDead;
 
-        GetComponent<MeshRenderer>().sortingOrder = -1;
+        GetComponent<MeshRenderer>().sortingOrder = -1;  //ToDo
         m_EyeRender.sortingOrder = -1;
 
         m_Rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;  //ŠÛ‚¢ƒLƒƒƒ‰‚ª“]‚ª‚ç‚È‚¢‚æ‚¤‚É‚·‚é

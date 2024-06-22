@@ -5,10 +5,10 @@ using UnityEngine;
 public class Switch : GimmickSender
 {
     [SerializeField] private GimmickReceiver m_TargetGimmick;
-    //[SerializeField] private bool m_IsActivate = false;
 
     private SpriteRenderer m_Renderer;
     private readonly List<Collider2D> m_Touches = new List<Collider2D>(10);
+    private bool IsPushSwitch => m_Touches.Count != 0;
 
     private void Start()
     {
@@ -26,7 +26,7 @@ public class Switch : GimmickSender
 
     public sealed override void StartGimmick(Collider2D col)
     {
-        if(m_Touches.Count == 0)
+        if(!IsPushSwitch)
         {
             m_TargetGimmick?.ChangeActivate();
             m_Renderer.sprite = GeneralSettings.Instance.Sprite.SwitchPush;
@@ -39,7 +39,7 @@ public class Switch : GimmickSender
     {
         m_Touches.Remove(col);
 
-        if(m_Touches.Count == 0)
+        if(!IsPushSwitch)
         {
             m_TargetGimmick?.ChangeActivate();
             m_Renderer.sprite = GeneralSettings.Instance.Sprite.SwitchIdle;

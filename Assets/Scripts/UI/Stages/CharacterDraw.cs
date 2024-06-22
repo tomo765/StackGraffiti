@@ -27,7 +27,7 @@ public class CharacterDraw : MonoBehaviour, IPointerDownHandler, IPointerEnterHa
 
     void Update()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (InputExtension.MouseLeftUp)
         {
             FinishWrite();
             m_OnDrawing = false;
@@ -36,7 +36,7 @@ public class CharacterDraw : MonoBehaviour, IPointerDownHandler, IPointerEnterHa
 
     void FixedUpdate()
     {
-        if (m_OnDrawing && m_IsInArea && Input.GetMouseButton(0))
+        if (m_OnDrawing && m_IsInArea && InputExtension.MouseLeftPush)
         {
             if (!CheckCursorPosOnArea()) { return; }
 
