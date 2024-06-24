@@ -47,11 +47,32 @@ public partial class ElevatorController : GimmickReceiver
     }
 
     public override void ChangeActivate() => m_OnActivate = !m_OnActivate;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            collision.transform.SetParent(transform);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            collision.transform.SetParent(null);
+        }
+    }
 }
 
 #if UNITY_EDITOR
+
+//編集中はエレベーターの中心から移動後の位置まで線が伸びる
+//再生中はエレベーターの移動前の位置から移動後の位置まで線が伸びる
+
 public partial class ElevatorController : GimmickReceiver
 {
+    [Space(15), SerializeField] private Color m_GizmosCol = Color.red;
+
     // 移動範囲表示
     private void OnDrawGizmosSelected()
     {
@@ -68,7 +89,7 @@ public partial class ElevatorController : GimmickReceiver
             t = f + m_MoveVec;
         }
 
-
+        Gizmos.color = m_GizmosCol;
         // 移動範囲を線で表示
         Gizmos.DrawLine(f, t);
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Switch : GimmickSender
+public partial class Switch : GimmickSender
 {
     [SerializeField] private GimmickReceiver m_TargetGimmick;
 
@@ -46,3 +46,19 @@ public class Switch : GimmickSender
         }
     }
 }
+
+
+#if UNITY_EDITOR
+public partial class Switch : GimmickSender
+{
+    [Space(15), SerializeField] private Color m_GizmosCol = Color.red;
+
+    private void OnDrawGizmosSelected()
+    {
+        if(m_TargetGimmick == null) { return; }
+
+        Gizmos.color = m_GizmosCol;
+        Gizmos.DrawLine(transform.position, m_TargetGimmick.transform.position);  //çÏìÆÇ≥ÇπÇÈÉMÉ~ÉbÉNÇê¸Ç≈Ç¬Ç»ÇÆ
+    }
+}
+#endif

@@ -182,7 +182,7 @@ MonoBehaviour:
   m_MoveVec: {x: 10, y: 0}
   m_MoveSpeed: 1
   m_OnActivate: 1
-  m_CanReverse: 1
+  m_Reversible: 1
 --- !u!61 &457265072578399823
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -213,7 +213,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
