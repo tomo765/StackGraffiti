@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class CharacterCreator  //https://qiita.com/divideby_zero/items/491d18cbc91d7fabd700
 {
-    private static float m_Width = 0.1f;
+    private static float m_LineWidth = 0.1f;
     private static Mesh m_Mesh;
     private static List<Vector2> m_Vlist = new List<Vector2>();
 
@@ -19,7 +19,7 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
         if(m_CreateChara == null) { return; }
         m_CreateChara.gameObject.SetActive(b);
     }
-    public static void OnClick(Vector2 position)  //Input.GetMouseButtonDown(0)
+    public static void OnClick(Vector2 position)
     {
         CreateCharacter(position);
 
@@ -30,7 +30,7 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
         m_Vlist.Clear();
     }
 
-    public static void OnHold(Vector2 position)  //Input.GetMouseButton(0) && targetObject != null
+    public static void OnHold(Vector2 position)
     {
         var pos = InputExtension.WorldMousePos - position;
         m_Vlist.Add(pos);
@@ -38,7 +38,7 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
         CreateMesh();
     }
 
-    public static void OnRelease()  //Input.GetMouseButtonUp(0) && targetObject != null
+    public static void OnRelease()
     {
         Finish();
     }
@@ -75,7 +75,7 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
             var nextPos = m_Vlist[i + 1];
             var vec = currentPos - nextPos;//今と、一つ先のベクトルから、進行方向を得る
             if (vec.magnitude < 0.01f) continue;  //あまり頂点の間が空いてないのであればスキップする
-            var v = new Vector2(-vec.y, vec.x).normalized * m_Width; //90度回転させてから正規化*widthで左右への幅ベクトルを得る
+            var v = new Vector2(-vec.y, vec.x).normalized * m_LineWidth; //90度回転させてから正規化*widthで左右への幅ベクトルを得る
 
             //指定した横幅に広げる
             vertices.Add(currentPos - v);
