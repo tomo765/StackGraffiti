@@ -15,8 +15,9 @@ public class CharacterManager : MonoBehaviour
 
     private Rigidbody2D m_Rb2d;
     private PolygonCollider2D m_PolygonCollider2D;
-
     private CharacterController m_Controller;
+
+    private bool m_IsDead = false;
 
     public SpriteRenderer EyeRenderer => m_EyeRender;
     public Rigidbody2D Rb2D => m_Rb2d;
@@ -25,7 +26,6 @@ public class CharacterManager : MonoBehaviour
 
     private void Start()
     {
-
         m_Rb2d = GetComponent<Rigidbody2D>();
         m_PolygonCollider2D = GetComponent<PolygonCollider2D>();
         m_Controller = GetComponent<CharacterController>();
@@ -66,6 +66,7 @@ public class CharacterManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        OnCharacterTouch(collision.tag);
         if (collision.CompareTag("Goal"))
         {
             OnClear();
@@ -79,8 +80,9 @@ public class CharacterManager : MonoBehaviour
         { 
             Destroy(gameObject);
             return;
-        }  
-        
+        }
+        m_IsDead = true;
+
         m_EyeRender.sprite = GeneralSettings.Instance.Sprite.DeathEye;
         m_Rb2d.sharedMaterial = GeneralSettings.Instance.PlayerSetting.PhysicsOnDead;
 
@@ -100,8 +102,10 @@ public class CharacterManager : MonoBehaviour
 
     private void OnDead()
     {
-        GameManager.SleepCharacter();
         Destroy(gameObject);
+        if(m_IsDead) { return; }
+        
+        GameManager.SleepCharacter();
     }
 
     private void OnClear()
