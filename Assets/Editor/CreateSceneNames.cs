@@ -52,17 +52,21 @@ public class CreateSceneNames : EditorWindow
     private static string GenerateClassContent(List<string> sceneNames, List<string> stageNames)
     {
         StringBuilder content = new();
-        content.Append("namespace Config {\n");
-        content.Append("    public class SceneNames {");
+        content.Append("namespace Config\n");
+        content.Append("{    public class SceneNames \n");
+        content.Append("    {");
         foreach (var sceneName in sceneNames)
         {
             content.Append($"\n        public static readonly string {sceneName} = \"{sceneName}\";");
         }
+        content.Append("\n");
 
-        content.Append("\n\n        public static readonly string[] m_StageNames = {");
+
+        content.Append("\n        public static readonly string[] m_StageNames = ");
+        content.Append("\n        {");
         foreach (var stageName in stageNames)
         {
-            content.Append($"\n         \"{stageName}\"");
+            content.Append($"\n            \"{stageName}\"");
             if (stageName != stageNames[stageNames.Count - 1]) { content.Append(','); }
         }
         content.Append("\n        };");
