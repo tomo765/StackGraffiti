@@ -13,6 +13,7 @@ public class DrawUI : MonoBehaviour  //Ques : キャラを生成したら名前インプットを
     [SerializeField] private Button m_CreateButton;
     [SerializeField] private Button m_LookButton;
     [SerializeField] private Button m_RenameButton;
+    [SerializeField] private Button m_ReturnButton;
     [SerializeField] private TInputField m_NameInput;
     [SerializeField] private CharacterDraw m_DrawArea;
     
@@ -40,6 +41,13 @@ public class DrawUI : MonoBehaviour  //Ques : キャラを生成したら名前インプットを
         {
             m_NameInput.text = GeneralSettings.Instance.PlayerSetting.GetRandomName();
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
+        });
+
+
+        m_ReturnButton.onClick.RemoveAllListeners();
+        m_ReturnButton.onClick.AddListener(() =>
+        {
+            SceneLoadExtension.LoadWithFade(Config.SceneNames.StageSelect, GeneralSettings.Instance.Sound.SelectSE);
         });
     }
 }

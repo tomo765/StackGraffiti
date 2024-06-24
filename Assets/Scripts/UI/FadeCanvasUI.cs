@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 public class FadeCanvasUI : MonoBehaviour
@@ -41,7 +40,7 @@ public class FadeCanvasUI : MonoBehaviour
     }
 
 
-    public async Task IsCompleteFadeIn() => await WaitUntiil(() => m_Info.IsName("Fout"));
+    public async Task IsCompleteFadeIn() => await WaitUntiil(() => m_Info.IsName("Fout"));  //ToDo : マジックナンバー
 
     public async Task IsCompleteFadeOut() => await WaitUntiil(() => m_Info.IsName("Fout") &&
                                                                     m_Info.normalizedTime >= 1f);
@@ -52,28 +51,5 @@ public class FadeCanvasUI : MonoBehaviour
         {
             await Task.Delay((int)(Time.fixedDeltaTime * 1000));
         }
-    }
-}
-
-public static class FadeExtension
-{
-    public static async void LoadScene(string load, AudioClip playClp)
-    {
-
-        if(FadeCanvasUI.Instance == null) 
-        { 
-            MonoBehaviour.Instantiate(GeneralSettings.Instance.Prehab.FadeCanvasUI);
-            await FadeCanvasUI.WaitUntiil(() => FadeCanvasUI.Instance != null);
-        }
-
-        if (FadeCanvasUI.Instance.OnFade) { return; }
-        SoundManager.Instance?.PlayNewSE(playClp);
-        FadeCanvasUI.Instance.StartFade();
-
-        await FadeCanvasUI.Instance.IsCompleteFadeIn();
-        SceneManager.LoadScene(load);
-
-        await FadeCanvasUI.Instance.IsCompleteFadeOut();
-        FadeCanvasUI.Instance.FinishFade();
     }
 }
