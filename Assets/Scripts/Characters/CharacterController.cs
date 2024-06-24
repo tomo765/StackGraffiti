@@ -9,22 +9,18 @@ using System;
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterController : MonoBehaviour
 {
-    public delegate void OnTouchHandler(string tag);
-    
     private Rigidbody2D m_Rb2d;
 
     private const float MaxMoveSpeed = 2.5f;
     private const float AirMoveSpeed = 0.5f;
 
-    private OnTouchHandler m_OnTouch;
     private Action m_OnSleep;
 
     private bool m_OnGround = false;
 
-    public void SetManagerMember(Rigidbody2D rb2d, OnTouchHandler onTouch, Action onSleep)
+    public void SetManagerMember(Rigidbody2D rb2d, Action onSleep)
     {
         m_Rb2d = rb2d;
-        m_OnTouch = onTouch;
         m_OnSleep = onSleep;
     }
 
@@ -34,59 +30,29 @@ public class CharacterController : MonoBehaviour
         {
             m_OnSleep();
         }
-
-        //if (InputExtension.StartJump && m_OnGround)
-        //{
-        //    m_Rb2d.velocity = new Vector2(m_Rb2d.velocity.x, 10);
-        //    SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.JumpSE);
-        //}
     }
 
     private void FixedUpdate()
     {
         if (InputExtension.OnMove)
         {
-            if(!GameManager.IsPlaying) { return; }
-
-            if (m_OnGround)
-            {
-                m_Rb2d.velocity = InputExtension.MoveByKey(MaxMoveSpeed) + Vector2.up * m_Rb2d.velocity.y;
-            }
-            else
-            {
-                var newVec = m_Rb2d.velocity + InputExtension.MoveByKey(AirMoveSpeed);  //ToDo
-                newVec.x = Mathf.Clamp(newVec.x, -MaxMoveSpeed, MaxMoveSpeed);
-                m_Rb2d.velocity = newVec;
-            }
+            Move();
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void Move()
     {
-        OnCharacterTouch(collision.transform.tag, true);
-    }
+        if (!GameManager.IsPlaying) { return; }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        OnCharacterTouch(collision.transform.tag, false);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        OnCharacterTouch(collision.transform.tag, true);
-    }
-
-    private void OnCharacterTouch(string tag, bool isEnter)
-    {
-        switch (tag)
+        if (m_OnGround)
         {
-            case "Ground":
-            case "Player":
-                m_OnGround = isEnter;
-                break;
-            default:
-                m_OnTouch(tag);
-                break;
+            m_Rb2d.velocity = InputExtension.MoveByKey(MaxMoveSpeed) + Vector2.up * m_Rb2d.velocity.y;
+        }
+        else
+        {
+            var newVec = m_Rb2d.velocity + InputExtension.MoveByKey(AirMoveSpeed);
+            newVec.x = Mathf.Clamp(newVec.x, -MaxMoveSpeed, MaxMoveSpeed);
+            m_Rb2d.velocity = newVec;
         }
     }
 }

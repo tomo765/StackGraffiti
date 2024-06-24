@@ -31,7 +31,7 @@ public class CharacterManager : MonoBehaviour
         m_Controller = GetComponent<CharacterController>();
 
         Poly2D.enabled = false;
-        m_Controller.SetManagerMember(m_Rb2d, OnCharacterTouch, OnSleep);
+        m_Controller.SetManagerMember(m_Rb2d, OnSleep);
     }
 
     public void CreateOnStage(string playerName)
