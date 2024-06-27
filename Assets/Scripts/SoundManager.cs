@@ -6,7 +6,17 @@ using UnityEngine.SceneManagement;
 public class SoundManager : MonoBehaviour
 {
     private static SoundManager instance;
-    public static SoundManager Instance => instance;
+    public static SoundManager Instance
+    {
+        get
+        {
+            if(instance == null)
+            {
+                instance = Instantiate(GeneralSettings.Instance.Prehab.SoundManager);
+            }
+            return instance;
+        }
+    }
 
     [SerializeField] private AudioSource m_BGM;
     [SerializeField] private AudioSource m_SE;

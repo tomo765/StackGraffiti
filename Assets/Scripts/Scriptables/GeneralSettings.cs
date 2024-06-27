@@ -68,9 +68,21 @@ public class GeneralSettings : ScriptableObject
         [SerializeField] private StageSelectButton m_StageSelectBtn;
         [SerializeField] private FadeCanvasUI m_FadeCanvasUI;
 
+        [Space(10), SerializeField] private BalloonEffect m_BalloonEffect;
+        [SerializeField] private ClickEffect m_ClickEffect;
+        [SerializeField] private JumpEffect m_JumpEffect;
+
+        [SerializeField] private SoundManager m_SoundManager;
+        [SerializeField] private EffectContainer m_EffectContainer;
+
         public CharacterManager Character => m_Character;
         public StageSelectButton StageSelectBtn => m_StageSelectBtn;
         public FadeCanvasUI FadeCanvasUI => m_FadeCanvasUI;
+        public BalloonEffect BalloonEffect => m_BalloonEffect;
+        public ClickEffect ClickEffect => m_ClickEffect;
+        public JumpEffect JumpEffect => m_JumpEffect;
+        public SoundManager SoundManager => m_SoundManager;
+        public EffectContainer EffectContainer => m_EffectContainer;
     }
 
     [System.Serializable]

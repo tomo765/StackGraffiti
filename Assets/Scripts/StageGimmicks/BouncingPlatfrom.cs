@@ -8,10 +8,9 @@ public class BouncingPlatfrom : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
+        if (!collision.TryGetComponent<Rigidbody2D>(out var rb2d)) { return; }
 
-        if (playerRb == null) { return; }
-        // ÉvÉåÉCÉÑÅ[Ç…íµÇÀÇÈóÕÇâ¡Ç¶ÇÈ
-        playerRb.velocity = new Vector2(playerRb.velocity.x, bounceForce);
+        EffectContainer.Instance.PlayEffect(GeneralSettings.Instance.Prehab.BalloonEffect, transform.position);
+        rb2d.velocity = new Vector2(rb2d.velocity.x, bounceForce);
     }
 }
