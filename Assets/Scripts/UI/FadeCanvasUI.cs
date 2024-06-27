@@ -31,7 +31,7 @@ public class FadeCanvasUI : MonoBehaviour
     {
         m_OnFade = true;
         gameObject.SetActive(true);
-        m_FadeAnim.Play("Fin");
+        //m_FadeAnim.Play("Fin");
     }
     public void FinishFade()
     {

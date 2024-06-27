@@ -13,7 +13,7 @@ using UnityEditor.UI;
 [RequireComponent(typeof(Image))]
 public class CommonButton : Button
 {
-    [SerializeField] private Color m_EnterColor = Color.white * 0.8f;  //ToDo : マジックナンバー消す 
+    [SerializeField] private Color m_EnterColor = Color.white;
     [SerializeField] private Color m_ExitColor = Color.white;
 
 #if UNITY_EDITOR
@@ -69,8 +69,6 @@ public class CommonButton : Button
 [CustomEditor(typeof(CommonButton))]
 public class CommonSEButtonEditor : ButtonEditor
 {
-    SerializedProperty myCustomColorProperty;
-
     protected override void OnEnable()
     {
         base.OnEnable();
