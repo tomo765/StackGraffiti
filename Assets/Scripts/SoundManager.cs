@@ -75,12 +75,12 @@ public class SoundManager : MonoBehaviour
     {
         if (isPlay)
         {
-            m_MarimbaBGM.volume = Mathf.Lerp(m_MarimbaBGM.volume, 1, Time.fixedDeltaTime);
+            m_MarimbaBGM.volume = Mathf.Lerp(m_MarimbaBGM.volume, 1, 0.05f);  //ToDo : マジックナンバー
         }
 
         if (!isPlay) 
         {
-            m_MarimbaBGM.volume = Mathf.Lerp(m_MarimbaBGM.volume, 0, Time.fixedDeltaTime);
+            m_MarimbaBGM.volume = Mathf.Lerp(m_MarimbaBGM.volume, 0, 0.05f);
             if (m_MarimbaBGM.volume == 0)
             {
                 m_MarimbaBGM.Stop();
@@ -89,6 +89,15 @@ public class SoundManager : MonoBehaviour
         }
 
         if(m_MarimbaBGM.isPlaying) { return; }
+
+        m_MarimbaBGM.Play();
+        m_MarimbaBGM.time = m_MainBGM.time;
+    }
+
+    public void PlayMarimba(float val)
+    {
+        m_MarimbaBGM.volume = Mathf.Clamp(Mathf.Abs(val), 0, 1);
+        if (m_MarimbaBGM.isPlaying) { return; }
 
         m_MarimbaBGM.Play();
         m_MarimbaBGM.time = m_MainBGM.time;
