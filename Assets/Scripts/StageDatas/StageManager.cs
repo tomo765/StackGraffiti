@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class StageManager : MonoBehaviour
 {
     [SerializeField] GameObject m_SpawnArea;
+    
 
     void Start()
     {
@@ -22,7 +23,7 @@ public class StageManager : MonoBehaviour
 
         if (InputExtension.ResetStage)
         {
-            if(!GameManager.IsPlaying) { return; }
+            if(FindFirstObjectByType<GameCanvasUI>().IsInputNameNow) { return; }
 
             GameManager.StartStage(GameManager.CullentStage);
             SceneLoadExtension.LoadWithFade(gameObject.scene.name, GeneralSettings.Instance.Sound.SelectSE);

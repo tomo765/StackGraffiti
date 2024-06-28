@@ -16,7 +16,10 @@ public class DrawUI : MonoBehaviour  //Ques : キャラを生成したら名前インプットを
     [SerializeField] private Button m_ReturnButton;
     [SerializeField] private TInputField m_NameInput;
     [SerializeField] private CharacterDraw m_DrawArea;
-    
+
+    public bool IsInputNow => m_NameInput.isFocused;
+
+
     void Start()
     {
         Init();

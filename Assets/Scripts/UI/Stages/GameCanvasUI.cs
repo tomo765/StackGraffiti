@@ -16,6 +16,8 @@ public class GameCanvasUI : MonoBehaviour
     private const string ViewStage = "ステージを見る";
     private const string CreateCharacter = "キャラクターを作る";
 
+    public bool IsInputNameNow => m_DrawUI.IsInputNow;
+
 
     void Start()
     {
