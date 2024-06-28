@@ -24,6 +24,30 @@ public enum StageType
     Stage13,
 }
 
+public enum IndicatesPriority  //•\Ž¦—Dæ“x,ƒJƒƒ‰‚©‚ç‚Ì‹——£‚ðÝ’è 
+{
+    Layer1 = 1,  //zŽ²‚Ì-9
+    Layer2 = 2,
+    Layer3 = 3,
+    Layer4 = 4,
+    Layer5 = 5,
+    Layer6 = 6,
+    Layer7 = 7,
+    Layer8 = 8,
+    Layer9 = 9,
+    Layer10 = 10,  //zŽ²‚Ì0
+    Layer11 = 11,
+    Layer12 = 12,
+    Layer13 = 13,
+    Layer14 = 14,
+    Layer15 = 15,
+    Layer16 = 16,
+    Layer17 = 17,
+    Layer18 = 18,
+    Layer19 = 19,
+    Layer20 = 20, //zŽ²‚Ì10
+}
+
 
 [CreateAssetMenu(fileName = "GeneralSettings", menuName = "Scriptables/GeneralSettings")]
 public class GeneralSettings : ScriptableObject
@@ -52,6 +76,7 @@ public class GeneralSettings : ScriptableObject
     [SerializeField] private Prehabs m_Prehabs;
     [SerializeField] private Sprites m_Sprites;
     [SerializeField] private Sounds m_Sounds;
+    [SerializeField] private IndicatesPrioritySettings m_Priorities;
 
 
     public Prehabs Prehab => m_Prehabs;
@@ -59,6 +84,7 @@ public class GeneralSettings : ScriptableObject
     public StageEvaluations StageEvals => m_StageEvaluation;
     public Sprites Sprite => m_Sprites;
     public Sounds Sound => m_Sounds;
+    public IndicatesPrioritySettings Priorities => m_Priorities;
 
 
     [System.Serializable]
@@ -163,5 +189,21 @@ public class GeneralSettings : ScriptableObject
         public AudioClip JumpSE => m_JumpSE;
         public AudioClip TouchNeedleSE => m_TouchNeedleSE;
         public AudioClip ClearSE => m_ClearSE;
+    }
+
+    [System.Serializable]
+    public class IndicatesPrioritySettings
+    {
+        [SerializeField] private IndicatesPriority m_CreateChara = IndicatesPriority.Layer2;
+        [SerializeField] private IndicatesPriority m_StageCanvas = IndicatesPriority.Layer5;
+        [SerializeField] private IndicatesPriority m_Effect = IndicatesPriority.Layer10;
+        [SerializeField] private IndicatesPriority m_CharaOnStage = IndicatesPriority.Layer10;
+
+
+        public Vector3 CreateCharaPos => Camera.main.transform.position + new Vector3(0, 0, (int)m_CreateChara);
+        public IndicatesPriority StageCanvas => m_StageCanvas;
+        public Vector3 StageCanvasPos => Camera.main.transform.position + new Vector3(0, 0, (int)m_StageCanvas);
+        public Vector3 EffectPos => Camera.main.transform.position + new Vector3(0, 0, (int)m_Effect);
+        public Vector3 CharaOnStagePos => Camera.main.transform.position + new Vector3(0, 0, (int)m_CharaOnStage);
     }
 }

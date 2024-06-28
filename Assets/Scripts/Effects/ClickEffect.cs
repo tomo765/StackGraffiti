@@ -23,7 +23,7 @@ public class ClickEffect : MonoBehaviour, IContainEffectBase
         transform.position = vec;
     }
 
-    public IContainEffectBase CreateEffect(Vector2 vec, Quaternion q, Transform parent)
+    public IContainEffectBase CreateEffect(Vector3 vec, Quaternion q, Transform parent)
     {
         return Instantiate(this, vec, q, parent);
     }

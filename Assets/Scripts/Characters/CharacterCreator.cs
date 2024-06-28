@@ -54,9 +54,10 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
         m_CreateChara = null;
     }
 
-    private static void CreateCharacter(Vector2 position)
+    private static void CreateCharacter(Vector3 position)
     {
         if (m_CreateChara != null) { return; }
+        position += GeneralSettings.Instance.Priorities.CreateCharaPos;
 
         m_CreateChara = MonoBehaviour.Instantiate(GeneralSettings.Instance.Prehab.Character,
                                       position,

@@ -7,7 +7,7 @@ public interface IContainEffectBase
     bool IsActive { get; }
     void PlayEffect(Vector2 vec);
 
-    IContainEffectBase CreateEffect(Vector2 vec, Quaternion q, Transform parent);
+    IContainEffectBase CreateEffect(Vector3 vec, Quaternion q, Transform parent);
 }
 
 public static class EffectExtension

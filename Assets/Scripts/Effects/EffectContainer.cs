@@ -42,9 +42,11 @@ public class EffectContainer : MonoBehaviour  //ToDo : Manager‚É–¼‘O•Ï‚¦‚½•û‚ª‚¢
         m_Transform = transform;
     }
 
-    public void PlayEffect<T>(T effect, Vector2 vec) where T : IContainEffectBase
+    public void PlayEffect<T>(T effect, Vector3 vec) where T : IContainEffectBase
     {
         IContainEffectBase clickEff = null;
+        vec += GeneralSettings.Instance.Priorities.EffectPos;
+
         if (m_Effects.Count != 0)
         {
             var effects = m_Effects.Where(effects => !effects.IsActive)
