@@ -7,10 +7,16 @@ using UnityEngine;
 public class StageDatas
 {
     [SerializeField] private StageScore[] m_StageScores;
+    [SerializeField] private bool m_Credited;
+
     public StageScore[] StageScores => m_StageScores;
+    public bool Credited => m_Credited;
 
-    public StageDatas(StageScore[] scores) => m_StageScores = scores;
-
+    public StageDatas(StageScore[] scores, bool isCredited)
+    {
+        m_StageScores = scores;
+        m_Credited = isCredited;
+    }
 }
 
 

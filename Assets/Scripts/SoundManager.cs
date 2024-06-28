@@ -18,10 +18,17 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    [SerializeField] private AudioSource m_BGM;
-    [SerializeField] private AudioSource m_SE;
+    [SerializeField] private AudioSource m_MainBGM;
+    [SerializeField] private AudioSource m_BassBGM;
+    [SerializeField] private AudioSource m_CodeBGM;
+    [SerializeField] private AudioSource m_SE
+        ;
+    [SerializeField] private float m_BassScale = 0.5f;
+    [SerializeField] private float m_CodeScale = 0.7f;
 
-    public float BGMVol => m_BGM.volume;
+    [SerializeField] private float m_SubBGMVolume = 0;
+
+    public float BGMVol => m_MainBGM.volume;
     public float SEVol => m_SE.volume;
 
     public void Awake()
@@ -40,15 +47,28 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void PlayNewBGM(AudioClip newClip)
-    {
-        if (m_SE == null) { return; }
-        m_BGM.clip = newClip;
-        m_BGM.Play();
-    }
     public void SetBGMVol(float vol)
     {
-        m_BGM.volume = vol;
+        m_MainBGM.volume = vol;
+        m_BassBGM.volume = vol * m_BassScale * m_SubBGMVolume;
+        m_CodeBGM.volume = vol * m_CodeScale * m_SubBGMVolume;
+    }
+
+    public void PlayBass(bool isPlay)
+    {
+        if(m_BassBGM.isPlaying && isPlay) { return; }
+
+        m_BassBGM.Play();
+        m_BassBGM.volume = m_MainBGM.volume * m_BassScale * m_SubBGMVolume;
+        m_BassBGM.time = m_MainBGM.time;
+    }
+    public void PlayCode(bool isPlay)
+    {
+        if (m_CodeBGM.isPlaying && isPlay) { return; }
+
+        m_CodeBGM.Play();
+        m_CodeBGM.volume = m_MainBGM.volume * m_CodeScale * m_SubBGMVolume;
+        m_CodeBGM.time = m_MainBGM.time;
     }
 
 
@@ -61,5 +81,11 @@ public class SoundManager : MonoBehaviour
     public void SetSEVol(float vol)
     {
         m_SE.volume = vol;
+    }
+
+    public void SetSubBGMVolume(float vol)
+    {
+        m_SubBGMVolume = vol;
+        SetBGMVol(m_MainBGM.volume);
     }
 }

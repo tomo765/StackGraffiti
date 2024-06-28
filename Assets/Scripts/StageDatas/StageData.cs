@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -27,24 +28,24 @@ public static class StageDataUtility
         }
         else
         {
-            LoadData();
+            m_StageDatas = LoadData();
         }
     }
 
     public static void SetNewData()
     {
-        CreateData();
+        m_StageDatas = CreateData();
         SaveData();
     }
 
-    private static void CreateData()
+    private static StageDatas CreateData()
     {
         StageScore[] scores = new StageScore[Enum.GetValues(typeof(StageType)).Length - 1];
         for (int i = 1; i <= scores.Length; i++)
         {
             scores[i - 1] = new StageScore((StageType)i, 0);
         }
-        m_StageDatas = new StageDatas(scores);
+        return new StageDatas(scores, false);
     }
 
     public static void SaveData()
@@ -55,10 +56,13 @@ public static class StageDataUtility
 
     public static StageDatas LoadData()
     {
-        string jsonData = File.ReadAllText(FilePath);
-        m_StageDatas = JsonUtility.FromJson<StageDatas>(jsonData);
+        if (!File.Exists(FilePath))
+        {
+            SetNewData();
+        }
 
-        return m_StageDatas;
+        string jsonData = File.ReadAllText(FilePath);
+        return JsonUtility.FromJson<StageDatas>(jsonData);
     }
 
     private static StageScore GetScore(StageType state) => Array.Find(m_StageDatas.StageScores, score => score.StageType == state);
@@ -69,9 +73,11 @@ public static class StageDataUtility
         GetScore(stage).SetStarLevel(starLevel);
     }
 
-    public static int GetCullentStarLevel(StageType stage)
+    public static int GetAllStarLevel()
     {
-        var score = Array.Find(m_StageDatas.StageScores, score => score.StageType == StageType.Stage1);
-        return score.StarLevel;
+        int allScore = 0;
+        LoadData().StageScores.Select(score => allScore += score.StarLevel).ToArray();
+
+        return allScore;
     }
 }

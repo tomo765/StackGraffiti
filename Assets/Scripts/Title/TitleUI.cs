@@ -14,6 +14,8 @@ public class TitleUI : MonoBehaviour
     {
         SetStartButton();
         SetFinishButton();
+
+        GameManager.CheckStarLevel();
     }
 
     private void SetStartButton()

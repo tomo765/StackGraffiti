@@ -7,7 +7,6 @@ public static class SceneLoadExtension
 {
     public static async void LoadWithFade(string load, AudioClip playClp)
     {
-
         if (FadeCanvasUI.Instance == null)
         {
             MonoBehaviour.Instantiate(GeneralSettings.Instance.Prehab.FadeCanvasUI);

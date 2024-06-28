@@ -1,6 +1,8 @@
 using System;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public enum GameState
 {
@@ -61,5 +63,21 @@ public static class GameManager
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.ClearSE);
         StageDataUtility.SetStageScore(m_CullentStage, m_SleepCount);
         SceneManager.LoadScene(Config.SceneNames.Result, LoadSceneMode.Additive);
+    }
+
+    public static void CheckStarLevel()
+    {
+        var datas = StageDataUtility.LoadData();
+        var allStarLevel = StageDataUtility.GetAllStarLevel();
+
+        if(datas.StageScores.All(data => data.StarLevel != 0) && !datas.Credited)  //すべてのステージをクリアしていたら
+        {
+            //クレジット
+            //StageDataUtility.
+        }
+
+        SoundManager.Instance.SetSubBGMVolume(allStarLevel >= 20 ? 0.8f : allStarLevel >= 15 ? 0.5f : allStarLevel >= 10 ? 0.3f : 0);
+        SoundManager.Instance.PlayCode(allStarLevel >= 15);
+        SoundManager.Instance.PlayBass(allStarLevel >= 10);
     }
 }
