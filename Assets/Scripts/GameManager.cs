@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
@@ -70,13 +69,13 @@ public static class GameManager
         var datas = StageDataUtility.LoadData();
         var allStarLevel = StageDataUtility.GetAllStarLevel();
 
-        if(datas.StageScores.All(data => data.StarLevel != 0) && !datas.Credited)  //すべてのステージをクリアしていたら
+        if(datas.StageScores.All(data => data.StarLevel != 0) && !datas.Credited)  //初めてすべてのステージをクリアしていたら
         {
             //クレジット
             //StageDataUtility.
         }
 
-        SoundManager.Instance.SetSubBGMVolume(allStarLevel >= 20 ? 0.8f : allStarLevel >= 15 ? 0.5f : allStarLevel >= 10 ? 0.3f : 0);
+        SoundManager.Instance.SetSubBGMVolume(allStarLevel >= 20 ? 0.8f : allStarLevel >= 15 ? 0.5f : allStarLevel >= 10 ? 0.3f : 0);  //ToDo : マジックナンバー
         SoundManager.Instance.PlayCode(allStarLevel >= 15);
         SoundManager.Instance.PlayBass(allStarLevel >= 10);
     }
