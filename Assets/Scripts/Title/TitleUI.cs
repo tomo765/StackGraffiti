@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.Video;
 
 public class TitleUI : MonoBehaviour
 {
     [SerializeField] private Button m_StartButton;
     [SerializeField] private Button m_FinishButton;
+
+    [SerializeField] private VideoPlayer m_Video;
 
     void Start()
     {
@@ -16,6 +19,7 @@ public class TitleUI : MonoBehaviour
         SetFinishButton();
 
         GameManager.CheckStarLevel();
+        m_Video.Play();
     }
 
     private void SetStartButton()
