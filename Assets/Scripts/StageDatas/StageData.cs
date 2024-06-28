@@ -76,7 +76,7 @@ public static class StageDataUtility
     public static int GetAllStarLevel()
     {
         int allScore = 0;
-        LoadData().StageScores.Select(score => allScore += score.StarLevel).ToArray();
+        m_StageDatas.StageScores.Select(score => allScore += score.StarLevel).ToArray();
 
         return allScore;
     }

@@ -50,6 +50,15 @@ public class CharacterManager : MonoBehaviour
         transform.localScale = Vector3.one * m_ScaleOnStage;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        OnCharacterTouch(collision.tag);
+        if (collision.CompareTag("Goal"))
+        {
+            OnClear();
+        }
+    }
+
     private void OnCharacterTouch(string tag)
     {
         switch (tag)
@@ -61,15 +70,6 @@ public class CharacterManager : MonoBehaviour
                 SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.TouchNeedleSE);
                 OnUnmovable();
                 break;
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        OnCharacterTouch(collision.tag);
-        if (collision.CompareTag("Goal"))
-        {
-            OnClear();
         }
     }
 

@@ -34,15 +34,14 @@ public class CharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (InputExtension.OnMove)
-        {
-            Move();
-        }
-        SoundManager.Instance.PlayMarimba(InputExtension.OnMove);  //rb2D.velocity.x‚Å‚¢‚¢‚©‚à
+        Move();
     }
 
     private void Move()
     {
+        SoundManager.Instance.PlayMarimba(m_Rb2d.velocity.x / MaxMoveSpeed);
+
+        if (!InputExtension.OnMove) { return; }
         if (!GameManager.IsPlaying) { return; }
 
         if (m_OnGround)
