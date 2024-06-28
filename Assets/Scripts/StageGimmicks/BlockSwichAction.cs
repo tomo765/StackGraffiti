@@ -9,7 +9,6 @@ public class BlockSwichAction : MonoBehaviour
     public Sprite imageOff;             // OFF時の画像
     public bool on = false;             // スイッチONフラグ
 
-    // Start is called before the first frame update
     void Start()
     {
         if (on)

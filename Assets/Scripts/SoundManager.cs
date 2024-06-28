@@ -21,12 +21,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource m_MainBGM;
     [SerializeField] private AudioSource m_BassBGM;
     [SerializeField] private AudioSource m_CodeBGM;
-    [SerializeField] private AudioSource m_SE
-        ;
+    [SerializeField] private AudioSource m_SE;
     [SerializeField] private float m_BassScale = 0.5f;
     [SerializeField] private float m_CodeScale = 0.7f;
 
-    [SerializeField] private float m_SubBGMVolume = 0;
+    private float m_SubBGMVolume = 0;
 
     public float BGMVol => m_MainBGM.volume;
     public float SEVol => m_SE.volume;
