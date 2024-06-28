@@ -626,7 +626,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  m_EnterColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.8}
+  m_EnterColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
   m_ExitColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2669819055569725463
 GameObject:
