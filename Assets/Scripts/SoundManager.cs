@@ -21,8 +21,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource m_MainBGM;
     [SerializeField] private AudioSource m_BassBGM;
     [SerializeField] private AudioSource m_CodeBGM;
+    [SerializeField] private AudioSource m_MarimbaBGM;
     [SerializeField] private AudioSource m_SE;
-    [SerializeField] private float m_BassScale = 0.5f;
+    [SerializeField] private float m_BassScale = 0.5f;  //ToDo : MaxVolume
     [SerializeField] private float m_CodeScale = 0.7f;
 
     private float m_SubBGMVolume = 0;
@@ -68,6 +69,29 @@ public class SoundManager : MonoBehaviour
         m_CodeBGM.Play();
         m_CodeBGM.volume = m_MainBGM.volume * m_CodeScale * m_SubBGMVolume;
         m_CodeBGM.time = m_MainBGM.time;
+    }
+
+    public void PlayMarimba(bool isPlay)
+    {
+        if (isPlay)
+        {
+            m_MarimbaBGM.volume = Mathf.Lerp(m_MarimbaBGM.volume, 1, Time.fixedDeltaTime);
+        }
+
+        if (!isPlay) 
+        {
+            m_MarimbaBGM.volume = Mathf.Lerp(m_MarimbaBGM.volume, 0, Time.fixedDeltaTime);
+            if (m_MarimbaBGM.volume == 0)
+            {
+                m_MarimbaBGM.Stop();
+            }
+            return; 
+        }
+
+        if(m_MarimbaBGM.isPlaying) { return; }
+
+        m_MarimbaBGM.Play();
+        m_MarimbaBGM.time = m_MainBGM.time;
     }
 
 

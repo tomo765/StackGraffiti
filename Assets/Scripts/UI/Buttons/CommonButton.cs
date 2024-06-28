@@ -11,7 +11,7 @@ using UnityEditor.UI;
 #endif
 
 [RequireComponent(typeof(Image))]
-public class CommonButton : Button
+public class CommonButton : Button  //ToDo : Enter ‚Æ Exit ‚È‚Ç‚Ìê—pƒNƒ‰ƒX‚ğì‚é
 {
     [SerializeField] private Color m_EnterColor = Color.white;
     [SerializeField] private Color m_ExitColor = Color.white;

@@ -38,6 +38,7 @@ public class CharacterController : MonoBehaviour
         {
             Move();
         }
+        SoundManager.Instance.PlayMarimba(InputExtension.OnMove);  //rb2D.velocity.x‚Å‚¢‚¢‚©‚à
     }
 
     private void Move()
