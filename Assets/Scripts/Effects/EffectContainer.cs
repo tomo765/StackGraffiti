@@ -42,18 +42,14 @@ public class EffectContainer : MonoBehaviour  //ToDo : Manager‚É–¼‘O•Ï‚¦‚½•û‚ª‚¢
         m_Transform = transform;
     }
 
-    public void PlayEffect<T>(T effect, Vector3 vec) where T : IContainEffectBase
+    public void PlayEffect<T>(T effect, Vector3 vec) where T : IContainEffectBase, new()
     {
         IContainEffectBase clickEff = null;
-        vec += GeneralSettings.Instance.Priorities.EffectPos;
+        vec += GeneralSettings.Instance.Priorities.EffectLayer;
 
         if (m_Effects.Count != 0)
         {
-            var effects = m_Effects.Where(effects => !effects.IsActive)
-                                   .Where(inactives => inactives is T)
-                                   .ToArray();
-
-            if(effects.Length != 0)
+            if(TryGetEffects<T>(out IContainEffectBase[] effects))
             {
                 clickEff = effects.First();
             }
@@ -67,4 +63,14 @@ public class EffectContainer : MonoBehaviour  //ToDo : Manager‚É–¼‘O•Ï‚¦‚½•û‚ª‚¢
 
         clickEff.PlayEffect(vec);
     }
+
+    private bool TryGetEffects<T>(out IContainEffectBase[] effects) where T : IContainEffectBase, new()
+    {
+        effects = m_Effects.Where(effects => !effects.IsActive)
+                           .Where(inactives => inactives is T)
+                           .ToArray();
+
+        if(effects.Length == 0) { return false; }
+        return true;
+    } 
 }

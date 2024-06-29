@@ -200,10 +200,10 @@ public class GeneralSettings : ScriptableObject
         [SerializeField] private IndicatesPriority m_CharaOnStage = IndicatesPriority.Layer10;
 
 
-        public Vector3 CreateCharaPos => Camera.main.transform.position + new Vector3(0, 0, (int)m_CreateChara);
+        public Vector3 CreateCharaLayer => Camera.main.transform.position + new Vector3(0, 0, (int)m_CreateChara);
         public IndicatesPriority StageCanvas => m_StageCanvas;
-        public Vector3 StageCanvasPos => Camera.main.transform.position + new Vector3(0, 0, (int)m_StageCanvas);
-        public Vector3 EffectPos => Camera.main.transform.position + new Vector3(0, 0, (int)m_Effect);
-        public Vector3 CharaOnStagePos => Camera.main.transform.position + new Vector3(0, 0, (int)m_CharaOnStage);
+        public Vector3 StageCanvasLayer => Camera.main.transform.position + new Vector3(0, 0, (int)m_StageCanvas);
+        public Vector3 EffectLayer => Camera.main.transform.position + new Vector3(0, 0, (int)m_Effect);
+        public Vector3 CharaOnStageLayer => Camera.main.transform.position + new Vector3(0, 0, (int)m_CharaOnStage);
     }
 }
