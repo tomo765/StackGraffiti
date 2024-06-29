@@ -18,7 +18,7 @@ public class StageManager : MonoBehaviour
     {
         if (InputExtension.EscapeStage)
         {
-            SceneLoadExtension.LoadWithFade(Config.SceneNames.StageSelect, GeneralSettings.Instance.Sound.SelectSE);
+            SceneLoadExtension.LoadWithFade(Config.SceneNames.StageSelect, GeneralSettings.Instance.Sound.FadeSE);
         }
 
         if (InputExtension.ResetStage)
@@ -26,7 +26,7 @@ public class StageManager : MonoBehaviour
             if(FindFirstObjectByType<GameCanvasUI>().IsInputNameNow) { return; }
 
             GameManager.StartStage(GameManager.CullentStage);
-            SceneLoadExtension.LoadWithFade(gameObject.scene.name, GeneralSettings.Instance.Sound.SelectSE);
+            SceneLoadExtension.LoadWithFade(gameObject.scene.name, GeneralSettings.Instance.Sound.FadeSE);
         }
 
         if(InputExtension.ShowHowToPlay)
