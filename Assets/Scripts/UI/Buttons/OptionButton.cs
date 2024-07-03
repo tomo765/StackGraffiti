@@ -18,7 +18,7 @@ public class OptionButton : MonoBehaviour
         m_OptionButton.onClick.RemoveAllListeners();
         m_OptionButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene(Config.SceneNames.Option, LoadSceneMode.Additive);
+            DontDestroyCanvas.Instance.ChangeOptionUIVisible();
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
     }

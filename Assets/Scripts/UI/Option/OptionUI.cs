@@ -24,7 +24,7 @@ public class OptionUI : MonoBehaviour
         m_ReturnButton.onClick.RemoveAllListeners();
         m_ReturnButton.onClick.AddListener(() =>
         {
-            SceneManager.UnloadSceneAsync(gameObject.scene);
+            DontDestroyCanvas.Instance.ChangeOptionUIVisible();
             SoundManager.Instance.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
     }

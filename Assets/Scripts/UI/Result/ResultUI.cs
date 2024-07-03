@@ -23,10 +23,12 @@ public class ResultUI : MonoBehaviour
         m_StageSelectBtn.onClick.AddListener(() =>
         {
             SceneLoadExtension.LoadWithFade(Config.SceneNames.StageSelect, GeneralSettings.Instance.Sound.FadeSE);
+            DontDestroyCanvas.Instance.ChangeResultUIVisible();
         });
         m_ReturnTitleBtn.onClick.AddListener(() =>
         {
             SceneLoadExtension.LoadWithFade(Config.SceneNames.Title, GeneralSettings.Instance.Sound.FadeSE);
+            DontDestroyCanvas.Instance.ChangeResultUIVisible();
         });
     }
 

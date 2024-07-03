@@ -43,7 +43,7 @@ public class GameCanvasUI : MonoBehaviour
         GameManager.SetUpdateSleepText(UpdateSleepText);
         GameManager.SetRestartDrawing(RestartDrawing);
 
-        GetComponent<Canvas>().planeDistance = (float)GeneralSettings.Instance.Priorities.StageCanvas;
+        GetComponent<Canvas>().planeDistance = GeneralSettings.Instance.Priorities.StageCanvas;
     }
 
     private void ChangeVisible()

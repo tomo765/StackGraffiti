@@ -34,7 +34,7 @@ public class StageSelectUI : MonoBehaviour
 
         for (int i = 0; i < sceneNames.Length; i++)
         {
-            var btn = Instantiate(GeneralSettings.Instance.Prehab.StageSelectBtn, Vector3.zero, Quaternion.identity, m_ViewContent.transform);
+            var btn = Instantiate(GeneralSettings.Instance.Prehab.StageSelectBtn, m_ViewContent.transform);
             btn.Init(sceneNames[i], i+1);
             m_SelectButtons[i] = btn;
         }

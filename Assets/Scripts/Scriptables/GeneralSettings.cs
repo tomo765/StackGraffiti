@@ -92,6 +92,10 @@ public class GeneralSettings : ScriptableObject
     {
         [SerializeField] private CharacterManager m_Character;
         [SerializeField] private StageSelectButton m_StageSelectBtn;
+
+        [SerializeField] private DontDestroyCanvas m_DontDestroyCanvas;
+        [SerializeField] private OptionUI m_OptionUI;
+        [SerializeField] private ResultUI m_ResultUI;
         [SerializeField] private FadeCanvasUI m_FadeCanvasUI;
 
         [Space(10), SerializeField] private BalloonEffect m_BalloonEffect;
@@ -103,6 +107,9 @@ public class GeneralSettings : ScriptableObject
 
         public CharacterManager Character => m_Character;
         public StageSelectButton StageSelectBtn => m_StageSelectBtn;
+        public DontDestroyCanvas DontDestroyCanvas => m_DontDestroyCanvas;
+        public OptionUI OptionUI => m_OptionUI;
+        public ResultUI ResultUI => m_ResultUI;
         public FadeCanvasUI FadeCanvasUI => m_FadeCanvasUI;
         public BalloonEffect BalloonEffect => m_BalloonEffect;
         public ClickEffect ClickEffect => m_ClickEffect;
@@ -200,10 +207,12 @@ public class GeneralSettings : ScriptableObject
         [SerializeField] private IndicatesPriority m_StageCanvas = IndicatesPriority.Layer5;
         [SerializeField] private IndicatesPriority m_Effect = IndicatesPriority.Layer10;
         [SerializeField] private IndicatesPriority m_CharaOnStage = IndicatesPriority.Layer10;
+        [SerializeField] private IndicatesPriority m_DontDestroyCanvas = IndicatesPriority.Layer11;
 
 
         public Vector3 CreateCharaLayer => Camera.main.transform.position + new Vector3(0, 0, (int)m_CreateChara);
-        public IndicatesPriority StageCanvas => m_StageCanvas;
+        public float StageCanvas => (float)m_StageCanvas;
+        public float DontDestroyCanvas => (float)m_DontDestroyCanvas;
         public Vector3 StageCanvasLayer => Camera.main.transform.position + new Vector3(0, 0, (int)m_StageCanvas);
         public Vector3 EffectLayer => Camera.main.transform.position + new Vector3(0, 0, (int)m_Effect);
         public Vector3 CharaOnStageLayer => Camera.main.transform.position + new Vector3(0, 0, (int)m_CharaOnStage);
