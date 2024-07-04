@@ -19,7 +19,6 @@ public class DrawUI : MonoBehaviour  //Ques : キャラを生成したら名前インプットを
 
     public bool IsInputNow => m_NameInput.isFocused;
 
-
     void Start()
     {
         Init();
@@ -54,5 +53,3 @@ public class DrawUI : MonoBehaviour  //Ques : キャラを生成したら名前インプットを
         });
     }
 }
-
-

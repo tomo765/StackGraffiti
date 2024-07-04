@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public static class SceneLoadExtension
 {
-    public static async void LoadWithFade(string load, AudioClip playClp)
+    public static async void LoadWithFade(string sceneName, AudioClip playClp)
     {
         if (FadeCanvasUI.Instance == null)
         {
@@ -18,7 +18,7 @@ public static class SceneLoadExtension
         FadeCanvasUI.Instance.StartFade();
 
         await FadeCanvasUI.Instance.IsCompleteFadeIn();
-        SceneManager.LoadScene(load);
+        SceneManager.LoadScene(sceneName);
 
         await FadeCanvasUI.Instance.IsCompleteFadeOut();
         DontDestroyCanvas.Instance.SetNewRenderCamera();

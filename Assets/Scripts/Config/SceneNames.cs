@@ -16,10 +16,7 @@ namespace Config
             "Main_Stage7",
             "Main_Stage8",
             "Main_Stage9",
-            "Main_Stage10",
-            "Main_Stage11",
-            "Main_Stage12",
-            "Main_Stage13"
+            "Main_Stage10"
         };
     }
 }

@@ -439,6 +439,7 @@ MonoBehaviour:
   m_MainBGM: {fileID: 1496415432024819889}
   m_BassBGM: {fileID: 6558822674627071293}
   m_CodeBGM: {fileID: 3894634039308539439}
+  m_MarimbaBGM: {fileID: 8949364411577995745}
   m_SE: {fileID: 6922771050483900608}
   m_BassScale: 1
   m_CodeScale: 1
