@@ -44,24 +44,24 @@ public class EffectContainer : MonoBehaviour  //ToDo : Manager‚É–¼‘O•Ï‚¦‚½•û‚ª‚¢
 
     public void PlayEffect<T>(T effect, Vector3 vec) where T : IContainEffectBase, new()
     {
-        IContainEffectBase clickEff = null;
+        IContainEffectBase eff = null;
         vec += GeneralSettings.Instance.Priorities.EffectLayer;
 
         if (m_Effects.Count != 0)
         {
             if(TryGetEffects<T>(out IContainEffectBase[] effects))
             {
-                clickEff = effects.First();
+                eff = effects.First();
             }
         }
 
-        if(clickEff == null)
+        if(eff == null)
         {
-            clickEff = effect.CreateEffect(vec, Quaternion.identity, m_Transform);
-            m_Effects.Add(clickEff);
+            eff = effect.CreateEffect(vec, Quaternion.identity, m_Transform);
+            m_Effects.Add(eff);
         }
 
-        clickEff.PlayEffect(vec);
+        eff.PlayEffect(vec);
     }
 
     private bool TryGetEffects<T>(out IContainEffectBase[] effects) where T : IContainEffectBase, new()
