@@ -11,7 +11,7 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         GameManager.SetSpawnPos(m_SpawnArea);
-        StageDataUtility.FindData();
+        StageDataUtility.LoadData();
     }
 
     private void Update()

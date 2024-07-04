@@ -60,8 +60,8 @@ public static class GameManager
     {
         SetGameState(GameState.Goal);
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.ClearSE);
+
         StageDataUtility.SetStageScore(m_CullentStage, m_SleepCount);
-        //SceneManager.LoadScene(Config.SceneNames.Result, LoadSceneMode.Additive);
         DontDestroyCanvas.Instance.ChangeResultUIVisible();
     }
 
