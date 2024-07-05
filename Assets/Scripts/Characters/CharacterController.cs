@@ -41,6 +41,7 @@ public class CharacterController : MonoBehaviour
     {
         SoundManager.Instance.PlayMarimba(m_Rb2d.velocity.x / MaxMoveSpeed);
 
+        if (SceneLoadExtension.IsFading) { return; }
         if (!InputExtension.OnMove) { return; }
         if (!GameManager.IsPlaying) { return; }
 

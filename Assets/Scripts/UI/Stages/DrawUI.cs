@@ -49,7 +49,7 @@ public class DrawUI : MonoBehaviour  //Ques : キャラを生成したら名前インプットを
         m_ReturnButton.onClick.RemoveAllListeners();
         m_ReturnButton.onClick.AddListener(() =>
         {
-            SceneLoadExtension.LoadWithFade(Config.SceneNames.StageSelect, GeneralSettings.Instance.Sound.FadeSE);
+            _ = SceneLoadExtension.LoadWithFade(Config.SceneNames.StageSelect, GeneralSettings.Instance.Sound.FadeSE);
         });
     }
 }

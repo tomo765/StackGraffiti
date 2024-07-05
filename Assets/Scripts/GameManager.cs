@@ -44,7 +44,6 @@ public static class GameManager
         m_UpdSleepText = null;
         SetGameState(GameState.Drawing);
         m_SleepCount = 0;
-        Debug.Log(stg);
     }
 
     public static void SleepCharacter()

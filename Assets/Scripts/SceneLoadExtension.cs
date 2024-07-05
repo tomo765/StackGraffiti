@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public static class SceneLoadExtension
 {
-    public static async void LoadWithFade(string sceneName, AudioClip playClp)
+    public static bool IsFading = false;
+
+    public static async Task LoadWithFade(string sceneName, AudioClip playClp)
     {
+        IsFading = true;
+
         if (FadeCanvasUI.Instance == null)
         {
             MonoBehaviour.Instantiate(GeneralSettings.Instance.Prehab.FadeCanvasUI);
@@ -23,5 +28,7 @@ public static class SceneLoadExtension
         await FadeCanvasUI.Instance.IsCompleteFadeOut();
         DontDestroyCanvas.Instance.SetNewRenderCamera();
         FadeCanvasUI.Instance.FinishFade();
+
+        IsFading = false;
     }
 }
