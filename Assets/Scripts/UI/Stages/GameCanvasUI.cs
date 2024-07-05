@@ -13,8 +13,8 @@ public class GameCanvasUI : MonoBehaviour
 
     private bool m_isVisible = false;
 
-    private const string ViewStage = "ステージを見る";
-    private const string CreateCharacter = "キャラクターを作る";
+    private const string ViewStage = "Look Stage";
+    private const string CreateCharacter = "To Create Character";
 
     public bool IsInputNameNow => m_DrawUI.IsInputNow;
 
@@ -54,7 +54,7 @@ public class GameCanvasUI : MonoBehaviour
 
     private void UpdateSleepText()
     {
-        m_SleepCount.text = "眠った回数 : " + GameManager.SleepCount.ToString();
+        m_SleepCount.text = "Sleep Count : " + GameManager.SleepCount.ToString();
     }
 
     private void RestartDrawing()
