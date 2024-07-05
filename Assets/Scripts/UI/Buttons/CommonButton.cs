@@ -5,16 +5,22 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEditor;
 using System;
+using System.Threading.Tasks;
+
 
 #if UNITY_EDITOR
 using UnityEditor.UI;
 #endif
 
 [RequireComponent(typeof(Image))]
-public class CommonButton : Button  //ToDo : Enter ‚Æ Exit ‚È‚Ç‚Ìê—pƒNƒ‰ƒX‚ğì‚é
+public class CommonButton : Button
 {
     [SerializeField] private Color m_EnterColor = Color.white;
     [SerializeField] private Color m_ExitColor = Color.white;
+    [SerializeField] private bool m_IsScaling = true;
+
+    private bool m_PointerEntering = false;
+    private Vector3 m_DefaultScale;
 
 #if UNITY_EDITOR
 
@@ -42,25 +48,67 @@ public class CommonButton : Button  //ToDo : Enter ‚Æ Exit ‚È‚Ç‚Ìê—pƒNƒ‰ƒX‚ğì‚
             m_ExitColor = value;
         }
     }
+    [Obsolete("CustomEditorˆÈŠO‚Åg—p‚µ‚È‚¢")]
+    public bool IsScaling
+    {
+        get
+        {
+            return m_IsScaling;
+        }
+        set
+        {
+            m_IsScaling = value;
+        }
+    }
 #endif
 
     private Image m_Img;
+
+    private new void Start()
+    {
+        m_DefaultScale = transform.localScale;
+    }
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
         if(m_Img == null) { SetImage(); }
 
+        m_PointerEntering = true;
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.HoverSE);
         m_Img.color = m_EnterColor;
+
+        if(m_IsScaling) { PlayScaling(); }
     }
     public override void OnPointerExit(PointerEventData eventData)
     {
         if (m_Img == null) { SetImage(); }
 
+        m_PointerEntering = false;
         m_Img.color = m_ExitColor;
     }
 
+    public override void OnPointerClick(PointerEventData eventData)
+    {
+        onClick.Invoke();
+        m_PointerEntering = false;
+    }
+
     private void SetImage() => m_Img = GetComponent<Image>();
+
+    private async void PlayScaling()
+    {
+        float time = 0;
+        int waitTime = 16;   //60ƒtƒŒ[ƒ€
+        float speed = 10f;
+
+        while(m_PointerEntering)
+        {
+            transform.localScale = m_DefaultScale * (-Mathf.Cos(time) * 0.1f + 1.1f);
+            time += waitTime / 1000f * speed;
+            await Task.Delay(waitTime);
+        }
+        transform.localScale = m_DefaultScale;
+    }
 }
 
 
@@ -82,6 +130,7 @@ public class CommonSEButtonEditor : ButtonEditor
 #pragma warning disable CS0618 // Œ^‚Ü‚½‚Íƒƒ“ƒo[‚ª‹ŒŒ^®‚Å‚·
         customButton.EnterColor = EditorGUILayout.ColorField("EnterColor", customButton.EnterColor);
         customButton.ExitColor = EditorGUILayout.ColorField("ExitColor", customButton.ExitColor);
+        customButton.IsScaling = EditorGUILayout.Toggle("IsScaling", customButton.IsScaling);
 #pragma warning restore CS0618 // Œ^‚Ü‚½‚Íƒƒ“ƒo[‚ª‹ŒŒ^®‚Å‚·
 
         // •ÏX‚ª‚ ‚Á‚½ê‡‚ÉƒIƒuƒWƒFƒNƒg‚ğƒ}[ƒN
