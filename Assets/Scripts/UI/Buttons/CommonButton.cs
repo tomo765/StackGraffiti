@@ -18,6 +18,7 @@ public class CommonButton : Button
     [SerializeField] private Color m_EnterColor = Color.white;
     [SerializeField] private Color m_ExitColor = Color.white;
     [SerializeField] private bool m_IsScaling = true;
+    [SerializeField] private bool m_IsStopScalling = true;
 
     private bool m_PointerEntering = false;
     private Vector3 m_DefaultScale;
@@ -60,6 +61,18 @@ public class CommonButton : Button
             m_IsScaling = value;
         }
     }
+    [Obsolete("CustomEditor以外で使用しない")]
+    public bool IsStopScalling
+    {
+        get
+        {
+            return m_IsStopScalling;
+        }
+        set
+        {
+            m_IsStopScalling = value;
+        }
+    }
 #endif
 
     private Image m_Img;
@@ -75,7 +88,6 @@ public class CommonButton : Button
 
         m_PointerEntering = true;
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.HoverSE);
-        //m_Img.color = m_EnterColor;
 
         if(m_IsScaling) { PlayScaling(); }
     }
@@ -84,17 +96,18 @@ public class CommonButton : Button
         if (m_Img == null) { SetImage(); }
 
         m_PointerEntering = false;
-        //m_Img.color = m_ExitColor;
     }
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        m_Img.color = m_EnterColor;
+        base.OnPointerDown(eventData);
+        //m_Img.color = m_EnterColor;
     }
     public override void OnPointerUp(PointerEventData eventData)
     {
+        base.OnPointerUp(eventData);
+        if(!m_IsStopScalling) { return; }
         m_PointerEntering = false;
-        m_Img.color = m_ExitColor;
     }
 
     private void SetImage() => m_Img = GetComponent<Image>();
@@ -135,6 +148,7 @@ public class CommonSEButtonEditor : ButtonEditor
         customButton.EnterColor = EditorGUILayout.ColorField("EnterColor", customButton.EnterColor);
         customButton.ExitColor = EditorGUILayout.ColorField("ExitColor", customButton.ExitColor);
         customButton.IsScaling = EditorGUILayout.Toggle("IsScaling", customButton.IsScaling);
+        customButton.IsStopScalling = EditorGUILayout.Toggle("IsStopScalling", customButton.IsStopScalling);
 #pragma warning restore CS0618 // 型またはメンバーが旧型式です
 
         // 変更があった場合にオブジェクトをマーク

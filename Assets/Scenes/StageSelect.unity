@@ -243,6 +243,7 @@ MonoBehaviour:
   m_EnterColor: {r: 0.60784316, g: 0.60784316, b: 0.60784316, a: 1}
   m_ExitColor: {r: 1, g: 1, b: 1, a: 1}
   m_IsScaling: 1
+  m_IsStopScalling: 1
 --- !u!1 &159210014
 GameObject:
   m_ObjectHideFlags: 0
@@ -1863,6 +1864,10 @@ PrefabInstance:
     - target: {fileID: 6728196733415557805, guid: 4905765c939891f43bccf74c52809c9b, type: 3}
       propertyPath: m_Name
       value: OptionButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6795023412556211390, guid: 4905765c939891f43bccf74c52809c9b, type: 3}
+      propertyPath: m_IsStopScalling
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
