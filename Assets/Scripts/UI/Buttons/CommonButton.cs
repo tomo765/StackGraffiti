@@ -19,6 +19,7 @@ public class CommonButton : Button
     [SerializeField] private Color m_ExitColor = Color.white;
     [SerializeField] private bool m_IsScaling = true;
     [SerializeField] private bool m_IsStopScalling = true;
+    [SerializeField] private bool m_ChangeColor = false;
 
     private bool m_PointerEntering = false;
     private Vector3 m_DefaultScale;
@@ -73,6 +74,18 @@ public class CommonButton : Button
             m_IsStopScalling = value;
         }
     }
+    [Obsolete("CustomEditor以外で使用しない")]
+    public bool ChangeColor
+    {
+        get
+        {
+            return m_ChangeColor;
+        }
+        set
+        {
+            m_ChangeColor = value;
+        }
+    }
 #endif
 
     private Image m_Img;
@@ -90,10 +103,12 @@ public class CommonButton : Button
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.HoverSE);
 
         if(m_IsScaling) { PlayScaling(); }
+        if(m_ChangeColor) { m_Img.color = m_EnterColor; }
     }
     public override void OnPointerExit(PointerEventData eventData)
     {
         if (m_Img == null) { SetImage(); }
+        if (m_ChangeColor) { m_Img.color = m_ExitColor; }
 
         m_PointerEntering = false;
     }
@@ -106,6 +121,8 @@ public class CommonButton : Button
     {
         base.OnPointerUp(eventData);
         if(!m_IsStopScalling) { return; }
+        if (m_ChangeColor) { m_Img.color = m_ExitColor; }
+
         m_PointerEntering = false;
     }
 
@@ -148,6 +165,7 @@ public class CommonSEButtonEditor : ButtonEditor
         customButton.ExitColor = EditorGUILayout.ColorField("ExitColor", customButton.ExitColor);
         customButton.IsScaling = EditorGUILayout.Toggle("IsScaling", customButton.IsScaling);
         customButton.IsStopScalling = EditorGUILayout.Toggle("IsStopScalling", customButton.IsStopScalling);
+        customButton.ChangeColor = EditorGUILayout.Toggle("ChangeColor", customButton.ChangeColor);
 #pragma warning restore CS0618 // 型またはメンバーが旧型式です
 
         // 変更があった場合にオブジェクトをマーク
