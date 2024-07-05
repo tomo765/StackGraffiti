@@ -25,17 +25,20 @@ public class ResultUI : MonoBehaviour
         {
             _ = SceneLoadExtension.LoadWithFade(Config.SceneNames.StageSelect, GeneralSettings.Instance.Sound.FadeSE);
             DontDestroyCanvas.Instance.ChangeResultUIVisible();
+            GameManager.CheckStarLevel();
         });
         m_ReturnTitleBtn.onClick.AddListener(() =>
         {
             _ = SceneLoadExtension.LoadWithFade(Config.SceneNames.Title, GeneralSettings.Instance.Sound.FadeSE);
             DontDestroyCanvas.Instance.ChangeResultUIVisible();
+            GameManager.CheckStarLevel();
         });
         m_NextStageButton.onClick.AddListener(() =>
         {
             _ = SceneLoadExtension.LoadWithFade(Config.SceneNames.m_StageNames[(int)GameManager.CullentStage], GeneralSettings.Instance.Sound.FadeSE);
             GameManager.StartStage(GameManager.CullentStage + 1);
             DontDestroyCanvas.Instance.ChangeResultUIVisible();
+            GameManager.CheckStarLevel();
         });
     }
 
