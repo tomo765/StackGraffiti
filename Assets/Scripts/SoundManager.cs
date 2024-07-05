@@ -17,6 +17,13 @@ public class SoundManager : MonoBehaviour
             return instance;
         }
     }
+    public const int PlayBassScore = 10;
+    public const int PlayCodeScore = 15;
+    public const int PlayMaxVolScore = 20;
+    public const float VolumeOnMax = 0.8f;
+    public const float VolumeOnCode = 0.5f;
+    public const float VolumeOnBass = 0.3f;
+
 
     [SerializeField] private AudioSource m_MainBGM;
     [SerializeField] private AudioSource m_BassBGM;
@@ -120,9 +127,11 @@ public class SoundManager : MonoBehaviour
         m_SE.volume = vol;
     }
 
-    public void SetSubBGMVolume(float vol)
+    public void SetSubBGMVolume(float starLevel)
     {
-        m_SubBGMVolume = vol;
+        m_SubBGMVolume = starLevel >= PlayMaxVolScore ? 0.8f :
+                         starLevel >= PlayCodeScore ? 0.5f :
+                         starLevel >= PlayBassScore ? 0.3f : 0;
         SetBGMVol(m_MainBGM.volume);
     }
 }

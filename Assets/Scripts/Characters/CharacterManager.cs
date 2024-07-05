@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class CharacterManager : MonoBehaviour
 {
+    private const int OnSleepLayer = -1;
+
     [SerializeField] private SpriteRenderer m_EyeRender;
     [SerializeField] private TextMeshProUGUI m_NameText;
     [SerializeField] private MeshFilter m_MeshFilter;
-
     [SerializeField] private float m_ScaleOnStage = 0.3f;
 
     private Rigidbody2D m_Rb2d;
@@ -86,8 +87,8 @@ public class CharacterManager : MonoBehaviour
         m_EyeRender.sprite = GeneralSettings.Instance.Sprite.DeathEye;
         m_Rb2d.sharedMaterial = GeneralSettings.Instance.PlayerSetting.PhysicsOnDead;
 
-        GetComponent<MeshRenderer>().sortingOrder = -1;  //ToDo
-        m_EyeRender.sortingOrder = -1;
+        GetComponent<MeshRenderer>().sortingOrder = OnSleepLayer;
+        m_EyeRender.sortingOrder = OnSleepLayer;
 
         m_Rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;  //ŠÛ‚¢ƒLƒƒƒ‰‚ª“]‚ª‚ç‚È‚¢‚æ‚¤‚É‚·‚é
 
