@@ -759,6 +759,7 @@ MonoBehaviour:
   m_EnterColor: {r: 0, g: 0, b: 0, a: 0.39215687}
   m_ExitColor: {r: 0, g: 0, b: 0, a: 0}
   m_IsScaling: 0
+  m_IsStopScalling: 1
 --- !u!222 &8198833615542386308
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -965,6 +966,7 @@ MonoBehaviour:
   m_EnterColor: {r: 1, g: 1, b: 1, a: 1}
   m_ExitColor: {r: 1, g: 1, b: 1, a: 1}
   m_IsScaling: 0
+  m_IsStopScalling: 1
 --- !u!1 &6628439662290956610
 GameObject:
   m_ObjectHideFlags: 0

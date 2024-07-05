@@ -101,7 +101,6 @@ public class CommonButton : Button
     public override void OnPointerDown(PointerEventData eventData)
     {
         base.OnPointerDown(eventData);
-        //m_Img.color = m_EnterColor;
     }
     public override void OnPointerUp(PointerEventData eventData)
     {
