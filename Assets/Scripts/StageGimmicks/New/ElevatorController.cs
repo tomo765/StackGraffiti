@@ -34,6 +34,7 @@ public partial class ElevatorController : GimmickReceiver
 
     private void Move()
     {
+        if(GameManager.IsClear) { return; }
         if (!m_OnActivate) { return; }
 
         m_ArrivalTime += GetAddTime();
