@@ -981,10 +981,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1496415432024819889, guid: 770a5945a7b645d4c846d83585847d89, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7477939888501565766, guid: 770a5945a7b645d4c846d83585847d89, type: 3}
       propertyPath: m_Name
       value: Sounds

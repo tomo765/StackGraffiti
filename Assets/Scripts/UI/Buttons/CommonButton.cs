@@ -75,7 +75,7 @@ public class CommonButton : Button
 
         m_PointerEntering = true;
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.HoverSE);
-        m_Img.color = m_EnterColor;
+        //m_Img.color = m_EnterColor;
 
         if(m_IsScaling) { PlayScaling(); }
     }
@@ -84,13 +84,17 @@ public class CommonButton : Button
         if (m_Img == null) { SetImage(); }
 
         m_PointerEntering = false;
-        m_Img.color = m_ExitColor;
+        //m_Img.color = m_ExitColor;
     }
 
-    public override void OnPointerClick(PointerEventData eventData)
+    public override void OnPointerDown(PointerEventData eventData)
     {
-        onClick.Invoke();
+        m_Img.color = m_EnterColor;
+    }
+    public override void OnPointerUp(PointerEventData eventData)
+    {
         m_PointerEntering = false;
+        m_Img.color = m_ExitColor;
     }
 
     private void SetImage() => m_Img = GetComponent<Image>();
@@ -103,7 +107,7 @@ public class CommonButton : Button
 
         while(m_PointerEntering)
         {
-            transform.localScale = m_DefaultScale * (-Mathf.Cos(time) * 0.1f + 1.1f);
+            transform.localScale = m_DefaultScale * (-Mathf.Cos(time) * 0.06f + 1.06f);
             time += waitTime / 1000f * speed;
             await Task.Delay(waitTime);
         }
