@@ -81,5 +81,6 @@ public static class GameManager
         SoundManager.Instance.PlayMainBGM();
         SoundManager.Instance.PlayCode(allStarLevel >= SoundManager.PlayCodeScore);
         SoundManager.Instance.PlayBass(allStarLevel >= SoundManager.PlayBassScore);
+        SoundManager.Instance.PlayMarimba(0);
     }
 }
