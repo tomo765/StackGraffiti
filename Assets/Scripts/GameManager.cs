@@ -78,6 +78,7 @@ public static class GameManager
         }
 
         SoundManager.Instance.SetSubBGMVolume(allStarLevel >= 20 ? 0.8f : allStarLevel >= 15 ? 0.5f : allStarLevel >= 10 ? 0.3f : 0);  //ToDo : マジックナンバー
+        SoundManager.Instance.PlayMainBGM();
         SoundManager.Instance.PlayCode(allStarLevel >= 15);
         SoundManager.Instance.PlayBass(allStarLevel >= 10);
     }

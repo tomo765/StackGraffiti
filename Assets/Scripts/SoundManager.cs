@@ -54,6 +54,11 @@ public class SoundManager : MonoBehaviour
         m_CodeBGM.volume = vol * m_CodeScale * m_SubBGMVolume;
     }
 
+    public void PlayMainBGM()
+    {
+        if(m_MainBGM.isPlaying) { return; }
+        m_MainBGM.Play();
+    }
     public void PlayBass(bool isPlay)
     {
         if(m_BassBGM.isPlaying && isPlay) { return; }
