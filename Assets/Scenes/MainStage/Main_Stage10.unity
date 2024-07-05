@@ -965,7 +965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9077559240799815346, guid: 684edbe56e61a3148a078bef74f53d99, type: 3}
       propertyPath: bounceForce
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
