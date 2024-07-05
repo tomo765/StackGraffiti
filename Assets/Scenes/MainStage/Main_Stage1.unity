@@ -537,7 +537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6991122266055076704, guid: 7612b316619bbda46a73e2582ae40b2f, type: 3}
       propertyPath: m_Name
-      value: ef_flag
+      value: Goal
       objectReference: {fileID: 0}
     - target: {fileID: 6991122266055076704, guid: 7612b316619bbda46a73e2582ae40b2f, type: 3}
       propertyPath: m_Layer
