@@ -27,6 +27,7 @@ public class StageSelectButton : MonoBehaviour
             GameManager.StartStage((StageType)stageNum);
             await SceneLoadExtension.LoadWithFade(m_StageName, GeneralSettings.Instance.Sound.FadeSE);
             DontDestroyCanvas.Instance.ChangeStageIntroUIVisible(true);
+            DontDestroyCanvas.Instance.StageIntroUI.SetIntroText("Stage " + m_StageLevel.ToString(), "Hello StackGraffiti!!");
         });
 
         for (int i = 0; i < StageDataUtility.StageDatas.StageScores[stageNum - 1].StarLevel; i++)

@@ -44,6 +44,11 @@ public class StageIntroUI : MonoBehaviour
         ShowIntro();
         ShowTexts();
     }
+    public void SetIntroText(string stageTxt, string TitleTxt)
+    {
+        m_StageText.text = stageTxt;
+        m_TitleText.text = TitleTxt;
+    }
 
     private void Init()
     {

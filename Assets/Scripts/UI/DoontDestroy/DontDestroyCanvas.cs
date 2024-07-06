@@ -25,6 +25,7 @@ public class DontDestroyCanvas : MonoBehaviour
 
     private Canvas m_Canvas;
 
+    public StageIntroUI StageIntroUI => m_StageIntroUI;
 
     private void Init()
     {
