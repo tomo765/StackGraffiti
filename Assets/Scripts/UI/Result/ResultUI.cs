@@ -33,6 +33,13 @@ public class ResultUI : MonoBehaviour
             DontDestroyCanvas.Instance.ChangeResultUIVisible();
             GameManager.CheckStarLevel();
         });
+
+
+        if(GameManager.IsLastStage)
+        {
+            m_NextStageButton.gameObject.SetActive(false);
+            return;
+        }
         m_NextStageButton.onClick.AddListener(() =>
         {
             _ = SceneLoadExtension.LoadWithFade(Config.SceneNames.m_StageNames[(int)GameManager.CullentStage], GeneralSettings.Instance.Sound.FadeSE);

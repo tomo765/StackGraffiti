@@ -28,6 +28,7 @@ public static class GameManager
     public static bool IsHowToPlay => m_GameState == GameState.HowToPlay;
 
     public static StageType CullentStage => m_CullentStage;
+    public static bool IsLastStage => m_CullentStage == StageType.Stage10;
 
     public static int SleepCount => m_SleepCount;
     public static GameObject SpawnArea => m_SpawnArea;
