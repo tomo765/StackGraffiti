@@ -33,6 +33,8 @@ public class StageIntroUI : MonoBehaviour
 
     public async void PlayIntro()
     {
+        m_FinishFadeOut = false;
+
         await TaskExtension.WaitUntiil(() => m_BGImage != null);
         m_BGImage.color = Color.black * 0.24f;
 

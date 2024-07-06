@@ -18,13 +18,16 @@ public class StageManager : MonoBehaviour
     {
         if (InputExtension.EscapeStage)
         {
+            if(!DontDestroyCanvas.Instance.StageIntroUI.FinishFadeOut) { return; }
+
             await SceneLoadExtension.LoadWithFade(Config.SceneNames.StageSelect, GeneralSettings.Instance.Sound.FadeSE);
             SoundManager.Instance.PlayMarimba(0);
         }
 
         if (InputExtension.ResetStage)
         {
-            if(FindFirstObjectByType<GameCanvasUI>().IsInputNameNow) { return; }
+            if (!DontDestroyCanvas.Instance.StageIntroUI.FinishFadeOut) { return; }
+            if (FindFirstObjectByType<GameCanvasUI>().IsInputNameNow) { return; }
 
             GameManager.StartStage(GameManager.CullentStage);
             await SceneLoadExtension.LoadWithFade(gameObject.scene.name, GeneralSettings.Instance.Sound.FadeSE);
@@ -33,7 +36,8 @@ public class StageManager : MonoBehaviour
 
         if(InputExtension.ShowHowToPlay)
         {
-            if(!GameManager.IsPlaying && !GameManager.IsHowToPlay) { return; }
+            if (!DontDestroyCanvas.Instance.StageIntroUI.FinishFadeOut) { return; }
+            if (!GameManager.IsPlaying && !GameManager.IsHowToPlay) { return; }
 
             if(GameManager.IsHowToPlay) 
             {
