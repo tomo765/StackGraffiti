@@ -94,6 +94,7 @@ public class GeneralSettings : ScriptableObject
         [SerializeField] private OptionUI m_OptionUI;
         [SerializeField] private ResultUI m_ResultUI;
         [SerializeField] private FadeCanvasUI m_FadeCanvasUI;
+        [SerializeField] private StageIntroUI m_StageIntroUI;
 
         [Space(10), SerializeField] private BalloonEffect m_BalloonEffect;
         [SerializeField] private ClickEffect m_ClickEffect;
@@ -108,6 +109,7 @@ public class GeneralSettings : ScriptableObject
         public OptionUI OptionUI => m_OptionUI;
         public ResultUI ResultUI => m_ResultUI;
         public FadeCanvasUI FadeCanvasUI => m_FadeCanvasUI;
+        public StageIntroUI StageIntroUI => m_StageIntroUI;
         public BalloonEffect BalloonEffect => m_BalloonEffect;
         public ClickEffect ClickEffect => m_ClickEffect;
         public JumpEffect JumpEffect => m_JumpEffect;

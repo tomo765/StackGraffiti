@@ -7,23 +7,24 @@ using UnityEngine;
 
 public class FadeCanvasUI : MonoBehaviour
 {
-    public static FadeCanvasUI Instance;
+    private static FadeCanvasUI instance;
+    public static FadeCanvasUI Instance => instance;
 
     [SerializeField] Animator m_FadeAnim;
 
     private bool m_OnFade = false;
 
-    public bool OnFade => m_OnFade;
+    public bool OnFade() => m_OnFade;
     private AnimatorStateInfo m_Info => m_FadeAnim.GetCurrentAnimatorStateInfo(0);
 
     private void Awake()
     {
-        if(Instance != null) 
+        if(instance != null) 
         { 
             Destroy(gameObject);
             return; 
         }
-        Instance = this;
+        instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
@@ -39,11 +40,14 @@ public class FadeCanvasUI : MonoBehaviour
     }
 
 
-    public async Task IsCompleteFadeIn() => await WaitUntiil(() => m_Info.IsName("Fout"));  //ToDo : マジックナンバー
+    public async Task IsCompleteFadeIn() => await TaskExtension.WaitUntiil(() => m_Info.IsName("Fout"));  //ToDo : マジックナンバー
 
-    public async Task IsCompleteFadeOut() => await WaitUntiil(() => m_Info.IsName("Fout") &&
+    public async Task IsCompleteFadeOut() => await TaskExtension.WaitUntiil(() => m_Info.IsName("Fout") &&
                                                                     m_Info.normalizedTime >= 1f);
+}
 
+public static class TaskExtension
+{
     public static async Task WaitUntiil(Func<bool> isCompleted)
     {
         while (!isCompleted())

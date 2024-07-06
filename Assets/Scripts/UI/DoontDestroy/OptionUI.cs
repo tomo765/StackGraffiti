@@ -24,7 +24,7 @@ public class OptionUI : MonoBehaviour
         m_ReturnButton.onClick.RemoveAllListeners();
         m_ReturnButton.onClick.AddListener(() =>
         {
-            DontDestroyCanvas.Instance.ChangeOptionUIVisible();
+            DontDestroyCanvas.Instance.ChangeOptionUIVisible(false);
             SoundManager.Instance.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
     }

@@ -21,6 +21,7 @@ public class DontDestroyCanvas : MonoBehaviour
 
     private OptionUI m_OptionUI;
     private ResultUI m_ResultUI;
+    private StageIntroUI m_StageIntroUI;
 
     private Canvas m_Canvas;
 
@@ -39,17 +40,25 @@ public class DontDestroyCanvas : MonoBehaviour
         m_Canvas.worldCamera = Camera.main;
     }
 
-    public void ChangeOptionUIVisible()
+    public void ChangeOptionUIVisible(bool b)
     {
         m_OptionUI ??= Instantiate(GeneralSettings.Instance.Prehab.OptionUI, transform);
 
-        m_OptionUI.gameObject.SetActive(!m_OptionUI.gameObject.activeSelf);
+        m_OptionUI.gameObject.SetActive(b);
     }
 
-    public void ChangeResultUIVisible()
+    public void ChangeResultUIVisible(bool b)
     {
         m_ResultUI ??= Instantiate(GeneralSettings.Instance.Prehab.ResultUI, transform);
 
-        m_ResultUI.gameObject.SetActive(!m_ResultUI.gameObject.activeSelf);
+        m_ResultUI.gameObject.SetActive(b);
+    }
+
+    public void ChangeStageIntroUIVisible(bool b)
+    {
+        m_StageIntroUI ??= Instantiate(GeneralSettings.Instance.Prehab.StageIntroUI, transform);
+
+        m_StageIntroUI.gameObject.SetActive(b);
+        m_StageIntroUI.PlayIntro();
     }
 }

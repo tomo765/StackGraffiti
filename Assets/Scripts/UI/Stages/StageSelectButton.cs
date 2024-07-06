@@ -26,6 +26,7 @@ public class StageSelectButton : MonoBehaviour
         {
             _ = SceneLoadExtension.LoadWithFade(m_StageName, GeneralSettings.Instance.Sound.FadeSE);
             GameManager.StartStage((StageType)stageNum);
+            DontDestroyCanvas.Instance.ChangeStageIntroUIVisible(true);
         });
 
         for (int i = 0; i < StageDataUtility.StageDatas.StageScores[stageNum - 1].StarLevel; i++)

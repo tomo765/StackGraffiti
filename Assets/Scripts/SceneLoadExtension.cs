@@ -15,18 +15,18 @@ public static class SceneLoadExtension
         if (FadeCanvasUI.Instance == null)
         {
             MonoBehaviour.Instantiate(GeneralSettings.Instance.Prehab.FadeCanvasUI);
-            await FadeCanvasUI.WaitUntiil(() => FadeCanvasUI.Instance != null);
+            await TaskExtension.WaitUntiil(() => FadeCanvasUI.Instance != null);
         }
 
-        if (FadeCanvasUI.Instance.OnFade) { return; }
+        if (FadeCanvasUI.Instance.OnFade()) { return; }  //ToDo : Žè‘O‚É != null‚ð‚Â‚¯‚½‚Ù‚¤‚ª‚¢‚¢‚©‚à
         SoundManager.Instance?.PlayNewSE(playClp);
         FadeCanvasUI.Instance.StartFade();
 
         await FadeCanvasUI.Instance.IsCompleteFadeIn();
-        SceneManager.LoadScene(sceneName);
+        await SceneManager.LoadSceneAsync(sceneName);
+        DontDestroyCanvas.Instance.SetNewRenderCamera();
 
         await FadeCanvasUI.Instance.IsCompleteFadeOut();
-        DontDestroyCanvas.Instance.SetNewRenderCamera();
         FadeCanvasUI.Instance.FinishFade();
 
         IsFading = false;

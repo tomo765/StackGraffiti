@@ -18,7 +18,7 @@ public class OptionButton : MonoBehaviour
         m_OptionButton.onClick.RemoveAllListeners();
         m_OptionButton.onClick.AddListener(() =>
         {
-            DontDestroyCanvas.Instance.ChangeOptionUIVisible();
+            DontDestroyCanvas.Instance.ChangeOptionUIVisible(true);
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
     }
