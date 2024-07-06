@@ -672,18 +672,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4008376028669498688, guid: 6b92bd4e01246164d979773ee4dafddd, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5163184305368580728, guid: 6b92bd4e01246164d979773ee4dafddd, type: 3}
-      propertyPath: m_fontColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5163184305368580728, guid: 6b92bd4e01246164d979773ee4dafddd, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4278190080
-      objectReference: {fileID: 0}
     - target: {fileID: 7757612215551112442, guid: 6b92bd4e01246164d979773ee4dafddd, type: 3}
       propertyPath: m_Name
       value: StageIntroUI

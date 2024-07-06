@@ -12,9 +12,10 @@ public class StageIntroUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_TitleText;
     [SerializeField] private float m_PlaySpeed;
     [SerializeField] private Animator m_Animator;
+    [SerializeField] private Image m_IntroImage;
 
+    private Image m_BGImage;
     private CancellationTokenSource m_Source = new CancellationTokenSource();
-    private Image m_Image;
     private bool m_FinishAnimation => StateInfo.normalizedTime >= 1;
     private bool m_FinishFadeOut = false;
     
@@ -32,6 +33,9 @@ public class StageIntroUI : MonoBehaviour
 
     public async void PlayIntro()
     {
+        await TaskExtension.WaitUntiil(() => m_BGImage != null);
+        m_BGImage.color = Color.black * 0.24f;
+
         if (FadeCanvasUI.Instance != null)
         {
             await TaskExtension.WaitUntiil(() => !FadeCanvasUI.Instance.OnFade());
@@ -43,9 +47,9 @@ public class StageIntroUI : MonoBehaviour
 
     private void Init()
     {
-        m_Image = GetComponent<Image>();
+        m_BGImage = GetComponent<Image>();
 
-        m_Image.color = ColorExtension.WhiteClearness;
+        m_IntroImage.color = ColorExtension.WhiteClearness;
         m_StageText.color = ColorExtension.BlackClearness;
         m_TitleText.color = ColorExtension.BlackClearness;
         m_Animator.speed = m_PlaySpeed;
@@ -95,11 +99,11 @@ public class StageIntroUI : MonoBehaviour
 
     private async Task FadeIn()
     {
-        while (m_Image.color.a < 0.98f)
+        while (m_IntroImage.color.a < 0.98f)
         {
-            var newCol = m_Image.color;
+            var newCol = m_IntroImage.color;
             newCol.a = Mathf.Lerp(newCol.a, 1, 0.1f);
-            m_Image.color = newCol;
+            m_IntroImage.color = newCol;
 
             await Task.Delay(16);
             m_Source.Token.ThrowIfCancellationRequested();
@@ -108,11 +112,15 @@ public class StageIntroUI : MonoBehaviour
     private async Task FadeOut()
     {
         Color newCol;
-        while (m_Image.color.a > 0.005f)
+        while (m_IntroImage.color.a > 0.005f)
         {
-            newCol = m_Image.color;
+            newCol = m_IntroImage.color;
             newCol.a = Mathf.Lerp(newCol.a, 0, 0.1f);
-            m_Image.color = newCol;
+            m_IntroImage.color = newCol;
+
+            newCol = m_BGImage.color;
+            newCol.a = Mathf.Lerp(newCol.a, 0, 0.1f);
+            m_BGImage.color = newCol;
 
             newCol = m_StageText.color;
             newCol.a = Mathf.Lerp(newCol.a, 0, 0.1f);

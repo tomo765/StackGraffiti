@@ -22,10 +22,10 @@ public class StageSelectButton : MonoBehaviour
         m_StageName = name;
         m_StageLevel = stageNum;
         m_StageLevelText.text = "Stage " + stageNum.ToString();
-        m_TransitionButton.onClick.AddListener(() =>
+        m_TransitionButton.onClick.AddListener(async () =>
         {
-            _ = SceneLoadExtension.LoadWithFade(m_StageName, GeneralSettings.Instance.Sound.FadeSE);
             GameManager.StartStage((StageType)stageNum);
+            await SceneLoadExtension.LoadWithFade(m_StageName, GeneralSettings.Instance.Sound.FadeSE);
             DontDestroyCanvas.Instance.ChangeStageIntroUIVisible(true);
         });
 
