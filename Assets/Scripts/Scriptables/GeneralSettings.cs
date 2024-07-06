@@ -69,7 +69,7 @@ public class GeneralSettings : ScriptableObject
     }
 
     [SerializeField] private PlayerSettings m_PlayerSettings;
-    [SerializeField] private StageEvaluations m_StageEvaluation;
+    [SerializeField] private StageInfomations m_StageInfos;
     [SerializeField] private Prehabs m_Prehabs;
     [SerializeField] private Sprites m_Sprites;
     [SerializeField] private Sounds m_Sounds;
@@ -78,7 +78,7 @@ public class GeneralSettings : ScriptableObject
 
     public Prehabs Prehab => m_Prehabs;
     public PlayerSettings PlayerSetting => m_PlayerSettings;
-    public StageEvaluations StageEvals => m_StageEvaluation;
+    public StageInfomations StageInfos => m_StageInfos;
     public Sprites Sprite => m_Sprites;
     public Sounds Sound => m_Sounds;
     public IndicatesPrioritySettings Priorities => m_Priorities;
@@ -128,37 +128,32 @@ public class GeneralSettings : ScriptableObject
     }
 
     [System.Serializable]
-    public class StageEvaluations
+    public class StageInfomations
     {
-        [SerializeField] private StageEvaluation[] m_Stages = null;
+        [SerializeField] private StageInfomation[] m_Stages = null;
 
-        public StageEvaluation[] Stages => m_Stages;
+        public StageInfomation[] Stages => m_Stages;
 
-        public int GetCullentLevel(StageType type, int sleepCnt) => GetStageEval(type).GetStarLevel(sleepCnt);
-        private StageEvaluation GetStageEval(StageType stg) => Array.Find(Stages, stage => stage.StageType == stg);
+        public int GetCullentLevel(StageType type, int sleepCnt) => GetStageInfo(type).GetStarLevel(sleepCnt);
+        private StageInfomation GetStageInfo(StageType stg) => Array.Find(Stages, stage => stage.StageType == stg);
+        public string GetStageText(int stg) => Array.Find(Stages, stage => stage.StageType == (StageType)stg).StageTitle;
 
         [System.Serializable]
-        public class StageEvaluation
+        public class StageInfomation
         {
             [SerializeField] private StageType m_StageType;
+            [SerializeField] private string m_StageTitle;
             [SerializeField] private int m_ThreeStar;
             [SerializeField] private int m_TwoStar;
-            [SerializeField] private int m_OneStar;
 
             public StageType StageType => m_StageType;
+            public string StageTitle => m_StageTitle;
 
             public int GetStarLevel(int sleepCnt)
             {
-                if (sleepCnt <= m_ThreeStar)
-                {
-                    return 3;
-                }
-                else if (sleepCnt <= m_TwoStar)
-                {
-                    return 2;
-                }
-
-                return 1;
+                if (sleepCnt <= m_ThreeStar) { return 3; }
+                else if (sleepCnt <= m_TwoStar) { return 2; }
+                else { return 1; }
             }
         }
     }

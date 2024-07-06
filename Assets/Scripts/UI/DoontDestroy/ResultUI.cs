@@ -51,7 +51,7 @@ public class ResultUI : MonoBehaviour
 
     public void SetStar()
     {
-        int level = GeneralSettings.Instance.StageEvals.GetCullentLevel(GameManager.CullentStage, GameManager.SleepCount);
+        int level = GeneralSettings.Instance.StageInfos.GetCullentLevel(GameManager.CullentStage, GameManager.SleepCount);
         for (int i = 0; i < level; i++)
         {
             m_Stars[i].sprite = GeneralSettings.Instance.Sprite.ClearStar;
