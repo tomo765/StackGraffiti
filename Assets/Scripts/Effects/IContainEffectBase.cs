@@ -5,10 +5,10 @@ using UnityEngine;
 public interface IContainEffectBase
 {
     bool IsActive { get; }
-    void PlayEffect(Vector2 vec);
+    void Play(Vector2 vec);
     void StopEffect();
 
-    IContainEffectBase CreateEffect(Vector3 vec, Quaternion q, Transform parent);
+    IContainEffectBase Create(Vector3 vec, Quaternion q, Transform parent);
 }
 
 public static class EffectExtension

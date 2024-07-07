@@ -42,7 +42,7 @@ public class EffectContainer : MonoBehaviour  //ToDo : Manager‚É–¼‘O•Ï‚¦‚½•û‚ª‚¢
         m_Transform = transform;
     }
 
-    public void PlayEffect<T>(T effect, Vector3 vec) where T : IContainEffectBase, new()
+    public void PlayEffect<T>(T playEff, Vector3 vec) where T : IContainEffectBase, new()
     {
         IContainEffectBase eff = null;
         vec += GeneralSettings.Instance.Priorities.EffectLayer;
@@ -61,11 +61,11 @@ public class EffectContainer : MonoBehaviour  //ToDo : Manager‚É–¼‘O•Ï‚¦‚½•û‚ª‚¢
 
         if(eff == null)
         {
-            eff = effect.CreateEffect(vec, Quaternion.identity, m_Transform);
+            eff = playEff.Create(vec, Quaternion.identity, m_Transform);
             m_Effects.Add(eff);
         }
 
-        eff.PlayEffect(vec);
+        eff.Play(vec);
     }
 
     public void StopEffect<T>() where T : IContainEffectBase, new()

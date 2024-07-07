@@ -17,7 +17,7 @@ public class BalloonEffect : MonoBehaviour, IContainEffectBase
         gameObject.SetActive(m_Anim.IsPlaying());
     }
 
-    public void PlayEffect(Vector2 vec)
+    public void Play(Vector2 vec)
     {
         gameObject.SetActive(true);
         transform.position = vec;
@@ -28,7 +28,7 @@ public class BalloonEffect : MonoBehaviour, IContainEffectBase
         gameObject.SetActive(false);
     }
 
-    public IContainEffectBase CreateEffect(Vector3 vec, Quaternion q, Transform parent)
+    public IContainEffectBase Create(Vector3 vec, Quaternion q, Transform parent)
     {
         return Instantiate(this, vec, q, parent);
     }

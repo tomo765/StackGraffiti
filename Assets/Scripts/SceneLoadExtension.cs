@@ -1,4 +1,3 @@
-using Config;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,7 +8,7 @@ public static class SceneLoadExtension
 {
     public static bool IsFading = false;
 
-    public static async Task StartFadeIn(AudioClip playClp)
+    public static async Task StartFadeIn()
     {
         IsFading = true;
 
@@ -20,7 +19,6 @@ public static class SceneLoadExtension
         }
 
         if (FadeCanvasUI.Instance.OnFade()) { return; }
-        SoundManager.Instance?.PlayNewSE(playClp);
         FadeCanvasUI.Instance.StartFadeIn();
 
         await FadeCanvasUI.Instance.IsCompleteFadeIn();
@@ -33,10 +31,9 @@ public static class SceneLoadExtension
         await FadeCanvasUI.Instance.WaitToFadeOut();
     }
 
-    public static async Task StartFadeOut(AudioClip playClp)
+    public static async Task StartFadeOut()
     {
         FadeCanvasUI.Instance.StartFadeOut();
-        SoundManager.Instance?.PlayNewSE(playClp);
         await FadeCanvasUI.Instance.IsCompleteFadeOut();
         FadeCanvasUI.Instance.FinishFadeOut();
 

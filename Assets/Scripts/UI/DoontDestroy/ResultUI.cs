@@ -39,12 +39,16 @@ public class ResultUI : MonoBehaviour
 
     private async void OnPushResultButton(string nextScene)
     {
-        await SceneLoadExtension.StartFadeIn(GeneralSettings.Instance.Sound.Fade1.FadeIn);
+        SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
+        await SceneLoadExtension.StartFadeIn();
+
         EffectContainer.Instance.StopEffect<ConfettiEffect>();
         GameManager.CheckStarLevel();
         DontDestroyCanvas.Instance.ChangeResultUIVisible(false);
+
         await SceneLoadExtension.StartFadeWait(nextScene);
-        await SceneLoadExtension.StartFadeOut(GeneralSettings.Instance.Sound.Fade1.FadeOut);
+        SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeOut);
+        await SceneLoadExtension.StartFadeOut();
     }
 
     public void SetStar()
