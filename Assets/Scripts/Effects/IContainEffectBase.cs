@@ -6,6 +6,7 @@ public interface IContainEffectBase
 {
     bool IsActive { get; }
     void PlayEffect(Vector2 vec);
+    void StopEffect();
 
     IContainEffectBase CreateEffect(Vector3 vec, Quaternion q, Transform parent);
 }

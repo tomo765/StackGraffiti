@@ -21,18 +21,8 @@ public class ResultUI : MonoBehaviour
 
     private void Init()
     {
-        m_StageSelectBtn.onClick.AddListener(() =>
-        {
-            _ = SceneLoadExtension.LoadWithFade(Config.SceneNames.StageSelect, GeneralSettings.Instance.Sound.FadeSE);
-            DontDestroyCanvas.Instance.ChangeResultUIVisible(false);
-            GameManager.CheckStarLevel();
-        });
-        m_ReturnTitleBtn.onClick.AddListener(() =>
-        {
-            _ = SceneLoadExtension.LoadWithFade(Config.SceneNames.Title, GeneralSettings.Instance.Sound.FadeSE);
-            DontDestroyCanvas.Instance.ChangeResultUIVisible(false);
-            GameManager.CheckStarLevel();
-        });
+        m_StageSelectBtn.onClick.AddListener(() => OnPushResultButton(Config.SceneNames.StageSelect));
+        m_ReturnTitleBtn.onClick.AddListener(() => OnPushResultButton(Config.SceneNames.Title));
 
 
         if(GameManager.IsLastStage)
@@ -42,11 +32,17 @@ public class ResultUI : MonoBehaviour
         }
         m_NextStageButton.onClick.AddListener(() =>
         {
-            _ = SceneLoadExtension.LoadWithFade(Config.SceneNames.m_StageNames[(int)GameManager.CullentStage], GeneralSettings.Instance.Sound.FadeSE);
+            OnPushResultButton(Config.SceneNames.m_StageNames[(int)GameManager.CullentStage]);
             GameManager.StartStage(GameManager.CullentStage + 1);
-            DontDestroyCanvas.Instance.ChangeResultUIVisible(false);
-            GameManager.CheckStarLevel();
         });
+    }
+
+    private void OnPushResultButton(string nextScene)
+    {
+        EffectContainer.Instance.StopEffect<ConfettiEffect>();
+        _ = SceneLoadExtension.LoadWithFade(nextScene, GeneralSettings.Instance.Sound.FadeSE);
+        DontDestroyCanvas.Instance.ChangeResultUIVisible(false);
+        GameManager.CheckStarLevel();
     }
 
     public void SetStar()

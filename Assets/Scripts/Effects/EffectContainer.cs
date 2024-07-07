@@ -51,7 +51,11 @@ public class EffectContainer : MonoBehaviour  //ToDo : Manager‚É–¼‘O•Ï‚¦‚½•û‚ª‚¢
         {
             if(TryGetEffects<T>(out IContainEffectBase[] effects))
             {
-                eff = effects.First();
+                var inactives = effects.Where(effects => !effects.IsActive).ToArray();
+                if(inactives.Length != 0)
+                {
+                    eff = effects.Where(effects => !effects.IsActive).First();
+                }
             }
         }
 
@@ -64,10 +68,16 @@ public class EffectContainer : MonoBehaviour  //ToDo : Manager‚É–¼‘O•Ï‚¦‚½•û‚ª‚¢
         eff.PlayEffect(vec);
     }
 
+    public void StopEffect<T>() where T : IContainEffectBase, new()
+    {
+        if (!TryGetEffects<T>(out IContainEffectBase[] effects)) { return; }
+
+        effects[0].StopEffect();
+    }
+
     private bool TryGetEffects<T>(out IContainEffectBase[] effects) where T : IContainEffectBase, new()
     {
-        effects = m_Effects.Where(effects => !effects.IsActive)
-                           .Where(inactives => inactives is T)
+        effects = m_Effects.Where(effects => effects is T)
                            .ToArray();
 
         if(effects.Length == 0) { return false; }

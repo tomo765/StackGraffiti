@@ -23,6 +23,11 @@ public class JumpEffect : MonoBehaviour, IContainEffectBase
         transform.position = vec;
     }
 
+    public void StopEffect()
+    {
+        gameObject.SetActive(false);
+    }
+
     public IContainEffectBase CreateEffect(Vector3 vec, Quaternion q, Transform parent)
     {
         return Instantiate(this, vec, q, parent);
