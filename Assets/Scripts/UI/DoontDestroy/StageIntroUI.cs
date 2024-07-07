@@ -6,6 +6,9 @@ using TMPro;
 using System.Threading.Tasks;
 using System.Threading;
 
+/// <summary>
+/// ステージ開始時の演出
+/// </summary>
 public class StageIntroUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI m_StageText;

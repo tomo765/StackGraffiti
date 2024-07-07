@@ -25,7 +25,9 @@ public class StageSelectButton : MonoBehaviour
         m_TransitionButton.onClick.AddListener(async () =>
         {
             GameManager.StartStage((StageType)stageNum);
-            await SceneLoadExtension.LoadWithFade(m_StageName, GeneralSettings.Instance.Sound.FadeSE);
+            await SceneLoadExtension.StartFadeIn(GeneralSettings.Instance.Sound.Fade1.FadeIn);
+            await SceneLoadExtension.StartFadeWait(m_StageName);
+            await SceneLoadExtension.StartFadeOut(GeneralSettings.Instance.Sound.Fade1.FadeOut);
             DontDestroyCanvas.Instance.ChangeStageIntroUIVisible(true);
             DontDestroyCanvas.Instance.StageIntroUI.SetIntroText("Stage " + m_StageLevel.ToString(), GeneralSettings.Instance.StageInfos.GetStageText(stageNum));
         });

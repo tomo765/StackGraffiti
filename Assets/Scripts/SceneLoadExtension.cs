@@ -1,3 +1,4 @@
+using Config;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ public static class SceneLoadExtension
 {
     public static bool IsFading = false;
 
-    public static async Task LoadWithFade(string sceneName, AudioClip playClp)
+    public static async Task StartFadeIn(AudioClip playClp)
     {
         IsFading = true;
 
@@ -18,16 +19,26 @@ public static class SceneLoadExtension
             await TaskExtension.WaitUntiil(() => FadeCanvasUI.Instance != null);
         }
 
-        if (FadeCanvasUI.Instance.OnFade()) { return; }  //ToDo : Žè‘O‚É != null‚ð‚Â‚¯‚½‚Ù‚¤‚ª‚¢‚¢‚©‚à
+        if (FadeCanvasUI.Instance.OnFade()) { return; }
         SoundManager.Instance?.PlayNewSE(playClp);
-        FadeCanvasUI.Instance.StartFade();
+        FadeCanvasUI.Instance.StartFadeIn();
 
         await FadeCanvasUI.Instance.IsCompleteFadeIn();
-        await SceneManager.LoadSceneAsync(sceneName);
-        DontDestroyCanvas.Instance.SetNewRenderCamera();
+    }
 
+    public static async Task StartFadeWait(string sceneName)
+    {
+        FadeCanvasUI.Instance.StartWait();
+        await SceneManager.LoadSceneAsync(sceneName);
+        await FadeCanvasUI.Instance.WaitToFadeOut();
+    }
+
+    public static async Task StartFadeOut(AudioClip playClp)
+    {
+        FadeCanvasUI.Instance.StartFadeOut();
+        SoundManager.Instance?.PlayNewSE(playClp);
         await FadeCanvasUI.Instance.IsCompleteFadeOut();
-        FadeCanvasUI.Instance.FinishFade();
+        FadeCanvasUI.Instance.FinishFadeOut();
 
         IsFading = false;
     }

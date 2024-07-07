@@ -37,12 +37,14 @@ public class ResultUI : MonoBehaviour
         });
     }
 
-    private void OnPushResultButton(string nextScene)
+    private async void OnPushResultButton(string nextScene)
     {
+        await SceneLoadExtension.StartFadeIn(GeneralSettings.Instance.Sound.Fade1.FadeIn);
         EffectContainer.Instance.StopEffect<ConfettiEffect>();
-        _ = SceneLoadExtension.LoadWithFade(nextScene, GeneralSettings.Instance.Sound.FadeSE);
-        DontDestroyCanvas.Instance.ChangeResultUIVisible(false);
         GameManager.CheckStarLevel();
+        DontDestroyCanvas.Instance.ChangeResultUIVisible(false);
+        await SceneLoadExtension.StartFadeWait(nextScene);
+        await SceneLoadExtension.StartFadeOut(GeneralSettings.Instance.Sound.Fade1.FadeOut);
     }
 
     public void SetStar()
