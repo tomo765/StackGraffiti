@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 
 public static class SceneLoadExtension
 {
-    public static bool IsFading = false;
+    private static bool m_IsFading = false;
+    public static bool IsFading => m_IsFading;
 
     public static async Task StartFadeIn()
     {
-        IsFading = true;
+        m_IsFading = true;
 
         if (FadeCanvasUI.Instance == null)
         {
@@ -37,6 +38,6 @@ public static class SceneLoadExtension
         await FadeCanvasUI.Instance.IsCompleteFadeOut();
         FadeCanvasUI.Instance.FinishFadeOut();
 
-        IsFading = false;
+        m_IsFading = false;
     }
 }
