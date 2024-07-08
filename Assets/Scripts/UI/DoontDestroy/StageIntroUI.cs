@@ -43,7 +43,7 @@ public class StageIntroUI : MonoBehaviour
 
         if (FadeCanvasUI.Instance != null)
         {
-            await TaskExtension.WaitUntiil(() => !FadeCanvasUI.Instance.OnFade());
+            await TaskExtension.WaitUntiil(() => !SceneLoadExtension.IsFading);
         }
 
         ShowIntro();

@@ -47,7 +47,7 @@ public class StageSelectUI : MonoBehaviour
         {
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
             await SceneLoadExtension.StartFadeIn();
-            await SceneLoadExtension.StartFadeWait(Config.SceneNames.StageSelect);
+            await SceneLoadExtension.StartFadeWait(Config.SceneNames.Title);
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeOut);
             await SceneLoadExtension.StartFadeOut();
         });

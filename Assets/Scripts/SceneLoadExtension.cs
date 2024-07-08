@@ -11,6 +11,7 @@ public static class SceneLoadExtension
 
     public static async Task StartFadeIn()
     {
+        if (m_IsFading) { return; }
         m_IsFading = true;
 
         if (FadeCanvasUI.Instance == null)
@@ -19,9 +20,7 @@ public static class SceneLoadExtension
             await TaskExtension.WaitUntiil(() => FadeCanvasUI.Instance != null);
         }
 
-        if (FadeCanvasUI.Instance.OnFade()) { return; }
         FadeCanvasUI.Instance.StartFadeIn();
-
         await FadeCanvasUI.Instance.IsCompleteFadeIn();
     }
 

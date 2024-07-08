@@ -21,8 +21,16 @@ public class ResultUI : MonoBehaviour
 
     private void Init()
     {
-        m_StageSelectBtn.onClick.AddListener(() => OnPushResultButton(Config.SceneNames.StageSelect));
-        m_ReturnTitleBtn.onClick.AddListener(() => OnPushResultButton(Config.SceneNames.Title));
+        m_StageSelectBtn.onClick.AddListener(() =>
+        {
+            if (SceneLoadExtension.IsFading) { return; }
+            OnPushResultButton(Config.SceneNames.StageSelect);
+        });
+        m_ReturnTitleBtn.onClick.AddListener(() =>
+        {
+            if (SceneLoadExtension.IsFading) { return; }
+            OnPushResultButton(Config.SceneNames.Title);
+        });
 
 
         if(GameManager.IsLastStage)
@@ -32,6 +40,7 @@ public class ResultUI : MonoBehaviour
         }
         m_NextStageButton.onClick.AddListener(() =>
         {
+            if (SceneLoadExtension.IsFading) { return; }
             OnPushResultButton(Config.SceneNames.m_StageNames[(int)GameManager.CullentStage]);
             GameManager.StartStage(GameManager.CullentStage + 1);
         });
