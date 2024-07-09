@@ -131,14 +131,13 @@ public class CommonButton : Button
     private async void PlayScaling()
     {
         float time = 0;
-        int waitTime = 16;   //60ÉtÉåÅ[ÉÄ
         float speed = 10f;
 
         while(m_PointerEntering)
         {
             transform.localScale = m_DefaultScale * (-Mathf.Cos(time) * 0.06f + 1.06f);
-            time += waitTime / 1000f * speed;
-            await Task.Delay(waitTime);
+            time += TaskExtension.FPS_60 / 1000f * speed;
+            await Task.Delay(TaskExtension.FPS_60);
         }
         transform.localScale = m_DefaultScale;
     }

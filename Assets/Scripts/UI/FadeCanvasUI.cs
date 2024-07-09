@@ -63,11 +63,13 @@ public static class TaskExtension
 {
     private const int OneSec = 1000;
     private const int FrameRate = 60;
+
+    public static int FPS_60 => OneSec / FrameRate;
     public static async Task WaitUntiil(Func<bool> isCompleted)
     {
         while (!isCompleted())
         {
-            await Task.Delay(OneSec / FrameRate);
+            await Task.Delay(FPS_60);
         }
     }
 }

@@ -88,7 +88,7 @@ public class StageIntroUI : MonoBehaviour
             newCol.a = Mathf.Lerp(newCol.a, 1, 0.25f);
             m_StageText.color = newCol;
 
-            await Task.Delay(16);
+            await Task.Delay(TaskExtension.FPS_60);
             m_Source.Token.ThrowIfCancellationRequested();
         }
     }
@@ -101,7 +101,7 @@ public class StageIntroUI : MonoBehaviour
             newCol.a = Mathf.Lerp(newCol.a, 1, 0.25f);
             m_TitleText.color = newCol;
 
-            await Task.Delay(16);
+            await Task.Delay(TaskExtension.FPS_60);
             m_Source.Token.ThrowIfCancellationRequested();
         }
     }
@@ -115,7 +115,7 @@ public class StageIntroUI : MonoBehaviour
             newCol.a = Mathf.Lerp(newCol.a, 1, 0.1f);
             m_IntroImage.color = newCol;
 
-            await Task.Delay(16);
+            await Task.Delay(TaskExtension.FPS_60);
             m_Source.Token.ThrowIfCancellationRequested();
         }
     }
@@ -137,7 +137,7 @@ public class StageIntroUI : MonoBehaviour
             m_StageText.color = newCol;
             m_TitleText.color = newCol;
 
-            await Task.Delay(16);
+            await Task.Delay(TaskExtension.FPS_60);
             m_Source.Token.ThrowIfCancellationRequested();
         }
         m_FinishFadeOut = true;
