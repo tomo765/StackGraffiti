@@ -37,7 +37,7 @@ public class StageManager : MonoBehaviour
         if (!DontDestroyCanvas.Instance.StageIntroUI.FinishFadeOut) { return; }
         if (SceneLoadExtension.IsFading) { return; }
 
-
+        GameManager.Source.Cancel();
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
         await SceneLoadExtension.StartFadeIn();
 
@@ -54,6 +54,7 @@ public class StageManager : MonoBehaviour
         if (FindFirstObjectByType<GameCanvasUI>().IsInputNameNow) { return; }
         if (SceneLoadExtension.IsFading) { return; }
 
+        GameManager.Source.Cancel();
         GameManager.StartStage(GameManager.CullentStage);
 
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);

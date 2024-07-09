@@ -61,7 +61,7 @@ public class FadeCanvasUI : MonoBehaviour
 
 public static class TaskExtension
 {
-    private const int OneSec = 1000;
+    public const int OneSec = 1000;
     private const int FrameRate = 60;
 
     public static int FPS_60 => OneSec / FrameRate;

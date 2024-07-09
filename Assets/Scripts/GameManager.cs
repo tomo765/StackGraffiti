@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using System.Threading;
+using static Unity.VisualScripting.Member;
 
 public enum GameState
 {
@@ -17,6 +19,7 @@ public static class GameManager
     private static StageType m_CullentStage = StageType.Stage1;
     private static int m_SleepCount = 0;
     private static GameObject m_SpawnArea;
+    private static CancellationTokenSource m_Source;
 
     private static Action m_UpdSleepText;
     private static Action m_RestartDraw;
@@ -32,6 +35,7 @@ public static class GameManager
 
     public static int SleepCount => m_SleepCount;
     public static GameObject SpawnArea => m_SpawnArea;
+    public static CancellationTokenSource Source => m_Source;
 
 
     public static void SetGameState(GameState state) => m_GameState = state;
@@ -41,6 +45,7 @@ public static class GameManager
 
     public static void StartStage(StageType stg)
     {
+        m_Source = new CancellationTokenSource();
         m_CullentStage = stg;
         m_UpdSleepText = null;
         SetGameState(GameState.Drawing);
