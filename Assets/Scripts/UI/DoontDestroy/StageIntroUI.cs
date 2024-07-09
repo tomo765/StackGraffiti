@@ -143,11 +143,6 @@ public class StageIntroUI : MonoBehaviour
         m_FinishFadeOut = true;
     }
 
-    private void ShowTime()
-    {
-        Debug.Log(AnimationTime);
-    }
-
     private void OnDestroy()
     {
         m_Source.Cancel();
