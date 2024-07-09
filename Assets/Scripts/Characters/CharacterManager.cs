@@ -74,7 +74,7 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    private void OnSleep()
+    private void OnSleep()  //重量1.2倍 + scale3  1秒待機
     {
         GameManager.SleepCharacter();
         if (!GetComponent<Renderer>().isVisible) //画面外で操作不能になったら削除
@@ -84,6 +84,9 @@ public class CharacterManager : MonoBehaviour
         }
         m_IsDead = true;
 
+        m_Rb2d.useAutoMass = false;
+        m_Rb2d.mass *= 1.2f;
+        m_Rb2d.gravityScale = 3;
         m_EyeRender.sprite = GeneralSettings.Instance.Sprite.DeathEye;
         m_Rb2d.sharedMaterial = GeneralSettings.Instance.PlayerSetting.PhysicsOnDead;
 
