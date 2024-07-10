@@ -89,7 +89,7 @@ public class CharacterManager : MonoBehaviour
         GetComponent<MeshRenderer>().sortingOrder = -1;  //ToDo
         m_EyeRender.sortingOrder = -1;
 
-        m_Rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;  //ŠÛ‚¢ƒLƒƒƒ‰‚ª“]‚ª‚ç‚È‚¢‚æ‚¤‚É‚·‚é
+        //m_Rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;  //ŠÛ‚¢ƒLƒƒƒ‰‚ª“]‚ª‚ç‚È‚¢‚æ‚¤‚É‚·‚é
 
         Destroy(m_Controller);
     }
