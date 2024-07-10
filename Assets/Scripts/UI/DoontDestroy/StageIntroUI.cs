@@ -25,8 +25,8 @@ public class StageIntroUI : MonoBehaviour
     public bool FinishFadeOut => m_FinishFadeOut;
     private AnimatorStateInfo StateInfo => m_Animator.GetCurrentAnimatorStateInfo(0);
     private float AnimationTime => StateInfo.length * StateInfo.normalizedTime;
-    private bool StartShowStageText => AnimationTime >= 0.166f * m_PlaySpeed;  //finish 0.29f
-    private bool StartShowTitleText => AnimationTime >= 0.917f * m_PlaySpeed;  //finish 1.41f
+    private bool StartShowStageText => AnimationTime >= 0.166f * m_PlaySpeed;
+    private bool StartShowTitleText => AnimationTime >= 0.917f * m_PlaySpeed;
 
     void Start()
     {

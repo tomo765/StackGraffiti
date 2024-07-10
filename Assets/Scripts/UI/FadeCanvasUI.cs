@@ -75,6 +75,7 @@ public static class TaskExtension
 
     /// <summary>
     /// 投げっぱなしにする場合は、これを呼ぶことでコンパイラの警告の抑制と、例外発生時のロギングを行います。
+    /// https://neue.cc/2013/10/10_429.html
     /// </summary>
     public static void FireAndForget(this Task task)
     {
