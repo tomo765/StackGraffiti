@@ -36,6 +36,7 @@ public class StageManager : MonoBehaviour
     private async Task EscapeStage()
     {
         if (!DontDestroyCanvas.Instance.StageIntroUI.FinishFadeOut) { return; }
+        if (GameManager.IsClear) { return; }
         if (SceneLoadExtension.IsFading) { return; }
 
         GameManager.Source.Cancel();
@@ -53,6 +54,7 @@ public class StageManager : MonoBehaviour
     {
         if (!DontDestroyCanvas.Instance.StageIntroUI.FinishFadeOut) { return; }
         if (FindFirstObjectByType<GameCanvasUI>().IsInputNameNow) { return; }
+        if (GameManager.IsClear) { return; }
         if (SceneLoadExtension.IsFading) { return; }
 
         GameManager.Source.Cancel();
