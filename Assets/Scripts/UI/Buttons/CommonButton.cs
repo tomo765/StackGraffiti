@@ -102,7 +102,7 @@ public class CommonButton : Button
         m_PointerEntering = true;
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.HoverSE);
 
-        if(m_IsScaling) { PlayScaling(); }
+        if(m_IsScaling) { PlayScaling().FireAndForget(); }
         if(m_ChangeColor) { m_Img.color = m_EnterColor; }
     }
     public override void OnPointerExit(PointerEventData eventData)
@@ -128,7 +128,7 @@ public class CommonButton : Button
 
     private void SetImage() => m_Img = GetComponent<Image>();
 
-    private async void PlayScaling()
+    private async Task PlayScaling()
     {
         float time = 0;
         float speed = 10f;

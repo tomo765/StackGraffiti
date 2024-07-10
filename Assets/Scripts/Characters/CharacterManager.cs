@@ -66,7 +66,7 @@ public class CharacterManager : MonoBehaviour
         switch (tag)
         {
             case "Dead":
-                OnDead();
+                OnDead().FireAndForget();
                 break;
             case "Needle":
                 SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.TouchNeedleSE);
@@ -75,7 +75,7 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    private async void OnSleep()
+    private async Task OnSleep()
     {
         if (!GetComponent<Renderer>().isVisible) //âÊñ äOÇ≈ëÄçÏïsî\Ç…Ç»Ç¡ÇΩÇÁçÌèú
         { 
@@ -104,10 +104,10 @@ public class CharacterManager : MonoBehaviour
     private void OnUnmovable()
     {
         m_Rb2d.bodyType = RigidbodyType2D.Static;
-        OnSleep();
+        OnSleep().FireAndForget();
     }
 
-    private async void OnDead()
+    private async Task OnDead()
     {
         await Task.Delay(TaskExtension.OneSec, GameManager.Source.Token);
 

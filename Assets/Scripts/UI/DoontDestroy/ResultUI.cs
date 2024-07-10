@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -24,12 +25,12 @@ public class ResultUI : MonoBehaviour
         m_StageSelectBtn.onClick.AddListener(() =>
         {
             if (SceneLoadExtension.IsFading) { return; }
-            OnPushResultButton(Config.SceneNames.StageSelect);
+            OnPushResultButton(Config.SceneNames.StageSelect).FireAndForget();
         });
         m_ReturnTitleBtn.onClick.AddListener(() =>
         {
             if (SceneLoadExtension.IsFading) { return; }
-            OnPushResultButton(Config.SceneNames.Title);
+            OnPushResultButton(Config.SceneNames.Title).FireAndForget();
         });
 
 
@@ -41,12 +42,12 @@ public class ResultUI : MonoBehaviour
         m_NextStageButton.onClick.AddListener(() =>
         {
             if (SceneLoadExtension.IsFading) { return; }
-            OnPushResultButton(Config.SceneNames.m_StageNames[(int)GameManager.CullentStage]);
+            OnPushResultButton(Config.SceneNames.m_StageNames[(int)GameManager.CullentStage]).FireAndForget();
             GameManager.StartStage(GameManager.CullentStage + 1);
         });
     }
 
-    private async void OnPushResultButton(string nextScene)
+    private async Task OnPushResultButton(string nextScene)
     {
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
         await SceneLoadExtension.StartFadeIn();

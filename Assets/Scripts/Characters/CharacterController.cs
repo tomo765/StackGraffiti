@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq.Expressions;
 using System;
+using System.Threading.Tasks;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterController : MonoBehaviour
@@ -14,11 +15,11 @@ public class CharacterController : MonoBehaviour
     private const float MaxMoveSpeed = 2.5f;
     private const float AirMoveSpeed = 0.5f;
 
-    private Action m_OnSleep;
+    private Func<Task> m_OnSleep;
 
     private bool m_OnGround = false;
 
-    public void SetManagerMember(Rigidbody2D rb2d, Action onSleep)
+    public void SetManagerMember(Rigidbody2D rb2d, Func<Task> onSleep)
     {
         m_Rb2d = rb2d;
         m_OnSleep = onSleep;
@@ -28,7 +29,7 @@ public class CharacterController : MonoBehaviour
     {
         if (InputExtension.OnSleep)
         {
-            m_OnSleep();
+            m_OnSleep().FireAndForget();
         }
     }
 

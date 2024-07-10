@@ -72,4 +72,15 @@ public static class TaskExtension
             await Task.Delay(FPS_60);
         }
     }
+
+    /// <summary>
+    /// 投げっぱなしにする場合は、これを呼ぶことでコンパイラの警告の抑制と、例外発生時のロギングを行います。
+    /// </summary>
+    public static void FireAndForget(this Task task)
+    {
+        task.ContinueWith(x =>
+        {
+            Debug.LogError("Task Errored");
+        }, TaskContinuationOptions.OnlyOnFaulted);
+    }
 }

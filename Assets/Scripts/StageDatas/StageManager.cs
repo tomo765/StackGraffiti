@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,21 +19,21 @@ public class StageManager : MonoBehaviour
     {
         if (InputExtension.EscapeStage)
         {
-            EscapeStage();
+            EscapeStage().FireAndForget();
         }
 
         if (InputExtension.ResetStage)
         {
-            ResetStage();
+            ResetStage().FireAndForget();
         }
 
         if(InputExtension.ShowHowToPlay)
         {
-            PreviewHowTiPlay();
+            PreviewHowToPlay().FireAndForget();
         }
     }
 
-    private async void EscapeStage()
+    private async Task EscapeStage()
     {
         if (!DontDestroyCanvas.Instance.StageIntroUI.FinishFadeOut) { return; }
         if (SceneLoadExtension.IsFading) { return; }
@@ -48,7 +49,7 @@ public class StageManager : MonoBehaviour
         await SceneLoadExtension.StartFadeOut();
     }
 
-    private async void ResetStage()
+    private async Task ResetStage()
     {
         if (!DontDestroyCanvas.Instance.StageIntroUI.FinishFadeOut) { return; }
         if (FindFirstObjectByType<GameCanvasUI>().IsInputNameNow) { return; }
@@ -65,7 +66,7 @@ public class StageManager : MonoBehaviour
         await SceneLoadExtension.StartFadeOut();
     }
 
-    private async void PreviewHowTiPlay()
+    private async Task PreviewHowToPlay()
     {
         if (!DontDestroyCanvas.Instance.StageIntroUI.FinishFadeOut) { return; }
         if (!GameManager.IsPlaying && !GameManager.IsHowToPlay) { return; }

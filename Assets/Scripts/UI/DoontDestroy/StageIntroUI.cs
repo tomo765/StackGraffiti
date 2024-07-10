@@ -31,10 +31,10 @@ public class StageIntroUI : MonoBehaviour
     void Start()
     {
         Init();
-        PlayIntro();
+        PlayIntro().FireAndForget();
     }
 
-    public async void PlayIntro()
+    public async Task PlayIntro()
     {
         m_FinishFadeOut = false;
 
@@ -46,8 +46,8 @@ public class StageIntroUI : MonoBehaviour
             await TaskExtension.WaitUntiil(() => !SceneLoadExtension.IsFading);
         }
 
-        ShowIntro();
-        ShowTexts();
+        ShowIntro().FireAndForget();
+        ShowTexts().FireAndForget();
     }
     public void SetIntroText(string stageTxt, string TitleTxt)
     {
@@ -65,7 +65,7 @@ public class StageIntroUI : MonoBehaviour
         m_Animator.speed = m_PlaySpeed;
     }
 
-    private async void ShowIntro()
+    private async Task ShowIntro()
     {
         await FadeIn();
         await TaskExtension.WaitUntiil(() => m_FinishAnimation);
@@ -74,7 +74,7 @@ public class StageIntroUI : MonoBehaviour
 
         gameObject.SetActive(false);
     }
-    private async void ShowTexts()
+    private async Task ShowTexts()
     {
         await ShowStageText();
         await ShowTitleText();
