@@ -80,7 +80,6 @@ public class CharacterManager : MonoBehaviour
         if (!GetComponent<Renderer>().isVisible) //‰æ–ÊŠO‚Å‘€ì•s”\‚É‚È‚Á‚½‚çíœ
         { 
             Destroy(gameObject);
-            return;
         }
         else
         {
