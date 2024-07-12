@@ -60,7 +60,6 @@ public class GameCanvasUI : MonoBehaviour
 
         GameManager.SetUpdateSleepText(UpdateSleepText);
         GameManager.SetRestartDrawing(RestartDrawing);
-
         GetComponent<Canvas>().planeDistance = GeneralSettings.Instance.Priorities.StageCanvas;
     }
 

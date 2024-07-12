@@ -56,7 +56,7 @@ public static class GameManager
     {
         AddSleepCount();
         SetGameState(GameState.Drawing);
-        m_UpdSleepText();
+        m_UpdSleepText(); //ToDo : m_UpdSleepText‚ªNULL
         m_RestartDraw();
     }
 

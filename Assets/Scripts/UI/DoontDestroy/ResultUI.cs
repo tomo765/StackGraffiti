@@ -42,8 +42,9 @@ public class ResultUI : MonoBehaviour
         m_NextStageButton.onClick.AddListener(async() =>
         {
             if (SceneLoadExtension.IsFading) { return; }
-            await OnPushResultButton(Config.SceneNames.m_StageNames[(int)GameManager.CullentStage]);
-            GameManager.StartStage(GameManager.CullentStage + 1);
+            var nextStage = GameManager.CullentStage;
+            GameManager.StartStage(nextStage + 1);
+            await OnPushResultButton(Config.SceneNames.m_StageNames[(int)nextStage]);  //StageNamesの要素が StageType-1と同期している
 
             DontDestroyCanvas.Instance.ChangeStageIntroUIVisible(true);  //ToDo : StageSelectUI でも似た処理してるからメソッドにする
             DontDestroyCanvas.Instance.StageIntroUI.SetIntroText(GameManager.CullentStage.ToString(),
