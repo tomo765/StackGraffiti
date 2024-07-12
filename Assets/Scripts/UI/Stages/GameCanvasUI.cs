@@ -22,7 +22,7 @@ public class GameCanvasUI : MonoBehaviour
         SetViewDrawUIButton();
 
         Init();
-        m_DrawUI.Init(this);
+        m_DrawUI.Init(this, m_ViewDrawUIBtn);
         UpdateSleepText();
     }
 
@@ -34,6 +34,7 @@ public class GameCanvasUI : MonoBehaviour
             ChangeVisible();
 
             m_DrawUI.gameObject.SetActive(m_isVisible);
+            m_ViewDrawUIBtn.gameObject.SetActive(!m_isVisible);
             CharacterCreator.SetCreatingCharaVisible(m_isVisible);
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
@@ -46,6 +47,7 @@ public class GameCanvasUI : MonoBehaviour
             ChangeVisible();
 
             m_DrawUI.gameObject.SetActive(m_isVisible);
+            m_ViewDrawUIBtn.gameObject.SetActive(!m_isVisible);
             CharacterCreator.SetCreatingCharaVisible(m_isVisible);
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
@@ -54,6 +56,7 @@ public class GameCanvasUI : MonoBehaviour
     private void Init()
     {
         m_DrawUI.gameObject.SetActive(m_isVisible);
+        m_ViewDrawUIBtn.gameObject.SetActive(!m_isVisible);
 
         GameManager.SetUpdateSleepText(UpdateSleepText);
         GameManager.SetRestartDrawing(RestartDrawing);
@@ -73,6 +76,6 @@ public class GameCanvasUI : MonoBehaviour
 
     private void RestartDrawing()
     {
-        gameObject.SetActive(true);
+        m_DrawUI.gameObject.SetActive(true);
     }
 }

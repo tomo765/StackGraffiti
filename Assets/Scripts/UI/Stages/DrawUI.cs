@@ -19,8 +19,12 @@ public class DrawUI : MonoBehaviour  //Ques : キャラを生成したら名前インプットを
 
     public bool IsInputNow => m_NameInput.isFocused;
 
-    public void Init(GameCanvasUI gameCanvasUI)
+    private Button m_ViewDrawUIBtn;
+
+    public void Init(GameCanvasUI gameCanvasUI, Button viewDrawUIBtn)
     {
+        m_ViewDrawUIBtn = viewDrawUIBtn;
+
         m_CreateButton.onClick.RemoveAllListeners();
         m_CreateButton.onClick.AddListener(() =>
         {
@@ -28,7 +32,9 @@ public class DrawUI : MonoBehaviour  //Ques : キャラを生成したら名前インプットを
             CharacterCreator.CreateOnStage(m_NameInput.text);
 
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
-            gameCanvasUI.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+            m_ViewDrawUIBtn.gameObject.SetActive(false);
+
         });
 
         m_RenameButton.onClick.RemoveAllListeners();
