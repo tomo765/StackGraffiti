@@ -39,11 +39,17 @@ public class ResultUI : MonoBehaviour
             m_NextStageButton.gameObject.SetActive(false);
             return;
         }
-        m_NextStageButton.onClick.AddListener(() =>
+        m_NextStageButton.onClick.AddListener(async() =>
         {
             if (SceneLoadExtension.IsFading) { return; }
-            OnPushResultButton(Config.SceneNames.m_StageNames[(int)GameManager.CullentStage]).FireAndForget();
+            await OnPushResultButton(Config.SceneNames.m_StageNames[(int)GameManager.CullentStage]);
             GameManager.StartStage(GameManager.CullentStage + 1);
+
+            DontDestroyCanvas.Instance.ChangeStageIntroUIVisible(true);  //ToDo : StageSelectUI ‚Å‚à—‚½ˆ—‚µ‚Ä‚é‚©‚çƒƒ\ƒbƒh‚É‚·‚é
+            DontDestroyCanvas.Instance.StageIntroUI.SetIntroText(GameManager.CullentStage.ToString(),
+                                                                 GeneralSettings.Instance.StageInfos.GetStageTextEN((int)GameManager.CullentStage),
+                                                                 GeneralSettings.Instance.StageInfos.GetStageTextJP((int)GameManager.CullentStage)
+                                                                );
         });
     }
 
