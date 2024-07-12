@@ -19,7 +19,7 @@ public class CommonButton : Button
 {
     [SerializeField] private Color m_EnterColor = Color.white;
     [SerializeField] private Color m_ExitColor = Color.white;
-    [SerializeField] private bool m_ScallingAlways = true;
+    [SerializeField] private bool m_ScallingAlways = false;
     [SerializeField] private bool m_IsScaling = true;
     [SerializeField] private bool m_IsStopScalling = true;
     [SerializeField] private bool m_ChangeColor = false;

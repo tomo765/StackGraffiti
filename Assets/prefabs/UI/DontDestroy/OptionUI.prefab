@@ -758,6 +758,7 @@ MonoBehaviour:
       m_Calls: []
   m_EnterColor: {r: 0, g: 0, b: 0, a: 0.39215687}
   m_ExitColor: {r: 0, g: 0, b: 0, a: 0}
+  m_ScallingAlways: 0
   m_IsScaling: 0
   m_IsStopScalling: 1
   m_ChangeColor: 1
@@ -966,6 +967,7 @@ MonoBehaviour:
       m_Calls: []
   m_EnterColor: {r: 1, g: 1, b: 1, a: 1}
   m_ExitColor: {r: 1, g: 1, b: 1, a: 1}
+  m_ScallingAlways: 0
   m_IsScaling: 0
   m_IsStopScalling: 1
   m_ChangeColor: 0

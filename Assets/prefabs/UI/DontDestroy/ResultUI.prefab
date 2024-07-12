@@ -123,7 +123,10 @@ MonoBehaviour:
       m_Calls: []
   m_EnterColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
   m_ExitColor: {r: 1, g: 1, b: 1, a: 1}
+  m_ScallingAlways: 0
   m_IsScaling: 1
+  m_IsStopScalling: 1
+  m_ChangeColor: 0
 --- !u!1 &834148159998486319
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +639,10 @@ MonoBehaviour:
       m_Calls: []
   m_EnterColor: {r: 0.78431374, g: 0.78431374, b: 1, a: 1}
   m_ExitColor: {r: 1, g: 1, b: 1, a: 1}
+  m_ScallingAlways: 0
   m_IsScaling: 1
+  m_IsStopScalling: 1
+  m_ChangeColor: 0
 --- !u!1 &5056655703347262096
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,7 +766,10 @@ MonoBehaviour:
       m_Calls: []
   m_EnterColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
   m_ExitColor: {r: 1, g: 1, b: 1, a: 1}
+  m_ScallingAlways: 0
   m_IsScaling: 1
+  m_IsStopScalling: 1
+  m_ChangeColor: 0
 --- !u!1 &5257872245863208934
 GameObject:
   m_ObjectHideFlags: 0
