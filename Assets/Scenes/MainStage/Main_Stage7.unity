@@ -444,21 +444,32 @@ PrefabInstance:
       objectReference: {fileID: 473324333}
     - target: {fileID: 6729617308120181269, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.0817738
+      value: 1.1635433
       objectReference: {fileID: 0}
     - target: {fileID: 6729617308120181269, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.0817738
+      value: 1.1635433
       objectReference: {fileID: 0}
     - target: {fileID: 6729617308120181269, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.0817738
+      value: 1.1635433
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
+--- !u!114 &602744933 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3887436227582367500, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
+  m_PrefabInstance: {fileID: 602744932}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1347b15776a7044e9696b227ae4bf1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &855741988
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,7 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SpawnArea: {fileID: 274939170}
-  m_GameCanvasUI: {fileID: 0}
+  m_GameCanvasUI: {fileID: 602744933}
 --- !u!1 &1360674039
 GameObject:
   m_ObjectHideFlags: 0

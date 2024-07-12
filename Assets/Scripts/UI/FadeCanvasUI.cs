@@ -82,7 +82,6 @@ public static class TaskExtension
         task.ContinueWith(x =>
         {
             Debug.LogException(new TaskCanceledException());
-            Debug.LogError("Task Errored");
         }, TaskContinuationOptions.OnlyOnFaulted);
     }
 }
