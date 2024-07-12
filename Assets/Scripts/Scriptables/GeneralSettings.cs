@@ -100,6 +100,7 @@ public class GeneralSettings : ScriptableObject
         [SerializeField] private ClickEffect m_ClickEffect;
         [SerializeField] private JumpEffect m_JumpEffect;
         [SerializeField] private ConfettiEffect m_ConfettiEffect;
+        [SerializeField] private SleepEffect m_SleepEffect;
 
         [SerializeField] private SoundManager m_SoundManager;
         [SerializeField] private EffectContainer m_EffectContainer;
@@ -115,6 +116,7 @@ public class GeneralSettings : ScriptableObject
         public ClickEffect ClickEffect => m_ClickEffect;
         public JumpEffect JumpEffect => m_JumpEffect;
         public ConfettiEffect ConfettiEffect => m_ConfettiEffect;
+        public SleepEffect SleepEffect => m_SleepEffect;
         public SoundManager SoundManager => m_SoundManager;
         public EffectContainer EffectContainer => m_EffectContainer;
     }
