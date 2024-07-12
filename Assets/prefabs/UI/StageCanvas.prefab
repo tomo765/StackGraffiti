@@ -109,10 +109,10 @@ RectTransform:
   - {fileID: 2703762734228379514}
   m_Father: {fileID: 1911152671767312604}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 856.4}
-  m_SizeDelta: {x: 930.7477, y: 164.6146}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 316.40002}
+  m_SizeDelta: {x: 930.7477, y: 164.61462}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5872214847765487724
 CanvasRenderer:
@@ -198,6 +198,7 @@ MonoBehaviour:
       m_Calls: []
   m_EnterColor: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
   m_ExitColor: {r: 1, g: 1, b: 1, a: 1}
+  m_ScallingAlways: 1
   m_IsScaling: 1
   m_IsStopScalling: 1
   m_ChangeColor: 0
@@ -324,6 +325,7 @@ MonoBehaviour:
       m_Calls: []
   m_EnterColor: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
   m_ExitColor: {r: 1, g: 1, b: 1, a: 1}
+  m_ScallingAlways: 0
   m_IsScaling: 1
   m_IsStopScalling: 1
   m_ChangeColor: 0
@@ -499,7 +501,6 @@ MonoBehaviour:
   m_DrawUI: {fileID: 8220117502162674078}
   m_ViewStageBtn: {fileID: 5957227737394188388}
   m_ViewDrawUIBtn: {fileID: 232105666061344660}
-  m_LookButtonText: {fileID: 6901519039192495941}
 --- !u!1 &1508047268637306535
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,6 +759,7 @@ MonoBehaviour:
       m_Calls: []
   m_EnterColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
   m_ExitColor: {r: 1, g: 1, b: 1, a: 1}
+  m_ScallingAlways: 0
   m_IsScaling: 1
   m_IsStopScalling: 1
   m_ChangeColor: 0
@@ -917,7 +919,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CreateButton: {fileID: 2365871667345684612}
-  m_LookButton: {fileID: 232105666061344660}
   m_RenameButton: {fileID: 5176960487812515140}
   m_ReturnButton: {fileID: 6207683996401645112}
   m_NameInput: {fileID: 6449122217989721536}
@@ -1064,8 +1065,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Go to Stage Select
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf6170907dddf7246b827438e2d34f4e, type: 2}
+  m_sharedMaterial: {fileID: -1290955932652177083, guid: bf6170907dddf7246b827438e2d34f4e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1578,8 +1579,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000081383, y: -959}
-  m_SizeDelta: {x: 476.839, y: 172.72}
+  m_AnchoredPosition: {x: 0, y: -945}
+  m_SizeDelta: {x: 585, y: 173}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1316100324233364027
 CanvasRenderer:
@@ -1665,6 +1666,7 @@ MonoBehaviour:
       m_Calls: []
   m_EnterColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
   m_ExitColor: {r: 1, g: 1, b: 1, a: 1}
+  m_ScallingAlways: 0
   m_IsScaling: 1
   m_IsStopScalling: 1
   m_ChangeColor: 0
@@ -2159,6 +2161,7 @@ MonoBehaviour:
       m_Calls: []
   m_EnterColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
   m_ExitColor: {r: 1, g: 1, b: 1, a: 1}
+  m_ScallingAlways: 0
   m_IsScaling: 1
   m_IsStopScalling: 1
   m_ChangeColor: 0
@@ -2229,8 +2232,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf6170907dddf7246b827438e2d34f4e, type: 2}
+  m_sharedMaterial: {fileID: -1290955932652177083, guid: bf6170907dddf7246b827438e2d34f4e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
