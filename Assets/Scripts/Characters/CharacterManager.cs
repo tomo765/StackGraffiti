@@ -16,8 +16,10 @@ public class CharacterManager : MonoBehaviour
     private Rigidbody2D m_Rb2d;
     private PolygonCollider2D m_PolygonCollider2D;
     private CharacterController m_Controller;
+    private SleepEffect m_SleepEffect;
 
     private bool m_IsDead = false;
+    private Vector3 m_SleepEffectPos = new Vector3(1, 1, 0);
 
     public SpriteRenderer EyeRenderer => m_EyeRender;
     public Rigidbody2D Rb2D => m_Rb2d;
@@ -32,6 +34,12 @@ public class CharacterManager : MonoBehaviour
 
         Poly2D.enabled = false;
         m_Controller.SetManagerMember(m_Rb2d, OnSleep);
+    }
+
+    private void FixedUpdate()
+    {
+        if(m_SleepEffect == null) { return; }
+        m_SleepEffect.transform.position = transform.position + m_SleepEffectPos;
     }
 
     public void CreateOnStage(string playerName)
@@ -64,7 +72,7 @@ public class CharacterManager : MonoBehaviour
         switch (tag)
         {
             case "Dead":
-                OnDead().FireAndForget();
+                OnDead();
                 break;
             case "Needle":
                 SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.TouchNeedleSE);
@@ -82,6 +90,9 @@ public class CharacterManager : MonoBehaviour
         else
         {
             m_IsDead = true;
+            m_SleepEffect = Instantiate(GeneralSettings.Instance.Prehab.SleepEffect, transform.position, Quaternion.identity, EffectContainer.Instance.transform);
+            EffectContainer.Instance.AddEffect(m_SleepEffect);
+            //EffectContainer.Instance.PlayEffect(GeneralSettings.Instance.Prehab.SleepEffect, transform.position);
 
             m_Rb2d.useAutoMass = false;
             m_Rb2d.mass *= 1.2f;
@@ -104,11 +115,10 @@ public class CharacterManager : MonoBehaviour
         OnSleep().FireAndForget();
     }
 
-    private async Task OnDead()
+    private void OnDead()
     {
         Destroy(gameObject);
         if (m_IsDead) { return; }
-        await Task.Delay(TaskExtension.OneSec, GameManager.Source.Token);
         
         GameManager.SleepCharacter();
     }
