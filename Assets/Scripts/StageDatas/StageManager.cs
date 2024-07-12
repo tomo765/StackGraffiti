@@ -43,7 +43,6 @@ public class StageManager : MonoBehaviour
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
         await SceneLoadExtension.StartFadeIn();
         EffectContainer.Instance.StopAllEffect();
-
         await SceneLoadExtension.StartFadeWait(Config.SceneNames.StageSelect);
         SoundManager.Instance.PlayMarimba(0);
 

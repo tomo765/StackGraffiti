@@ -83,6 +83,9 @@ public class CharacterManager : MonoBehaviour
 
     private async Task OnSleep()
     {
+        if (GameManager.IsHowToPlay) { return; }
+
+        GameManager.SetGameState(GameState.Drawing);
         if (!GetComponent<Renderer>().isVisible) //âÊñ äOÇ≈ëÄçÏïsî\Ç…Ç»Ç¡ÇΩÇÁçÌèú
         { 
             Destroy(gameObject);
@@ -92,7 +95,6 @@ public class CharacterManager : MonoBehaviour
             m_IsDead = true;
             m_SleepEffect = Instantiate(GeneralSettings.Instance.Prehab.SleepEffect, transform.position, Quaternion.identity, EffectContainer.Instance.transform);
             EffectContainer.Instance.AddEffect(m_SleepEffect);
-            //EffectContainer.Instance.PlayEffect(GeneralSettings.Instance.Prehab.SleepEffect, transform.position);
 
             m_Rb2d.useAutoMass = false;
             m_Rb2d.mass *= 1.2f;
