@@ -33,7 +33,9 @@ public class StageSelectButton : MonoBehaviour
             await SceneLoadExtension.StartFadeOut();
 
             DontDestroyCanvas.Instance.ChangeStageIntroUIVisible(true);
-            DontDestroyCanvas.Instance.StageIntroUI.SetIntroText("Stage " + m_StageLevel.ToString(), GeneralSettings.Instance.StageInfos.GetStageText(stageNum));
+            DontDestroyCanvas.Instance.StageIntroUI.SetIntroText("Stage " + m_StageLevel.ToString(), 
+                                                                 GeneralSettings.Instance.StageInfos.GetStageTextEN(stageNum),
+                                                                 GeneralSettings.Instance.StageInfos.GetStageTextJP(stageNum));
         });
 
         for (int i = 0; i < StageDataUtility.StageDatas.StageScores[stageNum - 1].StarLevel; i++)

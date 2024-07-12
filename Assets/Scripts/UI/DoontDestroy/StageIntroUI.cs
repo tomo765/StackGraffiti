@@ -12,7 +12,8 @@ using System.Threading;
 public class StageIntroUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI m_StageText;
-    [SerializeField] private TextMeshProUGUI m_TitleText;
+    [SerializeField] private TextMeshProUGUI m_TitleTextEN;
+    [SerializeField] private TextMeshProUGUI m_TitleTextJP;
     [SerializeField] private float m_PlaySpeed;
     [SerializeField] private Animator m_Animator;
     [SerializeField] private Image m_IntroImage;
@@ -49,10 +50,11 @@ public class StageIntroUI : MonoBehaviour
         ShowIntro().FireAndForget();
         ShowTexts().FireAndForget();
     }
-    public void SetIntroText(string stageTxt, string TitleTxt)
+    public void SetIntroText(string stageTxt, string TitleTextEN, string TitleTextJP)
     {
         m_StageText.text = stageTxt;
-        m_TitleText.text = TitleTxt;
+        m_TitleTextEN.text = TitleTextEN;
+        m_TitleTextJP.text = TitleTextJP;
     }
 
     private void Init()
@@ -61,7 +63,8 @@ public class StageIntroUI : MonoBehaviour
 
         m_IntroImage.color = ColorExtension.WhiteClearness;
         m_StageText.color = ColorExtension.BlackClearness;
-        m_TitleText.color = ColorExtension.BlackClearness;
+        m_TitleTextEN.color = ColorExtension.BlackClearness;
+        m_TitleTextJP.color = ColorExtension.BlackClearness;
         m_Animator.speed = m_PlaySpeed;
     }
 
@@ -95,11 +98,12 @@ public class StageIntroUI : MonoBehaviour
     private async Task ShowTitleText()
     {
         await TaskExtension.WaitUntiil(() => StartShowTitleText);
-        while (m_TitleText.color.a < 0.98f)
+        while (m_TitleTextEN.color.a < 0.98f)
         {
-            var newCol = m_TitleText.color;
+            var newCol = m_TitleTextEN.color;
             newCol.a = Mathf.Lerp(newCol.a, 1, 0.25f);
-            m_TitleText.color = newCol;
+            m_TitleTextEN.color = newCol;
+            m_TitleTextJP.color = newCol;
 
             await Task.Delay(TaskExtension.FPS_60);
             m_Source.Token.ThrowIfCancellationRequested();
@@ -135,7 +139,8 @@ public class StageIntroUI : MonoBehaviour
             newCol = m_StageText.color;
             newCol.a = Mathf.Lerp(newCol.a, 0, 0.1f);
             m_StageText.color = newCol;
-            m_TitleText.color = newCol;
+            m_TitleTextEN.color = newCol;
+            m_TitleTextJP.color = newCol;
 
             await Task.Delay(TaskExtension.FPS_60);
             m_Source.Token.ThrowIfCancellationRequested();
