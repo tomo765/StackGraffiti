@@ -52,7 +52,7 @@ public class ResultUI : MonoBehaviour
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
         await SceneLoadExtension.StartFadeIn();
 
-        EffectContainer.Instance.StopEffect<ConfettiEffect>();
+        EffectContainer.Instance.StopAllEffect();
         GameManager.CheckStarLevel();
         DontDestroyCanvas.Instance.ChangeResultUIVisible(false);
 

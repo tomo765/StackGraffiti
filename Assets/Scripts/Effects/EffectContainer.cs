@@ -21,7 +21,6 @@ public class EffectContainer : MonoBehaviour  //ToDo : Managerに名前変えた方がい
     [SerializeField] private int m_MaxContain = 20;
 
     private List<IContainEffectBase> m_Effects;
-    private Transform m_Transform;
 
     private void Awake()
     {
@@ -39,7 +38,6 @@ public class EffectContainer : MonoBehaviour  //ToDo : Managerに名前変えた方がい
         DontDestroyOnLoad(gameObject);
 
         m_Effects = new List<IContainEffectBase>(m_MaxContain);
-        m_Transform = transform;
     }
 
     public void PlayEffect<T>(T playEff, Vector3 vec) where T : IContainEffectBase, new()
@@ -61,11 +59,17 @@ public class EffectContainer : MonoBehaviour  //ToDo : Managerに名前変えた方がい
 
         if(eff == null)
         {
-            eff = playEff.Create(vec, Quaternion.identity, m_Transform);
+            eff = playEff.Create(vec, Quaternion.identity, transform);
             m_Effects.Add(eff);
         }
 
         eff.Play(vec);
+    }
+
+    public void AddEffect<T>(T effect) where T : IContainEffectBase, new()
+    {
+        if (effect == null) { return; }
+        m_Effects.Add(effect);
     }
 
     public void StopEffect<T>() where T : IContainEffectBase, new()
@@ -73,6 +77,13 @@ public class EffectContainer : MonoBehaviour  //ToDo : Managerに名前変えた方がい
         if (!TryGetEffects<T>(out IContainEffectBase[] effects)) { return; }
 
         effects[0].StopEffect();
+    }
+    public void StopAllEffect()
+    {
+        foreach (var effect in m_Effects)
+        {
+            effect.StopEffect();
+        }
     }
 
     private bool TryGetEffects<T>(out IContainEffectBase[] effects) where T : IContainEffectBase, new()

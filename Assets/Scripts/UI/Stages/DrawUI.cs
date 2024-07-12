@@ -50,6 +50,7 @@ public class DrawUI : MonoBehaviour  //Ques : キャラを生成したら名前インプットを
         {
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
             await SceneLoadExtension.StartFadeIn();
+            EffectContainer.Instance.StopAllEffect();
             await SceneLoadExtension.StartFadeWait(Config.SceneNames.StageSelect);
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeOut);
             await SceneLoadExtension.StartFadeOut();
