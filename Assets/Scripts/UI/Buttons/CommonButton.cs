@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using UnityEditor;
 using System;
 using System.Threading.Tasks;
+using System.Threading;
+
 
 
 #if UNITY_EDITOR
@@ -24,6 +26,8 @@ public class CommonButton : Button
 
     private bool m_PointerEntering = false;
     private Vector3 m_DefaultScale;
+
+    private CancellationTokenSource m_Source;
 
 #if UNITY_EDITOR
 
@@ -70,7 +74,11 @@ public class CommonButton : Button
     private new void Start()
     {
         m_DefaultScale = transform.localScale;
-        if (m_ScallingAlways) { PlayScaling().FireAndForget(); }
+        if (m_ScallingAlways) 
+        {
+            m_Source = new CancellationTokenSource();
+            PlayScaling().FireAndForget(); 
+        }
     }
 
     public override void OnPointerEnter(PointerEventData eventData)
@@ -119,8 +127,14 @@ public class CommonButton : Button
             transform.localScale = m_DefaultScale * (-Mathf.Cos(time) * 0.06f + 1.06f);
             time += TaskExtension.FPS_60 / 1000f * speed;
             await Task.Delay(TaskExtension.FPS_60);
+            m_Source?.Token.ThrowIfCancellationRequested();
         }
         transform.localScale = m_DefaultScale;
+    }
+
+    private new void OnDestroy()
+    {
+        m_Source?.Cancel();
     }
 }
 
