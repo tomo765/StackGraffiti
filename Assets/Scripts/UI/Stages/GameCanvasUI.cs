@@ -8,37 +8,52 @@ public class GameCanvasUI : MonoBehaviour
 {
     [SerializeField] TMPText m_SleepCount;
     [SerializeField] DrawUI m_DrawUI;
-    [SerializeField] private Button m_LookButton;
-    [SerializeField] private TMPText m_LookButtonText;
+    [SerializeField] private Button m_ViewStageBtn;
+    [SerializeField] private Button m_ViewDrawUIBtn;
 
     private bool m_isVisible = false;
-
-    private const string ViewStage = "Look Stage";
-    private const string CreateCharacter = "To Create Character";
 
     public bool IsInputNameNow => m_DrawUI.IsInputNow;
 
 
     void Start()
     {
+        SetViewStageButton();
+        SetViewDrawUIButton();
+
         Init();
+        m_DrawUI.Init(this);
         UpdateSleepText();
     }
 
-    private void Init()
+    void SetViewStageButton()
     {
-        m_LookButton.onClick.RemoveAllListeners();
-        m_LookButton.onClick.AddListener(() =>
+        m_ViewStageBtn.onClick.RemoveAllListeners();
+        m_ViewStageBtn.onClick.AddListener(() =>
         {
             ChangeVisible();
-            SetLookBtnText();
 
             m_DrawUI.gameObject.SetActive(m_isVisible);
             CharacterCreator.SetCreatingCharaVisible(m_isVisible);
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
+    }
+    void SetViewDrawUIButton()
+    {
+        m_ViewDrawUIBtn.onClick.RemoveAllListeners();
+        m_ViewDrawUIBtn.onClick.AddListener(() =>
+        {
+            ChangeVisible();
+
+            m_DrawUI.gameObject.SetActive(m_isVisible);
+            CharacterCreator.SetCreatingCharaVisible(m_isVisible);
+            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
+        });
+    }
+
+    private void Init()
+    {
         m_DrawUI.gameObject.SetActive(m_isVisible);
-        SetLookBtnText();
 
         GameManager.SetUpdateSleepText(UpdateSleepText);
         GameManager.SetRestartDrawing(RestartDrawing);
@@ -50,7 +65,6 @@ public class GameCanvasUI : MonoBehaviour
     {
         m_isVisible = !m_isVisible;
     }
-    private void SetLookBtnText() => m_LookButtonText.text = m_isVisible ? ViewStage : CreateCharacter;
 
     private void UpdateSleepText()
     {
@@ -59,7 +73,6 @@ public class GameCanvasUI : MonoBehaviour
 
     private void RestartDrawing()
     {
-        m_DrawUI.gameObject.SetActive(true);
-        m_LookButton.gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
 }

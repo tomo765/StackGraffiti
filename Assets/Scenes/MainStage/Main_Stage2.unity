@@ -2573,6 +2573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SpawnArea: {fileID: 274939170}
+  m_GameCanvasUI: {fileID: 1792393056}
 --- !u!1 &1335628094
 GameObject:
   m_ObjectHideFlags: 0
@@ -3624,6 +3625,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
+--- !u!114 &1792393056 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3887436227582367500, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
+  m_PrefabInstance: {fileID: 1792393055}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1347b15776a7044e9696b227ae4bf1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1928552275
 PrefabInstance:
   m_ObjectHideFlags: 0

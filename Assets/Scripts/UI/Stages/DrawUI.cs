@@ -11,20 +11,15 @@ using UnityEngine.EventSystems;
 public class DrawUI : MonoBehaviour  //Ques : キャラを生成したら名前インプットを消す?
 {
     [SerializeField] private Button m_CreateButton;
-    [SerializeField] private Button m_LookButton;
     [SerializeField] private Button m_RenameButton;
     [SerializeField] private Button m_ReturnButton;
+
     [SerializeField] private TInputField m_NameInput;
     [SerializeField] private CharacterDraw m_DrawArea;
 
     public bool IsInputNow => m_NameInput.isFocused;
 
-    void Start()
-    {
-        Init();
-    }
-
-    private void Init()
+    public void Init(GameCanvasUI gameCanvasUI)
     {
         m_CreateButton.onClick.RemoveAllListeners();
         m_CreateButton.onClick.AddListener(() =>
@@ -33,9 +28,7 @@ public class DrawUI : MonoBehaviour  //Ques : キャラを生成したら名前インプットを
             CharacterCreator.CreateOnStage(m_NameInput.text);
 
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
-
-            gameObject.SetActive(false);
-            m_LookButton.gameObject.SetActive(false);
+            gameCanvasUI.gameObject.SetActive(false);
         });
 
         m_RenameButton.onClick.RemoveAllListeners();

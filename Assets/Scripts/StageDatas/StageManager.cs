@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class StageManager : MonoBehaviour
 {
     [SerializeField] GameObject m_SpawnArea;
-    
+    [SerializeField] private GameCanvasUI m_GameCanvasUI;
 
     void Start()
     {
@@ -53,7 +53,7 @@ public class StageManager : MonoBehaviour
     private async Task ResetStage()
     {
         if (!DontDestroyCanvas.Instance.StageIntroUI.FinishFadeOut) { return; }
-        if (FindFirstObjectByType<GameCanvasUI>().IsInputNameNow) { return; }
+        if (m_GameCanvasUI.IsInputNameNow) { return; }
         if (GameManager.IsClear) { return; }
         if (SceneLoadExtension.IsFading) { return; }
 

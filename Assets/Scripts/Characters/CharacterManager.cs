@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CharacterManager : MonoBehaviour
 {
@@ -108,10 +106,9 @@ public class CharacterManager : MonoBehaviour
 
     private async Task OnDead()
     {
-        await Task.Delay(TaskExtension.OneSec, GameManager.Source.Token);
-
         Destroy(gameObject);
-        if(m_IsDead) { return; }
+        if (m_IsDead) { return; }
+        await Task.Delay(TaskExtension.OneSec, GameManager.Source.Token);
         
         GameManager.SleepCharacter();
     }
