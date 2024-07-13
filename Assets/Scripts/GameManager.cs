@@ -69,6 +69,7 @@ public static class GameManager
 
         StageDataUtility.SetStageScore(m_CullentStage, m_SleepCount);
         DontDestroyCanvas.Instance.ChangeResultUIVisible(true);
+        DontDestroyCanvas.Instance.ResultUI.SetStar();
     }
 
     public static void CheckStarLevel()

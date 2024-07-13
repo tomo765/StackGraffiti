@@ -17,7 +17,6 @@ public class ResultUI : MonoBehaviour
     void Start()
     {
         Init();
-        SetStar();
     }
 
     private void Init()
