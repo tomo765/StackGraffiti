@@ -103,7 +103,7 @@ RectTransform:
   m_GameObject: {fileID: 109920337042729531}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2195439, y: 1.2195439, z: 1.2195439}
+  m_LocalScale: {x: 1.3295406, y: 1.3295406, z: 1.3295406}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2703762734228379514}
@@ -379,7 +379,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DrawUI: {fileID: 8220117502162674078}
-  m_Rect: {fileID: 0}
 --- !u!1 &1318833172722305346
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,8 +797,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 629.53, y: 490}
-  m_SizeDelta: {x: 660.938, y: 100}
+  m_AnchoredPosition: {x: -717.98, y: 319}
+  m_SizeDelta: {x: 356.0432, y: 77.44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2561819467781167560
 CanvasRenderer:
@@ -829,7 +828,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press Q to show operation
+  m_text: 'Q : operation'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bf6170907dddf7246b827438e2d34f4e, type: 2}
   m_sharedMaterial: {fileID: -1290955932652177083, guid: bf6170907dddf7246b827438e2d34f4e, type: 2}
@@ -863,7 +862,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
