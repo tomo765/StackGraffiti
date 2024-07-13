@@ -70,7 +70,7 @@ public class GameCanvasUI : MonoBehaviour
 
     private void UpdateSleepText()
     {
-        m_SleepCount.text = "Sleep Count : " + GameManager.SleepCount.ToString();
+        m_SleepCount.text = "x " + GameManager.SleepCount.ToString();
     }
 
     private void RestartDrawing()
