@@ -11,6 +11,9 @@ using System.Threading;
 /// </summary>
 public class StageIntroUI : MonoBehaviour
 {
+    private const float TextLerpValue = 0.25f;
+    private const float FadeLerpValue = 0.1f;
+
     [SerializeField] private TextMeshProUGUI m_StageText;
     [SerializeField] private TextMeshProUGUI m_TitleTextEN;
     [SerializeField] private TextMeshProUGUI m_TitleTextJP;
@@ -86,11 +89,12 @@ public class StageIntroUI : MonoBehaviour
     }
     private async Task ShowStageText()
     {
+        float finishFade = 0.98f;
         await TaskExtension.WaitUntiil(() => StartShowStageText);
-        while (m_StageText.color.a < 0.98f)
+        while (m_StageText.color.a < finishFade)
         {
             var newCol = m_StageText.color;
-            newCol.a = Mathf.Lerp(newCol.a, 1, 0.25f);
+            newCol.a = Mathf.Lerp(newCol.a, 1, TextLerpValue);
             m_StageText.color = newCol;
 
             await Task.Delay(TaskExtension.FPS_60);
@@ -99,11 +103,12 @@ public class StageIntroUI : MonoBehaviour
     }
     private async Task ShowTitleText()
     {
+        float finishFade = 0.98f;
         await TaskExtension.WaitUntiil(() => StartShowTitleText);
-        while (m_TitleTextEN.color.a < 0.98f)
+        while (m_TitleTextEN.color.a < finishFade)
         {
             var newCol = m_TitleTextEN.color;
-            newCol.a = Mathf.Lerp(newCol.a, 1, 0.25f);
+            newCol.a = Mathf.Lerp(newCol.a, 1, TextLerpValue);
             m_TitleTextEN.color = newCol;
             m_TitleTextJP.color = newCol;
 
@@ -115,13 +120,14 @@ public class StageIntroUI : MonoBehaviour
     private async Task ShowStartText()
     {
         int displayTime = 0;
+        int fadeCycleTime = TaskExtension.OneSec / 2 * 3;
         while (!InputExtension.MouseLeftPush)
         {
             displayTime += TaskExtension.FPS_60;
             m_StartText.gameObject.SetActive(displayTime <= TaskExtension.OneSec);
-            if (displayTime >= TaskExtension.OneSec / 2 * 3)
+            if (displayTime >= fadeCycleTime)
             {
-                displayTime -= TaskExtension.OneSec / 2 * 3;
+                displayTime -= fadeCycleTime;
             }
 
             await Task.Delay(TaskExtension.FPS_60);
@@ -132,10 +138,11 @@ public class StageIntroUI : MonoBehaviour
 
     private async Task FadeIn()
     {
-        while (m_IntroImage.color.a < 0.98f)
+        float finishFade = 0.98f;
+        while (m_IntroImage.color.a < finishFade)
         {
             var newCol = m_IntroImage.color;
-            newCol.a = Mathf.Lerp(newCol.a, 1, 0.1f);
+            newCol.a = Mathf.Lerp(newCol.a, 1, FadeLerpValue);
             m_IntroImage.color = newCol;
 
             await Task.Delay(TaskExtension.FPS_60);
@@ -144,19 +151,20 @@ public class StageIntroUI : MonoBehaviour
     }
     private async Task FadeOut()
     {
+        float finishFade = 0.005f;
         Color newCol;
-        while (m_IntroImage.color.a > 0.005f)
+        while (m_IntroImage.color.a > finishFade)
         {
             newCol = m_IntroImage.color;
-            newCol.a = Mathf.Lerp(newCol.a, 0, 0.1f);
+            newCol.a = Mathf.Lerp(newCol.a, 0, FadeLerpValue);
             m_IntroImage.color = newCol;
 
             newCol = m_BGImage.color;
-            newCol.a = Mathf.Lerp(newCol.a, 0, 0.1f);
+            newCol.a = Mathf.Lerp(newCol.a, 0, FadeLerpValue);
             m_BGImage.color = newCol;
 
             newCol = m_StageText.color;
-            newCol.a = Mathf.Lerp(newCol.a, 0, 0.1f);
+            newCol.a = Mathf.Lerp(newCol.a, 0, FadeLerpValue);
             m_StageText.color = newCol;
             m_TitleTextEN.color = newCol;
             m_TitleTextJP.color = newCol;
