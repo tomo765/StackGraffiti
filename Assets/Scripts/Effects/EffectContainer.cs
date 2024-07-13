@@ -66,12 +66,6 @@ public class EffectContainer : MonoBehaviour  //ToDo : Manager‚É–¼‘O•Ï‚¦‚½•û‚ª‚¢
         eff.Play(vec);
     }
 
-    public void AddEffect<T>(T effect) where T : IContainEffectBase, new()
-    {
-        if (effect == null) { return; }
-        m_Effects.Add(effect);
-    }
-
     public void StopEffect<T>() where T : IContainEffectBase, new()
     {
         if (!TryGetEffects<T>(out IContainEffectBase[] effects)) { return; }
@@ -86,6 +80,30 @@ public class EffectContainer : MonoBehaviour  //ToDo : Manager‚É–¼‘O•Ï‚¦‚½•û‚ª‚¢
         }
     }
 
+    public T GetEffect<T>(T effect) where T : IContainEffectBase, new()
+    {
+        T newEffect;
+        if (TryGetEffects<T>(out IContainEffectBase[] effects)) 
+        {
+            var sameEffects = effects.Where(effect => !effect.IsActive).ToArray();
+            if(sameEffects.Length == 0)
+            {
+                newEffect = (T)effect.Create(Vector3.zero, Quaternion.identity, transform);
+                m_Effects.Add(newEffect);
+            }
+            else
+            {
+                newEffect = (T)sameEffects[0];
+                newEffect.Play(Vector2.zero);
+            }
+            
+            return newEffect;
+        }
+
+        newEffect = (T)effect.Create(Vector3.zero, Quaternion.identity, transform);
+        m_Effects.Add(newEffect);
+        return newEffect;
+    }
     private bool TryGetEffects<T>(out IContainEffectBase[] effects) where T : IContainEffectBase, new()
     {
         effects = m_Effects.Where(effects => effects is T)
@@ -93,5 +111,6 @@ public class EffectContainer : MonoBehaviour  //ToDo : Manager‚É–¼‘O•Ï‚¦‚½•û‚ª‚¢
 
         if(effects.Length == 0) { return false; }
         return true;
-    } 
+    }
+
 }

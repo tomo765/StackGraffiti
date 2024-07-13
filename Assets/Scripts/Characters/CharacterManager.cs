@@ -93,8 +93,8 @@ public class CharacterManager : MonoBehaviour
         else
         {
             m_IsDead = true;
-            m_SleepEffect = Instantiate(GeneralSettings.Instance.Prehab.SleepEffect, transform.position, Quaternion.identity, EffectContainer.Instance.transform);
-            EffectContainer.Instance.AddEffect(m_SleepEffect);
+            m_SleepEffect = EffectContainer.Instance.GetEffect(GeneralSettings.Instance.Prehab.SleepEffect);
+            m_SleepEffect.transform.position = transform.position;
 
             m_Rb2d.useAutoMass = false;
             m_Rb2d.mass *= 1.2f;
@@ -120,8 +120,9 @@ public class CharacterManager : MonoBehaviour
     private void OnDead()
     {
         Destroy(gameObject);
+        m_SleepEffect?.gameObject.SetActive(false);
         if (m_IsDead) { return; }
-        
+
         GameManager.SleepCharacter();
     }
 
