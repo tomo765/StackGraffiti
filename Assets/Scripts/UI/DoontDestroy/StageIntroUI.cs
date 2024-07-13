@@ -14,6 +14,7 @@ public class StageIntroUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_StageText;
     [SerializeField] private TextMeshProUGUI m_TitleTextEN;
     [SerializeField] private TextMeshProUGUI m_TitleTextJP;
+    [SerializeField] private TextMeshProUGUI m_StartText;
     [SerializeField] private float m_PlaySpeed;
     [SerializeField] private Animator m_Animator;
     [SerializeField] private Image m_IntroImage;
@@ -22,7 +23,7 @@ public class StageIntroUI : MonoBehaviour
     private CancellationTokenSource m_Source = new CancellationTokenSource();
     private bool m_FinishAnimation => StateInfo.normalizedTime >= 1;
     private bool m_FinishFadeOut = false;
-    
+
     public bool FinishFadeOut => m_FinishFadeOut;
     private AnimatorStateInfo StateInfo => m_Animator.GetCurrentAnimatorStateInfo(0);
     private float AnimationTime => StateInfo.length * StateInfo.normalizedTime;
@@ -72,7 +73,8 @@ public class StageIntroUI : MonoBehaviour
     {
         await FadeIn();
         await TaskExtension.WaitUntiil(() => m_FinishAnimation);
-        await Task.Delay(300);
+        await ShowStartText();
+        //await TaskExtension.WaitUntiil(() => InputExtension.MouseLeftPush);
         await FadeOut();
 
         gameObject.SetActive(false);
@@ -108,6 +110,23 @@ public class StageIntroUI : MonoBehaviour
             await Task.Delay(TaskExtension.FPS_60);
             m_Source.Token.ThrowIfCancellationRequested();
         }
+    }
+
+    private async Task ShowStartText()
+    {
+        int displayTime = 0;
+        while (!InputExtension.MouseLeftPush)
+        {
+            displayTime += TaskExtension.FPS_60;
+            m_StartText.gameObject.SetActive(displayTime <= TaskExtension.OneSec);
+            if (displayTime >= TaskExtension.OneSec / 2 * 3)
+            {
+                displayTime -= TaskExtension.OneSec / 2 * 3;
+            }
+
+            await Task.Delay(TaskExtension.FPS_60);
+        }
+        m_StartText.gameObject.SetActive(false);
     }
 
 
