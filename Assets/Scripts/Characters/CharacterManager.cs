@@ -84,6 +84,7 @@ public class CharacterManager : MonoBehaviour
     private async Task OnSleep()
     {
         if (GameManager.IsHowToPlay) { return; }
+        if(SceneLoadExtension.IsFading) { return; }
 
         GameManager.SetGameState(GameState.Drawing);
         if (!GetComponent<Renderer>().isVisible) //‰æ–ÊŠO‚Å‘€ì•s”\‚É‚È‚Á‚½‚çíœ
