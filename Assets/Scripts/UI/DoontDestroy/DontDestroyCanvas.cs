@@ -25,6 +25,7 @@ public class DontDestroyCanvas : MonoBehaviour
 
     private Canvas m_Canvas;
 
+    public ResultUI ResultUI => m_ResultUI;
     public StageIntroUI StageIntroUI => m_StageIntroUI;
 
     private void Init()
@@ -60,6 +61,6 @@ public class DontDestroyCanvas : MonoBehaviour
         m_StageIntroUI ??= Instantiate(GeneralSettings.Instance.Prehab.StageIntroUI, transform);
 
         m_StageIntroUI.gameObject.SetActive(b);
-        m_StageIntroUI.PlayIntro();
+        m_StageIntroUI.PlayIntro().FireAndForget();
     }
 }

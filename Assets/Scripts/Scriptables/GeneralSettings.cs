@@ -100,6 +100,7 @@ public class GeneralSettings : ScriptableObject
         [SerializeField] private ClickEffect m_ClickEffect;
         [SerializeField] private JumpEffect m_JumpEffect;
         [SerializeField] private ConfettiEffect m_ConfettiEffect;
+        [SerializeField] private SleepEffect m_SleepEffect;
 
         [SerializeField] private SoundManager m_SoundManager;
         [SerializeField] private EffectContainer m_EffectContainer;
@@ -115,6 +116,7 @@ public class GeneralSettings : ScriptableObject
         public ClickEffect ClickEffect => m_ClickEffect;
         public JumpEffect JumpEffect => m_JumpEffect;
         public ConfettiEffect ConfettiEffect => m_ConfettiEffect;
+        public SleepEffect SleepEffect => m_SleepEffect;
         public SoundManager SoundManager => m_SoundManager;
         public EffectContainer EffectContainer => m_EffectContainer;
     }
@@ -138,18 +140,21 @@ public class GeneralSettings : ScriptableObject
 
         public int GetCullentLevel(StageType type, int sleepCnt) => GetStageInfo(type).GetStarLevel(sleepCnt);
         private StageInfomation GetStageInfo(StageType stg) => Array.Find(Stages, stage => stage.StageType == stg);
-        public string GetStageText(int stg) => Array.Find(Stages, stage => stage.StageType == (StageType)stg).StageTitle;
+        public string GetStageTextEN(int stg) => Array.Find(Stages, stage => stage.StageType == (StageType)stg).StageTitleEN;
+        public string GetStageTextJP(int stg) => Array.Find(Stages, stage => stage.StageType == (StageType)stg).StageTitleJP;
 
         [System.Serializable]
         public class StageInfomation
         {
             [SerializeField] private StageType m_StageType;
-            [SerializeField] private string m_StageTitle;
+            [SerializeField] private string m_StageTitleJP;
+            [SerializeField] private string m_StageTitleEN;
             [SerializeField] private int m_ThreeStar;
             [SerializeField] private int m_TwoStar;
 
             public StageType StageType => m_StageType;
-            public string StageTitle => m_StageTitle;
+            public string StageTitleJP => m_StageTitleJP;
+            public string StageTitleEN => m_StageTitleEN;
 
             public int GetStarLevel(int sleepCnt)
             {

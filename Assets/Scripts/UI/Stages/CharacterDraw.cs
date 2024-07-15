@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class CharacterDraw : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private DrawUI m_DrawUI;
-    [SerializeField] private RectTransform m_Rect;
+    private RectTransform m_Rect;
 
     private Mesh m_CharaMesh;
     private List<Vector2> m_MeshPoints;

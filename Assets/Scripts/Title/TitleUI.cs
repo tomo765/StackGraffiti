@@ -19,7 +19,7 @@ public class TitleUI : MonoBehaviour
         SetFinishButton();
 
         GameManager.CheckStarLevel();
-        m_Video.Play();
+        SetVideoPlayer();
     }
 
     private void SetStartButton()
@@ -34,6 +34,14 @@ public class TitleUI : MonoBehaviour
             await SceneLoadExtension.StartFadeOut();
         });
     }
+
+    private void SetVideoPlayer()
+    {
+        m_Video.Prepare();
+        m_Video.prepareCompleted += OnPrepareCompleted;
+        void OnPrepareCompleted(VideoPlayer player) => player.Play();
+    }
+
     private void SetFinishButton()
     {
         m_FinishButton.onClick.RemoveAllListeners();

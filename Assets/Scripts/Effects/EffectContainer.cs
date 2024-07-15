@@ -21,7 +21,6 @@ public class EffectContainer : MonoBehaviour  //ToDo : Managerに名前変えた方がい
     [SerializeField] private int m_MaxContain = 20;
 
     private List<IContainEffectBase> m_Effects;
-    private Transform m_Transform;
 
     private void Awake()
     {
@@ -39,7 +38,6 @@ public class EffectContainer : MonoBehaviour  //ToDo : Managerに名前変えた方がい
         DontDestroyOnLoad(gameObject);
 
         m_Effects = new List<IContainEffectBase>(m_MaxContain);
-        m_Transform = transform;
     }
 
     public void PlayEffect<T>(T playEff, Vector3 vec) where T : IContainEffectBase, new()
@@ -61,7 +59,7 @@ public class EffectContainer : MonoBehaviour  //ToDo : Managerに名前変えた方がい
 
         if(eff == null)
         {
-            eff = playEff.Create(vec, Quaternion.identity, m_Transform);
+            eff = playEff.Create(vec, Quaternion.identity, transform);
             m_Effects.Add(eff);
         }
 
@@ -74,7 +72,38 @@ public class EffectContainer : MonoBehaviour  //ToDo : Managerに名前変えた方がい
 
         effects[0].StopEffect();
     }
+    public void StopAllEffect()
+    {
+        foreach (var effect in m_Effects)
+        {
+            effect.StopEffect();
+        }
+    }
 
+    public T GetEffect<T>(T effect) where T : IContainEffectBase, new()
+    {
+        T newEffect;
+        if (TryGetEffects<T>(out IContainEffectBase[] effects)) 
+        {
+            var sameEffects = effects.Where(effect => !effect.IsActive).ToArray();
+            if(sameEffects.Length == 0)
+            {
+                newEffect = (T)effect.Create(Vector3.zero, Quaternion.identity, transform);
+                m_Effects.Add(newEffect);
+            }
+            else
+            {
+                newEffect = (T)sameEffects[0];
+                newEffect.Play(Vector2.zero);
+            }
+            
+            return newEffect;
+        }
+
+        newEffect = (T)effect.Create(Vector3.zero, Quaternion.identity, transform);
+        m_Effects.Add(newEffect);
+        return newEffect;
+    }
     private bool TryGetEffects<T>(out IContainEffectBase[] effects) where T : IContainEffectBase, new()
     {
         effects = m_Effects.Where(effects => effects is T)
@@ -82,5 +111,6 @@ public class EffectContainer : MonoBehaviour  //ToDo : Managerに名前変えた方がい
 
         if(effects.Length == 0) { return false; }
         return true;
-    } 
+    }
+
 }

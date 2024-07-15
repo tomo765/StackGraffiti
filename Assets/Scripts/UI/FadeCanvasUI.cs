@@ -61,13 +61,27 @@ public class FadeCanvasUI : MonoBehaviour
 
 public static class TaskExtension
 {
-    private const int OneSec = 1000;
+    public const int OneSec = 1000;
     private const int FrameRate = 60;
+
+    public static int FPS_60 => OneSec / FrameRate;
     public static async Task WaitUntiil(Func<bool> isCompleted)
     {
         while (!isCompleted())
         {
-            await Task.Delay(OneSec / FrameRate);
+            await Task.Delay(FPS_60);
         }
+    }
+
+    /// <summary>
+    /// 投げっぱなしにする場合は、これを呼ぶことでコンパイラの警告の抑制と、例外発生時のロギングを行います。
+    /// https://neue.cc/2013/10/10_429.html
+    /// </summary>
+    public static void FireAndForget(this Task task)
+    {
+        task.ContinueWith(x =>
+        {
+            Debug.LogException(new TaskCanceledException());
+        }, TaskContinuationOptions.OnlyOnFaulted);
     }
 }

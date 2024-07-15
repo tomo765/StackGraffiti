@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CharacterManager : MonoBehaviour
 {
@@ -17,8 +16,10 @@ public class CharacterManager : MonoBehaviour
     private Rigidbody2D m_Rb2d;
     private PolygonCollider2D m_PolygonCollider2D;
     private CharacterController m_Controller;
+    private SleepEffect m_SleepEffect;
 
     private bool m_IsDead = false;
+    private Vector3 m_SleepEffectPos = new Vector3(1, 1, 0);
 
     public SpriteRenderer EyeRenderer => m_EyeRender;
     public Rigidbody2D Rb2D => m_Rb2d;
@@ -33,6 +34,12 @@ public class CharacterManager : MonoBehaviour
 
         Poly2D.enabled = false;
         m_Controller.SetManagerMember(m_Rb2d, OnSleep);
+    }
+
+    private void FixedUpdate()
+    {
+        if(m_SleepEffect == null) { return; }
+        m_SleepEffect.transform.position = transform.position + m_SleepEffectPos;
     }
 
     public void CreateOnStage(string playerName)
@@ -74,38 +81,49 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    private void OnSleep()
+    private async Task OnSleep()
     {
-        GameManager.SleepCharacter();
+        if (GameManager.IsHowToPlay) { return; }
+        if(SceneLoadExtension.IsFading) { return; }
+
+        GameManager.SetGameState(GameState.Drawing);
         if (!GetComponent<Renderer>().isVisible) //画面外で操作不能になったら削除
         { 
             Destroy(gameObject);
-            return;
         }
-        m_IsDead = true;
+        else
+        {
+            m_IsDead = true;
+            m_SleepEffect = EffectContainer.Instance.GetEffect(GeneralSettings.Instance.Prehab.SleepEffect);
+            m_SleepEffect.transform.position = transform.position;
 
-        m_EyeRender.sprite = GeneralSettings.Instance.Sprite.DeathEye;
-        m_Rb2d.sharedMaterial = GeneralSettings.Instance.PlayerSetting.PhysicsOnDead;
+            m_Rb2d.useAutoMass = false;
+            m_Rb2d.mass *= 1.2f;
+            m_Rb2d.gravityScale = 3;
+            m_EyeRender.sprite = GeneralSettings.Instance.Sprite.DeathEye;
+            m_Rb2d.sharedMaterial = GeneralSettings.Instance.PlayerSetting.PhysicsOnDead;
 
-        GetComponent<MeshRenderer>().sortingOrder = OnSleepLayer;
-        m_EyeRender.sortingOrder = OnSleepLayer;
+            GetComponent<MeshRenderer>().sortingOrder = OnSleepLayer;
+            m_EyeRender.sortingOrder = OnSleepLayer;
 
-        m_Rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;  //丸いキャラが転がらないようにする
-
-        Destroy(m_Controller);
+            Destroy(m_Controller);
+        }
+        await Task.Delay(TaskExtension.OneSec, GameManager.Source.Token);
+        GameManager.SleepCharacter();
     }
 
     private void OnUnmovable()
     {
         m_Rb2d.bodyType = RigidbodyType2D.Static;
-        OnSleep();
+        OnSleep().FireAndForget();
     }
 
     private void OnDead()
     {
         Destroy(gameObject);
-        if(m_IsDead) { return; }
-        
+        m_SleepEffect?.gameObject.SetActive(false);
+        if (m_IsDead) { return; }
+
         GameManager.SleepCharacter();
     }
 

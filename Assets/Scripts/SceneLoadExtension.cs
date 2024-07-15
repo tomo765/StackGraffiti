@@ -37,6 +37,8 @@ public static class SceneLoadExtension
         await FadeCanvasUI.Instance.IsCompleteFadeOut();
         FadeCanvasUI.Instance.FinishFadeOut();
 
+        DontDestroyCanvas.Instance.SetNewRenderCamera();
+
         m_IsFading = false;
     }
 }
