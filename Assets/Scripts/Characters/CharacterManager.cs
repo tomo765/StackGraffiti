@@ -134,5 +134,6 @@ public class CharacterManager : MonoBehaviour
         EffectContainer.Instance.PlayEffect(GeneralSettings.Instance.Prehab.ConfettiEffect, new Vector3(0, 5.5f, 0));
         m_Rb2d.bodyType = RigidbodyType2D.Static;
         GameManager.StageClear();
+        DontDestroyCanvas.Instance.InitResultUI();
     }
 }

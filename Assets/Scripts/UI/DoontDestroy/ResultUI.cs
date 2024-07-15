@@ -14,12 +14,7 @@ public class ResultUI : MonoBehaviour
     [SerializeField] private Button m_ReturnTitleBtn;
     [SerializeField] private Button m_NextStageButton;
 
-    void Start()
-    {
-        Init();
-    }
-
-    private void Init()
+    public void Init()
     {
         m_StageSelectBtn.onClick.AddListener(() =>
         {
@@ -32,7 +27,7 @@ public class ResultUI : MonoBehaviour
             OnPushResultButton(Config.SceneNames.Title).FireAndForget();
         });
 
-
+        Debug.Log(GameManager.IsLastStage);
         if(GameManager.IsLastStage)
         {
             m_NextStageButton.gameObject.SetActive(false);

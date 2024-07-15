@@ -63,4 +63,6 @@ public class DontDestroyCanvas : MonoBehaviour
         m_StageIntroUI.gameObject.SetActive(b);
         m_StageIntroUI.PlayIntro().FireAndForget();
     }
+
+    public void InitResultUI() => m_ResultUI.Init();
 }
