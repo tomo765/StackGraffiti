@@ -1878,15 +1878,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 14198083395400859, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.1541147
+      value: 1.0439117
       objectReference: {fileID: 0}
     - target: {fileID: 14198083395400859, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.1541147
+      value: 1.0439117
       objectReference: {fileID: 0}
     - target: {fileID: 14198083395400859, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.1541147
+      value: 1.0439117
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000115002163646279, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 97.28699
       objectReference: {fileID: 0}
     - target: {fileID: 4743554085769181849, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
       propertyPath: m_Pivot.x
@@ -1968,6 +1972,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6152467517654903433, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 473324333}
     - target: {fileID: 6969704856536148491, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
       propertyPath: m_Name
       value: StageCanvas
