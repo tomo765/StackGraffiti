@@ -1,17 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ScreenSize  //ToDo : 画面サイズ変更できるようにする
-{
-    _FullScreen,
-    _1920x1080,
-    _1280x720,
-    _960x540
-}
 public static class ScreenSettings
 {
     private static ScreenSize m_ScreenSize;
+
+    //value : (width, height, isFullScreen)
     private static readonly Dictionary<ScreenSize, (int, int, bool)> m_ScreenValues = new Dictionary<ScreenSize, (int, int, bool)>()
     {
         { ScreenSize._FullScreen, (1920, 1080, true) },
@@ -32,4 +28,28 @@ public static class ScreenSettings
     {
         return Screen.fullScreen ? 0 : Screen.width == 1920 ? 1 : Screen.width == 1280 ? 2 : 3;
     }
+    public static string[] GetAllSizeName()
+    {
+        int index = 0;
+        string[] names = new string[m_ScreenValues.Count];
+
+        foreach(var key in m_ScreenValues.Keys)
+        {
+            names[index] = key.ToStr();
+            index++;
+        }
+        return names;
+    }
+}
+
+public enum ScreenSize  //ToDo : 画面サイズ変更できるようにする
+{
+    _FullScreen,
+    _1920x1080,
+    _1280x720,
+    _960x540
+}
+public static class ScreenSizeExtension
+{
+    public static string ToStr(this ScreenSize size) => size.ToString().Replace("_", "");
 }

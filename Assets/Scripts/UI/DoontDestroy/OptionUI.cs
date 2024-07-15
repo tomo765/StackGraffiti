@@ -52,15 +52,16 @@ public class OptionUI : MonoBehaviour
 
     private void SetScreenResizer()
     {
-        m_ScreenResizer.options = new List<TMP_Dropdown.OptionData>
+        var names = ScreenSettings.GetAllSizeName();
+        List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>(names.Length);
+        foreach (var name in names)
         {
-            new TMP_Dropdown.OptionData(ScreenSize._FullScreen.ToString().Replace("_", "")),
-            new TMP_Dropdown.OptionData(ScreenSize._1920x1080.ToString().Replace("_", "")),
-            new TMP_Dropdown.OptionData(ScreenSize._1280x720.ToString().Replace("_", "")),
-            new TMP_Dropdown.OptionData(ScreenSize._960x540.ToString().Replace("_", ""))
-        };
+            options.Add(new TMP_Dropdown.OptionData(name));
+        }
+        m_ScreenResizer.options = options;
 
         m_ScreenResizer.value = ScreenSettings.GetCullentScreenSizeIndex();
+        ScreenSettings.SetScreenSize((ScreenSize)m_ScreenResizer.value);
         m_ScreenResizer.onValueChanged.AddListener((i) =>
         {
             ScreenSettings.SetScreenSize((ScreenSize)i);
