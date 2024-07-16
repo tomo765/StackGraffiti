@@ -16,14 +16,20 @@ public class ResultUI : MonoBehaviour
 
     public void Init()
     {
-        m_StageSelectBtn.onClick.AddListener(() =>
+        m_StageSelectBtn.onClick.AddListener(async() =>
         {
             if (SceneLoadExtension.IsFading) { return; }
+            var playCredit = await GameManager.CheckPlayCredit();
+            if (playCredit) { return; }
+
             OnPushResultButton(Config.SceneNames.StageSelect).FireAndForget();
         });
-        m_ReturnTitleBtn.onClick.AddListener(() =>
+        m_ReturnTitleBtn.onClick.AddListener(async() =>
         {
             if (SceneLoadExtension.IsFading) { return; }
+            var playCredit = await GameManager.CheckPlayCredit();
+            if (playCredit) { return; }
+
             OnPushResultButton(Config.SceneNames.Title).FireAndForget();
         });
 

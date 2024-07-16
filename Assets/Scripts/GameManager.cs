@@ -89,7 +89,7 @@ public static class GameManager
     {
         var datas = StageDataUtility.LoadData();
         if(StageDataUtility.StageDatas.Credited) { return false; }
-        if (datas.StageScores.All(data => data.StarLevel == 0) || datas.Credited) { return false; }
+        if (datas.StageScores.Any(data => data.StarLevel < 1)) { return false; }
 
         StageDataUtility.StageDatas.StartCredit();
         SoundManager.Instance.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
