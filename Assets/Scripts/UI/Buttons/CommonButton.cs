@@ -74,7 +74,11 @@ public class CommonButton : Button
     private new void Start()
     {
         m_DefaultScale = transform.localScale;
-        if (m_ScallingAlways) 
+#if UNITY_EDITOR
+        if (UnityEditor.EditorApplication.isPlaying && m_ScallingAlways)
+#else
+        if (m_ScallingAlways)
+#endif
         {
             m_Source = new CancellationTokenSource();
             PlayScaling().FireAndForget(); 
