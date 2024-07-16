@@ -8,7 +8,9 @@ using UnityEngine.UI;
 
 public class OptionUI : MonoBehaviour
 {
+    [SerializeField] private GameObject m_AskDeleteData;
     [SerializeField] private Button m_ReturnButton;
+    [SerializeField] private Button m_DeleteDataButton;
     [SerializeField] private TMP_Dropdown m_ScreenResizer;
     [SerializeField] private Slider m_BGMSlider;
     [SerializeField] private Slider m_SESlider;
@@ -17,6 +19,7 @@ public class OptionUI : MonoBehaviour
     void Start()
     {
         SetReturnButton();
+        SetDeleteDataButton();
         SetScreenResizer();
         SetBGMSlider();
         SetSESlider();
@@ -28,6 +31,16 @@ public class OptionUI : MonoBehaviour
         m_ReturnButton.onClick.AddListener(() =>
         {
             DontDestroyCanvas.Instance.ChangeOptionUIVisible(false);
+            SoundManager.Instance.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
+        });
+    }
+
+    private void SetDeleteDataButton()
+    {
+        m_DeleteDataButton.onClick.RemoveAllListeners();
+        m_DeleteDataButton.onClick.AddListener(() =>
+        {
+            m_AskDeleteData.SetActive(true);
             SoundManager.Instance.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
     }
