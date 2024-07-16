@@ -80,7 +80,10 @@ public static class GameManager
         if(datas.StageScores.All(data => data.StarLevel != 0) && !datas.Credited)  //初めてすべてのステージをクリアしていたら
         {
             //クレジット
-            //StageDataUtility.
+            if (!StageDataUtility.StageDatas.Credited)
+            {
+                Debug.Log("All Stage Clear!!");
+            }
         }
 
         SoundManager.Instance.SetSubBGMVolume(allStarLevel);

@@ -17,6 +17,8 @@ public class StageDatas
         m_StageScores = scores;
         m_Credited = isCredited;
     }
+
+    public void StartCredit() => m_Credited = true;
 }
 
 
