@@ -18,7 +18,11 @@ public class StageDatas
         m_Credited = isCredited;
     }
 
-    public void StartCredit() => m_Credited = true;
+    public void StartCredit()
+    {
+        m_Credited = true;
+        StageDataUtility.SaveData();
+    }
 }
 
 

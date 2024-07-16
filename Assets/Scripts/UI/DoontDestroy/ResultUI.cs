@@ -27,7 +27,6 @@ public class ResultUI : MonoBehaviour
             OnPushResultButton(Config.SceneNames.Title).FireAndForget();
         });
 
-        Debug.Log(GameManager.IsLastStage);
         if(GameManager.IsLastStage)
         {
             m_NextStageButton.gameObject.SetActive(false);
@@ -38,6 +37,9 @@ public class ResultUI : MonoBehaviour
             if (SceneLoadExtension.IsFading) { return; }
             var nextStage = GameManager.CullentStage;
             GameManager.StartStage(nextStage + 1);
+
+            var playCredit = await GameManager.CheckPlayCredit();
+            if(playCredit) { return; }
             await OnPushResultButton(Config.SceneNames.m_StageNames[(int)nextStage]);  //StageNamesの要素が StageType-1と同期している
 
             DontDestroyCanvas.Instance.ChangeStageIntroUIVisible(true);  //ToDo : StageSelectUI でも似た処理してるからメソッドにする

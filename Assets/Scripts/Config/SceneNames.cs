@@ -4,6 +4,7 @@ namespace Config
         public static readonly string Title = "Title";
         public static readonly string StageSelect = "StageSelect";
         public static readonly string HowToPlay = "HowToPlay";
+        public static readonly string Credit = "Credit";
 
         public static readonly string[] m_StageNames = 
         {

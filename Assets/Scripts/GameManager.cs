@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 using System.Threading;
 using static Unity.VisualScripting.Member;
+using System.Threading.Tasks;
 
 public enum GameState
 {
@@ -74,22 +75,32 @@ public static class GameManager
 
     public static void CheckStarLevel()
     {
-        var datas = StageDataUtility.LoadData();
+        StageDataUtility.LoadData();
         var allStarLevel = StageDataUtility.GetAllStarLevel();
-
-        if(datas.StageScores.All(data => data.StarLevel != 0) && !datas.Credited)  //初めてすべてのステージをクリアしていたら
-        {
-            //クレジット
-            if (!StageDataUtility.StageDatas.Credited)
-            {
-                Debug.Log("All Stage Clear!!");
-            }
-        }
 
         SoundManager.Instance.SetSubBGMVolume(allStarLevel);
         SoundManager.Instance.PlayMainBGM();
         SoundManager.Instance.PlayCode(allStarLevel >= SoundManager.PlayCodeScore);
         SoundManager.Instance.PlayBass(allStarLevel >= SoundManager.PlayBassScore);
         SoundManager.Instance.PlayMarimba(0);
+    }
+
+    public static async Task<bool> CheckPlayCredit()
+    {
+        var datas = StageDataUtility.LoadData();
+        if(StageDataUtility.StageDatas.Credited) { return false; }
+        if (datas.StageScores.All(data => data.StarLevel == 0) || datas.Credited) { return false; }
+
+        StageDataUtility.StageDatas.StartCredit();
+        SoundManager.Instance.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
+        await SceneLoadExtension.StartFadeIn();
+        EffectContainer.Instance.StopAllEffect();
+        DontDestroyCanvas.Instance.ChangeResultUIVisible(false);
+        SoundManager.Instance.StopAllBGM();
+
+        await SceneLoadExtension.StartFadeWait(Config.SceneNames.Credit);
+        SoundManager.Instance.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeOut);
+        await SceneLoadExtension.StartFadeOut();
+        return true;
     }
 }

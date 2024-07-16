@@ -82,7 +82,6 @@ public class SoundManager : MonoBehaviour
         m_CodeBGM.volume = m_MainBGM.volume * m_CodeScale * m_SubBGMVolume;
         m_CodeBGM.time = m_MainBGM.time;
     }
-
     public void PlayMarimba(float val)
     {
         m_MarimbaBGM.volume = Mathf.Clamp(Mathf.Abs(val), 0, 1);
@@ -90,6 +89,13 @@ public class SoundManager : MonoBehaviour
 
         m_MarimbaBGM.Play();
         m_MarimbaBGM.time = m_MainBGM.time;
+    }
+    public void StopAllBGM()
+    {
+        m_MainBGM.Stop();
+        m_BassBGM.Stop();
+        m_CodeBGM.Stop();
+        m_MarimbaBGM.Stop();
     }
 
 
@@ -104,7 +110,7 @@ public class SoundManager : MonoBehaviour
         m_SE.volume = vol;
     }
 
-    public void SetSubBGMVolume(float starLevel)
+    public void SetSubBGMVolume(float starLevel)  //ToDo : 
     {
         m_SubBGMVolume = starLevel >= PlayMaxVolScore ? 0.8f :
                          starLevel >= PlayCodeScore ? 0.5f :

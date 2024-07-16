@@ -191,7 +191,6 @@ public class GeneralSettings : ScriptableObject
         [SerializeField] private AudioClip m_JumpSE;
         [SerializeField] private AudioClip m_TouchNeedleSE;
         [SerializeField] private AudioClip m_ClearSE;
-        [SerializeField] private AudioClip m_FadeSE;
         [SerializeField] private FadesSound m_Fade1;
 
         public AudioClip HoverSE => m_HoverSE;
@@ -199,7 +198,6 @@ public class GeneralSettings : ScriptableObject
         public AudioClip JumpSE => m_JumpSE;
         public AudioClip TouchNeedleSE => m_TouchNeedleSE;
         public AudioClip ClearSE => m_ClearSE;
-        public AudioClip FadeSE => m_FadeSE;
         public FadesSound Fade1 => m_Fade1;
 
         [System.Serializable]
