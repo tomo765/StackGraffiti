@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Stickynote_0: -871675406883435958
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
