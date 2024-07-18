@@ -11,6 +11,8 @@ public class CreditCanvas : MonoBehaviour
 
     void Start()
     {
+        m_VideoPlayer.targetTexture.Release();
+
         m_VideoPlayer.SetLoopPointReached(() => ReturnTitle().FireAndForget());
         StartPlayVideo().FireAndForget();
     }
