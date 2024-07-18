@@ -16,19 +16,19 @@ public class ResultUI : MonoBehaviour
 
     public void Init()
     {
-        m_StageSelectBtn.onClick.AddListener(() =>
+        m_StageSelectBtn.onClick.AddListener(async() =>
         {
             if (SceneLoadExtension.IsFading) { return; }
-            //var playCredit = await GameManager.CheckPlayCredit();
-            //if (playCredit) { return; }
+            var playCredit = await GameManager.CheckPlayCredit();
+            if (playCredit) { return; }
 
             OnPushResultButton(Config.SceneNames.StageSelect).FireAndForget();
         });
-        m_ReturnTitleBtn.onClick.AddListener(() =>
+        m_ReturnTitleBtn.onClick.AddListener(async() =>
         {
             if (SceneLoadExtension.IsFading) { return; }
-            //var playCredit = await GameManager.CheckPlayCredit();
-            //if (playCredit) { return; }
+            var playCredit = await GameManager.CheckPlayCredit();
+            if (playCredit) { return; }
 
             OnPushResultButton(Config.SceneNames.Title).FireAndForget();
         });
@@ -44,8 +44,8 @@ public class ResultUI : MonoBehaviour
             var nextStage = GameManager.CullentStage;
             GameManager.StartStage(nextStage + 1);
 
-            //var playCredit = await GameManager.CheckPlayCredit();
-            //if(playCredit) { return; }
+            var playCredit = await GameManager.CheckPlayCredit();
+            if (playCredit) { return; }
             await OnPushResultButton(Config.SceneNames.m_StageNames[(int)nextStage]);  //StageNamesの要素が StageType-1と同期している
 
             DontDestroyCanvas.Instance.ChangeStageIntroUIVisible(true);  //ToDo : StageSelectUI でも似た処理してるからメソッドにする
