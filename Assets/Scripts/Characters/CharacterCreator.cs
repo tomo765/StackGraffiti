@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public static class CharacterCreator  //https://qiita.com/divideby_zero/items/491d18cbc91d7fabd700

@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using TInputField = TMPro.TMP_InputField;
-using Unity.VisualScripting;
-using UnityEngine.EventSystems;
 
 
 public class DrawUI : MonoBehaviour  //Ques : キャラを生成したら名前インプットを消す?

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
@@ -25,11 +24,6 @@ public class StageManager : MonoBehaviour
         if (InputExtension.ResetStage)
         {
             ResetStage().FireAndForget();
-        }
-
-        if(InputExtension.ShowHowToPlay)
-        {
-            PreviewHowToPlay().FireAndForget();
         }
     }
 
@@ -66,23 +60,5 @@ public class StageManager : MonoBehaviour
         SoundManager.Instance.PlayMarimba(0);
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeOut);
         await SceneLoadExtension.StartFadeOut();
-    }
-
-    private async Task PreviewHowToPlay()
-    {
-        if (!DontDestroyCanvas.Instance.StageIntroUI.FinishFadeOut) { return; }
-        if (!GameManager.IsPlaying && !GameManager.IsHowToPlay) { return; }
-        if (SceneLoadExtension.IsFading) { return; }
-
-        if (GameManager.IsHowToPlay)
-        {
-            GameManager.SetGameState(GameState.Playing);
-            await SceneManager.UnloadSceneAsync(Config.SceneNames.HowToPlay);
-        }
-        else
-        {
-            GameManager.SetGameState(GameState.HowToPlay);
-            SceneManager.LoadScene(Config.SceneNames.HowToPlay, LoadSceneMode.Additive);
-        }
     }
 }

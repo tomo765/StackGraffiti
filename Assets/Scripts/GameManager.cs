@@ -1,9 +1,7 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Linq;
 using System.Threading;
-using static Unity.VisualScripting.Member;
 using System.Threading.Tasks;
 
 public enum GameState
