@@ -17,7 +17,7 @@ public class StageManager : MonoBehaviour
 
     private void Update()
     {
-        if (InputExtension.EscapeStage)
+        if (InputExtension.Escape)
         {
             EscapeStage().FireAndForget();
         }

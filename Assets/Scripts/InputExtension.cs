@@ -22,7 +22,7 @@ public static partial class InputExtension
     private static bool SleepKey => Input.GetKeyDown(KeyCode.E);
 
     public static bool OnSleep => SleepKey && !GameManager.IsClear;
-    public static bool EscapeStage => Input.GetKeyDown(KeyCode.Escape);
+    public static bool Escape => Input.GetKeyDown(KeyCode.Escape);
     public static bool ResetStage => Input.GetKeyDown(KeyCode.R);
     public static bool ShowHowToPlay => Input.GetKeyDown(KeyCode.Q);
 

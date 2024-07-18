@@ -15,6 +15,15 @@ public class CreditCanvas : MonoBehaviour
         StartPlayVideo().FireAndForget();
     }
 
+    private void Update()
+    {
+        if (InputExtension.Escape)
+        {
+            m_VideoPlayer.Stop();
+            ReturnTitle().FireAndForget();
+        }
+    }
+
     private async Task StartPlayVideo()
     {
         m_VideoPlayer.time = 0;
