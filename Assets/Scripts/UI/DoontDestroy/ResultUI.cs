@@ -38,6 +38,10 @@ public class ResultUI : MonoBehaviour
             m_NextStageButton.gameObject.SetActive(false);
             return;
         }
+        else
+        {
+            m_NextStageButton.gameObject.SetActive(true);
+        }
         m_NextStageButton.onClick.AddListener(async() =>
         {
             if (SceneLoadExtension.IsFading) { return; }
