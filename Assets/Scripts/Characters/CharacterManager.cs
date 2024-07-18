@@ -93,7 +93,6 @@ public class CharacterManager : MonoBehaviour
         }
         else
         {
-            m_IsDead = true;
             m_SleepEffect = EffectContainer.Instance.GetEffect(GeneralSettings.Instance.Prehab.SleepEffect);
             m_SleepEffect.transform.position = transform.position;
 
@@ -109,7 +108,10 @@ public class CharacterManager : MonoBehaviour
             Destroy(m_Controller);
         }
         await Task.Delay(TaskExtension.OneSec, GameManager.Source.Token);
+
+        if(m_IsDead) { return; }
         GameManager.SleepCharacter();
+        m_IsDead = true;
     }
 
     private void OnUnmovable()
@@ -122,9 +124,10 @@ public class CharacterManager : MonoBehaviour
     {
         Destroy(gameObject);
         m_SleepEffect?.gameObject.SetActive(false);
-        if (m_IsDead) { return; }
 
+        if (m_IsDead) { return; }
         GameManager.SleepCharacter();
+        m_IsDead = true;
     }
 
     private void OnClear()
