@@ -111,6 +111,7 @@ public class CharacterManager : MonoBehaviour
         await Task.Delay(TaskExtension.OneSec, GameManager.Source.Token);
 
         if(m_IsDead) { return; }
+        if (GameManager.IsClear) { return; }
         GameManager.SleepCharacter();
         m_IsDead = true;
     }
