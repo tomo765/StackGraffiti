@@ -60,6 +60,7 @@ public class CharacterManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (SceneLoadExtension.IsFading) { return; }
         OnCharacterTouch(collision.tag);
         if (collision.CompareTag("Goal"))
         {
