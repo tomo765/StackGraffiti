@@ -117,6 +117,8 @@ public class CharacterManager : MonoBehaviour
     private void OnUnmovable()
     {
         m_Rb2d.bodyType = RigidbodyType2D.Static;
+
+        if(m_IsDead) { return; }
         OnSleep().FireAndForget();
     }
 
