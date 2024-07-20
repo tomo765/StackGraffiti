@@ -117,7 +117,7 @@ public class CharacterManager : MonoBehaviour
         GameManager.SleepCharacter();
     }
 
-    private void OnUnmovable()  //Q‚½Œã‚É‚Æ‚°‚É“–‚½‚é‚Æzzz‚ª2ŒÂ‚É‚È‚é
+    private void OnUnmovable()
     {
         m_Rb2d.bodyType = RigidbodyType2D.Static;
 
