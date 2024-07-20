@@ -84,6 +84,9 @@ public class CharacterManager : MonoBehaviour
 
     private async Task OnSleep()
     {
+        if (m_IsDead) { return; }
+        m_IsDead = true;
+
         if (GameManager.IsHowToPlay) { return; }
         if(SceneLoadExtension.IsFading) { return; }
 
@@ -110,13 +113,11 @@ public class CharacterManager : MonoBehaviour
         }
         await Task.Delay(TaskExtension.OneSec, GameManager.Source.Token);
 
-        if(m_IsDead) { return; }
         if (GameManager.IsClear) { return; }
         GameManager.SleepCharacter();
-        m_IsDead = true;
     }
 
-    private void OnUnmovable()
+    private void OnUnmovable()  //êQÇΩå„Ç…Ç∆Ç∞Ç…ìñÇΩÇÈÇ∆zzzÇ™2å¬Ç…Ç»ÇÈ
     {
         m_Rb2d.bodyType = RigidbodyType2D.Static;
 
