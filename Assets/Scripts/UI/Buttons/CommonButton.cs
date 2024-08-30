@@ -87,6 +87,7 @@ public class CommonButton : Button
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
+        if(!interactable) { return; }
         if(m_ScallingAlways) { return; }
         if(m_Img == null) { SetImage(); }
 
@@ -98,6 +99,7 @@ public class CommonButton : Button
     }
     public override void OnPointerExit(PointerEventData eventData)
     {
+        if (!interactable) { return; }
         if (m_Img == null) { SetImage(); }
         if (m_ChangeColor) { m_Img.color = m_ExitColor; }
         if(m_ScallingAlways) { return; }
@@ -111,6 +113,7 @@ public class CommonButton : Button
     }
     public override void OnPointerUp(PointerEventData eventData)
     {
+        if (!interactable) { return; }
         base.OnPointerUp(eventData);
         if(m_ScallingAlways) { return; }
         if(!m_IsStopScalling) { return; }

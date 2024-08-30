@@ -75,4 +75,15 @@ public static class StageDataUtility
 
         return allScore;
     }
+
+    public static bool IsSelectable(int stageLevel)
+    {
+        if(stageLevel == 0) {  return true; }
+
+        for(int i = 0; i < stageLevel; i++)
+        {
+            if(StageDatas.StageScores[i].StarLevel == 0) { return false; }
+        }
+        return true;
+    }
 }
