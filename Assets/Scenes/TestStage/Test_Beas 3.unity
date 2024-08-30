@@ -235,6 +235,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 6969704856536148491, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -465,6 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SpawnArea: {fileID: 274939170}
+  m_GameCanvasUI: {fileID: 0}
 --- !u!1 &1360674039
 GameObject:
   m_ObjectHideFlags: 0

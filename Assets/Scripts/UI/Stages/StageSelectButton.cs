@@ -39,6 +39,7 @@ public class StageSelectButton : MonoBehaviour
 
         for (int i = 0; i < StageDataUtility.StageDatas.StageScores[stageNum - 1].StarLevel; i++)
         {
+            Debug.Log(stageNum);
             m_Stars[i].sprite = GeneralSettings.Instance.Sprite.ClearStar;
         }
     }
