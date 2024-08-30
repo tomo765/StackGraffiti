@@ -75,3 +75,8 @@ Text/
 /Text/**
 !/Text/**/
 !/Text/**/.gitkeep
+
+
+# Stage Clear Infomation
+/[Aa]ssets/SaveDatas/
+/[Aa]ssets/SaveDatas.meta
