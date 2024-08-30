@@ -79,6 +79,7 @@ public static class StageDataUtility
     public static bool IsSelectable(int stageLevel)
     {
         if(stageLevel == 0) {  return true; }
+        if (StageDatas.StageScores[GeneralSettings.Instance.StageInfos.LastTutorialStage - 1].StarLevel != 0) { return true; }
 
         for(int i = 0; i < stageLevel; i++)
         {
