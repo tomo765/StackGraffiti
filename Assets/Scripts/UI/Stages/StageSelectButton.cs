@@ -21,6 +21,7 @@ public class StageSelectButton : MonoBehaviour
         m_StageName = name;
         m_StageLevel = stageNum;
         m_StageLevelText.text = "Stage " + stageNum.ToString();
+
         m_TransitionButton.onClick.AddListener(async () =>
         {
             GameManager.InitPlayState((StageLevel)stageNum);

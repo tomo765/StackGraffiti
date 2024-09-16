@@ -139,8 +139,17 @@ public class GeneralSettings : ScriptableObject
     public class StageInfomations
     {
         [SerializeField] private StageInfomation[] m_Stages = null;
+        [SerializeField] private int m_LastTutorialStage;
 
         public StageInfomation[] Stages => m_Stages;
+        public int LastTutorialStage
+        {
+            get
+            {
+                if(m_LastTutorialStage == 0) { return 0; }
+                return m_LastTutorialStage;
+            }
+        }
 
         public int GetCullentLevel(StageLevel type, int sleepCnt) => GetStageInfo(type).GetStarLevel(sleepCnt);
         private StageInfomation GetStageInfo(StageLevel stg) => Array.Find(Stages, stage => stage.StageLevel == stg);

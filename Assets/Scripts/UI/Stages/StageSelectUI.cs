@@ -27,8 +27,10 @@ public class StageSelectUI : MonoBehaviour
 
         m_SelectButtons = new StageSelectButton[sceneNames.Length];
 
-        for (int i = 0; i < sceneNames.Length; i++)
+        for (int i = 0; i < sceneNames.Length; i++)  //ステージのクリアレベルが0でないかを取得する
         {
+            bool canSelect = StageDataUtility.IsSelectable(i);
+            if(!canSelect) { break; }
             var btn = Instantiate(GeneralSettings.Instance.Prehab.StageSelectBtn, m_ViewContent.transform);
             btn.Init(sceneNames[i], i+1);
             m_SelectButtons[i] = btn;
