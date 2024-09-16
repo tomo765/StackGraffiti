@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary> ステージクリア後のリザルト画面 </summary>
 public class ResultUI : MonoBehaviour
 {
     [SerializeField] private Image[] m_Stars;
@@ -13,67 +14,82 @@ public class ResultUI : MonoBehaviour
     [SerializeField] private Button m_ReturnTitleBtn;
     [SerializeField] private Button m_NextStageButton;
 
-    public void Init()
+    public void Init()  //ToDo : クレジットを流した後にセレクト画面を押していてもたいとるに戻る
     {
-        m_StageSelectBtn.onClick.AddListener(async() =>
+        //セレクト画面に戻るボタンの処理登録
+        m_StageSelectBtn.onClick.AddListener(() =>
         {
-            if (SceneLoadExtension.IsFading) { return; }
-            var playCredit = await GameManager.CheckPlayCredit();
-            if (playCredit) { return; }
+            string loadScene = Config.SceneNames.StageSelect;
 
-            OnPushResultButton(Config.SceneNames.StageSelect).FireAndForget();
-        });
-        m_ReturnTitleBtn.onClick.AddListener(async() =>
-        {
             if (SceneLoadExtension.IsFading) { return; }
-            var playCredit = await GameManager.CheckPlayCredit();
-            if (playCredit) { return; }
 
-            OnPushResultButton(Config.SceneNames.Title).FireAndForget();
+            var playCredit = GameManager.CheckPlayCredit();
+            if (playCredit) { loadScene = Config.SceneNames.Credit; }
+            else { GameManager.PlayBGMs(); }
+
+            OnPushResultButton(loadScene).FireAndForget();
         });
 
+        //タイトルに戻るボタンの処理登録
+        m_ReturnTitleBtn.onClick.AddListener(() =>
+        {
+            string loadScene = Config.SceneNames.Title;
+
+            if (SceneLoadExtension.IsFading) { return; }
+
+            var playCredit = GameManager.CheckPlayCredit();
+            if (playCredit) { loadScene = Config.SceneNames.Credit; }
+            else { GameManager.PlayBGMs(); }
+
+            OnPushResultButton(loadScene).FireAndForget();
+        });
+
+        //次のステージに進むボタンの処理登録
         if(GameManager.IsLastStage)
         {
             m_NextStageButton.gameObject.SetActive(false);
-            return;
         }
         else
         {
             m_NextStageButton.gameObject.SetActive(true);
+            m_NextStageButton.onClick.AddListener(async () =>
+            {
+                StageLevel nextStage = GameManager.CullentStage + 1;
+                string loadScene = Config.SceneNames.m_StageNames[(int)nextStage - 1];
+
+                if (SceneLoadExtension.IsFading) { return; }
+                var playCredit = GameManager.CheckPlayCredit();
+                if (playCredit) { loadScene = Config.SceneNames.Credit; }
+                else { GameManager.PlayBGMs(); }
+
+                await OnPushResultButton(loadScene);
+                if (playCredit) { return; }
+
+                GameManager.InitPlayState(nextStage);
+                DontDestroyCanvas.Instance.ChangeStageIntroUIVisible(true);  //ToDo : StageSelectUI でも似た処理してるからメソッドにする？
+                DontDestroyCanvas.Instance.StageIntroUI.SetIntroText(GameManager.CullentStage.ToString(),
+                                                                     GeneralSettings.Instance.StageInfos.GetStageTextEN((int)GameManager.CullentStage),
+                                                                     GeneralSettings.Instance.StageInfos.GetStageTextJP((int)GameManager.CullentStage)
+                                                                    );
+            });
         }
-        m_NextStageButton.onClick.AddListener(async() =>
-        {
-            if (SceneLoadExtension.IsFading) { return; }
-            var nextStage = GameManager.CullentStage;
-            GameManager.StartStage(nextStage + 1);
-
-            var playCredit = await GameManager.CheckPlayCredit();
-            if (playCredit) { return; }
-            await OnPushResultButton(Config.SceneNames.m_StageNames[(int)nextStage]);  //StageNamesの要素が StageType-1と同期している
-
-            DontDestroyCanvas.Instance.ChangeStageIntroUIVisible(true);  //ToDo : StageSelectUI でも似た処理してるからメソッドにする
-            DontDestroyCanvas.Instance.StageIntroUI.SetIntroText(GameManager.CullentStage.ToString(),
-                                                                 GeneralSettings.Instance.StageInfos.GetStageTextEN((int)GameManager.CullentStage),
-                                                                 GeneralSettings.Instance.StageInfos.GetStageTextJP((int)GameManager.CullentStage)
-                                                                );
-        });
     }
 
+    /// <summary> リザルト画面のボタンを押したときの処理 </summary>
     private async Task OnPushResultButton(string nextScene)
     {
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
         await SceneLoadExtension.StartFadeIn();
 
         EffectContainer.Instance.StopAllEffect();
-        GameManager.CheckStarLevel();
         DontDestroyCanvas.Instance.ChangeResultUIVisible(false);
 
-        await SceneLoadExtension.StartFadeWait(nextScene);
+        await SceneLoadExtension.FinishFadeIn(nextScene);
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeOut);
-        await SceneLoadExtension.StartFadeOut();
+        await SceneLoadExtension.FadeOut();
     }
 
-    public void SetStar()
+    public void SetStarLevel()
     {
         int level = GeneralSettings.Instance.StageInfos.GetCullentLevel(GameManager.CullentStage, GameManager.SleepCount);
         for (int i = 0; i < level; i++)

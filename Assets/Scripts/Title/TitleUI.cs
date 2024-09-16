@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
+/// <summary> ゲームタイトルのUI </summary>
 public class TitleUI : MonoBehaviour
 {
     [SerializeField] private Button m_StartButton;
@@ -16,7 +17,7 @@ public class TitleUI : MonoBehaviour
         SetStartButton();
         SetFinishButton();
 
-        GameManager.CheckStarLevel();
+        GameManager.PlayBGMs();
         SetVideoPlayer();
     }
 
@@ -27,9 +28,9 @@ public class TitleUI : MonoBehaviour
         {
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
             await SceneLoadExtension.StartFadeIn();
-            await SceneLoadExtension.StartFadeWait(Config.SceneNames.StageSelect);
+            await SceneLoadExtension.FinishFadeIn(Config.SceneNames.StageSelect);
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeOut);
-            await SceneLoadExtension.StartFadeOut();
+            await SceneLoadExtension.FadeOut();
         });
     }
 

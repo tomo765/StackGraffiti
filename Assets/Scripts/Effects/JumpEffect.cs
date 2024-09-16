@@ -1,5 +1,6 @@
 using UnityEngine;
 
+/// <summary> トランポリンなどでジャンプした時のエフェクト </summary>
 public class JumpEffect : MonoBehaviour, IContainEffectBase
 {
     [SerializeField] private float m_AnimSpeed = 1.4f;

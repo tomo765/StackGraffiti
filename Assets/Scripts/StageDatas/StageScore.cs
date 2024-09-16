@@ -2,40 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary> 全ステージのクリア状況、クレジット再生済みかを保存するクラス </summary>
 [System.Serializable]
 public class StageDatas
 {
     [SerializeField] private StageScore[] m_StageScores;
-    [SerializeField] private bool m_Credited;
+    [SerializeField] private bool m_SawCredit;
 
     public StageScore[] StageScores => m_StageScores;
-    public bool Credited => m_Credited;
+    public bool SawCredit => m_SawCredit;
 
     public StageDatas(StageScore[] scores, bool isCredited)
     {
         m_StageScores = scores;
-        m_Credited = isCredited;
+        m_SawCredit = isCredited;
     }
 
-    public void StartCredit()
+    public void BrowseCredit()
     {
-        m_Credited = true;
+        m_SawCredit = true;
         StageDataUtility.SaveData();
     }
 }
 
-
+/// <summary> StageType の </summary>
 [System.Serializable]
 public class StageScore
 {
-    [SerializeField] private StageType m_StageType;
+    [SerializeField] private StageLevel m_StageType;
     [SerializeField] private int m_StarLevel;
 
-    public StageType StageType => m_StageType;
+    public StageLevel StageType => m_StageType;
     public int StarLevel => m_StarLevel;
 
-    public StageScore(StageType stageName, int starLvl)
+    public StageScore(StageLevel stageName, int starLvl)
     {
         m_StageType = stageName;
         m_StarLevel = starLvl;
@@ -49,4 +49,6 @@ public class StageScore
 
         StageDataUtility.SaveData();
     }
+
+    public bool IsCleear() => m_StarLevel != 0;
 }

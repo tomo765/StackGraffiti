@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary> 複数のシーンで使うUIを保持する </summary>
 public class DontDestroyCanvas : MonoBehaviour
 {
     private static DontDestroyCanvas instance;
@@ -37,6 +38,7 @@ public class DontDestroyCanvas : MonoBehaviour
         SetNewRenderCamera();
     }
 
+    /// <summary> シーン切り替え時に参照するカメラを再度設定 </summary>
     public void SetNewRenderCamera()
     {
         m_Canvas.worldCamera = Camera.main;

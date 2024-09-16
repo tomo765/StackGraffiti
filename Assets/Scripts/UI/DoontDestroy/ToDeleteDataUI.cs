@@ -24,11 +24,11 @@ public class ToDeleteDataUI : MonoBehaviour
 
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
             await SceneLoadExtension.StartFadeIn();
-            await SceneLoadExtension.StartFadeWait(Config.SceneNames.Title);
+            await SceneLoadExtension.FinishFadeIn(Config.SceneNames.Title);
             DontDestroyCanvas.Instance.ChangeOptionUIVisible(false);
             SoundManager.Instance.SetSubBGMVolume(0);
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeOut);
-            await SceneLoadExtension.StartFadeOut();
+            await SceneLoadExtension.FadeOut();
         });
     }
 

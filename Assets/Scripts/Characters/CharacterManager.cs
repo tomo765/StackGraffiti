@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
+/// <summary> キャラクターの管理 </summary>
 public class CharacterManager : MonoBehaviour
 {
     private const int OnSleepLayer = -1;
@@ -42,6 +43,7 @@ public class CharacterManager : MonoBehaviour
         m_SleepEffect.transform.position = transform.position + m_SleepEffectPos;
     }
 
+    /// <summary> キャラを書き終わり、 </summary>
     public void CreateOnStage(string playerName)
     {
         Poly2D.enabled = true;
@@ -62,10 +64,6 @@ public class CharacterManager : MonoBehaviour
     {
         if (SceneLoadExtension.IsFading) { return; }
         OnCharacterTouch(collision.tag);
-        if (collision.CompareTag("Goal"))
-        {
-            OnClear();
-        }
     }
 
     private void OnCharacterTouch(string tag)
@@ -79,9 +77,13 @@ public class CharacterManager : MonoBehaviour
                 SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.TouchNeedleSE);
                 OnUnmovable();
                 break;
+            case "Goal":
+                OnClear();
+                break;
         }
     }
 
+    /// <summary> 操作キャラを眠らせる処理 </summary>
     private async Task OnSleep()
     {
         if (m_IsDead) { return; }
@@ -117,6 +119,7 @@ public class CharacterManager : MonoBehaviour
         GameManager.SleepCharacter();
     }
 
+    /// <summary>トゲなどの移動不可のギミックに当たった時の処理 </summary>
     private void OnUnmovable()
     {
         m_Rb2d.bodyType = RigidbodyType2D.Static;
@@ -125,6 +128,7 @@ public class CharacterManager : MonoBehaviour
         OnSleep().FireAndForget();
     }
 
+    /// <summary> 画面外に落ちた時の処理 </summary>
     private void OnDead()
     {
         Destroy(gameObject);
@@ -135,6 +139,7 @@ public class CharacterManager : MonoBehaviour
         m_IsDead = true;
     }
 
+    /// <summary> ゴールした時の処理 </summary>
     private void OnClear()
     {
         if(GameManager.IsClear) { return; }

@@ -7,13 +7,11 @@ using UnityEditor;
 using System;
 using System.Threading.Tasks;
 using System.Threading;
-
-
-
 #if UNITY_EDITOR
 using UnityEditor.UI;
 #endif
 
+/// <summary> 機能追加したButtonクラス </summary>
 [RequireComponent(typeof(Image))]
 public class CommonButton : Button
 {
@@ -74,6 +72,8 @@ public class CommonButton : Button
     private new void Start()
     {
         m_DefaultScale = transform.localScale;
+        m_Img = GetComponent<Image>();
+
 #if UNITY_EDITOR
         if (UnityEditor.EditorApplication.isPlaying && m_ScallingAlways)
 #else
@@ -88,7 +88,7 @@ public class CommonButton : Button
     public override void OnPointerEnter(PointerEventData eventData)
     {
         if(m_ScallingAlways) { return; }
-        if(m_Img == null) { SetImage(); }
+        //if(m_Img == null) { SetImage(); }
 
         m_PointerEntering = true;
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.HoverSE);
@@ -98,7 +98,7 @@ public class CommonButton : Button
     }
     public override void OnPointerExit(PointerEventData eventData)
     {
-        if (m_Img == null) { SetImage(); }
+        //if (m_Img == null) { SetImage(); }
         if (m_ChangeColor) { m_Img.color = m_ExitColor; }
         if(m_ScallingAlways) { return; }
 
@@ -121,16 +121,19 @@ public class CommonButton : Button
 
     private void SetImage() => m_Img = GetComponent<Image>();
 
+    /// <summary> アニメーション </summary>
     private async Task PlayScaling()
     {
         float time = 0;
         float speed = 10f;
+        float amplitude = 0.06f;
+        float intercept = 1.06f;
 
-        while(m_PointerEntering || m_ScallingAlways)
+        while (m_PointerEntering || m_ScallingAlways)
         {
-            transform.localScale = m_DefaultScale * (-Mathf.Cos(time) * 0.06f + 1.06f);
-            time += TaskExtension.FPS_60 / 1000f * speed;
-            await Task.Delay(TaskExtension.FPS_60);
+            transform.localScale = m_DefaultScale * (-Mathf.Cos(time) * amplitude + intercept);
+            time += TaskExtension.SixtyFrame / (float)TaskExtension.OneSec * speed;
+            await Task.Delay(TaskExtension.SixtyFrame);
             m_Source?.Token.ThrowIfCancellationRequested();
         }
         transform.localScale = m_DefaultScale;
@@ -143,7 +146,7 @@ public class CommonButton : Button
 }
 
 
-
+/// <summary> CommonButtonのエディター拡張 </summary>
 #if UNITY_EDITOR
 [CustomEditor(typeof(CommonButton))]
 public class CommonSEButtonEditor : ButtonEditor

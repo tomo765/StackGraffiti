@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
+/// <summary> ステージごとのクリア状況やスコアを保存する </summary>
 public static class StageDataUtility
 {
     public static readonly string FolderPath = Path.Combine(Application.dataPath, "SaveDatas");
@@ -27,28 +28,32 @@ public static class StageDataUtility
         }
     }
 
+    /// <summary> セーブデータを新規作成する </summary>
     public static void SetNewData()
     {
         m_StageDatas = CreateData();
         SaveData();
     }
 
+    /// <summary> 新規データの </summary>
     private static StageDatas CreateData()
     {
-        StageScore[] scores = new StageScore[Enum.GetValues(typeof(StageType)).Length - 1];
+        StageScore[] scores = new StageScore[Enum.GetValues(typeof(StageLevel)).Length - 1];
         for (int i = 1; i <= scores.Length; i++)
         {
-            scores[i - 1] = new StageScore((StageType)i, 0);
+            scores[i - 1] = new StageScore((StageLevel)i, 0);
         }
         return new StageDatas(scores, false);
     }
 
+    /// <summary> 現在のクリア状況をセーブする </summary>
     public static void SaveData()
     {
         string json = JsonUtility.ToJson(m_StageDatas);
         File.WriteAllText(FilePath, json);
     }
 
+    /// <summary> セーブデータをロード </summary>
     public static StageDatas LoadData()
     {
         ExistData();
@@ -58,9 +63,10 @@ public static class StageDataUtility
         return m_StageDatas;
     }
 
-    private static StageScore GetScore(StageType state) => Array.Find(m_StageDatas.StageScores, score => score.StageType == state);
+    /// <summary> 指定したステージスコア情報を取得 </summary>
+    private static StageScore GetScore(StageLevel state) => Array.Find(m_StageDatas.StageScores, score => score.StageType == state);
 
-    public static void SetStageScore(StageType stage, int sleepCnt)
+    public static void SetStageScore(StageLevel stage, int sleepCnt)
     {
         ExistData();
 
@@ -68,11 +74,27 @@ public static class StageDataUtility
         GetScore(stage).SetStarLevel(starLevel);
     }
 
-    public static int GetAllStarLevel()
+    /// <summary> 全ステージの星の合計獲得数を取得 </summary>
+    public static int GetTotalStarLevel()
     {
-        int allScore = 0;
-        m_StageDatas.StageScores.Select(score => allScore += score.StarLevel).ToArray();
+        int totalScore = 0;
+        foreach(var score in m_StageDatas.StageScores)
+        {
+            totalScore += score.StarLevel;
+        }
 
-        return allScore;
+        return totalScore;
+    }
+
+    public static bool CanPlayStage(int stageLevel)
+    {
+        for (int i = 0; i < stageLevel; i++)
+        {
+            if (!m_StageDatas.StageScores[i].IsCleear())
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

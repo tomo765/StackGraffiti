@@ -6,9 +6,7 @@ using TMPro;
 using System.Threading.Tasks;
 using System.Threading;
 
-/// <summary>
-/// ステージ開始時の演出
-/// </summary>
+/// <summary> ステージ開始時の演出 </summary>
 public class StageIntroUI : MonoBehaviour
 {
     private const float TextLerpValue = 0.25f;
@@ -97,7 +95,7 @@ public class StageIntroUI : MonoBehaviour
             newCol.a = Mathf.Lerp(newCol.a, 1, TextLerpValue);
             m_StageText.color = newCol;
 
-            await Task.Delay(TaskExtension.FPS_60);
+            await Task.Delay(TaskExtension.SixtyFrame);
             m_Source.Token.ThrowIfCancellationRequested();
         }
     }
@@ -112,7 +110,7 @@ public class StageIntroUI : MonoBehaviour
             m_TitleTextEN.color = newCol;
             m_TitleTextJP.color = newCol;
 
-            await Task.Delay(TaskExtension.FPS_60);
+            await Task.Delay(TaskExtension.SixtyFrame);
             m_Source.Token.ThrowIfCancellationRequested();
         }
     }
@@ -123,14 +121,14 @@ public class StageIntroUI : MonoBehaviour
         int fadeCycleTime = TaskExtension.OneSec / 2 * 3;
         while (!InputExtension.MouseLeftPush)
         {
-            displayTime += TaskExtension.FPS_60;
+            displayTime += TaskExtension.SixtyFrame;
             m_StartText.gameObject.SetActive(displayTime <= TaskExtension.OneSec);
             if (displayTime >= fadeCycleTime)
             {
                 displayTime -= fadeCycleTime;
             }
 
-            await Task.Delay(TaskExtension.FPS_60);
+            await Task.Delay(TaskExtension.SixtyFrame);
         }
         m_StartText.gameObject.SetActive(false);
     }
@@ -145,7 +143,7 @@ public class StageIntroUI : MonoBehaviour
             newCol.a = Mathf.Lerp(newCol.a, 1, FadeLerpValue);
             m_IntroImage.color = newCol;
 
-            await Task.Delay(TaskExtension.FPS_60);
+            await Task.Delay(TaskExtension.SixtyFrame);
             m_Source.Token.ThrowIfCancellationRequested();
         }
     }
@@ -169,7 +167,7 @@ public class StageIntroUI : MonoBehaviour
             m_TitleTextEN.color = newCol;
             m_TitleTextJP.color = newCol;
 
-            await Task.Delay(TaskExtension.FPS_60);
+            await Task.Delay(TaskExtension.SixtyFrame);
             m_Source.Token.ThrowIfCancellationRequested();
         }
         m_FinishFadeOut = true;

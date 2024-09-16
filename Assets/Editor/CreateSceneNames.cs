@@ -6,7 +6,10 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 
-/// <summary> 参考サイト https://www.mum-meblog.com/entry/research/scene_names_editor_extension </summary>
+/// <summary> 使用するシーン名を全て上げたクラスを作成する</summary>
+/// <remarks>
+/// 参考サイト https://www.mum-meblog.com/entry/research/scene_names_editor_extension
+/// </remarks>
 
 public class CreateSceneNames : EditorWindow
 {
@@ -52,8 +55,10 @@ public class CreateSceneNames : EditorWindow
     private static string GenerateClassContent(List<string> sceneNames, List<string> stageNames)
     {
         StringBuilder content = new();
+        content.AppendLine("///<summary> 自動で生成するクラス。 CreateSceneNames 参照 </summary>");
+        content.AppendLine("///<remarks> Editor => Generate Scene Names Class で生成開始する </remarks>");
         content.Append("namespace Config\n");
-        content.Append("{    public class SceneNames \n");
+        content.Append("{\n    public class SceneNames \n");
         content.Append("    {");
         foreach (var sceneName in sceneNames)
         {

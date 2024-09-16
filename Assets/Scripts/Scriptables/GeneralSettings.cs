@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
 
-public enum StageType
+/// <summary> ステージのレベル列挙 </summary>
+public enum StageLevel  //これも自動生成でよかったかも
 {
     None,
     Stage1,
@@ -40,7 +41,12 @@ public enum IndicatesPriority  //表示優先度,カメラからの距離を設定
     Layer20 = 20, //z軸の10
 }
 
-
+///<summary>使用するアセットを管理するクラス</summary>
+///<remarks>
+///     <para>GeneralSettings.Instance でアクセスし、必要なアセットを呼び出す。</para>
+///     <para>値の書き換えができないように、呼び出しはゲッターのプロパティからのみできるようにする。(セッターは書かない)</para>
+///     <para>get { } を [プロパティ名] => [変数] と書ける</para>
+///</remarks>
 [CreateAssetMenu(fileName = "GeneralSettings", menuName = "Scriptables/GeneralSettings")]
 public class GeneralSettings : ScriptableObject
 {
@@ -56,7 +62,7 @@ public class GeneralSettings : ScriptableObject
                 instance = Resources.Load<GeneralSettings>(path);
                 if(instance == null )
                 {
-                    Debug.LogError("no");
+                    Debug.LogError("No");
                 }
             }
             return instance;
@@ -78,7 +84,8 @@ public class GeneralSettings : ScriptableObject
     public Sounds Sound => m_Sounds;
     public IndicatesPrioritySettings Priorities => m_Priorities;
 
-
+    /// <summary>プレハブ管理クラス</summary>
+    /// <remarks>シーン上に登場するアセットを呼び出す</remarks>
     [System.Serializable]
     public class Prehabs
     {
@@ -116,6 +123,7 @@ public class GeneralSettings : ScriptableObject
         public EffectContainer EffectContainer => m_EffectContainer;
     }
 
+    /// <summary>操作するキャラクターの管理クラス</summary>
     [System.Serializable]
     public class PlayerSettings
     {
@@ -126,6 +134,7 @@ public class GeneralSettings : ScriptableObject
 
     }
 
+    /// <summary>ステージの情報を管理するクラス</summary>
     [System.Serializable]
     public class StageInfomations
     {
@@ -133,21 +142,21 @@ public class GeneralSettings : ScriptableObject
 
         public StageInfomation[] Stages => m_Stages;
 
-        public int GetCullentLevel(StageType type, int sleepCnt) => GetStageInfo(type).GetStarLevel(sleepCnt);
-        private StageInfomation GetStageInfo(StageType stg) => Array.Find(Stages, stage => stage.StageType == stg);
-        public string GetStageTextEN(int stg) => Array.Find(Stages, stage => stage.StageType == (StageType)stg).StageTitleEN;
-        public string GetStageTextJP(int stg) => Array.Find(Stages, stage => stage.StageType == (StageType)stg).StageTitleJP;
+        public int GetCullentLevel(StageLevel type, int sleepCnt) => GetStageInfo(type).GetStarLevel(sleepCnt);
+        private StageInfomation GetStageInfo(StageLevel stg) => Array.Find(Stages, stage => stage.StageLevel == stg);
+        public string GetStageTextEN(int stg) => Array.Find(Stages, stage => stage.StageLevel == (StageLevel)stg).StageTitleEN;
+        public string GetStageTextJP(int stg) => Array.Find(Stages, stage => stage.StageLevel == (StageLevel)stg).StageTitleJP;
 
         [System.Serializable]
         public class StageInfomation
         {
-            [SerializeField] private StageType m_StageType;
+            [SerializeField] private StageLevel m_StageLevel;
             [SerializeField] private string m_StageTitleJP;
             [SerializeField] private string m_StageTitleEN;
             [SerializeField] private int m_ThreeStar;
             [SerializeField] private int m_TwoStar;
 
-            public StageType StageType => m_StageType;
+            public StageLevel StageLevel => m_StageLevel;
             public string StageTitleJP => m_StageTitleJP;
             public string StageTitleEN => m_StageTitleEN;
 

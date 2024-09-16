@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Threading.Tasks;
 
+/// <summary> ƒLƒƒƒ‰‚Ì‘€ì’†‚Ì§Œä‚ğ‚·‚é </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterController : MonoBehaviour
 {

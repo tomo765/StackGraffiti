@@ -1,5 +1,7 @@
 using UnityEngine;
 
+
+/// <summary> 風船でジャンプした時のエフェクト </summary>
 public class BalloonEffect : MonoBehaviour, IContainEffectBase
 {
     [SerializeField] private float m_AnimSpeed = 1;

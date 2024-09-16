@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary> キャラの生成に関する設定や生成処理 </summary>
 public static class CharacterCreator  //https://qiita.com/divideby_zero/items/491d18cbc91d7fabd700
 {
     private static float m_LineWidth = 0.1f;
@@ -29,6 +30,7 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
         m_Vlist.Clear();
     }
 
+    /// <summary> キャラを書ける状態でマウス左をホールドしてる時の処理 </summary>
     public static void OnHold(Vector2 position)
     {
         var pos = InputExtension.WorldMousePos - position;
@@ -37,11 +39,12 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
         CreateMesh();
     }
 
+    /// <summary> キャラを書いているときにマウス左を話した時の処理 </summary>
     public static void OnRelease()
     {
-        Finish();
+        FinishWrite();
     }
-
+/// <summary> キャラを生成するボタンを押したときの処理 </summary>
     public static void CreateOnStage(string charaName)
     {
         if (!CanCreateChara) { return; }
@@ -95,7 +98,7 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
         m_Mesh.SetIndices(indices.ToArray(), MeshTopology.Quads, 0);
     }
 
-    private static void Finish()
+    private static void FinishWrite()
     {
         if (!CanCreateChara) { return; }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary> BGM‚Ì‰¹—Ê‚ğİ’è‚·‚é </summary>
 public class SoundManager : MonoBehaviour
 {
     private static SoundManager instance;
@@ -109,11 +110,11 @@ public class SoundManager : MonoBehaviour
         m_SE.volume = vol;
     }
 
-    public void SetSubBGMVolume(float starLevel)  //ToDo : 
+    public void SetSubBGMVolume(float starLevel)
     {
-        m_SubBGMVolume = starLevel >= PlayMaxVolScore ? 0.8f :
-                         starLevel >= PlayCodeScore ? 0.5f :
-                         starLevel >= PlayBassScore ? 0.3f : 0;
+        m_SubBGMVolume = starLevel >= PlayMaxVolScore ? VolumeOnMax :
+                         starLevel >= PlayCodeScore ? VolumeOnCode :
+                         starLevel >= PlayBassScore ? VolumeOnBass : 0;
         SetBGMVol(m_MainBGM.volume);
     }
 }
