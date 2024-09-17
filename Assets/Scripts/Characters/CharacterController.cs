@@ -43,6 +43,7 @@ public class CharacterController : MonoBehaviour
         if (SceneLoadExtension.IsFading) { return; }
         if (!InputExtension.OnMove) { return; }
         if (!GameManager.IsPlaying) { return; }
+        if (DontDestroyCanvas.Instance.IsViewInStage) { return; }
 
         if (m_OnGround)
         {

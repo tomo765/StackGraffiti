@@ -12,6 +12,9 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         GameManager.SetSpawnPos(m_SpawnArea);
+        DontDestroyCanvas.Instance.ResetStageUI.SetInputName(() => m_GameCanvasUI.IsInputNameNow);
+        DontDestroyCanvas.Instance.ResetStageUI.SetStageName(gameObject.scene.name);
+
         StageDataUtility.LoadData();
     }
 
@@ -24,7 +27,8 @@ public class StageManager : MonoBehaviour
 
         if (InputExtension.ResetStage)
         {
-            ResetStage().FireAndForget();
+            DontDestroyCanvas.Instance.ChangeResetStageUIVisible(true);
+            //ResetStage().FireAndForget();
         }
     }
 

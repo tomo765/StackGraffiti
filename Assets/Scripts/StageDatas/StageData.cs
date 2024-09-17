@@ -98,15 +98,16 @@ public static class StageDataUtility
         return true;
     }
 
+    /// <summary> 指定のステージがプレイ可能かを判別する </summary>
+    /// <param name="stageLevel">ステージのindex</param>
+    /// <returns></returns>
     public static bool IsSelectable(int stageLevel)
     {
         if(stageLevel == 0) {  return true; }
+        if(GeneralSettings.Instance.StageInfos.LastTutorialStage <= 0) { return true; }
         if (StageDatas.StageScores[GeneralSettings.Instance.StageInfos.LastTutorialStage - 1].StarLevel != 0) { return true; }
 
-        for(int i = 0; i < stageLevel; i++)
-        {
-            if(StageDatas.StageScores[i].StarLevel == 0) { return false; }
-        }
-        return true;
+        if (StageDatas.StageScores[stageLevel - 1].StarLevel != 0) { return true; }
+        return false;
     }
 }
