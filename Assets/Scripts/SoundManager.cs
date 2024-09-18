@@ -84,7 +84,7 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayMarimba(float val)
     {
-        m_MarimbaBGM.volume = Mathf.Clamp(Mathf.Abs(val), 0, 1);
+        m_MarimbaBGM.volume = Mathf.Clamp(Mathf.Abs(val), 0, 1) * DontDestroyCanvas.Instance.OptionUI.BGMVolume;
         if (m_MarimbaBGM.isPlaying) { return; }
 
         m_MarimbaBGM.Play();
