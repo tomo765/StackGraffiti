@@ -117,6 +117,7 @@ public class CharacterManager : MonoBehaviour
 
         if (GameManager.IsClear) { return; }
         GameManager.SleepCharacter();
+        SoundManager.Instance.PlayMarimba(0);
     }
 
     /// <summary>トゲなどの移動不可のギミックに当たった時の処理 </summary>
@@ -136,6 +137,7 @@ public class CharacterManager : MonoBehaviour
 
         if (m_IsDead) { return; }
         GameManager.SleepCharacter();
+        SoundManager.Instance.PlayMarimba(0);
         m_IsDead = true;
     }
 

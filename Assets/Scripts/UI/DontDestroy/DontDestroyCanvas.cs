@@ -19,6 +19,7 @@ public class DontDestroyCanvas : MonoBehaviour
 
     private Func<bool> m_InputNameNow;
 
+    public OptionUI OptionUI => m_OptionUI;
     public ResultUI ResultUI => m_ResultUI;
     public StageIntroUI StageIntroUI => m_StageIntroUI;
     public ResetStageUI ResetStageUI => m_ResetStageUI;

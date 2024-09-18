@@ -14,6 +14,7 @@ public class OptionUI : MonoBehaviour
     [SerializeField] private Slider m_BGMSlider;
     [SerializeField] private Slider m_SESlider;
 
+    public float BGMVolume => m_BGMSlider.value;
 
     void Start()
     {
