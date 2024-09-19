@@ -1908,7 +1908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f9d686717864f4428669e08aecee41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: {fileID: 2800000, guid: f43ddd7c4b639cb468b0bee8d2da23d4, type: 3}
+  cursor: {fileID: 2800000, guid: 4f920389c8a8db149a53bd8bd4dee4e8, type: 3}
 --- !u!222 &5202702774340510716
 CanvasRenderer:
   m_ObjectHideFlags: 0
