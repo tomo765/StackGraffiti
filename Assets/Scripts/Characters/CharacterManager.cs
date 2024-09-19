@@ -34,7 +34,7 @@ public class CharacterManager : MonoBehaviour
         m_Controller = GetComponent<CharacterController>();
 
         Poly2D.enabled = false;
-        m_Controller.SetManagerMember(m_Rb2d, OnSleep);
+        m_Controller.SetManagerMember(m_Rb2d, OnSleep, OnDead);
     }
 
     private void FixedUpdate()
@@ -129,7 +129,7 @@ public class CharacterManager : MonoBehaviour
         OnSleep().FireAndForget();
     }
 
-    /// <summary> ‰æ–ÊŠO‚É—‚¿‚½‚Ìˆ— </summary>
+    /// <summary> ƒLƒƒƒ‰‚ğíœ‚·‚éˆ— </summary>
     private void OnDead()
     {
         Destroy(gameObject);
