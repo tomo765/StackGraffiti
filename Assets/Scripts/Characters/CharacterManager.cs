@@ -71,7 +71,7 @@ public class CharacterManager : MonoBehaviour
         switch (tag)
         {
             case "Dead":
-                OnDead();
+                OnDead(0).FireAndForget();
                 break;
             case "Needle":
                 SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.TouchNeedleSE);
@@ -130,10 +130,12 @@ public class CharacterManager : MonoBehaviour
     }
 
     /// <summary> ƒLƒƒƒ‰‚ğíœ‚·‚éˆ— </summary>
-    private void OnDead()
+    private async Task OnDead(int waitTime)
     {
         Destroy(gameObject);
         m_SleepEffect?.gameObject.SetActive(false);
+
+        await Task.Delay(waitTime);
 
         if (m_IsDead) { return; }
         GameManager.SleepCharacter();

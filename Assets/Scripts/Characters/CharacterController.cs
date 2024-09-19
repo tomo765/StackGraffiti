@@ -14,15 +14,15 @@ public class CharacterController : MonoBehaviour
     private const float AirMoveSpeed = 0.5f;
 
     private Func<Task> m_OnSleep;
-    private Action m_OnDead;
+    private Func<int, Task> m_OnDead;
 
     private bool m_OnGround = false;
 
-    public void SetManagerMember(Rigidbody2D rb2d, Func<Task> onSleep, Action onDead)
+    public void SetManagerMember(Rigidbody2D rb2d, Func<Task> onSleep, Func<int, Task> onDead)
     {
         m_Rb2d = rb2d;
         m_OnSleep = onSleep;
-        m_OnDead = onDead;
+        m_OnDead += onDead;
     }
 
     private void Update()
@@ -34,7 +34,7 @@ public class CharacterController : MonoBehaviour
 
         if (InputExtension.OnDeleteColtrolChara)
         {
-            m_OnDead();
+            m_OnDead(TaskExtension.OneSec);
         }
     }
 
