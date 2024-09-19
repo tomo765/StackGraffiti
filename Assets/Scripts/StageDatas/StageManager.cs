@@ -29,7 +29,6 @@ public class StageManager : MonoBehaviour
         {
             if (m_GameCanvasUI.IsInputNameNow) { return; }
             DontDestroyCanvas.Instance.ChangeResetStageUIVisible(true);
-            //ResetStage().FireAndForget();
         }
     }
 
