@@ -6,7 +6,7 @@ public class Initialization : MonoBehaviour
 {
     private static bool initialized = false;
 
-    void Start()
+    void Awake()
     {
         if(initialized) { return; }
 
@@ -14,7 +14,6 @@ public class Initialization : MonoBehaviour
         {
             DontDestroyCanvas.CreateCanvas().CreateAllUI();
         }
-
 
         initialized = true;
     }
