@@ -27,6 +27,7 @@ public class StageManager : MonoBehaviour
 
         if (InputExtension.ResetStage)
         {
+            if (m_GameCanvasUI.IsInputNameNow) { return; }
             DontDestroyCanvas.Instance.ChangeResetStageUIVisible(true);
             //ResetStage().FireAndForget();
         }
