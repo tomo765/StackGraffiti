@@ -34,6 +34,7 @@ public class CharacterController : MonoBehaviour
 
         if (InputExtension.OnDeleteColtrolChara)
         {
+            EffectContainer.Instance.PlayEffect(GeneralSettings.Instance.Prehab.DeleteCharaEffect, transform.position);
             m_OnDead(TaskExtension.OneSec);
         }
     }
