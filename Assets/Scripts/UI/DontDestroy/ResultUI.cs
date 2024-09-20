@@ -62,10 +62,10 @@ public class ResultUI : MonoBehaviour
                 if (playCredit) { loadScene = Config.SceneNames.Credit; }
                 else { GameManager.PlayBGMs(); }
 
+                GameManager.InitPlayState(nextStage);
                 await OnPushResultButton(loadScene);
                 if (playCredit) { return; }
 
-                GameManager.InitPlayState(nextStage);
                 DontDestroyCanvas.Instance.ChangeStageIntroUIVisible(true);  //ToDo : StageSelectUI でも似た処理してるからメソッドにする？
                 DontDestroyCanvas.Instance.StageIntroUI.SetIntroText(GameManager.CullentStage.ToString(),
                                                                      GeneralSettings.Instance.StageInfos.GetStageTextEN((int)GameManager.CullentStage),
