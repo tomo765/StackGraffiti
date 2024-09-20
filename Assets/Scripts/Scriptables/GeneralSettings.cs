@@ -91,6 +91,7 @@ public class GeneralSettings : ScriptableObject
     public class Prehabs
     {
         [SerializeField] private CharacterManager m_Character;
+        [SerializeField] private CharacterNameCanvas m_CharacterNameCanvas;
         [SerializeField] private StageSelectButton m_StageSelectBtn;
 
         [SerializeField] private DontDestroyCanvas m_DontDestroyCanvas;
@@ -111,6 +112,7 @@ public class GeneralSettings : ScriptableObject
         [SerializeField] private EffectContainer m_EffectContainer;
 
         public CharacterManager Character => m_Character;
+        public CharacterNameCanvas CharacterNameCanvas => m_CharacterNameCanvas;
         public StageSelectButton StageSelectBtn => m_StageSelectBtn;
         public DontDestroyCanvas DontDestroyCanvas => m_DontDestroyCanvas;
         public OptionUI OptionUI => m_OptionUI;

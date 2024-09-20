@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TMPro;
 using UnityEngine;
 
 /// <summary> キャラクターの管理 </summary>
@@ -10,7 +9,6 @@ public class CharacterManager : MonoBehaviour
     private const int OnSleepLayer = -1;
 
     [SerializeField] private SpriteRenderer m_EyeRender;
-    [SerializeField] private TextMeshProUGUI m_NameText;
     [SerializeField] private MeshFilter m_MeshFilter;
     [SerializeField] private float m_ScaleOnStage = 0.3f;
 
@@ -18,6 +16,7 @@ public class CharacterManager : MonoBehaviour
     private PolygonCollider2D m_PolygonCollider2D;
     private CharacterController m_Controller;
     private SleepEffect m_SleepEffect;
+    private CharacterNameCanvas m_CharacterName;
 
     private bool m_IsDead = false;
     private Vector3 m_SleepEffectPos = new Vector3(1, 1, 0);
@@ -39,23 +38,34 @@ public class CharacterManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(m_SleepEffect == null) { return; }
+        SetEffectPos();
+        SetNamePos();
+    }
+
+    private void SetEffectPos()
+    {
+        if (m_SleepEffect == null) { return; }
         m_SleepEffect.transform.position = transform.position + m_SleepEffectPos;
     }
 
+    private void SetNamePos()
+    {
+        if(m_CharacterName == null) { return;}
+        m_CharacterName.transform.position = transform.position + Vector3.up * 1.3f;
+    }
+
     /// <summary> キャラを書き終わり、 </summary>
-    public void CreateOnStage(string playerName)
+    public void CreateOnStage(CharacterNameCanvas canvas)
     {
         Poly2D.enabled = true;
-
+        Debug.Log(canvas.name);
         m_EyeRender.gameObject.SetActive(true);
-        m_NameText.gameObject.SetActive(true);
         m_Controller.enabled = true;
 
         transform.position = GameManager.SpawnArea.transform.position;
         Rb2D.bodyType = RigidbodyType2D.Dynamic;
 
-        m_NameText.text = playerName;
+        m_CharacterName = canvas;
 
         transform.localScale = Vector3.one * m_ScaleOnStage;
     }
@@ -133,6 +143,7 @@ public class CharacterManager : MonoBehaviour
     private async Task OnDead(int waitTime)
     {
         Destroy(gameObject);
+        Destroy(m_CharacterName.gameObject);
         m_SleepEffect?.gameObject.SetActive(false);
 
         await Task.Delay(waitTime);

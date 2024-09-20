@@ -51,7 +51,9 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
         if (string.IsNullOrEmpty(charaName)) { charaName = GeneralSettings.Instance.PlayerSetting.GetRandomName(); }
 
         GameManager.SetGameState(GameState.Playing);
-        m_CreateChara.CreateOnStage(charaName);
+        var charaNameCanvas = GameObject.Instantiate(GeneralSettings.Instance.Prehab.CharacterNameCanvas);
+        charaNameCanvas.SetCharacterName(charaName);
+        m_CreateChara.CreateOnStage(charaNameCanvas);
 
         m_CreateChara = null;
     }
