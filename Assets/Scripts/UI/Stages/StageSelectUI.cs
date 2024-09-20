@@ -24,7 +24,6 @@ public class StageSelectUI : MonoBehaviour
     private void SetSelectButtons()
     {
         string[] sceneNames = Config.SceneNames.m_StageNames;
-
         m_SelectButtons = new StageSelectButton[sceneNames.Length];
 
         for (int i = 0; i < sceneNames.Length; i++)  //ステージのクリアレベルが0でないかを取得する

@@ -31,7 +31,7 @@ public static class GameManager
     public static bool IsHowToPlay => m_GameState == GameState.HowToPlay;
 
     public static StageLevel CullentStage => m_CullentStage;
-    public static bool IsLastStage => m_CullentStage == StageLevel.Stage10;
+    public static bool IsLastStage => m_CullentStage == (StageLevel)Config.SceneNames.m_StageNames.Length;
 
     public static int SleepCount => m_SleepCount;
     public static GameObject SpawnArea => m_SpawnArea;
