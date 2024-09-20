@@ -381,8 +381,28 @@ MeshRenderer:
 --- !u!1 &557153060
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6098368980036120832, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 4f920389c8a8db149a53bd8bd4dee4e8, type: 3}
+    - target: {fileID: 6152467517654903433, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 473324333}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
+--- !u!114 &996512668 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 760976876641361960, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
+  m_PrefabInstance: {fileID: 996512667}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:

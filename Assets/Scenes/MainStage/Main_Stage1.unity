@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 97.28699
       objectReference: {fileID: 0}
+    - target: {fileID: 6098368980036120832, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 4f920389c8a8db149a53bd8bd4dee4e8, type: 3}
     - target: {fileID: 6152467517654903433, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
       propertyPath: m_Camera
       value: 
@@ -253,6 +257,7 @@ GameObject:
   - component: {fileID: 473324333}
   - component: {fileID: 473324332}
   - component: {fileID: 473324335}
+  - component: {fileID: 473324336}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -378,6 +383,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &473324336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473324331}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 32
+  m_MaxRayIntersections: 0
 --- !u!1 &557153060
 GameObject:
   m_ObjectHideFlags: 0
