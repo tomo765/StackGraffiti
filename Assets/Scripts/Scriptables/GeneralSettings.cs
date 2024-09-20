@@ -15,6 +15,7 @@ public enum StageLevel  //‚±‚ê‚à©“®¶¬‚Å‚æ‚©‚Á‚½‚©‚à
     Stage8,
     Stage9,
     Stage10,
+    Stage11
 }
 
 public enum IndicatesPriority  //•\¦—Dæ“x,ƒJƒƒ‰‚©‚ç‚Ì‹——£‚ğİ’è 

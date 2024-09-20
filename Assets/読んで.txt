@@ -1,10 +1,10 @@
 シーン作成
 ・ゲームのシーンはMain_StageBaseから複製して作って、ファイル名はBaseを数字に変える
-・BuildSettingsにシーンを追加、削除したら上のEditor > Generate Scene Names Class を押す
+・BuildSettingsにシーンを追加、削除したら上のEditor > Generate Scene Names Class を押す  <<  動かんくなる
 
 ステージのスコア表
 ・スコア、ステージを追加したら必ず Assets > SaveDatas > StageData を消して (変更は大丈夫)
 
 
-
+・ステージを間に挿入する、場合はステージの名前を変える＆GeneralSettingsのステージを変更したい
 随時追加
