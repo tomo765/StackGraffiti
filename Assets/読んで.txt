@@ -6,5 +6,5 @@
 ・スコア、ステージを追加したら必ず Assets > SaveDatas > StageData を消して (変更は大丈夫)
 
 
-
+・ステージを間に挿入する、場合はステージの名前を変える＆GeneralSettingsのステージを変更したい
 随時追加
