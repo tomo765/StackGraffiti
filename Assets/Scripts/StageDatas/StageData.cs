@@ -98,6 +98,8 @@ public static class StageDataUtility
         return true;
     }
 
+    public static bool IsAllStageClear() => m_StageDatas.StageScores.All(score => score.IsCleear());
+
     /// <summary> 指定のステージがプレイ可能かを判別する </summary>
     /// <param name="stageLevel">ステージのindex</param>
     /// <returns></returns>
