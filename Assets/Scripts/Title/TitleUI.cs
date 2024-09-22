@@ -36,9 +36,8 @@ public class TitleUI : MonoBehaviour
 
     private void SetVideoPlayer()
     {
-        m_Video.Prepare();
-        m_Video.prepareCompleted += OnPrepareCompleted;
-        void OnPrepareCompleted(VideoPlayer player) => player.Play();
+        m_Video.Play();
+        //m_Video.SetLoopPointReached(() => m_Video.Play());
     }
 
     private void SetFinishButton()
