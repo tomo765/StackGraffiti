@@ -84,6 +84,7 @@ public class CharacterManager : MonoBehaviour
                 OnDead(0).FireAndForget();
                 break;
             case "Needle":
+                if (m_IsDead) { break; }
                 SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.TouchNeedleSE);
                 OnUnmovable();
                 break;
@@ -133,9 +134,11 @@ public class CharacterManager : MonoBehaviour
     /// <summary>トゲなどの移動不可のギミックに当たった時の処理 </summary>
     private void OnUnmovable()
     {
-        m_Rb2d.bodyType = RigidbodyType2D.Static;
+        m_Rb2d.bodyType = RigidbodyType2D.Kinematic;
+        Rb2D.velocity = Vector3.zero;
+        Rb2D.angularVelocity = 0;
 
-        if(m_IsDead) { return; }
+        if (m_IsDead) { return; }
         OnSleep().FireAndForget();
     }
 
