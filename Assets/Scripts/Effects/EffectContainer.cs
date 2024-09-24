@@ -21,7 +21,7 @@ public class EffectContainer : MonoBehaviour
 
     [SerializeField] private int m_MaxContain = 20;
 
-    private List<IContainEffectBase> m_Effects;
+    private List<IContainableEffect> m_Effects;
 
     private void Awake()
     {
@@ -38,18 +38,18 @@ public class EffectContainer : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
 
-        m_Effects = new List<IContainEffectBase>(m_MaxContain);
+        m_Effects = new List<IContainableEffect>(m_MaxContain);
     }
 
     /// <summary> 指定のエフェクトを再生する </summary>
-    public void PlayEffect<T>(T playEff, Vector3 vec) where T : IContainEffectBase, new()
+    public void PlayEffect<T>(T playEff, Vector3 vec) where T : MonoBehaviour, IContainableEffect
     {
-        IContainEffectBase eff = null;
+        IContainableEffect eff = null;
         vec += GeneralSettings.Instance.Priorities.EffectLayer;
 
         if (m_Effects.Count != 0)
         {
-            if(TryGetEffects<T>(out IContainEffectBase[] effects))
+            if(TryGetEffects<T>(out IContainableEffect[] effects))
             {
                 var inactives = effects.Where(effects => !effects.IsActive).ToArray();
                 if(inactives.Length != 0)
@@ -82,10 +82,10 @@ public class EffectContainer : MonoBehaviour
     ///     <para>使用していない(非表示中の)エフェクトがあればそれを使う</para>
     ///     <para>なければ生成し、それを使う</para>
     /// </remarks>
-    public T GetEffect<T>(T effect) where T : IContainEffectBase, new()
+    public T GetEffect<T>(T effect) where T : MonoBehaviour, IContainableEffect
     {
         T useEffect;
-        if (TryGetEffects<T>(out IContainEffectBase[] effects)) 
+        if (TryGetEffects<T>(out IContainableEffect[] effects)) 
         {
             var sameEffects = effects.Where(effect => !effect.IsActive).ToArray();
             if(sameEffects.Length == 0)
@@ -111,7 +111,7 @@ public class EffectContainer : MonoBehaviour
     /// <remarks>
     ///     <para> 使いたいエフェクトがあれば effects から取得できる</para>
     /// </remarks>
-    private bool TryGetEffects<T>(out IContainEffectBase[] effects) where T : IContainEffectBase, new()
+    private bool TryGetEffects<T>(out IContainableEffect[] effects) where T : MonoBehaviour, IContainableEffect
     {
         effects = m_Effects.Where(effects => effects is T)
                            .ToArray();

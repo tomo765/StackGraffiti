@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConfettiEffect : MonoBehaviour, IContainEffectBase
+public class ConfettiEffect : MonoBehaviour, IContainableEffect
 {
     public bool IsActive => gameObject.activeSelf;
 
-    public IContainEffectBase Create(Vector3 vec, Quaternion q, Transform parent)
+    public IContainableEffect Create(Vector3 vec, Quaternion q, Transform parent)
     {
         return Instantiate(this, vec, q, parent);
     }

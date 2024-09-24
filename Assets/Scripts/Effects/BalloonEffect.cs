@@ -2,7 +2,7 @@ using UnityEngine;
 
 
 /// <summary> 風船でジャンプした時のエフェクト </summary>
-public class BalloonEffect : MonoBehaviour, IContainEffectBase
+public class BalloonEffect : MonoBehaviour, IContainableEffect
 {
     [SerializeField] private float m_AnimSpeed = 1;
     private Animator m_Anim;
@@ -30,7 +30,7 @@ public class BalloonEffect : MonoBehaviour, IContainEffectBase
         gameObject.SetActive(false);
     }
 
-    public IContainEffectBase Create(Vector3 vec, Quaternion q, Transform parent)
+    public IContainableEffect Create(Vector3 vec, Quaternion q, Transform parent)
     {
         return Instantiate(this, vec, q, parent);
     }

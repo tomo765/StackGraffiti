@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SleepEffect : MonoBehaviour, IContainEffectBase
+public class SleepEffect : MonoBehaviour, IContainableEffect
 {
     [SerializeField] float m_AnimSpeed = 1;
 
@@ -14,7 +14,7 @@ public class SleepEffect : MonoBehaviour, IContainEffectBase
 
     public bool IsActive => gameObject.activeSelf;
 
-    public IContainEffectBase Create(Vector3 vec, Quaternion q, Transform parent)
+    public IContainableEffect Create(Vector3 vec, Quaternion q, Transform parent)
     {
         return Instantiate(this, vec, q, parent);
     }
