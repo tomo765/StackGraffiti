@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Obsolete("旧移動床の起動スイッチ")]
 public class BlockSwichAction : MonoBehaviour
 {
     public GameObject targetMoveBlock;  // 移動ブロック

@@ -3,31 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary> ゲームのスクリーンサイズを設定する </summary>
 public static class ScreenSettings
 {
-    private static ScreenSize m_ScreenSize;
-
-    //value : (width, height, isFullScreen)
     private static readonly Dictionary<ScreenSize, (int, int, bool)> m_ScreenValues = new Dictionary<ScreenSize, (int, int, bool)>()
     {
-        { ScreenSize._FullScreen, (1920, 1080, true) },
+      //{ ScreenSize , (width, height, isFullScreen)},
+        { ScreenSize._FullScreen, (1920, 1080, true)},
         { ScreenSize._1920x1080, (1920, 1080, false)},
         { ScreenSize._1280x720, (1280, 720, false)},
         { ScreenSize._960x540, (960, 540, false)}
     };
 
-    public static ScreenSize ScreenSize => m_ScreenSize;
-
+    /// <summary> サイズ変更を適用 </summary>
     public static void SetScreenSize(ScreenSize newSize)
     {
         var newScreenValue = m_ScreenValues[newSize];
         Screen.SetResolution(newScreenValue.Item1, newScreenValue.Item2, newScreenValue.Item3);
     }
 
-    public static int GetCullentScreenSizeIndex()
+    /// <summary> m_ScreenValues の順で番号を取得する </summary>
+    public static int GetCullentScreenSizeIndex()  //ToDo : m_ScreenValues の 
     {
         return Screen.fullScreen ? 0 : Screen.width == 1920 ? 1 : Screen.width == 1280 ? 2 : 3;
     }
+
+    /// <summary> UI上での画面サイズの一覧を見る </summary>
     public static string[] GetAllSizeName()
     {
         int index = 0;
@@ -35,21 +36,18 @@ public static class ScreenSettings
 
         foreach(var key in m_ScreenValues.Keys)
         {
-            names[index] = key.ToStr();
+            names[index] = key.ToString().Replace("_", "");
             index++;
         }
         return names;
     }
 }
 
-public enum ScreenSize  //ToDo : 画面サイズ変更できるようにする
+/// <summary> 使用可能な画面サイズを定義 </summary>
+public enum ScreenSize
 {
     _FullScreen,
     _1920x1080,
     _1280x720,
     _960x540
-}
-public static class ScreenSizeExtension
-{
-    public static string ToStr(this ScreenSize size) => size.ToString().Replace("_", "");
 }

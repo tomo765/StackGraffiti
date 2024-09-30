@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary> 移動床のコントローラー </summary>
 public partial class ElevatorController : GimmickReceiver
 {
     [SerializeField] private Vector2 m_MoveVec;

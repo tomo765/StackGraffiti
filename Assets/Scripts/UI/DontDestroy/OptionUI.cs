@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary> 各種設定をするUI </summary>
 public class OptionUI : MonoBehaviour
 {
     [SerializeField] private GameObject m_AskDeleteData;
@@ -13,6 +14,7 @@ public class OptionUI : MonoBehaviour
     [SerializeField] private Slider m_BGMSlider;
     [SerializeField] private Slider m_SESlider;
 
+    public float BGMVolume => m_BGMSlider.value;
 
     void Start()
     {
@@ -23,6 +25,7 @@ public class OptionUI : MonoBehaviour
         SetSESlider();
     }
 
+    /// <summary> オプション画面を閉じる処理の登録 </summary>
     private void SetReturnButton()
     {
         m_ReturnButton.onClick.RemoveAllListeners();
@@ -33,6 +36,7 @@ public class OptionUI : MonoBehaviour
         });
     }
 
+    /// <summary> セーブデータ削除画面に遷移する処理の登録 </summary>
     private void SetDeleteDataButton()
     {
         m_DeleteDataButton.onClick.RemoveAllListeners();
@@ -43,6 +47,7 @@ public class OptionUI : MonoBehaviour
         });
     }
 
+    /// <summary> BGM の音量調整の登録 </summary>
     private void SetBGMSlider()
     {
         m_BGMSlider.value = SoundManager.Instance.BGMVol;
@@ -52,6 +57,7 @@ public class OptionUI : MonoBehaviour
         });
     }
 
+    /// <summary> SE の音量調整の登録 </summary>
     private void SetSESlider()
     {
         m_SESlider.value = SoundManager.Instance.SEVol;
@@ -61,6 +67,7 @@ public class OptionUI : MonoBehaviour
         });
     }
 
+    /// <summary> スクリーンサイズの変更をする処理を登録 </summary>
     private void SetScreenResizer()
     {
         var names = ScreenSettings.GetAllSizeName();

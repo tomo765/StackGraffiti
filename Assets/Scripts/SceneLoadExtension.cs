@@ -4,11 +4,14 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+/// <summary> フェードをしながらシーンを切り替えるクラス </summary>
 public static class SceneLoadExtension
 {
     private static bool m_IsFading = false;
     public static bool IsFading => m_IsFading;
 
+    /// <summary> フェードイン開始 </summary>
     public static async Task StartFadeIn()
     {
         if (m_IsFading) { return; }
@@ -24,14 +27,17 @@ public static class SceneLoadExtension
         await FadeCanvasUI.Instance.IsCompleteFadeIn();
     }
 
-    public static async Task StartFadeWait(string sceneName)
+    /// <summary> フェードイン終了、表示するシーンを読み込む </summary>
+    /// <param name="sceneName"> 読み込むシーン名 </param>
+    public static async Task FinishFadeIn(string sceneName)
     {
-        FadeCanvasUI.Instance.StartWait();
+        FadeCanvasUI.Instance.FinishFadeIn();
         await SceneManager.LoadSceneAsync(sceneName);
         await FadeCanvasUI.Instance.WaitToFadeOut();
     }
 
-    public static async Task StartFadeOut()
+    /// <summary> フェードアウト開始 </summary>
+    public static async Task FadeOut()
     {
         FadeCanvasUI.Instance.StartFadeOut();
         await FadeCanvasUI.Instance.IsCompleteFadeOut();

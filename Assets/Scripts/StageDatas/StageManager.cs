@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
+/// <summary> ステージのレベル </summary>
 public class StageManager : MonoBehaviour
 {
     [SerializeField] GameObject m_SpawnArea;
@@ -11,6 +12,9 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         GameManager.SetSpawnPos(m_SpawnArea);
+        DontDestroyCanvas.Instance.ResetStageUI.SetInputName(() => m_GameCanvasUI.IsInputNameNow);
+        DontDestroyCanvas.Instance.ResetStageUI.SetStageName(gameObject.scene.name);
+
         StageDataUtility.LoadData();
     }
 
@@ -23,10 +27,12 @@ public class StageManager : MonoBehaviour
 
         if (InputExtension.ResetStage)
         {
-            ResetStage().FireAndForget();
+            if (m_GameCanvasUI.IsInputNameNow) { return; }
+            DontDestroyCanvas.Instance.ChangeResetStageUIVisible(true);
         }
     }
 
+    /// <summary> ステージのプレイを終了し、ステージ選択画面へ移動する </summary>
     private async Task EscapeStage()
     {
         if (!DontDestroyCanvas.Instance.StageIntroUI.FinishFadeOut) { return; }
@@ -37,12 +43,13 @@ public class StageManager : MonoBehaviour
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
         await SceneLoadExtension.StartFadeIn();
         EffectContainer.Instance.StopAllEffect();
-        await SceneLoadExtension.StartFadeWait(Config.SceneNames.StageSelect);
+        await SceneLoadExtension.FinishFadeIn(Config.SceneNames.StageSelect);
         SoundManager.Instance.PlayMarimba(0);
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeOut);
-        await SceneLoadExtension.StartFadeOut();
+        await SceneLoadExtension.FadeOut();
     }
 
+    /// <summary> ステージを最初からやり直す </summary>
     private async Task ResetStage()
     {
         if (!DontDestroyCanvas.Instance.StageIntroUI.FinishFadeOut) { return; }
@@ -51,14 +58,14 @@ public class StageManager : MonoBehaviour
         if (SceneLoadExtension.IsFading) { return; }
 
         GameManager.Source.Cancel();
-        GameManager.StartStage(GameManager.CullentStage);
+        GameManager.InitPlayState(GameManager.CullentStage);
 
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
         await SceneLoadExtension.StartFadeIn();
         EffectContainer.Instance.StopAllEffect();
-        await SceneLoadExtension.StartFadeWait(gameObject.scene.name);
+        await SceneLoadExtension.FinishFadeIn(gameObject.scene.name);
         SoundManager.Instance.PlayMarimba(0);
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeOut);
-        await SceneLoadExtension.StartFadeOut();
+        await SceneLoadExtension.FadeOut();
     }
 }

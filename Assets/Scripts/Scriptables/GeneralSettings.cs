@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
 
-public enum StageType
+/// <summary> ステージのレベル列挙 </summary>
+public enum StageLevel  //これも自動生成でよかったかも
 {
     None,
     Stage1,
@@ -41,7 +42,12 @@ public enum IndicatesPriority  //表示優先度,カメラからの距離を設定
     Layer20 = 20, //z軸の10
 }
 
-
+///<summary>使用するアセットを管理するクラス</summary>
+///<remarks>
+///     <para>GeneralSettings.Instance でアクセスし、必要なアセットを呼び出す。</para>
+///     <para>値の書き換えができないように、呼び出しはゲッターのプロパティからのみできるようにする。(セッターは書かない)</para>
+///     <para>get { } を [プロパティ名] => [変数] と書ける</para>
+///</remarks>
 [CreateAssetMenu(fileName = "GeneralSettings", menuName = "Scriptables/GeneralSettings")]
 public class GeneralSettings : ScriptableObject
 {
@@ -57,7 +63,7 @@ public class GeneralSettings : ScriptableObject
                 instance = Resources.Load<GeneralSettings>(path);
                 if(instance == null )
                 {
-                    Debug.LogError("no");
+                    Debug.LogError("No");
                 }
             }
             return instance;
@@ -79,11 +85,13 @@ public class GeneralSettings : ScriptableObject
     public Sounds Sound => m_Sounds;
     public IndicatesPrioritySettings Priorities => m_Priorities;
 
-
+    /// <summary>プレハブ管理クラス</summary>
+    /// <remarks>シーン上に登場するアセットを呼び出す</remarks>
     [System.Serializable]
     public class Prehabs
     {
         [SerializeField] private CharacterManager m_Character;
+        [SerializeField] private CharacterNameCanvas m_CharacterNameCanvas;
         [SerializeField] private StageSelectButton m_StageSelectBtn;
 
         [SerializeField] private DontDestroyCanvas m_DontDestroyCanvas;
@@ -91,32 +99,38 @@ public class GeneralSettings : ScriptableObject
         [SerializeField] private ResultUI m_ResultUI;
         [SerializeField] private FadeCanvasUI m_FadeCanvasUI;
         [SerializeField] private StageIntroUI m_StageIntroUI;
+        [SerializeField] private ResetStageUI m_ResetStageUI;
 
         [Space(10), SerializeField] private BalloonEffect m_BalloonEffect;
         [SerializeField] private ClickEffect m_ClickEffect;
         [SerializeField] private JumpEffect m_JumpEffect;
         [SerializeField] private ConfettiEffect m_ConfettiEffect;
         [SerializeField] private SleepEffect m_SleepEffect;
+        [SerializeField] private DeleteCharaEffect m_DeleteCharaEffect;
 
         [SerializeField] private SoundManager m_SoundManager;
         [SerializeField] private EffectContainer m_EffectContainer;
 
         public CharacterManager Character => m_Character;
+        public CharacterNameCanvas CharacterNameCanvas => m_CharacterNameCanvas;
         public StageSelectButton StageSelectBtn => m_StageSelectBtn;
         public DontDestroyCanvas DontDestroyCanvas => m_DontDestroyCanvas;
         public OptionUI OptionUI => m_OptionUI;
         public ResultUI ResultUI => m_ResultUI;
         public FadeCanvasUI FadeCanvasUI => m_FadeCanvasUI;
         public StageIntroUI StageIntroUI => m_StageIntroUI;
+        public ResetStageUI ResetStageUI => m_ResetStageUI;
         public BalloonEffect BalloonEffect => m_BalloonEffect;
         public ClickEffect ClickEffect => m_ClickEffect;
         public JumpEffect JumpEffect => m_JumpEffect;
         public ConfettiEffect ConfettiEffect => m_ConfettiEffect;
         public SleepEffect SleepEffect => m_SleepEffect;
+        public DeleteCharaEffect DeleteCharaEffect => m_DeleteCharaEffect;
         public SoundManager SoundManager => m_SoundManager;
         public EffectContainer EffectContainer => m_EffectContainer;
     }
 
+    /// <summary>操作するキャラクターの管理クラス</summary>
     [System.Serializable]
     public class PlayerSettings
     {
@@ -127,28 +141,38 @@ public class GeneralSettings : ScriptableObject
 
     }
 
+    /// <summary>ステージの情報を管理するクラス</summary>
     [System.Serializable]
     public class StageInfomations
     {
         [SerializeField] private StageInfomation[] m_Stages = null;
+        [SerializeField] private int m_LastTutorialStage;
 
         public StageInfomation[] Stages => m_Stages;
+        public int LastTutorialStage
+        {
+            get
+            {
+                if(m_LastTutorialStage == 0) { return 0; }
+                return m_LastTutorialStage;
+            }
+        }
 
-        public int GetCullentLevel(StageType type, int sleepCnt) => GetStageInfo(type).GetStarLevel(sleepCnt);
-        private StageInfomation GetStageInfo(StageType stg) => Array.Find(Stages, stage => stage.StageType == stg);
-        public string GetStageTextEN(int stg) => Array.Find(Stages, stage => stage.StageType == (StageType)stg).StageTitleEN;
-        public string GetStageTextJP(int stg) => Array.Find(Stages, stage => stage.StageType == (StageType)stg).StageTitleJP;
+        public int GetCullentLevel(StageLevel type, int sleepCnt) => GetStageInfo(type).GetStarLevel(sleepCnt);
+        private StageInfomation GetStageInfo(StageLevel stg) => Array.Find(Stages, stage => stage.StageLevel == stg);
+        public string GetStageTextEN(int stg) => Array.Find(Stages, stage => stage.StageLevel == (StageLevel)stg).StageTitleEN;
+        public string GetStageTextJP(int stg) => Array.Find(Stages, stage => stage.StageLevel == (StageLevel)stg).StageTitleJP;
 
         [System.Serializable]
         public class StageInfomation
         {
-            [SerializeField] private StageType m_StageType;
+            [SerializeField] private StageLevel m_StageLevel;
             [SerializeField] private string m_StageTitleJP;
             [SerializeField] private string m_StageTitleEN;
             [SerializeField] private int m_ThreeStar;
             [SerializeField] private int m_TwoStar;
 
-            public StageType StageType => m_StageType;
+            public StageLevel StageLevel => m_StageLevel;
             public string StageTitleJP => m_StageTitleJP;
             public string StageTitleEN => m_StageTitleEN;
 

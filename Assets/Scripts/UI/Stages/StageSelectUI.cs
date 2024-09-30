@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary> ステージセレクト画面のUI全般 </summary>
 public class StageSelectUI : MonoBehaviour
 {
     [SerializeField] private GameObject m_ViewContent;
@@ -19,20 +20,23 @@ public class StageSelectUI : MonoBehaviour
         m_VerticalBar.value = 1;
     }
 
+    /// <summary> ステージのセレクトボタンを、ステージの数ぶん生成する </summary>
     private void SetSelectButtons()
     {
         string[] sceneNames = Config.SceneNames.m_StageNames;
-
         m_SelectButtons = new StageSelectButton[sceneNames.Length];
 
-        for (int i = 0; i < sceneNames.Length; i++)
+        for (int i = 0; i < sceneNames.Length; i++)  //ステージのクリアレベルが0でないかを取得する
         {
+            bool canSelect = StageDataUtility.IsSelectable(i);
+            if(!canSelect) { break; }
             var btn = Instantiate(GeneralSettings.Instance.Prehab.StageSelectBtn, m_ViewContent.transform);
             btn.Init(sceneNames[i], i+1);
             m_SelectButtons[i] = btn;
         }
     }
 
+    /// <summary> タイトルに戻るボタンの処理を登録 </summary>
     private void SetReturnTitleBtn()
     {
         m_ReturnTitleBtn.onClick.RemoveAllListeners();
@@ -42,9 +46,9 @@ public class StageSelectUI : MonoBehaviour
 
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
             await SceneLoadExtension.StartFadeIn();
-            await SceneLoadExtension.StartFadeWait(Config.SceneNames.Title);
+            await SceneLoadExtension.FinishFadeIn(Config.SceneNames.Title);
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeOut);
-            await SceneLoadExtension.StartFadeOut();
+            await SceneLoadExtension.FadeOut();
         });
     }
 }

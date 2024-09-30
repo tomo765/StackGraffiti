@@ -5,14 +5,18 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Video;
 
+/// <summary> クレジット表示UI </summary>
 public class CreditCanvas : MonoBehaviour
 {
     [SerializeField] private VideoPlayer m_VideoPlayer;
 
     void Start()
     {
-        m_VideoPlayer.targetTexture.Release();
+        StageDataUtility.StageDatas.BrowseCredit();
+        DontDestroyCanvas.Instance.ChangeResultUIVisible(false);
+        SoundManager.Instance.StopAllBGM();
 
+        m_VideoPlayer.targetTexture.Release();
         m_VideoPlayer.SetLoopPointReached(() => ReturnTitle().FireAndForget());
         StartPlayVideo().FireAndForget();
     }
@@ -40,14 +44,14 @@ public class CreditCanvas : MonoBehaviour
         SoundManager.Instance.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
         await SceneLoadExtension.StartFadeIn();
 
-        await SceneLoadExtension.StartFadeWait(Config.SceneNames.Title);
+        await SceneLoadExtension.FinishFadeIn(Config.SceneNames.Title);
         SoundManager.Instance.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeOut);
 
-        await SceneLoadExtension.StartFadeOut();
+        await SceneLoadExtension.FadeOut();
     }
 }
 
-public static class VidoPlayerExtension
+public static class VideoPlayerExtension
 {
     public static void SetLoopPointReached(this VideoPlayer player, Action action)
     {

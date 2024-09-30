@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Threading.Tasks;
 
+/// <summary> ÉLÉÉÉâÇÃëÄçÏíÜÇÃêßå‰ÇÇ∑ÇÈ </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterController : MonoBehaviour
 {
@@ -13,13 +14,15 @@ public class CharacterController : MonoBehaviour
     private const float AirMoveSpeed = 0.5f;
 
     private Func<Task> m_OnSleep;
+    private Func<int, Task> m_OnDead;
 
     private bool m_OnGround = false;
 
-    public void SetManagerMember(Rigidbody2D rb2d, Func<Task> onSleep)
+    public void SetManagerMember(Rigidbody2D rb2d, Func<Task> onSleep, Func<int, Task> onDead)
     {
         m_Rb2d = rb2d;
         m_OnSleep = onSleep;
+        m_OnDead += onDead;
     }
 
     private void Update()
@@ -27,6 +30,12 @@ public class CharacterController : MonoBehaviour
         if (InputExtension.OnSleep)
         {
             m_OnSleep().FireAndForget();
+        }
+
+        if (InputExtension.OnDeleteColtrolChara)
+        {
+            EffectContainer.Instance.PlayEffect(GeneralSettings.Instance.Prehab.DeleteCharaEffect, transform.position);
+            m_OnDead(TaskExtension.OneSec);
         }
     }
 
@@ -42,6 +51,7 @@ public class CharacterController : MonoBehaviour
         if (SceneLoadExtension.IsFading) { return; }
         if (!InputExtension.OnMove) { return; }
         if (!GameManager.IsPlaying) { return; }
+        if (DontDestroyCanvas.Instance.IsViewInStage) { return; }
 
         if (m_OnGround)
         {

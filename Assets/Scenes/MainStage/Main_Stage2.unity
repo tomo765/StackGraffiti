@@ -387,10 +387,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 557153061}
-  - component: {fileID: 557153063}
   - component: {fileID: 557153062}
-  m_Layer: 8
-  m_Name: square_wood_0 (2)
+  - component: {fileID: 557153063}
+  m_Layer: 0
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
