@@ -68,7 +68,7 @@ public static class CharacterCreator  //参考サイト : https://qiita.com/divideby_
         GameManager.SetGameState(GameState.Playing);
         var charaNameCanvas = GameObject.Instantiate(GeneralSettings.Instance.Prehab.CharacterNameCanvas);
         charaNameCanvas.SetCharacterName(charaName);
-        m_CreateChara.CreateOnStage(charaNameCanvas);
+        m_CreateChara.StartOperation(charaNameCanvas);
 
         m_CreateChara = null;
     }

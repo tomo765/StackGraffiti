@@ -55,8 +55,8 @@ public class CharacterManager : MonoBehaviour
         m_CharacterName.transform.position = transform.position + Vector3.up * 1.3f;
     }
 
-    /// <summary> キャラを書き終わり、 </summary>
-    public void CreateOnStage(CharacterNameCanvas canvas)
+    /// <summary> 書き終わったとに、キャラの操作を開始するための処理 </summary>
+    public void StartOperation(CharacterNameCanvas canvas)
     {
         Poly2D.enabled = true;
         Debug.Log(canvas.name);
