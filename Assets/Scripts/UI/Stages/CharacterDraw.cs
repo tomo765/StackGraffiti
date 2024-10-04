@@ -55,11 +55,16 @@ public class CharacterDraw : MonoBehaviour, IPointerDownHandler, IPointerEnterHa
     public void OnPointerEnter(PointerEventData eventData)
     {
         m_IsInArea = true;
+        var newCursor = GeneralSettings.Instance.Cursor.DrawPen;
+        Cursor.SetCursor(newCursor.Item1, Vector2.one * newCursor.Item2, CursorMode.ForceSoftware);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         m_IsInArea = false;
+        var newCursor = GeneralSettings.Instance.Cursor.Default;
+
+        Cursor.SetCursor(newCursor.Item1, Vector2.one * newCursor.Item2, CursorMode.ForceSoftware);
     }
 
     private void FinishWrite()

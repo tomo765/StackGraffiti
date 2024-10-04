@@ -74,6 +74,7 @@ public class GeneralSettings : ScriptableObject
     [SerializeField] private StageInfomations m_StageInfos;
     [SerializeField] private Prehabs m_Prehabs;
     [SerializeField] private Sprites m_Sprites;
+    [SerializeField] private CursorSettings m_CursorSettings;
     [SerializeField] private Sounds m_Sounds;
     [SerializeField] private IndicatesPrioritySettings m_Priorities;
 
@@ -82,6 +83,7 @@ public class GeneralSettings : ScriptableObject
     public PlayerSettings PlayerSetting => m_PlayerSettings;
     public StageInfomations StageInfos => m_StageInfos;
     public Sprites Sprite => m_Sprites;
+    public CursorSettings Cursor => m_CursorSettings;
     public Sounds Sound => m_Sounds;
     public IndicatesPrioritySettings Priorities => m_Priorities;
 
@@ -202,6 +204,17 @@ public class GeneralSettings : ScriptableObject
         public Sprite UnclearStar => m_UnclearStar;
         public Sprite SwitchIdle => m_SwitchIdle;
         public Sprite SwitchPush => m_SwitchPush;
+    }
+
+    [Serializable] public class CursorSettings
+    {
+        [SerializeField] private Texture2D m_Default;
+        [SerializeField] private float m_DefaultSize = 0.5f;
+        [SerializeField] private Texture2D m_DrawPen;
+        [SerializeField] private float m_DrawSize = 1;
+
+        public (Texture2D, float) Default => (m_Default, m_DefaultSize);
+        public (Texture2D, float) DrawPen => (m_DrawPen, m_DrawSize);
     }
 
     /// <summary> BGM, SE ‚ğŠÇ—‚·‚éƒNƒ‰ƒX </summary>
