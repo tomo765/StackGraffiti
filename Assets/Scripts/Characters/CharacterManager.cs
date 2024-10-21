@@ -59,7 +59,6 @@ public class CharacterManager : MonoBehaviour
     public void StartOperation(CharacterNameCanvas canvas)
     {
         Poly2D.enabled = true;
-        Debug.Log(canvas.name);
         m_EyeRender.gameObject.SetActive(true);
         m_Controller.enabled = true;
 
@@ -145,7 +144,7 @@ public class CharacterManager : MonoBehaviour
     }
 
     /// <summary> ƒLƒƒƒ‰‚ğíœ‚·‚éˆ— </summary>
-    private async Task OnDead(int waitTime)
+    public async Task OnDead(int waitTime)
     {
         Destroy(gameObject);
         Destroy(m_CharacterName.gameObject);
