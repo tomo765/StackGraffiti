@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeleteCharaEffect : MonoBehaviour, IContainEffectBase
+public class DeleteCharaEffect : MonoBehaviour, IContainableEffect
 {
     [SerializeField] private float m_AnimSpeed = 1;
     private Animator m_Anim;
@@ -21,7 +21,7 @@ public class DeleteCharaEffect : MonoBehaviour, IContainEffectBase
     }
 
 
-    public IContainEffectBase Create(Vector3 vec, Quaternion q, Transform parent)
+    public IContainableEffect Create(Vector3 vec, Quaternion q, Transform parent)
     {
         return Instantiate(GeneralSettings.Instance.Prehab.DeleteCharaEffect, vec, q, parent);
     }

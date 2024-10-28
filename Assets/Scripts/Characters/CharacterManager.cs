@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary> キャラクターの管理 </summary>
 public class CharacterManager : MonoBehaviour
 {
-    private const int OnSleepLayer = -1;
+    private const int OnSleepLayer = 0;
 
     [SerializeField] private SpriteRenderer m_EyeRender;
     [SerializeField] private MeshFilter m_MeshFilter;
@@ -25,6 +25,7 @@ public class CharacterManager : MonoBehaviour
     public Rigidbody2D Rb2D => m_Rb2d;
     public MeshFilter MeshFilter => m_MeshFilter;
     public PolygonCollider2D Poly2D => m_PolygonCollider2D;
+    public bool IsDead => m_IsDead;
 
     private void Start()
     {
@@ -54,11 +55,10 @@ public class CharacterManager : MonoBehaviour
         m_CharacterName.transform.position = transform.position + Vector3.up * 1.3f;
     }
 
-    /// <summary> キャラを書き終わり、 </summary>
-    public void CreateOnStage(CharacterNameCanvas canvas)
+    /// <summary> 書き終わったとに、キャラの操作を開始するための処理 </summary>
+    public void StartOperation(CharacterNameCanvas canvas)
     {
         Poly2D.enabled = true;
-        Debug.Log(canvas.name);
         m_EyeRender.gameObject.SetActive(true);
         m_Controller.enabled = true;
 
@@ -135,6 +135,7 @@ public class CharacterManager : MonoBehaviour
     private void OnUnmovable()
     {
         m_Rb2d.bodyType = RigidbodyType2D.Kinematic;
+        transform.SetParent(null);
         Rb2D.velocity = Vector3.zero;
         Rb2D.angularVelocity = 0;
 
@@ -143,7 +144,7 @@ public class CharacterManager : MonoBehaviour
     }
 
     /// <summary> キャラを削除する処理 </summary>
-    private async Task OnDead(int waitTime)
+    public async Task OnDead(int waitTime)
     {
         Destroy(gameObject);
         Destroy(m_CharacterName.gameObject);

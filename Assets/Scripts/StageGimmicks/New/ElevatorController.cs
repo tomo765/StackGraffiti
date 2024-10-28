@@ -52,17 +52,17 @@ public partial class ElevatorController : GimmickReceiver
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-        {
-            collision.transform.SetParent(transform);
-        }
+        if(!collision.TryGetComponent(out CharacterManager manager)) { return; }
+        if (manager.IsDead) { return; }
+
+        manager.transform.SetParent(transform);
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-        {
-            collision.transform.SetParent(null);
-        }
+        if (!collision.TryGetComponent(out CharacterManager manager)) { return; }
+        if (manager.IsDead) { return; }
+
+        manager.transform.SetParent(null);
     }
 }
 

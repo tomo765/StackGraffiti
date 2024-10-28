@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary> キャラの生成に関する設定や生成処理 </summary>
-public static class CharacterCreator  //https://qiita.com/divideby_zero/items/491d18cbc91d7fabd700
+/// <summary> キャラの生成に関する設定や処理 </summary>
+public static class CharacterCreator  //参考サイト : https://qiita.com/divideby_zero/items/491d18cbc91d7fabd700
 {
     private static float m_LineWidth = 0.1f;
     private static Mesh m_Mesh;
@@ -13,18 +13,18 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
 
     public static bool CanCreateChara => m_CreateChara != null && m_Mesh.vertexCount >= 4;
 
-
+    /// <summary> キャラを書くUIの表示状態の変更と同時に、書いているキャラの表示状態も変更させる </summary>
     public static void SetCreatingCharaVisible(bool b)
     {
         if(m_CreateChara == null) { return; }
         m_CreateChara.gameObject.SetActive(b);
     }
+    /// <summary> キャラを書ける状態でマウス左をクリックした瞬間の処理 </summary>
     public static void OnClick(Vector2 position)
     {
         CreateCharacter(position);
 
         m_Mesh = new Mesh();
-        m_Mesh.name = "CharaMesh";
         m_CreateChara.MeshFilter.mesh = m_Mesh;
 
         m_Vlist.Clear();
@@ -44,20 +44,8 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
     {
         FinishWrite();
     }
-/// <summary> キャラを生成するボタンを押したときの処理 </summary>
-    public static void CreateOnStage(string charaName)
-    {
-        if (!CanCreateChara) { return; }
-        if (string.IsNullOrEmpty(charaName)) { charaName = GeneralSettings.Instance.PlayerSetting.GetRandomName(); }
 
-        GameManager.SetGameState(GameState.Playing);
-        var charaNameCanvas = GameObject.Instantiate(GeneralSettings.Instance.Prehab.CharacterNameCanvas);
-        charaNameCanvas.SetCharacterName(charaName);
-        m_CreateChara.CreateOnStage(charaNameCanvas);
-
-        m_CreateChara = null;
-    }
-
+    /// <summary> キャラの生成処理 </summary>
     private static void CreateCharacter(Vector3 position)
     {
         if (m_CreateChara != null) { return; }
@@ -67,7 +55,35 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
                                       position,
                                       Quaternion.identity);
     }
+    /// <summary> キャラを操作可能にするための処理 </summary>
+    public static void CreateOnStage(string charaName)
+    {
+        if (!CanCreateChara) { return; }
 
+        if (string.IsNullOrEmpty(charaName)) 
+        { 
+            charaName = GeneralSettings.Instance.PlayerSetting.GetRandomName(); 
+        }
+
+        GameManager.SetGameState(GameState.Playing);
+        var charaNameCanvas = GameObject.Instantiate(GeneralSettings.Instance.Prehab.CharacterNameCanvas);
+        charaNameCanvas.SetCharacterName(charaName);
+        m_CreateChara.StartOperation(charaNameCanvas);
+
+        m_CreateChara = null;
+    }
+
+    /// <summary> キャラを書き終わった時の処理 </summary>
+    private static void FinishWrite()
+    {
+        if (!CanCreateChara) { return; }
+
+        m_CreateChara.Rb2D.useAutoMass = true;
+        var polyColliderPos = CreateMeshToPolyCollider(m_Mesh);
+        m_CreateChara.Poly2D.SetPath(0, polyColliderPos.ToArray());
+    }
+
+    /// <summary> キャラの見た目を更新する </summary>
     private static void CreateMesh()
     {
         m_Mesh.Clear();
@@ -80,7 +96,7 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
             var nextPos = m_Vlist[i + 1];
             var vec = currentPos - nextPos;//今と、一つ先のベクトルから、進行方向を得る
             if (vec.magnitude < 0.01f) continue;  //あまり頂点の間が空いてないのであればスキップする
-            var v = new Vector2(-vec.y, vec.x).normalized * m_LineWidth; //90度回転させてから正規化*widthで左右への幅ベクトルを得る
+            var v = new Vector2(-vec.y, vec.x).normalized * m_LineWidth; //左右への幅ベクトルを得る
 
             //指定した横幅に広げる
             vertices.Add(currentPos - v);
@@ -100,15 +116,7 @@ public static class CharacterCreator  //https://qiita.com/divideby_zero/items/49
         m_Mesh.SetIndices(indices.ToArray(), MeshTopology.Quads, 0);
     }
 
-    private static void FinishWrite()
-    {
-        if (!CanCreateChara) { return; }
-
-        m_CreateChara.Rb2D.useAutoMass = true;
-        var polyColliderPos = CreateMeshToPolyCollider(m_Mesh);
-        m_CreateChara.Poly2D.SetPath(0, polyColliderPos.ToArray());
-    }
-
+    /// <summary> 現在の見た目から当たり判定を作る </summary>
     private static List<Vector2> CreateMeshToPolyCollider(Mesh mesh)
     {
         var polyColliderPos = new List<Vector2>();

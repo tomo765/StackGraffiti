@@ -45,13 +45,13 @@ public enum IndicatesPriority  //表示優先度,カメラからの距離を設定
 ///<summary>使用するアセットを管理するクラス</summary>
 ///<remarks>
 ///     <para>GeneralSettings.Instance でアクセスし、必要なアセットを呼び出す。</para>
-///     <para>値の書き換えができないように、呼び出しはゲッターのプロパティからのみできるようにする。(セッターは書かない)</para>
+///     <para>値の書き換えができないように、呼び出しはゲッターのプロパティからのみできるようにする。</para>
 ///     <para>get { } を [プロパティ名] => [変数] と書ける</para>
 ///</remarks>
 [CreateAssetMenu(fileName = "GeneralSettings", menuName = "Scriptables/GeneralSettings")]
 public class GeneralSettings : ScriptableObject
 {
-    private const string path = "GeneralSettings";
+    private const string FilePath = "GeneralSettings";
 
     private static GeneralSettings instance;
     public static GeneralSettings Instance
@@ -60,10 +60,10 @@ public class GeneralSettings : ScriptableObject
         {
             if(instance == null)
             {
-                instance = Resources.Load<GeneralSettings>(path);
+                instance = Resources.Load<GeneralSettings>(FilePath);
                 if(instance == null )
                 {
-                    Debug.LogError("No");
+                    Debug.LogError("No such as GeneralSettings in " + FilePath);
                 }
             }
             return instance;
@@ -74,6 +74,7 @@ public class GeneralSettings : ScriptableObject
     [SerializeField] private StageInfomations m_StageInfos;
     [SerializeField] private Prehabs m_Prehabs;
     [SerializeField] private Sprites m_Sprites;
+    [SerializeField] private CursorSettings m_CursorSettings;
     [SerializeField] private Sounds m_Sounds;
     [SerializeField] private IndicatesPrioritySettings m_Priorities;
 
@@ -82,6 +83,7 @@ public class GeneralSettings : ScriptableObject
     public PlayerSettings PlayerSetting => m_PlayerSettings;
     public StageInfomations StageInfos => m_StageInfos;
     public Sprites Sprite => m_Sprites;
+    public CursorSettings Cursor => m_CursorSettings;
     public Sounds Sound => m_Sounds;
     public IndicatesPrioritySettings Priorities => m_Priorities;
 
@@ -185,6 +187,7 @@ public class GeneralSettings : ScriptableObject
         }
     }
 
+    /// <summary> 見た目が変化するイメージを管理するクラス </summary>
     [System.Serializable]
     public class Sprites
     {
@@ -203,6 +206,18 @@ public class GeneralSettings : ScriptableObject
         public Sprite SwitchPush => m_SwitchPush;
     }
 
+    [Serializable] public class CursorSettings
+    {
+        [SerializeField] private Texture2D m_Default;
+        [SerializeField] private float m_DefaultSize = 0.5f;
+        [SerializeField] private Texture2D m_DrawPen;
+        [SerializeField] private float m_DrawSize = 1;
+
+        public (Texture2D, float) Default => (m_Default, m_DefaultSize);
+        public (Texture2D, float) DrawPen => (m_DrawPen, m_DrawSize);
+    }
+
+    /// <summary> BGM, SE を管理するクラス </summary>
     [System.Serializable]
     public class Sounds
     {
@@ -231,6 +246,8 @@ public class GeneralSettings : ScriptableObject
         }
     }
 
+    /// <summary> SpriteRenderer で同じレイヤー内にあるオブジェクトの表示優先度を管理するクラス </summary>
+    /// <remarks> z軸を使い、ここで設定された表示優先度が高いほどカメラから近くに並べる</remarks>
     [System.Serializable]
     public class IndicatesPrioritySettings
     {

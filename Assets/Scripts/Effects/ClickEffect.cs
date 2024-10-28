@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ClickEffect : MonoBehaviour, IContainEffectBase
+public class ClickEffect : MonoBehaviour, IContainableEffect
 {
     [SerializeField] private float m_AnimSpeed = 1;
     private Animator m_Anim;
@@ -28,7 +28,7 @@ public class ClickEffect : MonoBehaviour, IContainEffectBase
         gameObject.SetActive(false);
     }
 
-    public IContainEffectBase Create(Vector3 vec, Quaternion q, Transform parent)
+    public IContainableEffect Create(Vector3 vec, Quaternion q, Transform parent)
     {
         return Instantiate(this, vec, q, parent);
     }

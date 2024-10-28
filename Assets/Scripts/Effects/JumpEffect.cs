@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary> トランポリンなどでジャンプした時のエフェクト </summary>
-public class JumpEffect : MonoBehaviour, IContainEffectBase
+public class JumpEffect : MonoBehaviour, IContainableEffect
 {
     [SerializeField] private float m_AnimSpeed = 1.4f;
     private Animator m_Anim;
@@ -29,7 +29,7 @@ public class JumpEffect : MonoBehaviour, IContainEffectBase
         gameObject.SetActive(false);
     }
 
-    public IContainEffectBase Create(Vector3 vec, Quaternion q, Transform parent)
+    public IContainableEffect Create(Vector3 vec, Quaternion q, Transform parent)
     {
         return Instantiate(this, vec, q, parent);
     }

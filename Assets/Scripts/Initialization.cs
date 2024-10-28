@@ -15,6 +15,14 @@ public class Initialization : MonoBehaviour
             DontDestroyCanvas.CreateCanvas().CreateAllUI();
         }
 
+        SetCursor();
+
         initialized = true;
+    }
+
+    void SetCursor()
+    {
+        var useCursorInfo = GeneralSettings.Instance.Cursor.Default;
+        Cursor.SetCursor(useCursorInfo.Item1, Vector2.zero, CursorMode.ForceSoftware);
     }
 }
