@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-using Unity.VisualScripting;
+using System.Linq;
 using UnityEngine;
 
 public static class StageDataUtility
@@ -13,7 +13,7 @@ public static class StageDataUtility
 
     public static StageDatas StageDatas => m_StageDatas;
 
-    public static void FindData()
+    public static void ExistData()
     {
         // ディレクトリが存在しない場合は作成
         if (!Directory.Exists(FolderPath))
@@ -25,26 +25,22 @@ public static class StageDataUtility
         {
             SetNewData();
         }
-        else
-        {
-            LoadData();
-        }
     }
 
     public static void SetNewData()
     {
-        CreateData();
+        m_StageDatas = CreateData();
         SaveData();
     }
 
-    private static void CreateData()
+    private static StageDatas CreateData()
     {
         StageScore[] scores = new StageScore[Enum.GetValues(typeof(StageType)).Length - 1];
         for (int i = 1; i <= scores.Length; i++)
         {
             scores[i - 1] = new StageScore((StageType)i, 0);
         }
-        m_StageDatas = new StageDatas(scores);
+        return new StageDatas(scores, false);
     }
 
     public static void SaveData()
@@ -55,9 +51,10 @@ public static class StageDataUtility
 
     public static StageDatas LoadData()
     {
+        ExistData();
+
         string jsonData = File.ReadAllText(FilePath);
         m_StageDatas = JsonUtility.FromJson<StageDatas>(jsonData);
-
         return m_StageDatas;
     }
 
@@ -65,13 +62,17 @@ public static class StageDataUtility
 
     public static void SetStageScore(StageType stage, int sleepCnt)
     {
-        int starLevel = GeneralSettings.Instance.StageEvals.GetCullentLevel(stage, sleepCnt);
+        ExistData();
+
+        int starLevel = GeneralSettings.Instance.StageInfos.GetCullentLevel(stage, sleepCnt);
         GetScore(stage).SetStarLevel(starLevel);
     }
 
-    public static int GetCullentStarLevel(StageType stage)
+    public static int GetAllStarLevel()
     {
-        var score = Array.Find(m_StageDatas.StageScores, score => score.StageType == StageType.Stage1);
-        return score.StarLevel;
+        int allScore = 0;
+        m_StageDatas.StageScores.Select(score => allScore += score.StarLevel).ToArray();
+
+        return allScore;
     }
 }

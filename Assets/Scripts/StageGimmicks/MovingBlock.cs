@@ -16,7 +16,6 @@ public class MovingBlock : MonoBehaviour
     private bool isReverse = false;     // 逆移動フラグ
     private float movep = 0;            // 移動補完値
 
-    // Start is called before the first frame update
     void Start()
     {
         startPos = transform.position;  // 初期位置保存
@@ -29,7 +28,6 @@ public class MovingBlock : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isCanMove)

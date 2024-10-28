@@ -1,10 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
-using TMP = TMPro.TextMeshProUGUI;
 
 public enum StageType
 {
@@ -19,9 +14,30 @@ public enum StageType
     Stage8,
     Stage9,
     Stage10,
-    Stage11,
-    Stage12,
-    Stage13,
+}
+
+public enum IndicatesPriority  //•\Ž¦—Dæ“x,ƒJƒƒ‰‚©‚ç‚Ì‹——£‚ðÝ’è 
+{
+    Layer1 = 1,  //zŽ²‚Ì-9
+    Layer2 = 2,
+    Layer3 = 3,
+    Layer4 = 4,
+    Layer5 = 5,
+    Layer6 = 6,
+    Layer7 = 7,
+    Layer8 = 8,
+    Layer9 = 9,
+    Layer10 = 10,  //zŽ²‚Ì0
+    Layer11 = 11,
+    Layer12 = 12,
+    Layer13 = 13,
+    Layer14 = 14,
+    Layer15 = 15,
+    Layer16 = 16,
+    Layer17 = 17,
+    Layer18 = 18,
+    Layer19 = 19,
+    Layer20 = 20, //zŽ²‚Ì10
 }
 
 
@@ -47,18 +63,20 @@ public class GeneralSettings : ScriptableObject
         }
     }
 
-    [SerializeField] private Prehabs m_Prehabs;
     [SerializeField] private PlayerSettings m_PlayerSettings;
-    [SerializeField] private StageEvaluations m_StageEvaluation;
+    [SerializeField] private StageInfomations m_StageInfos;
+    [SerializeField] private Prehabs m_Prehabs;
     [SerializeField] private Sprites m_Sprites;
     [SerializeField] private Sounds m_Sounds;
+    [SerializeField] private IndicatesPrioritySettings m_Priorities;
 
 
     public Prehabs Prehab => m_Prehabs;
     public PlayerSettings PlayerSetting => m_PlayerSettings;
-    public StageEvaluations StageEvals => m_StageEvaluation;
+    public StageInfomations StageInfos => m_StageInfos;
     public Sprites Sprite => m_Sprites;
     public Sounds Sound => m_Sounds;
+    public IndicatesPrioritySettings Priorities => m_Priorities;
 
 
     [System.Serializable]
@@ -67,51 +85,77 @@ public class GeneralSettings : ScriptableObject
         [SerializeField] private CharacterManager m_Character;
         [SerializeField] private StageSelectButton m_StageSelectBtn;
 
+        [SerializeField] private DontDestroyCanvas m_DontDestroyCanvas;
+        [SerializeField] private OptionUI m_OptionUI;
+        [SerializeField] private ResultUI m_ResultUI;
+        [SerializeField] private FadeCanvasUI m_FadeCanvasUI;
+        [SerializeField] private StageIntroUI m_StageIntroUI;
+
+        [Space(10), SerializeField] private BalloonEffect m_BalloonEffect;
+        [SerializeField] private ClickEffect m_ClickEffect;
+        [SerializeField] private JumpEffect m_JumpEffect;
+        [SerializeField] private ConfettiEffect m_ConfettiEffect;
+        [SerializeField] private SleepEffect m_SleepEffect;
+
+        [SerializeField] private SoundManager m_SoundManager;
+        [SerializeField] private EffectContainer m_EffectContainer;
+
         public CharacterManager Character => m_Character;
         public StageSelectButton StageSelectBtn => m_StageSelectBtn;
+        public DontDestroyCanvas DontDestroyCanvas => m_DontDestroyCanvas;
+        public OptionUI OptionUI => m_OptionUI;
+        public ResultUI ResultUI => m_ResultUI;
+        public FadeCanvasUI FadeCanvasUI => m_FadeCanvasUI;
+        public StageIntroUI StageIntroUI => m_StageIntroUI;
+        public BalloonEffect BalloonEffect => m_BalloonEffect;
+        public ClickEffect ClickEffect => m_ClickEffect;
+        public JumpEffect JumpEffect => m_JumpEffect;
+        public ConfettiEffect ConfettiEffect => m_ConfettiEffect;
+        public SleepEffect SleepEffect => m_SleepEffect;
+        public SoundManager SoundManager => m_SoundManager;
+        public EffectContainer EffectContainer => m_EffectContainer;
     }
 
     [System.Serializable]
     public class PlayerSettings
     {
         [SerializeField] private string[] m_RandomNames;
-
+        [SerializeField] private PhysicsMaterial2D m_PhysicsOnDead;
         public string GetRandomName() => m_RandomNames[UnityEngine.Random.Range(0, m_RandomNames.Length)];
+        public PhysicsMaterial2D PhysicsOnDead => m_PhysicsOnDead;
 
     }
 
     [System.Serializable]
-    public class StageEvaluations
+    public class StageInfomations
     {
-        [SerializeField] private StageEvaluation[] m_Stages = null;
+        [SerializeField] private StageInfomation[] m_Stages = null;
 
-        public StageEvaluation[] Stages => m_Stages;
+        public StageInfomation[] Stages => m_Stages;
 
-        public int GetCullentLevel(StageType type, int sleepCnt) => GetStageEval(type).GetStarLevel(sleepCnt);
-        private StageEvaluation GetStageEval(StageType stg) => Array.Find(Stages, stage => stage.StageType == stg);
+        public int GetCullentLevel(StageType type, int sleepCnt) => GetStageInfo(type).GetStarLevel(sleepCnt);
+        private StageInfomation GetStageInfo(StageType stg) => Array.Find(Stages, stage => stage.StageType == stg);
+        public string GetStageTextEN(int stg) => Array.Find(Stages, stage => stage.StageType == (StageType)stg).StageTitleEN;
+        public string GetStageTextJP(int stg) => Array.Find(Stages, stage => stage.StageType == (StageType)stg).StageTitleJP;
 
         [System.Serializable]
-        public class StageEvaluation
+        public class StageInfomation
         {
             [SerializeField] private StageType m_StageType;
+            [SerializeField] private string m_StageTitleJP;
+            [SerializeField] private string m_StageTitleEN;
             [SerializeField] private int m_ThreeStar;
             [SerializeField] private int m_TwoStar;
-            [SerializeField] private int m_OneStar;
 
             public StageType StageType => m_StageType;
+            public string StageTitleJP => m_StageTitleJP;
+            public string StageTitleEN => m_StageTitleEN;
 
             public int GetStarLevel(int sleepCnt)
             {
-                if (sleepCnt <= m_ThreeStar)
-                {
-                    return 3;
-                }
-                else if (sleepCnt <= m_TwoStar)
-                {
-                    return 2;
-                }
-
-                return 1;
+                if (sleepCnt <= m_ThreeStar) { return 3; }
+                else if (sleepCnt <= m_TwoStar) { return 2; }
+                else { return 1; }
             }
         }
     }
@@ -123,11 +167,15 @@ public class GeneralSettings : ScriptableObject
         [SerializeField] private Sprite m_DeathEye;
         [SerializeField] private Sprite m_ClearStar;
         [SerializeField] private Sprite m_UnclearStar;
+        [SerializeField] private Sprite m_SwitchIdle;
+        [SerializeField] private Sprite m_SwitchPush;
 
         public Sprite AliveEye => m_AliveEye;
         public Sprite DeathEye => m_DeathEye;
         public Sprite ClearStar => m_ClearStar;
         public Sprite UnclearStar => m_UnclearStar;
+        public Sprite SwitchIdle => m_SwitchIdle;
+        public Sprite SwitchPush => m_SwitchPush;
     }
 
     [System.Serializable]
@@ -138,11 +186,41 @@ public class GeneralSettings : ScriptableObject
         [SerializeField] private AudioClip m_JumpSE;
         [SerializeField] private AudioClip m_TouchNeedleSE;
         [SerializeField] private AudioClip m_ClearSE;
+        [SerializeField] private FadesSound m_Fade1;
 
         public AudioClip HoverSE => m_HoverSE;
         public AudioClip SelectSE => m_SelectSE;
         public AudioClip JumpSE => m_JumpSE;
         public AudioClip TouchNeedleSE => m_TouchNeedleSE;
         public AudioClip ClearSE => m_ClearSE;
+        public FadesSound Fade1 => m_Fade1;
+
+        [System.Serializable]
+        public class FadesSound
+        {
+            [SerializeField] private AudioClip m_FadeIn;
+            [SerializeField] private AudioClip m_FadeOut;
+            public AudioClip FadeIn => m_FadeIn;
+            public AudioClip FadeOut => m_FadeOut;
+
+        }
+    }
+
+    [System.Serializable]
+    public class IndicatesPrioritySettings
+    {
+        [SerializeField] private IndicatesPriority m_CreateChara = IndicatesPriority.Layer2;
+        [SerializeField] private IndicatesPriority m_StageCanvas = IndicatesPriority.Layer5;
+        [SerializeField] private IndicatesPriority m_Effect = IndicatesPriority.Layer10;
+        [SerializeField] private IndicatesPriority m_CharaOnStage = IndicatesPriority.Layer10;
+        [SerializeField] private IndicatesPriority m_DontDestroyCanvas = IndicatesPriority.Layer11;
+
+
+        public Vector3 CreateCharaLayer => Camera.main.transform.position + new Vector3(0, 0, (int)m_CreateChara);
+        public float StageCanvas => (float)m_StageCanvas;
+        public float DontDestroyCanvas => (float)m_DontDestroyCanvas;
+        public Vector3 StageCanvasLayer => Camera.main.transform.position + new Vector3(0, 0, (int)m_StageCanvas);
+        public Vector3 EffectLayer => Camera.main.transform.position + new Vector3(0, 0, (int)m_Effect);
+        public Vector3 CharaOnStageLayer => Camera.main.transform.position + new Vector3(0, 0, (int)m_CharaOnStage);
     }
 }

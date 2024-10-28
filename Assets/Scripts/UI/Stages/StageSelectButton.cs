@@ -1,10 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
-using System;
 
 public class StageSelectButton : MonoBehaviour
 {
@@ -21,12 +20,21 @@ public class StageSelectButton : MonoBehaviour
     {
         m_StageName = name;
         m_StageLevel = stageNum;
-        m_StageLevelText.text = "ステージ" + stageNum.ToString();
-        m_TransitionButton.onClick.AddListener(() =>
+        m_StageLevelText.text = "Stage " + stageNum.ToString();
+        m_TransitionButton.onClick.AddListener(async () =>
         {
-            SceneManager.LoadScene(m_StageName);
             GameManager.StartStage((StageType)stageNum);
-            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
+
+            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
+            await SceneLoadExtension.StartFadeIn();
+            await SceneLoadExtension.StartFadeWait(m_StageName);
+            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeOut);
+            await SceneLoadExtension.StartFadeOut();
+
+            DontDestroyCanvas.Instance.ChangeStageIntroUIVisible(true);
+            DontDestroyCanvas.Instance.StageIntroUI.SetIntroText("Stage " + m_StageLevel.ToString(), 
+                                                                 GeneralSettings.Instance.StageInfos.GetStageTextEN(stageNum),
+                                                                 GeneralSettings.Instance.StageInfos.GetStageTextJP(stageNum));
         });
 
         for (int i = 0; i < StageDataUtility.StageDatas.StageScores[stageNum - 1].StarLevel; i++)

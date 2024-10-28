@@ -1,11 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StageSelectUI : MonoBehaviour
@@ -18,7 +11,7 @@ public class StageSelectUI : MonoBehaviour
 
     void Start()
     {
-        StageDataUtility.FindData();
+        StageDataUtility.LoadData();
 
         SetSelectButtons();
         SetReturnTitleBtn();
@@ -28,17 +21,13 @@ public class StageSelectUI : MonoBehaviour
 
     private void SetSelectButtons()
     {
-        string[] sceneNames = EditorBuildSettings.scenes
-                                                 .Where(scene => scene.enabled)
-                                                 .Select(scene => Path.GetFileNameWithoutExtension(scene.path))
-                                                 .Where(name => name.Contains("Main_Stage"))
-                                                 .ToArray();
+        string[] sceneNames = Config.SceneNames.m_StageNames;
 
         m_SelectButtons = new StageSelectButton[sceneNames.Length];
 
         for (int i = 0; i < sceneNames.Length; i++)
         {
-            var btn = Instantiate(GeneralSettings.Instance.Prehab.StageSelectBtn, Vector3.zero, Quaternion.identity, m_ViewContent.transform);
+            var btn = Instantiate(GeneralSettings.Instance.Prehab.StageSelectBtn, m_ViewContent.transform);
             btn.Init(sceneNames[i], i+1);
             m_SelectButtons[i] = btn;
         }
@@ -47,10 +36,15 @@ public class StageSelectUI : MonoBehaviour
     private void SetReturnTitleBtn()
     {
         m_ReturnTitleBtn.onClick.RemoveAllListeners();
-        m_ReturnTitleBtn.onClick.AddListener(() =>
+        m_ReturnTitleBtn.onClick.AddListener(async() =>
         {
-            SceneManager.LoadScene(Config.SceneNames.Title);
-            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
+            if(SceneLoadExtension.IsFading) { return; }
+
+            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
+            await SceneLoadExtension.StartFadeIn();
+            await SceneLoadExtension.StartFadeWait(Config.SceneNames.Title);
+            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeOut);
+            await SceneLoadExtension.StartFadeOut();
         });
     }
 }

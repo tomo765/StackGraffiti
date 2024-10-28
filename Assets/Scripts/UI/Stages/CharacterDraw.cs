@@ -6,10 +6,12 @@ using UnityEngine.EventSystems;
 public class CharacterDraw : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private DrawUI m_DrawUI;
-    [SerializeField] private RectTransform m_RectT;
+    private RectTransform m_Rect;
 
     private Mesh m_CharaMesh;
     private List<Vector2> m_MeshPoints;
+
+    Vector3[] m_CornersInWor;  // 左下, 左上, 右上, 右下 の順で格納される
 
     private bool m_OnDrawing = false;
     private bool m_IsInArea = false;
@@ -17,16 +19,15 @@ public class CharacterDraw : MonoBehaviour, IPointerDownHandler, IPointerEnterHa
 
     void Start()
     {
-        m_RectT = GetComponent<RectTransform>();
+        m_Rect = GetComponent<RectTransform>();
 
-        Vector3[] worldCorners = new Vector3[4];  // 左下, 左上, 右上, 右下 の順
-
-        m_RectT.GetWorldCorners(worldCorners);
+        m_CornersInWor = new Vector3[4];
+        m_Rect.GetWorldCorners(m_CornersInWor);
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (InputExtension.MouseLeftUp)
         {
             FinishWrite();
             m_OnDrawing = false;
@@ -35,8 +36,10 @@ public class CharacterDraw : MonoBehaviour, IPointerDownHandler, IPointerEnterHa
 
     void FixedUpdate()
     {
-        if (m_OnDrawing && m_IsInArea && Input.GetMouseButton(0))
+        if (m_OnDrawing && m_IsInArea && InputExtension.MouseLeftPush)
         {
+            if (!CheckCursorPosOnArea()) { return; }
+
             CharacterCreator.OnHold(transform.position);
         }
     }
@@ -63,5 +66,13 @@ public class CharacterDraw : MonoBehaviour, IPointerDownHandler, IPointerEnterHa
     {
         CharacterCreator.OnRelease();
         m_OnDrawing = false;
+    }
+
+    private bool CheckCursorPosOnArea()
+    {
+        return InputExtension.WorldMousePos.x >= m_CornersInWor[0].x &&
+               InputExtension.WorldMousePos.x <= m_CornersInWor[2].x &&
+               InputExtension.WorldMousePos.y >= m_CornersInWor[0].y &&
+               InputExtension.WorldMousePos.y <= m_CornersInWor[2].y;
     }
 }

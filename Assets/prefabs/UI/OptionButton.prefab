@@ -123,6 +123,10 @@ MonoBehaviour:
       m_Calls: []
   m_EnterColor: {r: 0.60784316, g: 0.60784316, b: 0.60784316, a: 1}
   m_ExitColor: {r: 1, g: 1, b: 1, a: 1}
+  m_ScallingAlways: 0
+  m_IsScaling: 1
+  m_IsStopScalling: 1
+  m_ChangeColor: 0
 --- !u!114 &157120368776950450
 MonoBehaviour:
   m_ObjectHideFlags: 0

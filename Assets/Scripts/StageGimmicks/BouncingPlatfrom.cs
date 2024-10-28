@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class BouncingPlatfrom : MonoBehaviour
 {
-    public float bounceForce = 10f; // íµÇÀÇÈóÕ
+    [SerializeField] private float bounceForce = 10f; // íµÇÀÇÈóÕ
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        //if (collision.gameObject.CompareTag("Player"))
-        //{
-            Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
-            if (playerRb != null)
-            {
-                // ÉvÉåÉCÉÑÅ[Ç…íµÇÀÇÈóÕÇâ¡Ç¶ÇÈ
-                playerRb.velocity = new Vector2(playerRb.velocity.x, bounceForce);
-            }
-        //}
+        if (!collision.TryGetComponent<Rigidbody2D>(out var rb2d)) { return; }
+
+        var effectPos = collision.transform.position + transform.position;
+        effectPos /= 2;
+
+        EffectContainer.Instance.PlayEffect(GeneralSettings.Instance.Prehab.BalloonEffect, effectPos);
+        rb2d.velocity = new Vector2(rb2d.velocity.x, bounceForce);
     }
 }
