@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary> オプション画面を開くボタン </summary>
 public class OptionButton : MonoBehaviour
 {
     [SerializeField] private Button m_OptionButton;

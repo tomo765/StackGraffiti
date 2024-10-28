@@ -1,5 +1,8 @@
+///<summary> 自動で生成するクラス。 CreateSceneNames 参照 </summary>
+///<remarks> Editor => Generate Scene Names Class で生成開始する </remarks>
 namespace Config
-{    public class SceneNames 
+{
+    public class SceneNames 
     {
         public static readonly string Title = "Title";
         public static readonly string StageSelect = "StageSelect";
@@ -16,7 +19,8 @@ namespace Config
             "Main_Stage7",
             "Main_Stage8",
             "Main_Stage9",
-            "Main_Stage10"
+            "Main_Stage10",
+            "Main_Stage11"
         };
     }
 }

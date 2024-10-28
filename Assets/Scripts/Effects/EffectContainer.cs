@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class EffectContainer : MonoBehaviour  //ToDo : Managerに名前変えた方がいい？
+/// <summary> エフェクトの表示、非表示、生成をするクラス </summary>
+public class EffectContainer : MonoBehaviour
 {
     private static EffectContainer instance;
     public static EffectContainer Instance
@@ -20,7 +21,7 @@ public class EffectContainer : MonoBehaviour  //ToDo : Managerに名前変えた方がい
 
     [SerializeField] private int m_MaxContain = 20;
 
-    private List<IContainEffectBase> m_Effects;
+    private List<IContainableEffect> m_Effects;
 
     private void Awake()
     {
@@ -37,17 +38,18 @@ public class EffectContainer : MonoBehaviour  //ToDo : Managerに名前変えた方がい
         instance = this;
         DontDestroyOnLoad(gameObject);
 
-        m_Effects = new List<IContainEffectBase>(m_MaxContain);
+        m_Effects = new List<IContainableEffect>(m_MaxContain);
     }
 
-    public void PlayEffect<T>(T playEff, Vector3 vec) where T : IContainEffectBase, new()
+    /// <summary> 指定のエフェクトを再生する </summary>
+    public void PlayEffect<T>(T playEff, Vector3 vec) where T : MonoBehaviour, IContainableEffect
     {
-        IContainEffectBase eff = null;
+        IContainableEffect eff = null;
         vec += GeneralSettings.Instance.Priorities.EffectLayer;
 
         if (m_Effects.Count != 0)
         {
-            if(TryGetEffects<T>(out IContainEffectBase[] effects))
+            if(TryGetEffects<T>(out IContainableEffect[] effects))
             {
                 var inactives = effects.Where(effects => !effects.IsActive).ToArray();
                 if(inactives.Length != 0)
@@ -66,12 +68,7 @@ public class EffectContainer : MonoBehaviour  //ToDo : Managerに名前変えた方がい
         eff.Play(vec);
     }
 
-    public void StopEffect<T>() where T : IContainEffectBase, new()
-    {
-        if (!TryGetEffects<T>(out IContainEffectBase[] effects)) { return; }
-
-        effects[0].StopEffect();
-    }
+    /// <summary> シーン遷移時などでエフェクトを非表示にしたいときに使う </summary>
     public void StopAllEffect()
     {
         foreach (var effect in m_Effects)
@@ -80,31 +77,41 @@ public class EffectContainer : MonoBehaviour  //ToDo : Managerに名前変えた方がい
         }
     }
 
-    public T GetEffect<T>(T effect) where T : IContainEffectBase, new()
+    /// <summary> 使用するエフェクトを取得する </summary>
+    /// <remarks>
+    ///     <para>使用していない(非表示中の)エフェクトがあればそれを使う</para>
+    ///     <para>なければ生成し、それを使う</para>
+    /// </remarks>
+    public T GetEffect<T>(T effect) where T : MonoBehaviour, IContainableEffect
     {
-        T newEffect;
-        if (TryGetEffects<T>(out IContainEffectBase[] effects)) 
+        T useEffect;
+        if (TryGetEffects<T>(out IContainableEffect[] effects)) 
         {
             var sameEffects = effects.Where(effect => !effect.IsActive).ToArray();
             if(sameEffects.Length == 0)
             {
-                newEffect = (T)effect.Create(Vector3.zero, Quaternion.identity, transform);
-                m_Effects.Add(newEffect);
+                useEffect = (T)effect.Create(Vector3.zero, Quaternion.identity, transform);
+                m_Effects.Add(useEffect);
             }
             else
             {
-                newEffect = (T)sameEffects[0];
-                newEffect.Play(Vector2.zero);
+                useEffect = (T)sameEffects[0];
+                useEffect.Play(Vector2.zero);
             }
             
-            return newEffect;
+            return useEffect;
         }
 
-        newEffect = (T)effect.Create(Vector3.zero, Quaternion.identity, transform);
-        m_Effects.Add(newEffect);
-        return newEffect;
+        useEffect = (T)effect.Create(Vector3.zero, Quaternion.identity, transform);
+        m_Effects.Add(useEffect);
+        return useEffect;
     }
-    private bool TryGetEffects<T>(out IContainEffectBase[] effects) where T : IContainEffectBase, new()
+
+    /// <summary> 使用したいエフェクトがあるかどうかを取得する </summary>
+    /// <remarks>
+    ///     <para> 使いたいエフェクトがあれば effects から取得できる</para>
+    /// </remarks>
+    private bool TryGetEffects<T>(out IContainableEffect[] effects) where T : MonoBehaviour, IContainableEffect
     {
         effects = m_Effects.Where(effects => effects is T)
                            .ToArray();

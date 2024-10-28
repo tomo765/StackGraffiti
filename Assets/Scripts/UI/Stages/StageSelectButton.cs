@@ -5,31 +5,32 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary> ステージ選択ボタンの一般クラス </summary>
 public class StageSelectButton : MonoBehaviour
 {
 
-    [SerializeField] private Button m_TransitionButton;
+    [SerializeField] private Button m_TransitionButton;  //アタッチされえているオブジェクトのボタン
     [SerializeField] private TextMeshProUGUI m_StageLevelText;
     [SerializeField] private Image[] m_Stars;
 
-    private string m_StageName;
+    private string m_StageName;  //ステージのシーン名
     private int m_StageLevel;
-    public string StageName => m_StageName;
 
     public void Init(string name, int stageNum)
     {
         m_StageName = name;
         m_StageLevel = stageNum;
         m_StageLevelText.text = "Stage " + stageNum.ToString();
+
         m_TransitionButton.onClick.AddListener(async () =>
         {
-            GameManager.StartStage((StageType)stageNum);
+            GameManager.InitPlayState((StageLevel)stageNum);
 
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeIn);
             await SceneLoadExtension.StartFadeIn();
-            await SceneLoadExtension.StartFadeWait(m_StageName);
+            await SceneLoadExtension.FinishFadeIn(m_StageName);
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeOut);
-            await SceneLoadExtension.StartFadeOut();
+            await SceneLoadExtension.FadeOut();
 
             DontDestroyCanvas.Instance.ChangeStageIntroUIVisible(true);
             DontDestroyCanvas.Instance.StageIntroUI.SetIntroText("Stage " + m_StageLevel.ToString(), 
@@ -39,6 +40,7 @@ public class StageSelectButton : MonoBehaviour
 
         for (int i = 0; i < StageDataUtility.StageDatas.StageScores[stageNum - 1].StarLevel; i++)
         {
+            Debug.Log(stageNum);
             m_Stars[i].sprite = GeneralSettings.Instance.Sprite.ClearStar;
         }
     }
