@@ -12,23 +12,27 @@ public class Achievement : MonoBehaviour
     //　エンディング(クレジット)を見たら実績解除
     public void EndingAchievement()
     {
+        // エンディングアチーブメント解除
+        if (!SteamManager.Initialized) { return; }
+
+        Debug.Log("Inited");
         // エンディングを見た判定になったら
-        if (StageDataUtility.StageDatas.SawCredit == true)
-        {
-            // エンディングアチーブメント解除
-            if(SteamManager.Initialized) 
-            {
-                SteamUserStats.RequestCurrentStats();
-                SteamUserStats.SetAchievement("ENDING_ACHIEVEMENT");
-                SteamUserStats.StoreStats();
+        if(StageDataUtility.StageDatas == null) {  return; }
+        if (!StageDataUtility.StageDatas.SawCredit) { return; }
+        Debug.Log("SawCredit");
 
-                SteamUserStats.RequestCurrentStats();
-                bool isCleared; // 達成なら true, 未達成なら false が入ります
-                SteamUserStats.GetAchievement(name.ToString(), out isCleared);
-            }
-        }
+        SteamUserStats.RequestCurrentStats();
+        SteamUserStats.SetAchievement("ENDING_ACHIEVEMENT");
+        SteamUserStats.StoreStats();
 
+        SteamUserStats.RequestCurrentStats();
+        bool isCleared; // 達成なら true, 未達成なら false が入ります
+        SteamUserStats.GetAchievement(name.ToString(), out isCleared);
     }
 
-
+    //private void ResetAchievementSample()
+    //{
+    //    SteamUserStats.ClearAchievement("ENDING_ACHIEVEMENT");
+    //    SteamUserStats.StoreStats();
+    //}
 }
