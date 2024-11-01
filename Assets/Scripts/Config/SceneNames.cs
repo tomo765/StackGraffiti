@@ -1,5 +1,5 @@
-///<summary> 閾ｪ蜍輔〒逕滓?舌☆繧九け繝ｩ繧ｹ縲? CreateSceneNames 蜿ら?ｧ </summary>
-///<remarks> Editor => Generate Scene Names Class 縺ｧ逕滓?宣幕蟋九☆繧? </remarks>
+///<summary> 自動で生成するクラス。 CreateSceneNames 参照 </summary>
+///<remarks> Editor => Generate Scene Names Class で生成開始する </remarks>
 namespace Config
 {
     public class SceneNames 
