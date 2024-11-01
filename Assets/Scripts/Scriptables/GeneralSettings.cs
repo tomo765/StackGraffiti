@@ -15,7 +15,26 @@ public enum StageLevel  //‚±‚ê‚à©“®¶¬‚Å‚æ‚©‚Á‚½‚©‚à
     Stage8,
     Stage9,
     Stage10,
-    Stage11
+    Stage11,
+    Stage12,
+    Stage13,
+    Stage14,
+    Stage15,
+    Stage16,
+    Stage17,
+    Stage18,
+    Stage19,
+    Stage20,
+    Stage21,
+    Stage22,
+    Stage23,
+    Stage24,
+    Stage25,
+    Stage26,
+    Stage27,
+    Stage28,
+    Stage29,
+    Stage30
 }
 
 public enum IndicatesPriority  //•\¦—Dæ“x,ƒJƒƒ‰‚©‚ç‚Ì‹——£‚ğİ’è 

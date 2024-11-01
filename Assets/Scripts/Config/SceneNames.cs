@@ -1,5 +1,5 @@
-///<summary> è‡ªå‹•ã§ç”Ÿæˆã™ã‚‹ã‚¯ãƒ©ã‚¹ã€‚ CreateSceneNames å‚ç…§ </summary>
-///<remarks> Editor => Generate Scene Names Class ã§ç”Ÿæˆé–‹å§‹ã™ã‚‹ </remarks>
+///<summary> ©“®‚Å¶¬‚·‚éƒNƒ‰ƒXB CreateSceneNames QÆ </summary>
+///<remarks> Editor => Generate Scene Names Class ‚Å¶¬ŠJn‚·‚é </remarks>
 namespace Config
 {
     public class SceneNames 
@@ -20,7 +20,26 @@ namespace Config
             "Main_Stage8",
             "Main_Stage9",
             "Main_Stage10",
-            "Main_Stage11"
+            "Main_Stage11",
+            "Main_Stage12",
+            "Main_Stage13",
+            "Main_Stage14",
+            "Main_Stage15",
+            "Main_Stage16",
+            "Main_Stage17",
+            "Main_Stage18",
+            "Main_Stage19",
+            "Main_Stage20",
+            "Main_Stage21",
+            "Main_Stage22",
+            "Main_Stage23",
+            "Main_Stage24",
+            "Main_Stage25",
+            "Main_Stage26",
+            "Main_Stage27",
+            "Main_Stage28",
+            "Main_Stage29",
+            "Main_Stage30"
         };
     }
 }
