@@ -16,7 +16,6 @@ public class GameCanvasUI : MonoBehaviour
 
     public bool IsInputNameNow => m_DrawUI.IsInputNow;
 
-
     void Start()
     {
         SetViewStageButton();

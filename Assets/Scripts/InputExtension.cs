@@ -27,7 +27,7 @@ public static partial class InputExtension  //‚±‚Á‚¿‚É‚ÍƒL[“ü—Í‚ð‘‚­
     public static bool OnDeleteColtrolChara => Input.GetKey(KeyCode.G);
     public static bool Escape => Input.GetKeyDown(KeyCode.Escape);
     public static bool ResetStage => Input.GetKeyDown(KeyCode.R);
-    public static bool ShowHowToPlay => Input.GetKeyDown(KeyCode.Q);
+    public static bool ShowHowToPlay => Input.GetKeyDown(KeyCode.Y);
 
     public static Vector2 MoveByKey(float i) => new Vector2(GetMoveDir() * i, 0);
     private static float GetMoveDir() => (MoveLeft ? -1 : 0) + (MoveRight ? 1 : 0);

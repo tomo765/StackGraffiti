@@ -99,6 +99,7 @@ public class GeneralSettings : ScriptableObject
         [SerializeField] private DontDestroyCanvas m_DontDestroyCanvas;
         [SerializeField] private OptionUI m_OptionUI;
         [SerializeField] private ResultUI m_ResultUI;
+        [SerializeField] private HowToPlayUI m_HowToPlayUI;
         [SerializeField] private FadeCanvasUI m_FadeCanvasUI;
         [SerializeField] private StageIntroUI m_StageIntroUI;
         [SerializeField] private ResetStageUI m_ResetStageUI;
@@ -119,6 +120,7 @@ public class GeneralSettings : ScriptableObject
         public DontDestroyCanvas DontDestroyCanvas => m_DontDestroyCanvas;
         public OptionUI OptionUI => m_OptionUI;
         public ResultUI ResultUI => m_ResultUI;
+        public HowToPlayUI HowToPlayUI => m_HowToPlayUI;
         public FadeCanvasUI FadeCanvasUI => m_FadeCanvasUI;
         public StageIntroUI StageIntroUI => m_StageIntroUI;
         public ResetStageUI ResetStageUI => m_ResetStageUI;

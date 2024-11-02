@@ -2163,6 +2163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SleepCount: {fileID: 5922193330351525879}
   m_DrawUI: {fileID: 7477760289709887992}
+  m_HowToPlayUI: {fileID: 0}
   m_ViewStageBtn: {fileID: 1749152718824809370}
   m_ViewDrawUIBtn: {fileID: 1359978207997020189}
 --- !u!1 &7756313691543982053
@@ -2459,7 +2460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7210277708365724383
 RectTransform:
   m_ObjectHideFlags: 0
