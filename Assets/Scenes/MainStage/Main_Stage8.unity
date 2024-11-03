@@ -272,6 +272,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 473324333}
+    - target: {fileID: 8413584424487759765, guid: 89735fd2ab0ced74293ad659e3e8db18, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -380,11 +384,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3407316006268606921, guid: fe79532856647894dadd719842b56484, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.87
+      value: -6.87
       objectReference: {fileID: 0}
     - target: {fileID: 3407316006268606921, guid: fe79532856647894dadd719842b56484, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.12
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 3407316006268606921, guid: fe79532856647894dadd719842b56484, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1250,7 +1254,7 @@ Transform:
   m_GameObject: {fileID: 3744531032526914465}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.38, y: -2.84, z: 0}
+  m_LocalPosition: {x: -5.67, y: -2.84, z: 0}
   m_LocalScale: {x: 1.3917, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
