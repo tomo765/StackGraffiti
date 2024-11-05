@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 
+#if UNITY_EDITOR
 //https://docs.google.com/spreadsheets/d/1Fy16eGDxAcyUBz0HUrkN-vnVj3x2XiOSiNMQJgEBY14/edit?gid=0#gid=0
 public static partial class Localizeations
 {
@@ -30,19 +31,18 @@ public static partial class Localizeations
                 LocalizeGenerates.GenerateCSVFile(request.downloadHandler.text);
                 LocalizeGenerates.GenerateTextID(request.downloadHandler.text.Split('\n'));
                 LocalizeGenerates.GenerateLanguage(request.downloadHandler.text.Split('\n')[0].Split(','));
-#if UNITY_EDITOR
                 AssetDatabase.Refresh();
-#endif
             }
         }
     }
 }
+#endif
 
 public static partial class Localizeations
 {
     public static string GetLocalizeText(Config.TextID textID, Config.Language language)
     {
-        var csvFile = Resources.Load<TextAsset>("Localize");
-        return csvFile.text.Split('\n')[(int)textID].Split(',')[(int)language];
+        var csvText = Resources.Load<TextAsset>("Localize").text;
+        return csvText.Split('\n')[(int)textID].Split(',')[(int)language];
     }
 }

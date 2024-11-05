@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEditor;
 
+#if UNITY_EDITOR
 public static class EditorCoroutine
 {
     public static void StartEditorCoroutine(IEnumerator coroutine)
@@ -16,3 +17,4 @@ public static class EditorCoroutine
         }
     }
 }
+#endif
