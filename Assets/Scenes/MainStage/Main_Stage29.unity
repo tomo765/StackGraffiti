@@ -615,11 +615,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3226581005610561060, guid: 920db08f8b09c9441aabad7555c71386, type: 3}
       propertyPath: m_Color.g
-      value: 0.5518868
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3226581005610561060, guid: 920db08f8b09c9441aabad7555c71386, type: 3}
       propertyPath: m_Color.r
-      value: 0.6389162
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3226581005610561062, guid: 920db08f8b09c9441aabad7555c71386, type: 3}
       propertyPath: targetMoveBlock
@@ -696,11 +696,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6980436277874240256, guid: 3ea7b15e95725534286cf9a2ddbcfe27, type: 3}
       propertyPath: m_Color.g
-      value: 0.6556604
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6980436277874240256, guid: 3ea7b15e95725534286cf9a2ddbcfe27, type: 3}
       propertyPath: m_Color.r
-      value: 0.6870948
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6980436277874240256, guid: 3ea7b15e95725534286cf9a2ddbcfe27, type: 3}
       propertyPath: m_DrawMode
