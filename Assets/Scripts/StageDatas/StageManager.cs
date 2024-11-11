@@ -28,21 +28,7 @@ public class StageManager : MonoBehaviour
         if (InputExtension.ResetStage)
         {
             if (m_GameCanvasUI.IsInputNameNow) { return; }
-            if (DontDestroyCanvas.Instance.IsShowResultUI) { return; }
-            if (DontDestroyCanvas.Instance.IsShowHowToPlay) { return; }
-
             DontDestroyCanvas.Instance.ChangeResetStageUIVisible(true);
-        }
-
-        if(InputExtension.ShowHowToPlay)
-        {
-            if(m_GameCanvasUI.IsInputNameNow) { return; }
-            if (DontDestroyCanvas.Instance.IsShowStageIntro) { return; }
-            if (DontDestroyCanvas.Instance.IsShowResetUI) { return; }
-            if (DontDestroyCanvas.Instance.IsShowResultUI) { return; }
-            if (SceneLoadExtension.IsFading) { return; }
-
-            DontDestroyCanvas.Instance.ChangeHowToPlayUIVisible(!DontDestroyCanvas.Instance.IsShowHowToPlay);
         }
     }
 
@@ -58,7 +44,6 @@ public class StageManager : MonoBehaviour
         await SceneLoadExtension.StartFadeIn();
         EffectContainer.Instance.StopAllEffect();
         await SceneLoadExtension.FinishFadeIn(Config.SceneNames.StageSelect);
-        DontDestroyCanvas.Instance.InvisibleAllUI();
         SoundManager.Instance.PlayMarimba(0);
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.Fade1.FadeOut);
         await SceneLoadExtension.FadeOut();

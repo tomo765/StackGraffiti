@@ -67,8 +67,6 @@ public static class GameManager
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.ClearSE);
 
         StageDataUtility.SetStageScore(m_CullentStage, m_SleepCount);
-
-        DontDestroyCanvas.Instance.InvisibleAllUI();
         DontDestroyCanvas.Instance.ChangeResultUIVisible(true);
         DontDestroyCanvas.Instance.ResultUI.SetStarLevel();
     }
