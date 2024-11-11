@@ -12,19 +12,21 @@ public class DontDestroyCanvas : MonoBehaviour
 
     private OptionUI m_OptionUI;
     private ResultUI m_ResultUI;
+    private HowToPlayUI m_HowToPlayUI;
     private StageIntroUI m_StageIntroUI;
     private ResetStageUI m_ResetStageUI;
 
     private Canvas m_Canvas;
-
-    private Func<bool> m_InputNameNow;
 
     public OptionUI OptionUI => m_OptionUI;
     public ResultUI ResultUI => m_ResultUI;
     public StageIntroUI StageIntroUI => m_StageIntroUI;
     public ResetStageUI ResetStageUI => m_ResetStageUI;
 
-    public bool IsViewInStage => m_ResetStageUI.isActiveAndEnabled;
+    public bool IsShowResetUI => m_ResetStageUI.isActiveAndEnabled;
+    public bool IsShowResultUI => m_ResultUI.isActiveAndEnabled;
+    public bool IsShowStageIntro => m_StageIntroUI.isActiveAndEnabled;
+    public bool IsShowHowToPlay => m_HowToPlayUI.isActiveAndEnabled;
 
     private void Init()
     {
@@ -48,18 +50,11 @@ public class DontDestroyCanvas : MonoBehaviour
     {
         m_OptionUI = Instantiate(GeneralSettings.Instance.Prehab.OptionUI, transform);
         m_ResultUI = Instantiate(GeneralSettings.Instance.Prehab.ResultUI, transform);
+        m_HowToPlayUI = Instantiate(GeneralSettings.Instance.Prehab.HowToPlayUI, transform);
         m_StageIntroUI = Instantiate(GeneralSettings.Instance.Prehab.StageIntroUI, transform);
         m_ResetStageUI = Instantiate(GeneralSettings.Instance.Prehab.ResetStageUI, transform);
 
-        m_OptionUI.gameObject.SetActive(false);
-        m_ResultUI.gameObject.SetActive(false);
-        m_StageIntroUI.gameObject.SetActive(false);
-        m_ResetStageUI.gameObject.SetActive(false);
-    }
-
-    public void SetInputName(Func<bool> func)
-    {
-        m_InputNameNow = func;
+        InvisibleAllUI();
     }
 
     /// <summary> シーン切り替え時に参照するカメラを再度設定 </summary>
@@ -78,6 +73,11 @@ public class DontDestroyCanvas : MonoBehaviour
         m_ResultUI.gameObject.SetActive(b);
     }
 
+    public void ChangeHowToPlayUIVisible(bool b)
+    {
+        m_HowToPlayUI.gameObject.SetActive(b);
+    }
+
     public void ChangeStageIntroUIVisible(bool b)
     {
         m_StageIntroUI.gameObject.SetActive(b);
@@ -89,6 +89,15 @@ public class DontDestroyCanvas : MonoBehaviour
         if (SceneLoadExtension.IsFading) { return; }
         if (m_StageIntroUI.gameObject.activeSelf) { return; }
         m_ResetStageUI.gameObject.SetActive(b);
+    }
+
+    public void InvisibleAllUI()
+    {
+        m_OptionUI.gameObject.SetActive(false);
+        m_ResultUI.gameObject.SetActive(false);
+        m_HowToPlayUI.gameObject.SetActive(false);
+        m_StageIntroUI.gameObject.SetActive(false);
+        m_ResetStageUI.gameObject.SetActive(false);
     }
 
     public void InitResultUI() => m_ResultUI.Init();
