@@ -1,5 +1,5 @@
-///<summary> ©“®‚Å¶¬‚·‚éƒNƒ‰ƒXB CreateSceneNames QÆ </summary>
-///<remarks> Editor => Generate Scene Names Class ‚Å¶¬ŠJn‚·‚é </remarks>
+///<summary> è‡ªå‹•ã§ç”Ÿæˆã™ã‚‹ã‚¯ãƒ©ã‚¹ã€‚ CreateSceneNames å‚ç…§ </summary>
+///<remarks> Editor => Generate Scene Names Class ã§ç”Ÿæˆé–‹å§‹ã™ã‚‹ </remarks>
 namespace Config
 {
     public class SceneNames 

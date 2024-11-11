@@ -14,7 +14,7 @@ public class MovingBlock : MonoBehaviour
 
     private Vector3 startPos;           // 初期位置
     private Vector3 endPos;             // 終了位置
-    private bool isReverse = false;     // 逆移動フラグ
+    public bool isReverse = false;     // 逆移動フラグ
     private float movep = 0;            // 移動補完値
 
     void Start()
