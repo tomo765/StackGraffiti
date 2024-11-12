@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -28,9 +27,10 @@ public static partial class Localizeations
                     yield break;
                 }
 
-                LocalizeGenerates.GenerateCSVFile(request.downloadHandler.text);
-                LocalizeGenerates.GenerateTextID(request.downloadHandler.text.Split('\n'));
-                LocalizeGenerates.GenerateLanguage(request.downloadHandler.text.Split('\n')[0].Split(','));
+                string text = request.downloadHandler.text.Replace("\r", "");
+                LocalizeGenerates.GenerateCSVFile(text);
+                LocalizeGenerates.GenerateTextID(text.Split('\n'));
+                LocalizeGenerates.GenerateLanguage(text.Split('\n')[0].Split(','));
                 AssetDatabase.Refresh();
             }
         }

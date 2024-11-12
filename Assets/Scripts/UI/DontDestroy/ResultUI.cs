@@ -53,7 +53,7 @@ public class ResultUI : MonoBehaviour
                 GameManager.PlayBGMs();
 
                 DontDestroyCanvas.Instance.ChangeStageIntroUIVisible(true);  //ToDo : StageSelectUI でも似た処理してるからメソッドにする？
-                DontDestroyCanvas.Instance.StageIntroUI.SetIntroText(GameManager.CullentStage.ToString(),
+                DontDestroyCanvas.Instance.StageIntroUI.SetIntroText((int)GameManager.CullentStage,
                                                                      GeneralSettings.Instance.StageInfos.GetStageTextEN((int)GameManager.CullentStage),
                                                                      GeneralSettings.Instance.StageInfos.GetStageTextJP((int)GameManager.CullentStage)
                                                                     );

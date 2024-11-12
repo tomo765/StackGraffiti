@@ -4,13 +4,26 @@ namespace Config
 {
     public enum TextID
     {
-        StartButton = 1,
-        ExitButton = 2,
+        StartGame = 1,
+        ExitGame = 2,
         BGM = 3,
         SE = 4,
-        DeleteDataButton = 5,
+        DeleteData = 5,
         AskDeleteData = 6,
-        NoButton = 7,
-        YesButton = 8,
+        No = 7,
+        Yes = 8,
+        StageSelect = 9,
+        Stage = 10,
+        Title = 11,
+        Click = 12,
+        Draw = 13,
+        ViewStage = 14,
+        InputName = 15,
+        Create = 16,
+        StageClear = 17,
+        NextStage = 18,
+        BackTitle = 19,
+        SeeCredit = 20,
+        AskResetStage = 21,
     }
 }

@@ -59,6 +59,13 @@ public class StageIntroUI : MonoBehaviour
         m_TitleTextJP.text = TitleTextJP;
     }
 
+    public void SetIntroText(int stageLevel, string TitleTextEN, string TitleTextJP)
+    {
+        m_StageText.text = m_StageText.GetComponent<TMPTextLocalizer>().GetLocalizeText() + stageLevel.ToString();
+        m_TitleTextEN.text = TitleTextEN;
+        m_TitleTextJP.text = TitleTextJP;
+    }
+
     private void Init()
     {
         m_BGImage = GetComponent<Image>();
@@ -75,7 +82,6 @@ public class StageIntroUI : MonoBehaviour
         await FadeIn();
         await TaskExtension.WaitUntiil(() => m_FinishAnimation);
         await ShowStartText();
-        //await TaskExtension.WaitUntiil(() => InputExtension.MouseLeftPush);
         await FadeOut();
 
         gameObject.SetActive(false);

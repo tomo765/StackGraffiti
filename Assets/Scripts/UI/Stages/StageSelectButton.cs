@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +7,6 @@ using TMPro;
 /// <summary> ステージ選択ボタンの一般クラス </summary>
 public class StageSelectButton : MonoBehaviour
 {
-
     [SerializeField] private Button m_TransitionButton;  //アタッチされえているオブジェクトのボタン
     [SerializeField] private TextMeshProUGUI m_StageLevelText;
     [SerializeField] private Image[] m_Stars;
@@ -20,7 +18,9 @@ public class StageSelectButton : MonoBehaviour
     {
         m_StageName = name;
         m_StageLevel = stageNum;
-        m_StageLevelText.text = "Stage " + stageNum.ToString();
+
+        var stageText = m_StageLevelText.GetComponent<TMPTextLocalizer>().GetLocalizeText() + " " + stageNum.ToString();
+        m_StageLevelText.text = stageText;
 
         m_TransitionButton.onClick.AddListener(async () =>
         {
@@ -33,7 +33,7 @@ public class StageSelectButton : MonoBehaviour
             await SceneLoadExtension.FadeOut();
 
             DontDestroyCanvas.Instance.ChangeStageIntroUIVisible(true);
-            DontDestroyCanvas.Instance.StageIntroUI.SetIntroText("Stage " + m_StageLevel.ToString(), 
+            DontDestroyCanvas.Instance.StageIntroUI.SetIntroText(m_StageLevel, 
                                                                  GeneralSettings.Instance.StageInfos.GetStageTextEN(stageNum),
                                                                  GeneralSettings.Instance.StageInfos.GetStageTextJP(stageNum));
         });
