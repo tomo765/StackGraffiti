@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +13,7 @@ public class OptionUI : MonoBehaviour
     [SerializeField] private Button m_ReturnButton;
     [SerializeField] private Button m_DeleteDataButton;
     [SerializeField] private TMP_Dropdown m_ScreenResizer;
+    [SerializeField] private TMP_Dropdown m_LanguageSelector;
     [SerializeField] private Slider m_BGMSlider;
     [SerializeField] private Slider m_SESlider;
 
@@ -21,6 +24,7 @@ public class OptionUI : MonoBehaviour
         SetReturnButton();
         SetDeleteDataButton();
         SetScreenResizer();
+        SetLanguageSelector();
         SetBGMSlider();
         SetSESlider();
     }
@@ -83,6 +87,26 @@ public class OptionUI : MonoBehaviour
         m_ScreenResizer.onValueChanged.AddListener((i) =>
         {
             ScreenSettings.SetScreenSize((ScreenSize)i);
+        });
+    }
+
+    private void SetLanguageSelector()
+    {
+        var names = Enum.GetNames(typeof(Config.Language));
+        List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>(names.Length);
+        foreach (var name in names)
+        {
+            options.Add(new TMP_Dropdown.OptionData(name));
+        }
+
+        m_LanguageSelector.options = options;
+        m_LanguageSelector.value = (int)GameManager.Language - 2;
+        m_LanguageSelector.onValueChanged.AddListener((i) =>
+        {
+            GameManager.Language = (Config.Language)(i + 2);
+            //await SceneLoadExtension.StartFadeIn();
+            //await SceneLoadExtension.FinishFadeIn(Config.SceneNames.Title);
+            //await SceneLoadExtension.FadeOut();
         });
     }
 }

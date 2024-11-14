@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 
 public enum GameState
 {
@@ -15,6 +14,22 @@ public enum GameState
 /// <summary> ステージ上でのステートなどの管理をする </summary>
 public static class GameManager
 {
+    private static Config.Language m_Language = Config.Language.日本語;
+    private static Action m_UpdateLocalizeText;
+    public static void AddLocalizeAction(Action action) => m_UpdateLocalizeText += action;
+
+    public static Config.Language Language
+    {
+        get { return m_Language; }
+        set
+        {
+            if(m_Language == value) { return; }
+            m_Language = value;
+            //m_UpdateLocalizeText();
+        }
+    }
+
+
     private static GameState m_GameState = GameState.Drawing;
     private static StageLevel m_CullentStage = StageLevel.Stage1;
     private static int m_SleepCount = 0;
@@ -67,6 +82,8 @@ public static class GameManager
         SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.ClearSE);
 
         StageDataUtility.SetStageScore(m_CullentStage, m_SleepCount);
+
+        DontDestroyCanvas.Instance.InvisibleAllUI();
         DontDestroyCanvas.Instance.ChangeResultUIVisible(true);
         DontDestroyCanvas.Instance.ResultUI.SetStarLevel();
     }
