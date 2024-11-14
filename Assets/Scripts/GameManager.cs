@@ -14,9 +14,18 @@ public enum GameState
 /// <summary> ステージ上でのステートなどの管理をする </summary>
 public static class GameManager
 {
-    private static Config.Language m_Language = Config.Language.日本語;
-    private static Action m_UpdateLocalizeText;
-    public static void AddLocalizeAction(Action action) => m_UpdateLocalizeText += action;
+    private static Config.Language m_Language = Config.Language.English;
+
+    /// <summary> DontDestroyCanvas内のテキストのローカライズの関数を追加する  </summary>
+    public static void AddStaticAction(Action action) => m_UpdateStaticText += action;
+    private static Action m_UpdateStaticText;  //DontDestroyCanvas内のテキストのローカライズをする
+
+
+    /// <summary> シーン上のテキストのローカライズの関数を追加する  </summary>
+    public static void AddSceneLocalizeAction(Action action) => m_UpdateSceneText += action;
+    /// <summary> シーン切り替え時に切り替え前に追加した関数の参照を破棄する </summary>
+    public static void ResetSceneLocalizeAction() => m_UpdateSceneText = null;
+    private static Action m_UpdateSceneText;   //シーン上のテキストのローカライズをする
 
     public static Config.Language Language
     {
@@ -25,7 +34,8 @@ public static class GameManager
         {
             if(m_Language == value) { return; }
             m_Language = value;
-            //m_UpdateLocalizeText();
+            m_UpdateStaticText();
+            m_UpdateSceneText();
         }
     }
 

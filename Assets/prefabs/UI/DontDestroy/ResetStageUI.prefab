@@ -152,6 +152,8 @@ MonoBehaviour:
   m_TextID: 21
   m_ChangeTextOnStart: 1
   m_UpdateWhenLanguageChange: 1
+  ChangeAsStatic: 1
+  ChangeAsScene: 0
 --- !u!1 &3007564152061126474
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,6 +306,8 @@ MonoBehaviour:
   m_TextID: 8
   m_ChangeTextOnStart: 1
   m_UpdateWhenLanguageChange: 1
+  ChangeAsStatic: 1
+  ChangeAsScene: 0
 --- !u!1 &5330517163828393552
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +460,8 @@ MonoBehaviour:
   m_TextID: 7
   m_ChangeTextOnStart: 1
   m_UpdateWhenLanguageChange: 1
+  ChangeAsStatic: 1
+  ChangeAsScene: 0
 --- !u!1 &6131348481372757464
 GameObject:
   m_ObjectHideFlags: 0

@@ -224,8 +224,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f9f95329564c2488610d638ee96d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LocalizeTarget: {fileID: 8382976721984732985}
   m_TextID: 10
   m_ChangeTextOnStart: 0
+  m_UpdateWhenLanguageChange: 1
+  ChangeAsStatic: 0
+  ChangeAsScene: 1
 --- !u!1 &3274248694584016341
 GameObject:
   m_ObjectHideFlags: 0

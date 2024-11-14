@@ -556,6 +556,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TextID: 1
+  m_ChangeTextOnStart: 1
+  m_UpdateWhenLanguageChange: 1
+  ChangeAsStatic: 0
+  ChangeAsScene: 1
 --- !u!1 &650223977
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,6 +1224,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TextID: 2
+  m_ChangeTextOnStart: 1
+  m_UpdateWhenLanguageChange: 1
+  ChangeAsStatic: 0
+  ChangeAsScene: 1
 --- !u!1 &2087307663
 GameObject:
   m_ObjectHideFlags: 0

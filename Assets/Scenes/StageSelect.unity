@@ -593,8 +593,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f9f95329564c2488610d638ee96d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LocalizeTarget: {fileID: 0}
   m_TextID: 11
   m_ChangeTextOnStart: 1
+  m_UpdateWhenLanguageChange: 1
+  ChangeAsStatic: 0
+  ChangeAsScene: 1
 --- !u!1 &822456766
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,8 +1209,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f9f95329564c2488610d638ee96d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LocalizeTarget: {fileID: 0}
   m_TextID: 9
   m_ChangeTextOnStart: 1
+  m_UpdateWhenLanguageChange: 0
+  ChangeAsStatic: 0
+  ChangeAsScene: 0
 --- !u!1 &1458136808
 GameObject:
   m_ObjectHideFlags: 0

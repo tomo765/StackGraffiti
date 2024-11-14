@@ -19,8 +19,9 @@ public class StageSelectButton : MonoBehaviour
         m_StageName = name;
         m_StageLevel = stageNum;
 
-        var stageText = m_StageLevelText.GetComponent<TMPTextLocalizer>().GetLocalizeText() + " " + stageNum.ToString();
-        m_StageLevelText.text = stageText;
+        var localizer = m_StageLevelText.GetComponent<TMPTextLocalizer>();
+        localizer.SetBackAndForthText("", stageNum.ToString());
+        localizer.SetLocalizeText();
 
         m_TransitionButton.onClick.AddListener(async () =>
         {

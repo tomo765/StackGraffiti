@@ -52,12 +52,6 @@ public class StageIntroUI : MonoBehaviour
         ShowIntro().FireAndForget();
         ShowTexts().FireAndForget();
     }
-    public void SetIntroText(string stageTxt, string TitleTextEN, string TitleTextJP)
-    {
-        m_StageText.text = stageTxt;
-        m_TitleTextEN.text = TitleTextEN;
-        m_TitleTextJP.text = TitleTextJP;
-    }
 
     public void SetIntroText(int stageLevel, string TitleTextEN, string TitleTextJP)
     {
