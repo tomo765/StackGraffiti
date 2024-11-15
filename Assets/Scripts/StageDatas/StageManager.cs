@@ -36,10 +36,10 @@ public class StageManager : MonoBehaviour
 
         if(InputExtension.ShowHowToPlay)
         {
-            if(m_GameCanvasUI.IsInputNameNow) { return; }
-            if (DontDestroyCanvas.Instance.IsShowStageIntro) { return; }
-            if (DontDestroyCanvas.Instance.IsShowResetUI) { return; }
-            if (DontDestroyCanvas.Instance.IsShowResultUI) { return; }
+            if (m_GameCanvasUI.IsInputNameNow) { return; }
+            if(DontDestroyCanvas.Instance.IsShowStageIntro) { return; }
+            if(DontDestroyCanvas.Instance.IsShowResetUI) { return; }
+            if(DontDestroyCanvas.Instance.IsShowResultUI) { return; }
             if (SceneLoadExtension.IsFading) { return; }
 
             DontDestroyCanvas.Instance.ChangeHowToPlayUIVisible(!DontDestroyCanvas.Instance.IsShowHowToPlay);

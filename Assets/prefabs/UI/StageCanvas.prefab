@@ -1106,8 +1106,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f9f95329564c2488610d638ee96d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LocalizeTarget: {fileID: 0}
   m_TextID: 9
   m_ChangeTextOnStart: 1
+  m_UpdateWhenLanguageChange: 0
+  ChangeAsStatic: 0
+  ChangeAsScene: 0
 --- !u!1 &4803189385876620388
 GameObject:
   m_ObjectHideFlags: 0
@@ -1332,8 +1336,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f9f95329564c2488610d638ee96d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LocalizeTarget: {fileID: 0}
   m_TextID: 14
   m_ChangeTextOnStart: 1
+  m_UpdateWhenLanguageChange: 0
+  ChangeAsStatic: 0
+  ChangeAsScene: 0
 --- !u!1 &5284212176137155478
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,8 +1627,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f9f95329564c2488610d638ee96d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LocalizeTarget: {fileID: 0}
   m_TextID: 13
   m_ChangeTextOnStart: 1
+  m_UpdateWhenLanguageChange: 0
+  ChangeAsStatic: 0
+  ChangeAsScene: 0
 --- !u!1 &5479054864104061498
 GameObject:
   m_ObjectHideFlags: 0
@@ -1848,8 +1860,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f9f95329564c2488610d638ee96d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LocalizeTarget: {fileID: 0}
   m_TextID: 16
   m_ChangeTextOnStart: 1
+  m_UpdateWhenLanguageChange: 0
+  ChangeAsStatic: 0
+  ChangeAsScene: 0
 --- !u!1 &6699026036279171096
 GameObject:
   m_ObjectHideFlags: 0
@@ -2443,7 +2459,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7210277708365724383
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2957,5 +2973,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f9f95329564c2488610d638ee96d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LocalizeTarget: {fileID: 0}
   m_TextID: 15
   m_ChangeTextOnStart: 1
+  m_UpdateWhenLanguageChange: 0
+  ChangeAsStatic: 0
+  ChangeAsScene: 0

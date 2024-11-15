@@ -19,12 +19,13 @@ public static class CharacterCreator  //参考サイト : https://qiita.com/divideby_
         if(m_CreateChara == null) { return; }
         m_CreateChara.gameObject.SetActive(b);
     }
-    public static void SetCreateCharaTransform(Vector3 pos, Vector3 size)
+    public static void SetCharacterTransform(Vector3 pos, Vector3 size)
     {
-        if(!CanCreateChara) { return; }
+        if (!CanCreateChara) { return; }
         m_CreateChara.transform.position = pos;
         m_CreateChara.transform.localScale = size;
     }
+
     /// <summary> キャラを書ける状態でマウス左をクリックした瞬間の処理 </summary>
     public static void OnClick(Vector2 position)
     {

@@ -16,6 +16,7 @@ public class GameCanvasUI : MonoBehaviour
 
     public bool IsInputNameNow => m_DrawUI.IsInputNow;
 
+
     void Start()
     {
         SetViewStageButton();
@@ -36,7 +37,7 @@ public class GameCanvasUI : MonoBehaviour
 
             m_DrawUI.gameObject.SetActive(m_isVisible);
             m_ViewDrawUIBtn.gameObject.SetActive(!m_isVisible);
-            CharacterCreator.SetCreateCharaTransform(GameManager.SpawnArea.transform.position, new Vector2(0.3f, 0.3f));
+            CharacterCreator.SetCharacterTransform(GameManager.SpawnArea.transform.position, new Vector2(0.3f, 0.3f));
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
     }
@@ -54,7 +55,7 @@ public class GameCanvasUI : MonoBehaviour
 
             Vector3 pos = m_DrawUI.DrawAreaPosition;
             pos.z = GeneralSettings.Instance.Priorities.CreateCharaLayer.z;
-            CharacterCreator.SetCreateCharaTransform(pos, Vector3.one);
+            CharacterCreator.SetCharacterTransform(pos, Vector3.one);
             SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
         });
     }

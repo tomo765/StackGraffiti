@@ -52,7 +52,7 @@ public class CharacterController : MonoBehaviour
         if (!InputExtension.OnMove) { return; }
         if (!GameManager.IsPlaying) { return; }
         if (DontDestroyCanvas.Instance.IsShowResetUI) { return; }
-        if(DontDestroyCanvas.Instance.IsShowHowToPlay) { return; }
+        if (DontDestroyCanvas.Instance.IsShowHowToPlay) { return; }
 
         if (m_OnGround)
         {
