@@ -11,6 +11,8 @@ public class StageSelectUI : MonoBehaviour
 
     private StageSelectButton[] m_SelectButtons;
 
+    private static float ScrollValue = 1;
+
     void Start()
     {
         StageDataUtility.LoadData();
@@ -18,7 +20,11 @@ public class StageSelectUI : MonoBehaviour
         SetSelectButtons();
         SetReturnTitleBtn();
 
-        m_VerticalBar.value = 1;
+        m_VerticalBar.value = ScrollValue;
+        m_VerticalBar.onValueChanged.AddListener((float val) =>
+        {
+            ScrollValue = val;
+        });
     }
 
     /// <summary> ステージのセレクトボタンを、ステージの数ぶん生成する </summary>
