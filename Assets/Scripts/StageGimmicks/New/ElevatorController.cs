@@ -7,6 +7,7 @@ public partial class ElevatorController : GimmickReceiver
 {
     [SerializeField] private Vector2 m_MoveVec;
     [SerializeField] private float m_MoveSpeed;
+    [SerializeField] private float m_WaitTime = 0;
     [SerializeField] private bool m_OnActivate = false;
     [SerializeField] private bool m_Reversible = true;
 
@@ -17,6 +18,7 @@ public partial class ElevatorController : GimmickReceiver
     private Vector2 m_EndPos;
     private float m_ArrivalTime;      // 0`1‚Å•Ï“® ‰ŠúˆÊ’u = 0, ˆÚ“®Œã = 1@‚Æ‚µ‚ÄˆÚ“®‚³‚¹‚é
     private bool m_OnReverse = false;  //true : •œ˜H, false : ‰˜H
+    private float m_CullentWaitTime = 0;
 
     public bool OnActivate => m_OnActivate;
 
@@ -26,6 +28,7 @@ public partial class ElevatorController : GimmickReceiver
     {
         m_StartPos = transform.position;
         m_EndPos = m_StartPos + m_MoveVec;
+        m_CullentWaitTime = m_WaitTime;
     }
 
     private void FixedUpdate()
@@ -38,14 +41,23 @@ public partial class ElevatorController : GimmickReceiver
         if(GameManager.IsClear) { return; }
         if (!m_OnActivate) { return; }
 
-        m_ArrivalTime += GetAddTime();
-        transform.position = Vector2.Lerp(m_StartPos, m_EndPos, m_ArrivalTime);
+        if(m_CullentWaitTime >= m_WaitTime) { DoMove(); }
+        else { DoWait(); }
 
-        if (m_ArrivalTime >= MaxTime || m_ArrivalTime <= MinTime)
+        void DoMove()
         {
-            m_OnReverse = !m_OnReverse;
-            m_ArrivalTime = Mathf.Clamp(m_ArrivalTime, MinTime, MaxTime);
+            m_ArrivalTime += GetAddTime();
+            transform.position = Vector2.Lerp(m_StartPos, m_EndPos, m_ArrivalTime);
+
+            if (m_ArrivalTime >= MaxTime || m_ArrivalTime <= MinTime)
+            {
+                m_CullentWaitTime = 0;
+                m_OnReverse = !m_OnReverse;
+                m_ArrivalTime = Mathf.Clamp(m_ArrivalTime, MinTime, MaxTime);
+            }
         }
+
+        void DoWait() { m_CullentWaitTime += Time.fixedDeltaTime; }
     }
 
     public override void ChangeActivate() => m_OnActivate = !m_OnActivate;
