@@ -515,5 +515,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ExcludeLayer:
     serializedVersion: 2
-    m_Bits: 2561
+    m_Bits: 3585
   m_MaxDistance: 20
+  m_RobotTransform: {fileID: 9055753153828915284}

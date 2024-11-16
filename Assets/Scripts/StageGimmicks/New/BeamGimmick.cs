@@ -8,9 +8,10 @@ public class BeamGimmick : MonoBehaviour
     private LineRenderer m_LineRenderer;
     private BoxCollider2D m_BoxCollider;
     [SerializeField] private LayerMask m_ExcludeLayer;
-
     [SerializeField] private float m_MaxDistance = 20;
+    [SerializeField] private Transform m_RobotTransform;
 
+    private float SizeCorrection => transform.localScale.x * m_RobotTransform.transform.localScale.x;
     private RaycastHit2D BeamRay => Physics2D.Raycast(transform.position, -transform.right, m_MaxDistance, ~m_ExcludeLayer);
 
     void Start()
@@ -45,7 +46,7 @@ public class BeamGimmick : MonoBehaviour
         return new Vector3[]
         {
             Vector3.zero,
-            -Vector3.right * distance
+            -Vector3.right * distance / SizeCorrection
         };
     }
 
