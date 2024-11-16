@@ -544,13 +544,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7562739624168116460, guid: edc59cb3c53bb5140b9b539592a64d6a, type: 3}
       propertyPath: m_Offset.y
-      value: 0.0069437027
+      value: 17.5
       objectReference: {fileID: 0}
     - target: {fileID: 7829589884673978187, guid: edc59cb3c53bb5140b9b539592a64d6a, type: 3}
       propertyPath: m_Name
       value: moveBlock2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5374014249957590036, guid: edc59cb3c53bb5140b9b539592a64d6a, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1445512130664966225, guid: edc59cb3c53bb5140b9b539592a64d6a, type: 3}
     m_AddedGameObjects: []
