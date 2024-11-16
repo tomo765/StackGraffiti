@@ -25,5 +25,9 @@ namespace Config
         BackTitle = 19,
         SeeCredit = 20,
         AskResetStage = 21,
+        Sleep = 22,
+        Delete = 23,
+        Reset = 24,
+        HowToPlay = 25,
     }
 }

@@ -27,7 +27,7 @@ public static partial class Localizeations
                     yield break;
                 }
 
-                string text = request.downloadHandler.text.Replace("\r", "");
+                string text = request.downloadHandler.text;
                 LocalizeGenerates.GenerateCSVFile(text);
                 LocalizeGenerates.GenerateTextID(text.Split('\n'));
                 LocalizeGenerates.GenerateLanguage(text.Split('\n')[0].Split(','));
@@ -43,6 +43,6 @@ public static partial class Localizeations
     public static string GetLocalizeText(Config.TextID textID, Config.Language language)
     {
         var csvText = Resources.Load<TextAsset>("Localize").text;
-        return csvText.Split('\n')[(int)textID].Split(',')[(int)language];
+        return csvText.Replace("\r", "").Split('\n')[(int)textID].Split(',')[(int)language];
     }
 }
