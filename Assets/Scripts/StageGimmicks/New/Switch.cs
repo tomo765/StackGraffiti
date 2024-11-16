@@ -17,10 +17,12 @@ public partial class Switch : GimmickSender
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Laser")) { return; }
         StartGimmick(collision);
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Laser")) { return; }
         StopGimmick(collision);
     }
 
