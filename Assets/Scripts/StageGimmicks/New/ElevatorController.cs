@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary> 移動床のコントローラー </summary>
@@ -18,6 +19,7 @@ public partial class ElevatorController : GimmickReceiver
     private Vector2 m_EndPos;
     private float m_ArrivalTime;      // 0～1で変動 初期位置 = 0, 移動後 = 1　として移動させる
     private bool m_OnReverse = false;  //true : 復路, false : 往路
+    private bool isInactive = false;
     private float m_CullentWaitTime = 0;
 
     public bool OnActivate => m_OnActivate;
@@ -73,8 +75,14 @@ public partial class ElevatorController : GimmickReceiver
     {
         if (!collision.TryGetComponent(out CharacterManager manager)) { return; }
         if (manager.IsDead) { return; }
+        if(isInactive) { return; }
 
         manager.transform.SetParent(null);
+    }
+
+    private void OnDisable()
+    {
+        isInactive = true;
     }
 }
 
