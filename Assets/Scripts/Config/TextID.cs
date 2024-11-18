@@ -29,5 +29,6 @@ namespace Config
         Delete = 23,
         Reset = 24,
         HowToPlay = 25,
+        ViewResult = 26,
     }
 }

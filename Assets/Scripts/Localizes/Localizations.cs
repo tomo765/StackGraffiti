@@ -27,7 +27,7 @@ public static partial class Localizeations
                     yield break;
                 }
 
-                string text = request.downloadHandler.text;
+                string text = request.downloadHandler.text.Replace("\r", "");
                 LocalizeGenerates.GenerateCSVFile(text);
                 LocalizeGenerates.GenerateTextID(text.Split('\n'));
                 LocalizeGenerates.GenerateLanguage(text.Split('\n')[0].Split(','));

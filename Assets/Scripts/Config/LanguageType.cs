@@ -5,6 +5,6 @@ namespace Config
     public enum Language
     {
         日本語 = 2,
-        English = 3,
+        English = 3,
     }
 }

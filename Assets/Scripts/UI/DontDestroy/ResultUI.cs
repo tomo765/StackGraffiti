@@ -7,15 +7,54 @@ using UnityEngine.UI;
 /// <summary> ステージクリア後のリザルト画面 </summary>
 public class ResultUI : MonoBehaviour
 {
+    [Header("リザルト画面")]
+    [SerializeField] private GameObject m_ResultBG;
     [SerializeField] private Image[] m_Stars;
 
+    [Space(3), Header("背景")]
+    [SerializeField] private Image m_BGImage;
+    [SerializeField] private Color m_ViewResultBGColor;
 
+    [Space(3), Header("ボタン")]
+    [SerializeField] private Button m_ViewStageBtn;
+    [SerializeField] private Button m_ViewResultBtn;
     [SerializeField] private Button m_StageSelectBtn;
     [SerializeField] private Button m_ReturnTitleBtn;
-    [SerializeField] private Button m_NextStageButton;
-    [SerializeField] private Button m_CreditButton;
+    [SerializeField] private Button m_NextStageBtn;
+    [SerializeField] private Button m_CreditBtn;
 
     public void Init()  //ToDo : クレジットを流した後にセレクト画面を押していてもたいとるに戻る
+    {
+        InitViewStageBtn();
+        InitViewResultButton();
+        InitStageSelectBtn();
+        InitReturnTitleBtn();
+        InitNextStageBtn();
+        InitCreditBtn();
+    }
+
+    private void InitViewStageBtn()
+    {
+        m_ViewStageBtn.onClick.RemoveAllListeners();
+        m_ViewStageBtn.onClick.AddListener(() =>
+        {
+            m_ViewResultBtn.gameObject.SetActive(true);
+            m_ResultBG.SetActive(false);
+            m_BGImage.color = new Color();
+        });
+    }
+    private void InitViewResultButton()
+    {
+        m_ViewResultBtn.gameObject.SetActive(false);
+        m_ViewResultBtn.onClick.RemoveAllListeners();
+        m_ViewResultBtn.onClick.AddListener(() =>
+        {
+            m_ViewResultBtn.gameObject.SetActive(false);
+            m_ResultBG.SetActive(true);
+            m_BGImage.color = m_ViewResultBGColor;
+        });
+    }
+    private void InitStageSelectBtn()
     {
         //セレクト画面に戻るボタンの処理登録
         m_StageSelectBtn.onClick.RemoveAllListeners();
@@ -26,7 +65,9 @@ public class ResultUI : MonoBehaviour
             OnPushResultButton(Config.SceneNames.StageSelect).FireAndForget();
             GameManager.PlayBGMs();
         });
-
+    }
+    private void InitReturnTitleBtn()
+    {
         //タイトルに戻るボタンの処理登録
         m_ReturnTitleBtn.onClick.RemoveAllListeners();
         m_ReturnTitleBtn.onClick.AddListener(() =>
@@ -36,13 +77,15 @@ public class ResultUI : MonoBehaviour
             OnPushResultButton(Config.SceneNames.Title).FireAndForget();
             GameManager.PlayBGMs();
         });
-
+    }
+    private void InitNextStageBtn()
+    {
         //次のステージに進むボタンの処理登録
-        m_NextStageButton.gameObject.SetActive(!GameManager.IsLastStage);
+        m_NextStageBtn.gameObject.SetActive(!GameManager.IsLastStage);
         if (!GameManager.IsLastStage)
         {
-            m_NextStageButton.onClick.RemoveAllListeners();
-            m_NextStageButton.onClick.AddListener(async() =>
+            m_NextStageBtn.onClick.RemoveAllListeners();
+            m_NextStageBtn.onClick.AddListener(async () =>
             {
                 StageLevel nextStage = GameManager.CullentStage + 1;
 
@@ -59,12 +102,14 @@ public class ResultUI : MonoBehaviour
                                                                     );
             });
         }
-
-        m_CreditButton.gameObject.SetActive(StageDataUtility.IsAllStageClear());
+    }
+    private void InitCreditBtn()
+    {
+        m_CreditBtn.gameObject.SetActive(StageDataUtility.IsAllStageClear());
         if (StageDataUtility.IsAllStageClear())
         {
-            m_CreditButton.onClick.RemoveAllListeners();
-            m_CreditButton.onClick.AddListener(() =>
+            m_CreditBtn.onClick.RemoveAllListeners();
+            m_CreditBtn.onClick.AddListener(() =>
             {
                 OnPushResultButton(Config.SceneNames.Credit).FireAndForget();
             });
