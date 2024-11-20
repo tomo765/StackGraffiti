@@ -37,7 +37,15 @@ public class BeamGimmick : MonoBehaviour
         m_BoxCollider.size = center;
         m_BoxCollider.offset = new Vector2(m_BoxCollider.size.x / 2f * (isNegatoveX ? -1 : 1), 0);
 
-        m_RazerImpactTransform.position = points[1] + transform.position;
+        SetLazerEffectTransform(points[1]);
+    }
+
+    private void SetLazerEffectTransform(Vector3 point)
+    {
+        m_RazerImpactTransform.position = point * BeamDirection + transform.position;
+        var impactRot = m_RazerImpactTransform.localEulerAngles;
+        impactRot.x *= BeamDirection;
+        m_RazerImpactTransform.localEulerAngles = impactRot;
     }
 
     private Vector3[] GetLocalPoints(RaycastHit2D hit)
