@@ -496,7 +496,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
+  m_SortingOrder: -4
   m_Sprite: {fileID: 5332292067110755029, guid: 745da61c6c8d2304dbd0159b8a28f88a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -524,7 +524,7 @@ Transform:
   - {fileID: 1240910877}
   - {fileID: 940423061}
   - {fileID: 1531433455}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1318967383}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &933875049
 PrefabInstance:
@@ -1126,6 +1126,7 @@ Transform:
   - {fileID: 303081426}
   - {fileID: 1137042703}
   - {fileID: 300456149}
+  - {fileID: 927531778}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1318967384
@@ -2227,4 +2228,3 @@ SceneRoots:
   - {fileID: 1360674041}
   - {fileID: 1859806780}
   - {fileID: 1318967383}
-  - {fileID: 927531778}
