@@ -173,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6226861125795277964, guid: b5262d94f0e993e46a13a3c9699ebdc4, type: 3}
       propertyPath: m_MaxDistance
-      value: -20
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9055753153828915284, guid: b5262d94f0e993e46a13a3c9699ebdc4, type: 3}
       propertyPath: m_LocalScale.x

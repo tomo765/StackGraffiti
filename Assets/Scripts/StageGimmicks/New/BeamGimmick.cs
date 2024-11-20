@@ -12,7 +12,8 @@ public class BeamGimmick : MonoBehaviour
     [SerializeField] private Transform m_RobotTransform;
 
     private float SizeCorrection => transform.localScale.x * m_RobotTransform.transform.localScale.x;
-    private RaycastHit2D BeamRay => Physics2D.Raycast(transform.position, -transform.right, m_MaxDistance, ~m_ExcludeLayer);
+    private RaycastHit2D BeamRay => Physics2D.Raycast(transform.position, -transform.right * BeamDirection, m_MaxDistance, ~m_ExcludeLayer);
+    private int BeamDirection => m_RobotTransform.lossyScale.x < 0 ? -1 : m_RobotTransform.lossyScale.x == 0 ? 0 : 1;
 
     void Start()
     {
@@ -46,7 +47,7 @@ public class BeamGimmick : MonoBehaviour
         return new Vector3[]
         {
             Vector3.zero,
-            -Vector3.right * distance / SizeCorrection
+            -Vector3.right * distance * BeamDirection / SizeCorrection
         };
     }
 
