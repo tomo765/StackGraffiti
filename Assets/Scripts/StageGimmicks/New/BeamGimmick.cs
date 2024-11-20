@@ -10,6 +10,7 @@ public class BeamGimmick : MonoBehaviour
     [SerializeField] private LayerMask m_ExcludeLayer;
     [SerializeField] private float m_MaxDistance = 20;
     [SerializeField] private Transform m_RobotTransform;
+    [SerializeField] private Transform m_RazerImpactTransform;
 
     private float SizeCorrection => transform.localScale.x * m_RobotTransform.transform.localScale.x;
     private RaycastHit2D BeamRay => Physics2D.Raycast(transform.position, -transform.right * BeamDirection, m_MaxDistance, ~m_ExcludeLayer);
@@ -35,6 +36,8 @@ public class BeamGimmick : MonoBehaviour
         m_LineRenderer.SetPositions(points);
         m_BoxCollider.size = center;
         m_BoxCollider.offset = new Vector2(m_BoxCollider.size.x / 2f * (isNegatoveX ? -1 : 1), 0);
+
+        m_RazerImpactTransform.position = points[1] + transform.position;
     }
 
     private Vector3[] GetLocalPoints(RaycastHit2D hit)
