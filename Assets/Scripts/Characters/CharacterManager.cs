@@ -84,7 +84,7 @@ public class CharacterManager : MonoBehaviour
                 OnDead(0).FireAndForget();
                 break;
             case "Needle":
-                if (m_IsDead) { break; }
+                //if (m_IsDead) { break; }
                 SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.TouchNeedleSE);
                 OnUnmovable();
                 break;
