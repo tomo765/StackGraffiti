@@ -38,6 +38,7 @@ public class ResultUI : MonoBehaviour
         m_ViewStageBtn.onClick.RemoveAllListeners();
         m_ViewStageBtn.onClick.AddListener(() =>
         {
+            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
             m_ViewResultBtn.gameObject.SetActive(true);
             m_ResultBG.SetActive(false);
             m_BGImage.color = new Color();
@@ -49,6 +50,7 @@ public class ResultUI : MonoBehaviour
         m_ViewResultBtn.onClick.RemoveAllListeners();
         m_ViewResultBtn.onClick.AddListener(() =>
         {
+            SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.SelectSE);
             m_ViewResultBtn.gameObject.SetActive(false);
             m_ResultBG.SetActive(true);
             m_BGImage.color = m_ViewResultBGColor;
