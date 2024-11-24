@@ -126,7 +126,9 @@ public class CharacterManager : MonoBehaviour
         }
         await Task.Delay(TaskExtension.OneSec, GameManager.Source.Token);
 
-        if (GameManager.IsClear) { return; }
+        if(GameManager.IsClear) { return; }
+        if(SceneLoadExtension.IsFading) { return; }
+
         GameManager.SleepCharacter();
         SoundManager.Instance.PlayMarimba(0);
     }
