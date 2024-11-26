@@ -42,7 +42,7 @@ public class BeamGimmick : MonoBehaviour
 
     private void SetLazerEffectTransform(Vector3 point)
     {
-        m_RazerImpactTransform.position = transform.right * point.x + transform.position;
+        m_RazerImpactTransform.position = transform.right * point.x * SizeCorrection + transform.position;
         var impactRot = m_RazerImpactTransform.localEulerAngles;
         impactRot.x *= BeamDirection;
         m_RazerImpactTransform.localEulerAngles = impactRot;
