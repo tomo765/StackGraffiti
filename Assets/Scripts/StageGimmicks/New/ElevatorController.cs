@@ -19,7 +19,6 @@ public partial class ElevatorController : GimmickReceiver
     private Vector2 m_EndPos;
     private float m_ArrivalTime;      // 0`1‚Å•Ï“® ‰ŠúˆÊ’u = 0, ˆÚ“®Œã = 1@‚Æ‚µ‚ÄˆÚ“®‚³‚¹‚é
     private bool m_OnReverse = false;  //true : •œ˜H, false : ‰˜H
-    private bool isInactive = false;
     private float m_CullentWaitTime = 0;
 
     public bool OnActivate => m_OnActivate;
@@ -68,6 +67,7 @@ public partial class ElevatorController : GimmickReceiver
     {
         if(!collision.TryGetComponent(out CharacterManager manager)) { return; }
         if (manager.IsDead) { return; }
+        if (SceneLoadExtension.IsFading) { return; }
 
         manager.transform.SetParent(transform);
     }
@@ -75,14 +75,9 @@ public partial class ElevatorController : GimmickReceiver
     {
         if (!collision.TryGetComponent(out CharacterManager manager)) { return; }
         if (manager.IsDead) { return; }
-        if(isInactive) { return; }
+        if(SceneLoadExtension.IsFading) { return; }
 
         manager.transform.SetParent(null);
-    }
-
-    private void OnDisable()
-    {
-        isInactive = true;
     }
 }
 
