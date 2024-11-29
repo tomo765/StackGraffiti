@@ -1314,11 +1314,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5426519664796835804, guid: c57bdc1c79c169941ade4917c78eb6ab, type: 3}
       propertyPath: m_MoveVec.x
-      value: 3.5
+      value: 4.3
       objectReference: {fileID: 0}
     - target: {fileID: 5426519664796835804, guid: c57bdc1c79c169941ade4917c78eb6ab, type: 3}
       propertyPath: m_MoveVec.y
-      value: 4.5
+      value: 4.9
       objectReference: {fileID: 0}
     - target: {fileID: 5426519664796835804, guid: c57bdc1c79c169941ade4917c78eb6ab, type: 3}
       propertyPath: m_OnActivate
@@ -1330,11 +1330,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7459158832038374435, guid: c57bdc1c79c169941ade4917c78eb6ab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.90034246
+      value: 0.33
       objectReference: {fileID: 0}
     - target: {fileID: 7459158832038374435, guid: c57bdc1c79c169941ade4917c78eb6ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.9446669
+      value: -4.12
       objectReference: {fileID: 0}
     - target: {fileID: 7459158832038374435, guid: c57bdc1c79c169941ade4917c78eb6ab, type: 3}
       propertyPath: m_LocalPosition.z
