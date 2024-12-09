@@ -13,7 +13,7 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private float m_ScaleOnStage = 0.3f;
 
     private Rigidbody2D m_Rb2d;
-    private PolygonCollider2D m_PolygonCollider2D;
+    private List<BoxCollider2D> m_Collisions = new List<BoxCollider2D>();
     private CharacterController m_Controller;
     private SleepEffect m_SleepEffect;
     private CharacterNameCanvas m_CharacterName;
@@ -24,16 +24,14 @@ public class CharacterManager : MonoBehaviour
     public SpriteRenderer EyeRenderer => m_EyeRender;
     public Rigidbody2D Rb2D => m_Rb2d;
     public MeshFilter MeshFilter => m_MeshFilter;
-    public PolygonCollider2D Poly2D => m_PolygonCollider2D;
+    public List<BoxCollider2D> Collisions => m_Collisions;
     public bool IsDead => m_IsDead;
 
     private void Start()
     {
         m_Rb2d = GetComponent<Rigidbody2D>();
-        m_PolygonCollider2D = GetComponent<PolygonCollider2D>();
         m_Controller = GetComponent<CharacterController>();
 
-        Poly2D.enabled = false;
         m_Controller.SetManagerMember(m_Rb2d, OnSleep, OnDead);
     }
 
@@ -58,7 +56,7 @@ public class CharacterManager : MonoBehaviour
     /// <summary> 書き終わったとに、キャラの操作を開始するための処理 </summary>
     public void StartOperation(CharacterNameCanvas canvas)
     {
-        Poly2D.enabled = true;
+        for (int i = 0; i < Collisions.Count; i++) { Collisions[i].enabled = true; }
         m_EyeRender.gameObject.SetActive(true);
         m_Controller.enabled = true;
 

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 /// <summary> キャラの生成に関する設定や処理 </summary>
 public static class CharacterCreator  //参考サイト : https://qiita.com/divideby_zero/items/491d18cbc91d7fabd700
@@ -88,8 +90,7 @@ public static class CharacterCreator  //参考サイト : https://qiita.com/divideby_
         if (!CanCreateChara) { return; }
 
         m_CreateChara.Rb2D.useAutoMass = true;
-        var polyColliderPos = CreateMeshToPolyCollider(m_Mesh);
-        m_CreateChara.Poly2D.SetPath(0, polyColliderPos.ToArray());
+        SetCollider();
     }
 
     /// <summary> キャラの見た目を更新する </summary>
@@ -179,5 +180,25 @@ public static class CharacterCreator  //参考サイト : https://qiita.com/divideby_
             polyColliderPos.Add(pos);
         }
         return polyColliderPos;
+    }
+
+    private static void SetCollider()
+    {
+        for (int i = 0; i < m_Vlist.Count-2; i++)
+        {
+            var col = new GameObject("Collider").AddComponent<BoxCollider2D>();
+
+            col.enabled = false;
+            col.gameObject.tag = m_CreateChara.gameObject.tag;
+            col.gameObject.layer = m_CreateChara.gameObject.layer;
+
+            col.transform.position = (m_Vlist[i] + m_Vlist[i + 1]) / 2f + (Vector2)m_CreateChara.transform.position;
+            col.size = new Vector2((m_Vlist[i + 1] - m_Vlist[i]).magnitude, m_LineWidth * 2);
+            var angle = Mathf.Atan2(m_Vlist[i + 1].y - m_Vlist[i].y, m_Vlist[i + 1].x - m_Vlist[i].x) * Mathf.Rad2Deg; ;
+            col.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+            m_CreateChara.Collisions.Add(col);
+            col.transform.SetParent(m_CreateChara.transform);
+        }
     }
 }
