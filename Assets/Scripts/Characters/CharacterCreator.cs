@@ -36,8 +36,6 @@ public static class CharacterCreator  //参考サイト : https://qiita.com/divideby_
 
         m_Mesh = new Mesh();
         m_CreateChara.MeshFilter.mesh = m_Mesh;
-
-        m_Vlist.Clear();
     }
 
     /// <summary> キャラを書ける状態でマウス左をホールドしてる時の処理 </summary>
@@ -59,12 +57,23 @@ public static class CharacterCreator  //参考サイト : https://qiita.com/divideby_
     /// <summary> キャラの生成処理 </summary>
     private static void CreateCharacter(Vector3 position)
     {
-        if (m_CreateChara != null) { return; }
-        position += GeneralSettings.Instance.Priorities.CreateCharaLayer;
+        if (m_CreateChara != null)
+        {
+            for(int i = m_CreateChara.Collisions.Count - 1; i >= 0; i--)
+            {
+                MonoBehaviour.Destroy(m_CreateChara.Collisions[i].gameObject);
+            }
+            m_CreateChara.Collisions.Clear();
+        }
+        else
+        {
+            position += GeneralSettings.Instance.Priorities.CreateCharaLayer;
 
-        m_CreateChara = MonoBehaviour.Instantiate(GeneralSettings.Instance.Prehab.Character,
-                                      position,
-                                      Quaternion.identity);
+            m_CreateChara = MonoBehaviour.Instantiate(GeneralSettings.Instance.Prehab.Character,
+                                          position,
+                                          Quaternion.identity);
+        }
+        m_Vlist.Clear();
     }
     /// <summary> キャラを操作可能にするための処理 </summary>
     public static void CreateOnStage(string charaName)
@@ -128,6 +137,8 @@ public static class CharacterCreator  //参考サイト : https://qiita.com/divideby_
 
     private static void AddMesh(Vector2 addVec)
     {
+        if(m_Vlist.Count != 0 && (addVec - m_Vlist.Last()).magnitude <= 0.1f) { return; }
+
         SetVertices();
         SetIndices();
 
@@ -194,11 +205,11 @@ public static class CharacterCreator  //参考サイト : https://qiita.com/divideby_
 
             col.transform.position = (m_Vlist[i] + m_Vlist[i + 1]) / 2f + (Vector2)m_CreateChara.transform.position;
             col.size = new Vector2((m_Vlist[i + 1] - m_Vlist[i]).magnitude, m_LineWidth * 2);
-            var angle = Mathf.Atan2(m_Vlist[i + 1].y - m_Vlist[i].y, m_Vlist[i + 1].x - m_Vlist[i].x) * Mathf.Rad2Deg; ;
+            var angle = Mathf.Atan2(m_Vlist[i + 1].y - m_Vlist[i].y, m_Vlist[i + 1].x - m_Vlist[i].x) * Mathf.Rad2Deg;
             col.transform.rotation = Quaternion.Euler(0, 0, angle);
 
             m_CreateChara.Collisions.Add(col);
-            col.transform.SetParent(m_CreateChara.transform);
+            col.transform.SetParent(m_CreateChara.ColliderContainer);
         }
     }
 }

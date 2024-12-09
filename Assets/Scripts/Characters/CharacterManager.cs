@@ -9,6 +9,7 @@ public class CharacterManager : MonoBehaviour
     private const int OnSleepLayer = 0;
 
     [SerializeField] private SpriteRenderer m_EyeRender;
+    [SerializeField] private Transform m_ColliderContainer;
     [SerializeField] private MeshFilter m_MeshFilter;
     [SerializeField] private float m_ScaleOnStage = 0.3f;
 
@@ -22,6 +23,7 @@ public class CharacterManager : MonoBehaviour
     private Vector3 m_SleepEffectPos = new Vector3(1, 1, 0);
 
     public SpriteRenderer EyeRenderer => m_EyeRender;
+    public Transform ColliderContainer => m_ColliderContainer;
     public Rigidbody2D Rb2D => m_Rb2d;
     public MeshFilter MeshFilter => m_MeshFilter;
     public List<BoxCollider2D> Collisions => m_Collisions;
