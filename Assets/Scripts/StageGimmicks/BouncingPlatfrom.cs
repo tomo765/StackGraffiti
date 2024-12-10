@@ -17,7 +17,8 @@ public class BouncingPlatfrom : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.TryGetComponent<Rigidbody2D>(out var rb2d)) { return; }
+        Rigidbody2D rb2d = collision.attachedRigidbody;
+        if(rb2d == null) { return; }
 
         var effectPos = (collision.transform.position + transform.position) / 2;
 

@@ -64,7 +64,7 @@ public class BeamGimmick : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent(out CharacterManager manager))
+        if(collision.attachedRigidbody.TryGetComponent(out CharacterManager manager))
         {
             EffectContainer.Instance.PlayEffect(GeneralSettings.Instance.Prehab.DeleteCharaEffect, manager.transform.position);
             manager.OnDead(TaskExtension.OneSec).FireAndForget();

@@ -65,7 +65,7 @@ public partial class ElevatorController : GimmickReceiver
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!collision.TryGetComponent(out CharacterManager manager)) { return; }
+        if(!collision.attachedRigidbody.TryGetComponent(out CharacterManager manager)) { return; }
         if (manager.IsDead) { return; }
         if (SceneLoadExtension.IsFading) { return; }
 
@@ -73,7 +73,7 @@ public partial class ElevatorController : GimmickReceiver
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!collision.TryGetComponent(out CharacterManager manager)) { return; }
+        if (!collision.attachedRigidbody.TryGetComponent(out CharacterManager manager)) { return; }
         if (manager.IsDead) { return; }
         if(SceneLoadExtension.IsFading) { return; }
 
