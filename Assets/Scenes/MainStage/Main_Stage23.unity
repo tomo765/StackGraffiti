@@ -615,7 +615,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 629621415675561979, guid: e4cd5f3a72934db4b94379a211a618c9, type: 3}
       propertyPath: bounceForce
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2369688667947122280, guid: e4cd5f3a72934db4b94379a211a618c9, type: 3}
       propertyPath: m_Name
@@ -896,7 +896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6503841162627709071, guid: d0decdd7b2a77c543bd656f845fbf065, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.29
+      value: 10.84
       objectReference: {fileID: 0}
     - target: {fileID: 6503841162627709071, guid: d0decdd7b2a77c543bd656f845fbf065, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1649,7 +1649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4890692423432746229, guid: 9c5a554b43baba04ba8a78517ead07dd, type: 3}
       propertyPath: m_Mass
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4890692423432746229, guid: 9c5a554b43baba04ba8a78517ead07dd, type: 3}
       propertyPath: m_Constraints
