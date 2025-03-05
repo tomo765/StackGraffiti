@@ -58,6 +58,8 @@ public class CharacterManager : MonoBehaviour
     /// <summary> 書き終わったとに、キャラの操作を開始するための処理 </summary>
     public void StartOperation(CharacterNameCanvas canvas)
     {
+        m_EyeRender.sprite = GeneralSettings.Instance.Sprite.GetRandomEye();
+
         Poly2D.enabled = true;
         m_EyeRender.gameObject.SetActive(true);
         m_Controller.enabled = true;

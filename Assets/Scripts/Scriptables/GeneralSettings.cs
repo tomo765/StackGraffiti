@@ -212,19 +212,33 @@ public class GeneralSettings : ScriptableObject
     [System.Serializable]
     public class Sprites
     {
-        [SerializeField] private Sprite m_AliveEye;
+        [SerializeField] private Sprite m_Eye1;
+        [SerializeField] private Sprite m_Eye2;
+        [SerializeField] private Sprite m_Eye3;
+        [SerializeField] private Sprite m_Eye4;
         [SerializeField] private Sprite m_DeathEye;
         [SerializeField] private Sprite m_ClearStar;
         [SerializeField] private Sprite m_UnclearStar;
         [SerializeField] private Sprite m_SwitchIdle;
         [SerializeField] private Sprite m_SwitchPush;
 
-        public Sprite AliveEye => m_AliveEye;
         public Sprite DeathEye => m_DeathEye;
         public Sprite ClearStar => m_ClearStar;
         public Sprite UnclearStar => m_UnclearStar;
         public Sprite SwitchIdle => m_SwitchIdle;
         public Sprite SwitchPush => m_SwitchPush;
+
+        public Sprite GetRandomEye()
+        {
+            return UnityEngine.Random.Range(0, 4) switch
+            {
+                0 => m_Eye1,
+                1 => m_Eye2,
+                2 => m_Eye3,
+                3 => m_Eye4,
+                _ => m_Eye1,
+            };
+        }
     }
 
     [Serializable] public class CursorSettings
