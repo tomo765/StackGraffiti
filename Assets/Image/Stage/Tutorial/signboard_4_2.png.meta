@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      signboard_4_2_0: -7212391704713185321
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
