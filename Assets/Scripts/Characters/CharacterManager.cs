@@ -75,20 +75,21 @@ public class CharacterManager : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (SceneLoadExtension.IsFading) { return; }
-        OnCharacterTouch(collision.tag);
+        if (m_IsDead) { return; }
+
+        OnCharacterTouch(collision);
     }
 
-    private void OnCharacterTouch(string tag)
+    private void OnCharacterTouch(Collider2D collision)  //ToDo : ギミックの基底クラスを作って、継承でそれぞれの処理を書きたい
     {
-        switch (tag)
+        switch (collision.tag)
         {
             case "Dead":
                 OnDead(0).FireAndForget();
                 break;
             case "Needle":
-                //if (m_IsDead) { break; }
                 SoundManager.Instance?.PlayNewSE(GeneralSettings.Instance.Sound.TouchNeedleSE);
-                OnUnmovable();
+                OnUnmovable(collision);
                 break;
             case "Goal":
                 OnClear();
@@ -136,10 +137,10 @@ public class CharacterManager : MonoBehaviour
     }
 
     /// <summary>トゲなどの移動不可のギミックに当たった時の処理 </summary>
-    private void OnUnmovable()
+    private void OnUnmovable(Collider2D collision)
     {
         m_Rb2d.bodyType = RigidbodyType2D.Kinematic;
-        transform.SetParent(null);
+        transform.SetParent(collision.transform);
         Rb2D.velocity = Vector3.zero;
         Rb2D.angularVelocity = 0;
 
