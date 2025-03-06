@@ -80,7 +80,7 @@ public class CharacterManager : MonoBehaviour
         OnCharacterTouch(collision);
     }
 
-    private void OnCharacterTouch(Collider2D collision)  //ToDo : ギミックの基底クラスを作って、継承でそれぞれの処理を書きたい
+    private void OnCharacterTouch(Collider2D collision)
     {
         switch (collision.tag)
         {
